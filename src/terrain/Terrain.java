@@ -15,10 +15,12 @@ public class Terrain {
 		spriteFilepath = "";
 
 	}
+	
 	protected Terrain(String name, String spriteFilepath) {
 		this.name = name;
 		this.spriteFilepath = spriteFilepath;
 	}
+	
 	/**
 	 * To be overridden by subclasses, which should return a static instance of their own type.
 	 * @return
@@ -26,9 +28,11 @@ public class Terrain {
 	public static Terrain get() {
 		return generic_terrain;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public String getSpriteFilepath() {
 		return spriteFilepath;
 	}

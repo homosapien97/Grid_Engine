@@ -6,6 +6,7 @@ public interface Thermochemical {
 	 */
 	public double getMeltingPoint();
 	public double getBoilingPoint();
+	
 	/*
 	 * Specific heats given in Joules / (tile * kelvin)
 	 */
