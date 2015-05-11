@@ -7,12 +7,17 @@ import terrain.Terrain;
 
 public class Chunk {
 	public static final int GRID_DIM = 16;
+	
 	private static Vector<Chunk> chunks = new Vector<Chunk>(); //stores all chunks.
+	
 	public final int xPos;
 	public final int yPos;
+	
 	private Vector<Entity> entities;
+	
 	private Chunk[][] neighbors;
 	private Terrain[][] terrain;
+	
 	//height should pretty much range between -1 and 1, 0 being ground, -1 being pit/fluid/void, and 0 being ground.
 	private int[][] heightmap;
 	
@@ -22,14 +27,18 @@ public class Chunk {
 	public Chunk() {
 		xPos = 0;
 		yPos = 0;
+		
 		entities = new Vector<Entity>();
 		chunks.add(this);
+		
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
 		updateNeighbors();
+		
 		terrain = new Terrain[GRID_DIM][GRID_DIM];
 		heightmap = new int[GRID_DIM][GRID_DIM];
 	}
+	
 	/**
 	 * Creates an empty chunk at position xPos, yPos in the chunk grid.
 	 * @param xPos the x position in the chunks where the new chunk is located
@@ -39,19 +48,24 @@ public class Chunk {
 	public Chunk(int xPos, int yPos, boolean checkOverlap) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+		
 		entities = new Vector<Entity>();
+		
 		if(checkOverlap) {
 			for(Chunk c : chunks) {
 				if(equals(c)) checkOverlap = false;
 			}
 			if(checkOverlap) chunks.add(this);
 		}
+		
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
 		updateNeighbors();
+		
 		terrain = new Terrain[GRID_DIM][GRID_DIM];
 		heightmap = new int[GRID_DIM][GRID_DIM];
 	}
+	
 	/**
 	 * Creates a chunk at position xPos, yPos in the chunk grid.
 	 * @param xPos the x position in the chunks where the new chunk is located
@@ -64,19 +78,24 @@ public class Chunk {
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Vector<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+		
 		entities = new Vector<Entity>();
+		
 		if(checkOverlap) {
 			for(Chunk c : chunks) {
 				if(equals(c)) checkOverlap = false;
 			}
 			if(checkOverlap) chunks.add(this);
 		}
+		
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
 		updateNeighbors();
+		
 		this.terrain = terrain;
 		this.heightmap = heightmap;
 	}
+	
 	/**Creates a copy of chunk without entities at position xPos, yPos in the chunk grid.
 	 * @param xPos the x position in the chunks where the new chunk is located
 	 * @param yPos the y position in the chunks where the new chunk is located
@@ -86,18 +105,23 @@ public class Chunk {
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Chunk chunk) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+		
 		entities = new Vector<Entity>();
+		
 		if(checkOverlap) {
 			for(Chunk c : chunks) {
 				if(equals(c)) checkOverlap = false;
 			}
 			if(checkOverlap) chunks.add(this);
 		}
+		
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
 		updateNeighbors();
+		
 		terrain = new Terrain[GRID_DIM][GRID_DIM];
 		heightmap = new int[GRID_DIM][GRID_DIM];
+		
 		for(int i = 0; i < GRID_DIM; i++) {
 			for(int j = 0; j < GRID_DIM; j++) {
 				terrain[i][j] = chunk.terrain[i][j];
@@ -106,6 +130,7 @@ public class Chunk {
 		}
 		
 	}
+	
 	/**
 	 * Checks for Chunks from chunks to fill any null positions in nearestNeighbors.
 	 */
@@ -124,6 +149,7 @@ public class Chunk {
 			}
 		}
 	}
+	
 	/**
 	 * Sets nearestNeighbors at x, y to null. If x or y is outside the range [0,2], all nearest neighbors except this are cleared. If x
 	 * and y are both one, this chunk is deleted.
@@ -138,8 +164,10 @@ public class Chunk {
 		} else {
 			neighbors[x][y] = null;
 		}
+		
 		if(x == 1 && y == 1) delete();
 	}
+	
 	/**
 	 * Deletes this chunk from the global chunks and from any of its nearest neighbors' nearestNeighbors arrays.
 	 */
@@ -152,27 +180,35 @@ public class Chunk {
 				}
 			}
 		}
+		
 		chunks.remove(this);
 	}
+	
 	public Entity entityAt(int x, int y) {
 		for(Entity e : entities) {
 			if(e.getX() == x && e.getY() == y) return e;
 		}
+		
 		return null;
 	}
+	
 	public Vector<Entity> entitiesAt(int x, int y) {
 		Vector<Entity> ret = new Vector<Entity>();
 		for(Entity e: entities) {
 			if(e.getX() == x && e.getY() == y) ret.add(e);
 		}
+		
 		return ret;
 	}
+	
 	public Terrain terrainAt(int x, int y) {
 		return terrain[x][y];
 	}
+	
 	public int heightAt(int x, int y) {
 		return heightmap[x][y];
 	}
+	
 	public boolean equals(Chunk c) {
 		return (xPos == c.xPos && yPos == c.yPos);
 	}
