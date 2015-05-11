@@ -116,6 +116,7 @@ public class Chunk {
 					for(Chunk c : chunks) {
 						if(c.xPos == xPos - 1 + i && c.yPos == yPos - 1 + j) {
 							neighbors[i][j] = c;
+							if(c.neighbors[2 - i][2 - j] == null) c.neighbors[2 - i][2 - j] = this;
 							break;
 						}
 					}
