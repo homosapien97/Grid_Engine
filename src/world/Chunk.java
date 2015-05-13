@@ -212,4 +212,7 @@ public class Chunk {
 	public boolean equals(Chunk c) {
 		return (xPos == c.xPos && yPos == c.yPos);
 	}
+	public Chunk getNeighbor(int x, int y) {
+		return neighbors[x][y];
+	}
 }
