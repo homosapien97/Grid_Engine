@@ -14,4 +14,11 @@ public class Entity {
 	public int getY() {
 		return y;
 	}
+	
+	public int getAbsoluteX() {
+		return chunk.xPos * Chunk.GRID_DIM + x;
+	}
+	public int getAbsoluteY() {
+		return chunk.yPos * Chunk.GRID_DIM + y;
+	}
 }

@@ -13,10 +13,10 @@ public class Chunk {
 	public final int xPos;
 	public final int yPos;
 	
-	private Vector<Entity> entities;
+	public Vector<Entity> entities;
 	
-	private Chunk[][] neighbors;
-	private Terrain[][] terrain;
+	public Chunk[][] neighbors;
+	public Terrain[][] terrain;
 	
 	//height should pretty much range between -1 and 1, 0 being ground, -1 being pit/fluid/void, and 0 being ground.
 	private int[][] heightmap;
