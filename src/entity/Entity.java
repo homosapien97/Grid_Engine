@@ -17,12 +17,16 @@ public class Entity {
 		
 	}
 	
+	//relative position in chunk
+	
 	public int getX() {
 		return x;
 	}
 	public int getY() {
 		return y;
 	}
+	
+	//position in relation to all chunks
 	
 	public int getAbsoluteX() {
 		return chunk.xPos * Chunk.GRID_DIM + x;
