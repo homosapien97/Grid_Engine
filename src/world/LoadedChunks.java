@@ -97,10 +97,10 @@ public class LoadedChunks {
 	}
 	
 	public static Vector<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
-		int x1c = x1/Chunk.DIM - chunks[0][0].xPos;
-		int y1c = y1/Chunk.DIM - chunks[0][0].yPos;
-		int x2c = x2/Chunk.DIM - chunks[0][0].xPos;
-		int y2c = y2/Chunk.DIM - chunks[0][0].yPos;
+		int x1c = Methods.absCoordToChunkCoord(x1) - chunks[0][0].xPos;
+		int y1c = Methods.absCoordToChunkCoord(y1) - chunks[0][0].yPos;
+		int x2c = Methods.absCoordToChunkCoord(x2) - chunks[0][0].xPos;
+		int y2c = Methods.absCoordToChunkCoord(y2) - chunks[0][0].yPos;
 		Vector<Entity> ret = new Vector<Entity>();
 		for(int i = x1c; i < x2c + 1; i++) {
 			for(int j = y1c; i < y2c + 1; i++) {

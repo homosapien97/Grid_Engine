@@ -13,8 +13,8 @@ public class Entity {
 		this.x = x;
 		this.y = y;
 		this.chunk = chunk;
+		chunk.addEntity(this);
 		this.spriteFilepath = sprite;
-		
 	}
 	
 	//relative position in chunk
@@ -37,5 +37,8 @@ public class Entity {
 	
 	public String getSpriteFilepath() {
 		return spriteFilepath;
+	}
+	public void delete() {
+		chunk.removeEntity(this);
 	}
 }

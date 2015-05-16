@@ -199,7 +199,7 @@ public class Chunk {
 	/**
 	 * Checks for Chunks from the chunks vector to fill any null positions in nearestNeighbors.
 	 */
-	private void updateNeighbors() {
+	public void updateNeighbors() {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				//for each neighbor in the array, check if null
@@ -224,7 +224,7 @@ public class Chunk {
 	 * @param x the x position in the array nearestNeighbors to clear
 	 * @param y the y position in the array nearestNeighbors to clear
 	 */
-	private void clearNeighbor(int x, int y) {
+	public void clearNeighbor(int x, int y) {
 		if(x < 0 || y < 0 || x > 2 || y > 2) {
 			//if x or y are out of bounds for a neighbor, clear all neighbors
 			neighbors[0][0] = null; neighbors[0][1] = null; neighbors[0][2] = null;
@@ -242,7 +242,7 @@ public class Chunk {
 	/**
 	 * Deletes this chunk from the global chunks and from any of its nearest neighbors' nearestNeighbors arrays.
 	 */
-	private void delete() {
+	public void delete() {
 		updateNeighbors();
 		
 		for(int i = 0; i < 3; i++) {
@@ -254,6 +254,13 @@ public class Chunk {
 		}
 		
 		chunks.remove(this);
+	}
+	
+	public void addEntity(Entity e) {
+		entities.add(e);
+	}
+	public void removeEntity(Entity e) {
+		entities.remove(e);
 	}
 	
 	/**

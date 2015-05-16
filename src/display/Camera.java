@@ -1,13 +1,16 @@
 package display;
 
+import java.util.Vector;
+
 import entity.Player;
-import world.Chunk;
+import entity.Entity;
 import world.LoadedChunks;
 
 public class Camera {
 	public static Player player;
 	
 	public static String[][] snapshot;
+	public static Vector<Entity> entities;
 	
 	public static boolean initialized;
 	
@@ -22,19 +25,20 @@ public class Camera {
 		return true;
 	}
 	
+	private static int pAbsX;
+	private static int pAbsY;
 	public static String[][] snapshot() {
+		pAbsX = player.getAbsoluteX();
+		pAbsY = player.getAbsoluteY();
 		for(int j = 0; j < Display.HEIGHT; j++) {
 			for(int i = 0; i < Display.WIDTH; i++) {
-				snapshot[i][j] = LoadedChunks.spriteAt(player.getAbsoluteX() - Display.WIDTH / 2 + i, player.getAbsoluteY() - Display.HEIGHT / 2 + j);
-//				System.out.print(snapshot[i][j]);
-//				System.out.print(player.getAbsoluteX() - Display.WIDTH / 2 + i + " ");
-//				System.out.print(LoadedChunks.spriteAt(player.getAbsoluteX() - Display.WIDTH /2 + i, player.getAbsoluteY() - Display.HEIGHT/2 + j));
+				snapshot[i][j] = LoadedChunks.spriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
 			}
-//			System.out.println();
 		}
-//		snapshot[Display.WIDTH/2][Display.HEIGHT/2] = "0";
-//		snapshot[Display.WIDTH/2][Display.HEIGHT/2 + Chunk.DIM] = "1";
-//		snapshot[Display.WIDTH/2 + Chunk.DIM][Display.HEIGHT/2] = "*";
+		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY - Display.HEIGHT/2);
+		for(Entity e : entities) {
+			snapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT + e.getAbsoluteY() - pAbsY] = e.spriteFilepath;
+		}
 		return snapshot;
 	}
 }
