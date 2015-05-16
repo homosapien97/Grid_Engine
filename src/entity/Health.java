@@ -1,7 +1,7 @@
 package entity;
 
 public interface Health {
-	public double getHealth();
-	public double hurt(double damage); //returns health after hurting
-	public double heal(double healing);//returns health after healing
+	public int getHealth();
+	public int hurt(int damage); //returns health after hurting
+	public int heal(int healing);//returns health after healing
 }
