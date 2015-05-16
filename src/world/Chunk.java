@@ -6,7 +6,7 @@ import entity.Entity;
 import terrain.Terrain;
 
 public class Chunk {
-	public static final int GRID_DIM = 16;
+	public static final int DIM = 16;
 	
 	private static Vector<Chunk> chunks = new Vector<Chunk>(); //stores all chunks.
 	
@@ -35,8 +35,8 @@ public class Chunk {
 		neighbors[1][1] = this;
 		updateNeighbors();
 		
-		terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
+		terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
 	}
 	
 	/**
@@ -62,8 +62,8 @@ public class Chunk {
 		neighbors[1][1] = this;
 		updateNeighbors();
 		
-		terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
+		terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
 	}
 	
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Terrain terrain) {
@@ -82,10 +82,10 @@ public class Chunk {
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
 		updateNeighbors();
-		this.terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
-		for(int i = 0; i < GRID_DIM; i++) {
-			for(int j = 0; j < GRID_DIM; j++) {
+		this.terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
+		for(int i = 0; i < DIM; i++) {
+			for(int j = 0; j < DIM; j++) {
 				this.terrain[i][j] = terrain;
 			}
 		}
@@ -145,11 +145,11 @@ public class Chunk {
 		neighbors[1][1] = this;
 		updateNeighbors();
 		
-		terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
+		terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
 		
-		for(int i = 0; i < GRID_DIM; i++) {
-			for(int j = 0; j < GRID_DIM; j++) {
+		for(int i = 0; i < DIM; i++) {
+			for(int j = 0; j < DIM; j++) {
 				terrain[i][j] = chunk.terrain[i][j];
 				heightmap[i][j] = chunk.heightmap[i][j];
 			}
@@ -244,8 +244,8 @@ public class Chunk {
 	
 	public String toString() {
 		String ret = "";
-		for(int j = 0; j < GRID_DIM; j++) {
-			for(int i = 0; i < GRID_DIM; i++) {
+		for(int j = 0; j < DIM; j++) {
+			for(int i = 0; i < DIM; i++) {
 				ret += terrain[i][j];
 			}
 			ret += "\n";

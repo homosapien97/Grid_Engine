@@ -25,10 +25,10 @@ public class Entity {
 	}
 	
 	public int getAbsoluteX() {
-		return chunk.xPos * Chunk.GRID_DIM + x;
+		return chunk.xPos * Chunk.DIM + x;
 	}
 	public int getAbsoluteY() {
-		return chunk.yPos * Chunk.GRID_DIM + y;
+		return chunk.yPos * Chunk.DIM + y;
 	}
 	
 	public String getSpriteFilepath() {

@@ -1,5 +1,7 @@
 package display;
 
+import world.LoadedChunks;
+
 public class TextDisplay extends Display{
 	public static void print() {
 		Camera.snapshot();
@@ -9,5 +11,8 @@ public class TextDisplay extends Display{
 			}
 			System.out.println();
 		}
+//		for(int i = 0; i< 35; i++) {
+//			System.out.print(LoadedChunks.spriteAt(i, 0));
+//		}
 	}
 }

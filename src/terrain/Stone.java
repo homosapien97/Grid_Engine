@@ -14,8 +14,7 @@ public class Stone extends Terrain implements Thermochemical {
 	}
 	
 	public String toString() {
-		c = (c + 1 > 'Z') ? 'A' : (char)(c + 1);
-		return String.valueOf(c);
+		return spriteFilepath;
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package world;
 import java.util.Vector;
 
 import entity.Entity;
+import general.Methods;
 
 public class LoadedChunks {
 	public static Chunk[][] chunks;
@@ -80,17 +81,18 @@ public class LoadedChunks {
 	public static String spriteAt(int absoluteX, int absoluteY) {
 //		System.out.println(absoluteX/Chunk.GRID_DIM + " - " + chunks[0][0].xPos);
 //		System.out.println(((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM) + " " + ((absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM));
-		return chunks[absoluteX/Chunk.GRID_DIM - chunks[0][0].xPos][absoluteY/Chunk.GRID_DIM - chunks[0][0].yPos].
-				terrainAt((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM, (absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM).toString();/*spriteFilepath;*/
+		return chunks[Methods.absCoordToChunkCoord(absoluteX) - chunks[0][0].xPos][Methods.absCoordToChunkCoord(absoluteY) - chunks[0][0].yPos].
+				terrainAt(Methods.absCoordToMinorCoord(absoluteX), Methods.absCoordToMinorCoord(absoluteY)).toString();/*spriteFilepath;*/
 	}
 	public static int heightAt(int absoluteX, int absoluteY) {
-		return chunks[chunks[0][0].xPos + absoluteX/Chunk.GRID_DIM][chunks[0][0].yPos + absoluteY/Chunk.GRID_DIM].heightAt(absoluteX%Chunk.GRID_DIM, absoluteY%Chunk.GRID_DIM);
+		return chunks[chunks[0][0].xPos + Methods.absCoordToChunkCoord(absoluteX)][chunks[0][0].yPos + Methods.absCoordToChunkCoord(absoluteY)].
+				heightAt(Methods.absCoordToMinorCoord(absoluteX), Methods.absCoordToMinorCoord(absoluteY));
 	}
 	public static Vector<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
-		int x1c = x1/Chunk.GRID_DIM - chunks[0][0].xPos;
-		int y1c = y1/Chunk.GRID_DIM - chunks[0][0].yPos;
-		int x2c = x2/Chunk.GRID_DIM - chunks[0][0].xPos;
-		int y2c = y2/Chunk.GRID_DIM - chunks[0][0].yPos;
+		int x1c = x1/Chunk.DIM - chunks[0][0].xPos;
+		int y1c = y1/Chunk.DIM - chunks[0][0].yPos;
+		int x2c = x2/Chunk.DIM - chunks[0][0].xPos;
+		int y2c = y2/Chunk.DIM - chunks[0][0].yPos;
 		Vector<Entity> ret = new Vector<Entity>();
 		for(int i = x1c; i < x2c + 1; i++) {
 			for(int j = y1c; i < y2c + 1; i++) {

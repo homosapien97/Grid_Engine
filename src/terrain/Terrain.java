@@ -40,9 +40,9 @@ public class Terrain {
 	}
 	
 	public String toString() {
-//		return spriteFilepath;
-		test = String.valueOf((int) (Math.random() * 10));
-		return test;
+		return spriteFilepath;
+//		test = String.valueOf((int) (Math.random() * 10));
+//		return test;
 	}
 	
 }
