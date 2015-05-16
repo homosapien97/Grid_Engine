@@ -34,6 +34,7 @@ public class LoadedChunks {
 	public static void setCenter(Chunk center) {
 		LoadedChunks.center = center;
 	}
+	
 	public static void shiftLeft() {
 		for(int i = 0; i < 2 * RADIUS; i++) {
 			for(int j = 0; j < 2 * RADIUS + 1; j++) {
@@ -44,20 +45,25 @@ public class LoadedChunks {
 			chunks[2 * RADIUS][j] = chunks[ 2 * RADIUS - 1][j].getNeighbor(2, 1);
 		}
 	}
+	
 	public static void shiftRight() {
 		
 	}
+	
 	public static void shiftUp() {
 		
 	}
+	
 	public static void shiftDown() {
 		
 	}
+	
 	public static void reload() {
 		for(int i = RADIUS - 1; i > -1; i--) {
 			chunks[i][i] = chunks[i + 1][i + 1].getNeighbor(0, 0);
 			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + i);
 		}
+		
 		for(int i = 1; i < 2 * RADIUS + 1; i++) {
 			chunks[i][0] = chunks[i -1][0].getNeighbor(2, 1);
 			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS);
@@ -84,10 +90,12 @@ public class LoadedChunks {
 		return chunks[Methods.absCoordToChunkCoord(absoluteX) - chunks[0][0].xPos][Methods.absCoordToChunkCoord(absoluteY) - chunks[0][0].yPos].
 				terrainAt(Methods.absCoordToMinorCoord(absoluteX), Methods.absCoordToMinorCoord(absoluteY)).toString();/*spriteFilepath;*/
 	}
+	
 	public static int heightAt(int absoluteX, int absoluteY) {
 		return chunks[chunks[0][0].xPos + Methods.absCoordToChunkCoord(absoluteX)][chunks[0][0].yPos + Methods.absCoordToChunkCoord(absoluteY)].
 				heightAt(Methods.absCoordToMinorCoord(absoluteX), Methods.absCoordToMinorCoord(absoluteY));
 	}
+	
 	public static Vector<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
 		int x1c = x1/Chunk.DIM - chunks[0][0].xPos;
 		int y1c = y1/Chunk.DIM - chunks[0][0].yPos;

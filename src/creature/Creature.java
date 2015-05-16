@@ -1,35 +1,22 @@
-package entity;
-
+package creature;
 import world.Chunk;
+import entity.Entity;
+import entity.Health;
 
-public class Player extends Entity implements Health, Armored {
+public class Creature extends Entity implements Health{
 	public int maxHealth;
 	public int health;
 	public int natArmor;
-	public int armor;
 	public String name;
 	public boolean alive;
 	
-	public Player(int x, int y, int hp, int arm, Chunk c, String s, String n) {
+	public Creature (int x, int y, int hp, int arm, Chunk c, String s, String n){
 		super(x, y, c, s);
 		maxHealth = hp;
 		health = hp;
 		natArmor = arm;
-		armor = arm;
 		name = n;
 		alive = true;
-		
-	}
-
-	@Override
-	public int getFlatArmor() {
-		return armor;
-	}
-
-	@Override
-	public int getProportionalArmor() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -58,4 +45,5 @@ public class Player extends Entity implements Health, Armored {
 	public boolean isAlive() {
 		return alive;
 	}
+
 }
