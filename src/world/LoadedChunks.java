@@ -18,8 +18,14 @@ public class LoadedChunks {
 //		
 //	}
 	
-	public LoadedChunks(Chunk center) {
-		this.center = center;
+//	public LoadedChunks(Chunk center) {
+//		LoadedChunks.center = center;
+//		chunks[RADIUS][RADIUS] = center;
+//		reload();
+//	}
+	
+	public static void init(Chunk center) {
+		LoadedChunks.center = center;
 		chunks[RADIUS][RADIUS] = center;
 		reload();
 	}
@@ -52,13 +58,14 @@ public class LoadedChunks {
 			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + i);
 		}
 		for(int i = 1; i < 2 * RADIUS + 1; i++) {
-			chunks[i][0] = chunks[i -1][0].getNeighbor(0, 1);
+			chunks[i][0] = chunks[i -1][0].getNeighbor(2, 1);
 			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS);
 		}
+		
 		for(int i = 0; i < 2 * RADIUS + 1; i++) {
 			for(int j = 1; j < 2 * RADIUS + 1; j++) {
-				chunks[i][j] = chunks[i][j-1].getNeighbor(1, 0);
-				if(chunks[i][j] == null) chunks[i][0] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + j);
+				chunks[i][j] = chunks[i][j-1].getNeighbor(1, 2);
+				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + j);
 			}
 		}
 	}
@@ -71,7 +78,10 @@ public class LoadedChunks {
 	}
 	
 	public static String spriteAt(int absoluteX, int absoluteY) {
-		return chunks[chunks[0][0].xPos + absoluteX/Chunk.GRID_DIM][chunks[0][0].yPos + absoluteY/Chunk.GRID_DIM].terrainAt(absoluteX%Chunk.GRID_DIM, absoluteY%Chunk.GRID_DIM).spriteFilepath;
+//		System.out.println(absoluteX/Chunk.GRID_DIM + " - " + chunks[0][0].xPos);
+//		System.out.println(((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM) + " " + ((absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM));
+		return chunks[absoluteX/Chunk.GRID_DIM - chunks[0][0].xPos][absoluteY/Chunk.GRID_DIM - chunks[0][0].yPos].
+				terrainAt((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM, (absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM).toString();/*spriteFilepath;*/
 	}
 	public static int heightAt(int absoluteX, int absoluteY) {
 		return chunks[chunks[0][0].xPos + absoluteX/Chunk.GRID_DIM][chunks[0][0].yPos + absoluteY/Chunk.GRID_DIM].heightAt(absoluteX%Chunk.GRID_DIM, absoluteY%Chunk.GRID_DIM);

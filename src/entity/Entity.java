@@ -3,14 +3,23 @@ package entity;
 import world.Chunk;
 
 public class Entity {
-	private int x;
-	private int y;
-	Chunk chunk;
+	public int x;
+	public int y;
+	public Chunk chunk;
+	public String spriteFilepath;
+	
+	
+	public Entity(int x, int y, Chunk chunk, String sprite) {
+		this.x = x;
+		this.y = y;
+		this.chunk = chunk;
+		this.spriteFilepath = sprite;
+		
+	}
 	
 	public int getX() {
 		return x;
 	}
-	
 	public int getY() {
 		return y;
 	}
@@ -20,5 +29,9 @@ public class Entity {
 	}
 	public int getAbsoluteY() {
 		return chunk.yPos * Chunk.GRID_DIM + y;
+	}
+	
+	public String getSpriteFilepath() {
+		return spriteFilepath;
 	}
 }

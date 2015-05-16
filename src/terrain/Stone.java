@@ -2,7 +2,8 @@ package terrain;
 
 public class Stone extends Terrain implements Thermochemical {
 	private static final Stone stone = new Stone();
-	private static final String spriteFilepath = "placeholder";
+	private static final String spriteFilepath = "X";
+	private static char c = 'A';
 	
 	private Stone() {
 		super("stone",spriteFilepath);
@@ -10,6 +11,11 @@ public class Stone extends Terrain implements Thermochemical {
 
 	public static Stone get() {
 		return stone;
+	}
+	
+	public String toString() {
+		c = (c + 1 > 'Z') ? 'A' : (char)(c + 1);
+		return String.valueOf(c);
 	}
 	
 	@Override

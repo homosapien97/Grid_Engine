@@ -66,6 +66,32 @@ public class Chunk {
 		heightmap = new int[GRID_DIM][GRID_DIM];
 	}
 	
+	public Chunk(int xPos, int yPos, boolean checkOverlap, Terrain terrain) {
+		this.xPos = xPos;
+		this.yPos = yPos;
+		
+		entities = new Vector<Entity>();
+		
+		if(checkOverlap) {
+			for(Chunk c : chunks) {
+				if(equals(c)) checkOverlap = false;
+			}
+			if(checkOverlap) chunks.add(this);
+		}
+		
+		neighbors = new Chunk[3][3];
+		neighbors[1][1] = this;
+		updateNeighbors();
+		this.terrain = new Terrain[GRID_DIM][GRID_DIM];
+		heightmap = new int[GRID_DIM][GRID_DIM];
+		for(int i = 0; i < GRID_DIM; i++) {
+			for(int j = 0; j < GRID_DIM; j++) {
+				this.terrain[i][j] = terrain;
+			}
+		}
+		
+	}
+	
 	/**
 	 * Creates a chunk at position xPos, yPos in the chunk grid.
 	 * @param xPos the x position in the chunks where the new chunk is located
@@ -214,5 +240,16 @@ public class Chunk {
 	}
 	public Chunk getNeighbor(int x, int y) {
 		return neighbors[x][y];
+	}
+	
+	public String toString() {
+		String ret = "";
+		for(int j = 0; j < GRID_DIM; j++) {
+			for(int i = 0; i < GRID_DIM; i++) {
+				ret += terrain[i][j];
+			}
+			ret += "\n";
+		}
+		return ret;
 	}
 }
