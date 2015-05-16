@@ -6,17 +6,15 @@ import entity.Entity;
 import terrain.Terrain;
 
 public class Chunk {
-<<<<<<< HEAD
-	public static final int DIM = 16;
-=======
 	//grid dimensions (square)
-	public static final int GRID_DIM = 16;
->>>>>>> origin/master
+	public static final int DIM = 16;
+
 	
+
 	//stores all chunks
 	private static Vector<Chunk> chunks = new Vector<Chunk>(); 
 	
-	//chunck instance positions
+	//chunk instance positions
 	public final int xPos;
 	public final int yPos;
 	
@@ -45,14 +43,10 @@ public class Chunk {
 		neighbors[1][1] = this;
 		updateNeighbors();
 		
-<<<<<<< HEAD
+		//terrain and height
 		terrain = new Terrain[DIM][DIM];
 		heightmap = new int[DIM][DIM];
-=======
-		//terrain and height
-		terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
->>>>>>> origin/master
+
 	}
 	
 	/**
@@ -82,14 +76,10 @@ public class Chunk {
 		neighbors[1][1] = this;
 		updateNeighbors();
 		
-<<<<<<< HEAD
+		//terrain and height
 		terrain = new Terrain[DIM][DIM];
 		heightmap = new int[DIM][DIM];
-=======
-		//terrain and height
-		terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
->>>>>>> origin/master
+
 	}
 	
 	/**
@@ -119,20 +109,11 @@ public class Chunk {
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
 		updateNeighbors();
-<<<<<<< HEAD
+		//terrain and height
 		this.terrain = new Terrain[DIM][DIM];
 		heightmap = new int[DIM][DIM];
 		for(int i = 0; i < DIM; i++) {
 			for(int j = 0; j < DIM; j++) {
-=======
-		
-		//terrain and height
-		this.terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
-		
-		for(int i = 0; i < GRID_DIM; i++) {
-			for(int j = 0; j < GRID_DIM; j++) {
->>>>>>> origin/master
 				this.terrain[i][j] = terrain;
 			}
 		}
@@ -201,21 +182,13 @@ public class Chunk {
 		neighbors[1][1] = this;
 		updateNeighbors();
 		
-<<<<<<< HEAD
+		//terrain and height
 		terrain = new Terrain[DIM][DIM];
 		heightmap = new int[DIM][DIM];
 		
+		//copying
 		for(int i = 0; i < DIM; i++) {
 			for(int j = 0; j < DIM; j++) {
-=======
-		//terrain and height
-		terrain = new Terrain[GRID_DIM][GRID_DIM];
-		heightmap = new int[GRID_DIM][GRID_DIM];
-		
-		//copying
-		for(int i = 0; i < GRID_DIM; i++) {
-			for(int j = 0; j < GRID_DIM; j++) {
->>>>>>> origin/master
 				terrain[i][j] = chunk.terrain[i][j];
 				heightmap[i][j] = chunk.heightmap[i][j];
 			}

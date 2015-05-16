@@ -1,10 +1,8 @@
 package run;
 
 import display.Camera;
-import display.Display;
 import display.TextDisplay;
 import entity.Player;
-import terrain.Quicksand;
 import terrain.Stone;
 import world.Chunk;
 import world.LoadedChunks;
@@ -29,7 +27,7 @@ public class Main {
 		
 	}
 	private static void init() {
-		Camera.init(new Player(0,0,testChunk, "0"));
+		Camera.init(new Player(0,0,testChunk, "0", 256, 64, "Player"));
 		LoadedChunks.init(testChunk);
 	}
 	

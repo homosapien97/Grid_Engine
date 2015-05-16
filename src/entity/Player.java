@@ -10,7 +10,7 @@ public class Player extends Entity implements Health, Armored {
 	public String name;
 	public boolean alive;
 	
-	public Player(int x, int y, int hp, int arm, Chunk c, String s, String n) {
+	public Player(int x, int y, Chunk c, String s, int hp, int arm, String n) {
 		super(x, y, c, s);
 		maxHealth = hp;
 		health = hp;
@@ -20,31 +20,31 @@ public class Player extends Entity implements Health, Armored {
 		alive = true;
 		
 	}
-
+	
 	@Override
 	public int getFlatArmor() {
 		return armor;
 	}
-
+	
 	@Override
 	public int getProportionalArmor() {
-		// TODO Auto-generated method stub
+		//TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public int getHealth() {
 		return health;
 	}
-
+	
 	@Override
-	public int hurt(int hurts) {
-		health -= hurts;
+	public int hurt(int damage) {
+		health -= damage;
 		if(maxHealth - health < -10)
 			alive = false;
 		return health;
 	}
-
+	
 	@Override
 	public int heal(int heals) {
 		if(health != maxHealth)
@@ -53,7 +53,7 @@ public class Player extends Entity implements Health, Armored {
 			health = maxHealth;
 		return health;
 	}
-
+	
 	@Override
 	public boolean isAlive() {
 		return alive;
