@@ -35,9 +35,9 @@ public class Camera {
 				snapshot[i][j] = LoadedChunks.spriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
 			}
 		}
-		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY - Display.HEIGHT/2);
+		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
 		for(Entity e : entities) {
-			snapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT + e.getAbsoluteY() - pAbsY] = e.spriteFilepath;
+			snapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.spriteFilepath;
 		}
 		return snapshot;
 	}

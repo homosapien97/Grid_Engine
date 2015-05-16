@@ -34,14 +34,5 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		step();
-//		System.out.println(testChunk);
-//		System.out.println(LoadedChunks.chunks[LoadedChunks.RADIUS][LoadedChunks.RADIUS]);
-//		System.out.println(LoadedChunks.chunks[LoadedChunks.RADIUS + 1][LoadedChunks.RADIUS + 1]);
-//		System.out.println();
-//		for(int i = -35; i < 35; i++) {
-//			System.out.print(LoadedChunks.spriteAt(i, 0));
-//		}
-//		System.out.println();
-//		System.out.println(LoadedChunks.center.neighbors[1][2]);
 	}
 }

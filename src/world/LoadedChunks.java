@@ -103,7 +103,7 @@ public class LoadedChunks {
 		int y2c = Methods.absCoordToChunkCoord(y2) - chunks[0][0].yPos;
 		Vector<Entity> ret = new Vector<Entity>();
 		for(int i = x1c; i < x2c + 1; i++) {
-			for(int j = y1c; i < y2c + 1; i++) {
+			for(int j = y1c; j < y2c + 1; j++) {
 				for(Entity e : chunks[i][j].entities) {
 					if(e.getAbsoluteX() >= x1 && e.getAbsoluteX() <= x2 && e.getAbsoluteY() >= y1 && e.getAbsoluteY() <= y2) ret.add(e);
 				}
