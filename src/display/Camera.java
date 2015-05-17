@@ -32,13 +32,13 @@ public class Camera {
 		pAbsY = player.getAbsoluteY();
 		for(int j = 0; j < Display.HEIGHT; j++) {
 			for(int i = 0; i < Display.WIDTH; i++) {
-				snapshot[i][j] = LoadedChunks.spriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
+				snapshot[i][j] = LoadedChunks.terrainSpriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
 			}
 		}
 		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
-		for(Entity e : entities) {
-			snapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.spriteFilepath;
-		}
+//		for(Entity e : entities) {
+//			snapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.spriteFilepath;
+//		}
 		return snapshot;
 	}
 }

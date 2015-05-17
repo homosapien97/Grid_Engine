@@ -33,6 +33,7 @@ public class LoadedChunks {
 		}
 		for(int j = 0; j < 2 * RADIUS + 1; j++) {
 			chunks[2 * RADIUS][j] = chunks[ 2 * RADIUS - 1][j].getNeighbor(2, 1);
+			if(chunks[2*RADIUS][j] == null) chunks[2*RADIUS][j] = Generator.generateChunk(2*RADIUS + chunks[0][0].xPos, j + chunks[0][0].yPos);
 		}
 	}
 	
@@ -110,7 +111,7 @@ public class LoadedChunks {
 	 * @param absoluteY absolute y coordinate
 	 * @return the filepath of the sprite at x,y
 	 */
-	public static String spriteAt(int absoluteX, int absoluteY) {
+	public static String terrainSpriteAt(int absoluteX, int absoluteY) {
 //		System.out.println(absoluteX/Chunk.GRID_DIM + " - " + chunks[0][0].xPos);
 //		System.out.println(((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM) + " " + ((absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM));
 		return chunks[Methods.absCoordToChunkCoord(absoluteX) - chunks[0][0].xPos][Methods.absCoordToChunkCoord(absoluteY) - chunks[0][0].yPos].
