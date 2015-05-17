@@ -86,4 +86,10 @@ public class Player extends Entity implements Health, Armored, Mobile {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public boolean stepTowards(int absoluteX, int absoluteY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
