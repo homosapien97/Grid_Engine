@@ -1,8 +1,10 @@
 package entity;
 
+import general.Methods;
 import world.Chunk;
+import world.LoadedChunks;
 
-public class Player extends Entity implements Health, Armored {
+public class Player extends Entity implements Health, Armored, Mobile {
 	public int maxHealth;
 	public int health;
 	public int natArmor;
@@ -57,5 +59,31 @@ public class Player extends Entity implements Health, Armored {
 	@Override
 	public boolean isAlive() {
 		return alive;
+	}
+	
+	@Override
+	/**
+	 * For now, this teleports the player instantly to wherever you tell it (within LoadedChunks)
+	 */
+	public boolean goToAbsolute(int absoluteX, int absoluteY) {
+		if(LoadedChunks.isLoaded(absoluteX, absoluteY)) {
+			chunk = LoadedChunks.chunks[Methods.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Methods.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
+			x = Methods.absCoordToMinorCoord(absoluteX);
+			y = Methods.absCoordToMinorCoord(absoluteY);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean goToRelative(int relativeX, int relativeY) {
+		goToAbsolute(getAbsoluteX() + relativeX, getAbsoluteY() + relativeY);
+		return false;
+	}
+
+	@Override
+	public int ticksPerTileWalked() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

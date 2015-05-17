@@ -10,6 +10,7 @@ import world.LoadedChunks;
 public class Main {
 //	Chunk blank = new Chunk();
 	static Chunk testChunk = new Chunk(0,0,true,Stone.get());
+	static Player player = new Player(0,0,testChunk, "0", 256, 64, "Player");
 //	LoadedChunks chunks = new LoadedChunks(testChunk);
 //	Camera camera;
 //	Display display;
@@ -24,10 +25,10 @@ public class Main {
 		TextDisplay.print();
 	}
 	private static void stepState() {
-		
+		player.goToAbsolute(-1, -1);
 	}
 	private static void init() {
-		Camera.init(new Player(0,0,testChunk, "0", 256, 64, "Player"));
+		Camera.init(player);
 		LoadedChunks.init(testChunk);
 	}
 	
