@@ -11,6 +11,7 @@ public class Player extends Entity implements Health, Armored, Mobile {
 	public int armor;
 	public String name;
 	public boolean alive;
+	public int ticksPerTile;
 	
 	public Player(int x, int y, Chunk c, String s, int hp, int arm, String n) {
 		super(x, y, c, s);
@@ -61,10 +62,10 @@ public class Player extends Entity implements Health, Armored, Mobile {
 		return alive;
 	}
 	
-	@Override
 	/**
 	 * For now, this teleports the player instantly to wherever you tell it (within LoadedChunks)
 	 */
+	@Override
 	public boolean goToAbsolute(int absoluteX, int absoluteY) {
 		if(LoadedChunks.isLoaded(absoluteX, absoluteY)) {
 			chunk = LoadedChunks.chunks[Methods.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Methods.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
@@ -74,22 +75,65 @@ public class Player extends Entity implements Health, Armored, Mobile {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Same as goToAbsolute, but coordinates are relative to the player
+	 */
 	@Override
 	public boolean goToRelative(int relativeX, int relativeY) {
 		goToAbsolute(getAbsoluteX() + relativeX, getAbsoluteY() + relativeY);
 		return false;
 	}
-
+	
+	
 	@Override
 	public int ticksPerTileWalked() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ticksPerTile;
 	}
-
+	
+	//for the use of stepTowards;
+	private static double[][] stepChoices = new double[3][3];
+	private static double lowest = Integer.MAX_VALUE;
+	private static int choices = 0;
 	@Override
 	public boolean stepTowards(int absoluteX, int absoluteY) {
-		// TODO Auto-generated method stub
+		lowest = Integer.MAX_VALUE;
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				if(LoadedChunks.heightAt(x -1 + i, y - 1 + i) == 0) {
+					stepChoices[i][j] = Math.sqrt((x - 1 + i - absoluteX) * (x - 1 + i - absoluteX) + (y - 1 + j - absoluteY) * (y - 1 + j - absoluteY));
+				} else {
+					stepChoices[i][j] = Integer.MAX_VALUE;
+				}
+				if(stepChoices[i][j] < lowest) {
+					choices = 1;
+					lowest = stepChoices[i][j];
+					for(int k = 0; k < 3; k++) {
+						for(int l = 0; l < 3; l++) {
+							if(stepChoices[k][l] == -1) stepChoices[i][j] = -2;
+						}
+					}
+					stepChoices[i][j] = -1;
+				} else if(stepChoices[i][j] == lowest) {
+					choices++;
+					stepChoices [i][j] = -1;
+				}
+			}
+		}
+		if(choices == 0) return false;
+		//repurposing lowest here
+		lowest = Math.random() * choices;
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				if(stepChoices[i][j] == -1) {
+					if(lowest < 1) {
+						goToRelative(i + 1, j + 1);
+						return true;
+					}
+					lowest -= 1;
+				}
+			}
+		}
 		return false;
 	}
 }
