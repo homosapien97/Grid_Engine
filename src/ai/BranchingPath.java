@@ -1,5 +1,7 @@
 package ai;
 
+import geometry.Point;
+
 import java.util.Vector;
 
 public class BranchingPath {

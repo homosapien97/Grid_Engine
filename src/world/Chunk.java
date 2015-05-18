@@ -1,22 +1,23 @@
 package world;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 import entity.Entity;
+import geometry.Point;
 import terrain.Terrain;
 
 public class Chunk {
 	//grid dimensions (square)
 	public static final int DIM = 16;
-
 	
-
 	//stores all chunks
-	private static Vector<Chunk> chunks = new Vector<Chunk>(); 
+	private static final HashMap<Point, Chunk> chunks = new HashMap<Point, Chunk>(961);
 	
 	//chunk instance positions
-	public final int xPos;
-	public final int yPos;
+//	public final int xPos;
+//	public final int yPos;
+	public final Point pos;
 	
 	//all entities
 	public Vector<Entity> entities;
@@ -31,13 +32,11 @@ public class Chunk {
 	/**
 	 * Creates the origin chunk at position (0, 0).
 	 */
-	public Chunk() {
-		xPos = 0;
-		yPos = 0;
+	private Chunk() {
+		pos = new Point(0,0);
 		
 		entities = new Vector<Entity>();
-		chunks.add(this);
-		
+		chunks.put(pos, this);
 		//neighbors
 		neighbors = new Chunk[3][3];
 		neighbors[1][1] = this;
@@ -56,25 +55,17 @@ public class Chunk {
 	 * @param checkOverlap whether to check for any existing chunks with the same coordinates before adding the new chunk to chunks
 	 */
 	public Chunk(int xPos, int yPos, boolean checkOverlap) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+		pos = new Point(xPos, yPos);
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap) {
-			for(Chunk c : chunks) {
-				if(equals(c)) 
-					checkOverlap = false;
-			}
-			
-			if(checkOverlap) 
-				chunks.add(this);
+		if(checkOverlap && !chunks.containsKey(pos)) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
 		}
-		
-		//neighbors
-		neighbors = new Chunk[3][3];
-		neighbors[1][1] = this;
-		updateNeighbors();
 		
 		//terrain and height
 		terrain = new Terrain[DIM][DIM];
@@ -90,31 +81,25 @@ public class Chunk {
 	 * @param terrain the terrain to set to this new chunk
 	 */
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Terrain terrain) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+		pos = new Point(xPos, yPos);
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap) {
-			for(Chunk c : chunks) {
-				if(equals(c)) 
-					checkOverlap = false;
-			}
-			
-			if(checkOverlap) 
-				chunks.add(this);
+		if(checkOverlap && !chunks.containsKey(pos)) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
 		}
 		
-		//neighbors
-		neighbors = new Chunk[3][3];
-		neighbors[1][1] = this;
-		updateNeighbors();
 		//terrain and height
 		this.terrain = new Terrain[DIM][DIM];
 		heightmap = new int[DIM][DIM];
 		for(int i = 0; i < DIM; i++) {
 			for(int j = 0; j < DIM; j++) {
 				this.terrain[i][j] = terrain;
+				heightmap[i][j] = 0;
 			}
 		}
 		
@@ -130,25 +115,17 @@ public class Chunk {
 	 * @param heightmap heightmap to create in the new chunk.
 	 */
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Vector<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+		pos = new Point(xPos, yPos);
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap) {
-			for(Chunk c : chunks) {
-				if(equals(c)) 
-					checkOverlap = false;
-			}
-			
-			if(checkOverlap) 
-				chunks.add(this);
+		if(checkOverlap && !chunks.containsKey(pos)) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
 		}
-		
-		//neighbors
-		neighbors = new Chunk[3][3];
-		neighbors[1][1] = this;
-		updateNeighbors();
 		
 		//terrain and height
 		this.terrain = terrain;
@@ -162,25 +139,17 @@ public class Chunk {
 	 * @param chunk chunk to copy
 	 */
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Chunk chunk) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+		pos = new Point(xPos, yPos);
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap) {
-			for(Chunk c : chunks) {
-				if(equals(c)) 
-					checkOverlap = false;
-			}
-			
-			if(checkOverlap) 
-				chunks.add(this);
+		if(checkOverlap && !chunks.containsKey(pos)) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
 		}
-		
-		//neighbors
-		neighbors = new Chunk[3][3];
-		neighbors[1][1] = this;
-		updateNeighbors();
 		
 		//terrain and height
 		terrain = new Terrain[DIM][DIM];
@@ -200,18 +169,26 @@ public class Chunk {
 	 * Checks for Chunks from the chunks vector to fill any null positions in nearestNeighbors.
 	 */
 	public void updateNeighbors() {
+		Point tempP;
+		Chunk tempC;
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				//for each neighbor in the array, check if null
 				if(neighbors[i][j] == null) {
 					//if null, search the chunks object to find the neigbors of this chunk
-					for(Chunk c : chunks) {
-						if(c.xPos == xPos - 1 + i && c.yPos == yPos - 1 + j) {
-							neighbors[i][j] = c;
-							if(c.neighbors[2 - i][2 - j] == null)
-								c.neighbors[2 - i][2 - j] = this;
-							break;
-						}
+//					for(Chunk c : chunks) {
+//						if(c.xPos == xPos - 1 + i && c.yPos == yPos - 1 + j) {
+//							neighbors[i][j] = c;
+//							if(c.neighbors[2 - i][2 - j] == null)
+//								c.neighbors[2 - i][2 - j] = this;
+//							break;
+//						}
+//					}
+					tempP = new Point(pos.x + i - 1, pos.y + i - 1);
+					if(chunks.containsKey(tempP)) {
+						tempC = chunks.get(tempP);
+						neighbors[i][j] = tempC;
+						tempC.neighbors[2 - i][2 - j] = this;
 					}
 				}
 			}
@@ -243,17 +220,17 @@ public class Chunk {
 	 * Deletes this chunk from the global chunks and from any of its nearest neighbors' nearestNeighbors arrays.
 	 */
 	public void delete() {
-		updateNeighbors();
+//		updateNeighbors();
 		
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				if(neighbors[i][j] != null) {
+				if(neighbors[i][j] != null && !(i == 1 && j == 1)) {
 					neighbors[i][j].clearNeighbor(2 - i, 2 - j);
 				}
 			}
 		}
 		
-		chunks.remove(this);
+		chunks.remove(this.pos);
 	}
 	
 	public void addEntity(Entity e) {
@@ -313,7 +290,7 @@ public class Chunk {
 	//basic class functions
 	
 	public boolean equals(Chunk c) {
-		return (xPos == c.xPos && yPos == c.yPos);
+		return (pos.equals(c.pos));
 	}
 	
 	public String toString() {

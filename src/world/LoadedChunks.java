@@ -33,7 +33,7 @@ public class LoadedChunks {
 		}
 		for(int j = 0; j < 2 * RADIUS + 1; j++) {
 			chunks[2 * RADIUS][j] = chunks[ 2 * RADIUS - 1][j].getNeighbor(2, 1);
-			if(chunks[2*RADIUS][j] == null) chunks[2*RADIUS][j] = Generator.generateChunk(2*RADIUS + chunks[0][0].xPos, j + chunks[0][0].yPos);
+			if(chunks[2*RADIUS][j] == null) chunks[2*RADIUS][j] = Generator.generateChunk(2*RADIUS + chunks[0][0].pos.x, j + chunks[0][0].pos.y);
 		}
 	}
 	
@@ -50,48 +50,34 @@ public class LoadedChunks {
 	}
 	
 	public static void reload() {
+		//TODO optimize this for chunks being stored in a hashmap
 		for(int i = RADIUS - 1; i > -1; i--) {
 			chunks[i][i] = chunks[i + 1][i + 1].getNeighbor(0, 0);
-			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + i);
+			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + i);
 		}
 		
 		for(int i = 1; i < 2 * RADIUS + 1; i++) {
 			chunks[i][0] = chunks[i -1][0].getNeighbor(2, 1);
-			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS);
+			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS);
 		}
 		
 		for(int i = 0; i < 2 * RADIUS + 1; i++) {
 			for(int j = 1; j < 2 * RADIUS + 1; j++) {
 				chunks[i][j] = chunks[i][j-1].getNeighbor(1, 2);
-				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + j);
+				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + j);
 			}
 		}
 	}
 	public static void reload(Chunk center) {
 		LoadedChunks.center = center;
-		for(int i = RADIUS - 1; i > -1; i--) {
-			chunks[i][i] = chunks[i + 1][i + 1].getNeighbor(0, 0);
-			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + i);
-		}
-		
-		for(int i = 1; i < 2 * RADIUS + 1; i++) {
-			chunks[i][0] = chunks[i -1][0].getNeighbor(2, 1);
-			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS);
-		}
-		
-		for(int i = 0; i < 2 * RADIUS + 1; i++) {
-			for(int j = 1; j < 2 * RADIUS + 1; j++) {
-				chunks[i][j] = chunks[i][j-1].getNeighbor(1, 2);
-				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.xPos - RADIUS + i, center.yPos - RADIUS + j);
-			}
-		}
+		reload();
 	}
 	
 	public static int getTopLeftX() {
-		return chunks[0][0].xPos;
+		return chunks[0][0].pos.x;
 	}
 	public static int getTopLeftY() {
-		return chunks[0][0].yPos;
+		return chunks[0][0].pos.y;
 	}
 	/**
 	 * Returns whether a specific absolute point is within LoadedChunks
@@ -102,7 +88,7 @@ public class LoadedChunks {
 	public static boolean isLoaded(int absoluteX, int absoluteY) {
 		absoluteX = Tools.absCoordToChunkCoord(absoluteX);
 		absoluteY = Tools.absCoordToChunkCoord(absoluteY);
-		return absoluteX >= chunks[0][0].xPos && absoluteX <= chunks[2*RADIUS][2*RADIUS].xPos && absoluteY >= chunks[0][0].yPos && absoluteY <= chunks[2*RADIUS][2*RADIUS].yPos;
+		return absoluteX >= chunks[0][0].pos.x && absoluteX <= chunks[2*RADIUS][2*RADIUS].pos.x && absoluteY >= chunks[0][0].pos.y && absoluteY <= chunks[2*RADIUS][2*RADIUS].pos.y;
 	}
 	
 	/**
@@ -114,7 +100,7 @@ public class LoadedChunks {
 	public static String terrainSpriteAt(int absoluteX, int absoluteY) {
 //		System.out.println(absoluteX/Chunk.GRID_DIM + " - " + chunks[0][0].xPos);
 //		System.out.println(((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM) + " " + ((absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM));
-		return chunks[Tools.absCoordToChunkCoord(absoluteX) - chunks[0][0].xPos][Tools.absCoordToChunkCoord(absoluteY) - chunks[0][0].yPos].
+		return chunks[Tools.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
 				terrainAt(Tools.absCoordToMinorCoord(absoluteX), Tools.absCoordToMinorCoord(absoluteY)).toString();/*spriteFilepath;*/
 	}
 	/**
@@ -124,7 +110,7 @@ public class LoadedChunks {
 	 * @return height at x, y
 	 */
 	public static int heightAt(int absoluteX, int absoluteY) {
-		return chunks[chunks[0][0].xPos + Tools.absCoordToChunkCoord(absoluteX)][chunks[0][0].yPos + Tools.absCoordToChunkCoord(absoluteY)].
+		return chunks[chunks[0][0].pos.x + Tools.absCoordToChunkCoord(absoluteX)][chunks[0][0].pos.y + Tools.absCoordToChunkCoord(absoluteY)].
 				heightAt(Tools.absCoordToMinorCoord(absoluteX), Tools.absCoordToMinorCoord(absoluteY));
 	}
 	/**
@@ -136,10 +122,10 @@ public class LoadedChunks {
 	 * @return vector of entities within (x1,y1)->(x2,y2)
 	 */
 	public static Vector<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
-		int x1c = Tools.absCoordToChunkCoord(x1) - chunks[0][0].xPos;
-		int y1c = Tools.absCoordToChunkCoord(y1) - chunks[0][0].yPos;
-		int x2c = Tools.absCoordToChunkCoord(x2) - chunks[0][0].xPos;
-		int y2c = Tools.absCoordToChunkCoord(y2) - chunks[0][0].yPos;
+		int x1c = Tools.absCoordToChunkCoord(x1) - chunks[0][0].pos.x;
+		int y1c = Tools.absCoordToChunkCoord(y1) - chunks[0][0].pos.y;
+		int x2c = Tools.absCoordToChunkCoord(x2) - chunks[0][0].pos.x;
+		int y2c = Tools.absCoordToChunkCoord(y2) - chunks[0][0].pos.y;
 		Vector<Entity> ret = new Vector<Entity>();
 		for(int i = x1c; i < x2c + 1; i++) {
 			for(int j = y1c; j < y2c + 1; j++) {

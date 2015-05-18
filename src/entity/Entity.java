@@ -29,10 +29,10 @@ public class Entity {
 	//position in relation to all chunks
 	
 	public int getAbsoluteX() {
-		return chunk.xPos * Chunk.DIM + x;
+		return chunk.pos.x * Chunk.DIM + x;
 	}
 	public int getAbsoluteY() {
-		return chunk.yPos * Chunk.DIM + y;
+		return chunk.pos.x * Chunk.DIM + y;
 	}
 	
 	public String getSpriteFilepath() {
