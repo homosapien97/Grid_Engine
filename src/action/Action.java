@@ -17,6 +17,7 @@ public class Action implements Runnable{
 	 */
 	public void run() {
 	}
+	
 	public Action(int startTime, int endTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
