@@ -4,10 +4,10 @@ import world.LoadedChunks;
 
 public class TextDisplay extends Display{
 	public static void print() {
-		Camera.snapshot();
+		Camera.terrainSnapshot();
 		for(int i = 0; i < Display.HEIGHT; i++) {
 			for(int j = 0; j < Display.WIDTH; j++) {
-				System.out.print(Camera.snapshot[j][i]);
+				System.out.print(Camera.terrainSnapshot[j][i]);
 			}
 			System.out.println();
 		}

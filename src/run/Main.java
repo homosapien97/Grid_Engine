@@ -21,7 +21,7 @@ public class Main {
 	static Chunk testChunk = new Chunk(0,0,true,Stone.get());
 	
 	//player object
-	static Player player = new Player(0,0,testChunk, "0", 256, 64, "Player");
+	static Player player = new Player(0,0,testChunk, "P", 256, 64, "Player");
 	
 	//graphics
 	static JFrame frame = new JFrame("Grid Game");
@@ -33,6 +33,7 @@ public class Main {
 	
 	private static void stepGFX() {
 		//TextDisplay.print();
+		frame.repaint();
 		frame.setVisible(true);
 	}
 	
