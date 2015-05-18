@@ -1,6 +1,6 @@
 package entity;
 
-import general.Methods;
+import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
 
@@ -68,9 +68,9 @@ public class Player extends Entity implements Health, Armored, Mobile {
 	@Override
 	public boolean goToAbsolute(int absoluteX, int absoluteY) {
 		if(LoadedChunks.isLoaded(absoluteX, absoluteY)) {
-			chunk = LoadedChunks.chunks[Methods.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Methods.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
-			x = Methods.absCoordToMinorCoord(absoluteX);
-			y = Methods.absCoordToMinorCoord(absoluteY);
+			chunk = LoadedChunks.chunks[Tools.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Tools.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
+			x = Tools.absCoordToMinorCoord(absoluteX);
+			y = Tools.absCoordToMinorCoord(absoluteY);
 			return true;
 		}
 		return false;

@@ -15,13 +15,14 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 	//example chunk
 	static Chunk testChunk = new Chunk(0,0,true,Stone.get());
 	
 	//player object
-	static Player player = new Player(0,0,testChunk, "0", 256, 64, "Player");
+	static Player player = new Player(0,0,testChunk, "P", 256, 64, "Player");
 	
 	//graphics
 	static JFrame frame = new JFrame("Grid Game");
@@ -34,10 +35,11 @@ public class Main {
 	private static void stepGFX() {
 		//TextDisplay.print();
 		frame.setVisible(true);
+		frame.repaint();
 	}
 	
 	private static void stepState() {
-		player.goToAbsolute(-1, -1);
+		player.goToRelative(-1, -1);
 	}
 	
 	private static void init() {
@@ -54,17 +56,17 @@ public class Main {
 		frame.pack();
 		
 		//icon
-		/*
 		Image gameicon = null;
 		
-		File icon = new File("resources\\icons\\game_icon.jpeg");
+		File icon = new File("resources\\icons\\game_icon.jpg");
 		
 		try{
 			gameicon = ImageIO.read(icon);
-		}catch(IOException e){}
+		}catch(IOException e){
+			System.out.println(e);
+		}
 		
 		frame.setIconImage(gameicon);
-		*/
 		
 		//general
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,6 +74,24 @@ public class Main {
 	
 	public static void main(String[] args) {
 		init();
+		step();
+		try{
+		    TimeUnit.MILLISECONDS.sleep(1000);
+	    }catch(InterruptedException e){
+		    e.printStackTrace();
+	    }
+		step();
+		try{
+		    TimeUnit.MILLISECONDS.sleep(1000);
+	    }catch(InterruptedException e){
+		    e.printStackTrace();
+	    }
+		step();
+		try{
+		    TimeUnit.MILLISECONDS.sleep(1000);
+	    }catch(InterruptedException e){
+		    e.printStackTrace();
+	    }
 		step();
 	}
 }
