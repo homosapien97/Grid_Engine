@@ -1,10 +1,8 @@
 package general;
 
-import entity.Entity;
-import entity.Player;
 import world.Chunk;
 
-public class Methods {
+public class Tools {
 	public static int absCoordToChunkCoord(int abs) {
 		return (abs > -1) ? (abs/Chunk.DIM) : ((abs - Chunk.DIM + 1) / (Chunk.DIM));
 	}
