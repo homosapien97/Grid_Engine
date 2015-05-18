@@ -1,7 +1,6 @@
 package general;
 
 import java.util.concurrent.TimeUnit;
-
 import world.Chunk;
 
 public class Tools {
@@ -54,7 +53,9 @@ public class Tools {
 	static void p(Object obj){
 		System.out.print(obj);
 	}
+	
 	static void pln(Object obj){
 		System.out.println(obj);
 	}
+	
 }
