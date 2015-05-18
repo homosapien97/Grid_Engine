@@ -4,7 +4,7 @@ import world.Chunk;
 import entity.Entity;
 import entity.Player;
 import general.Tools;
-import geometry.Beam;
+import geometry.Line;
 import geometry.Circle;
 
 public class Tester {
@@ -24,7 +24,7 @@ public class Tester {
 			System.out.println();
 		}
 		System.out.println();
-		Beam beam = new Beam(0,0,30,50);
+		Line beam = new Line(0,0,30,50);
 		beam.generateMask();
 		for(int j = 0; j < beam.mask[0].length; j++) {
 			for(int i = 0; i < beam.mask.length; i++) {
