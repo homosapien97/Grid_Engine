@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 	//example chunk
@@ -33,12 +34,12 @@ public class Main {
 	
 	private static void stepGFX() {
 		//TextDisplay.print();
-		frame.repaint();
 		frame.setVisible(true);
+		frame.repaint();
 	}
 	
 	private static void stepState() {
-		player.goToAbsolute(-1, -1);
+		player.goToRelative(-1, -1);
 	}
 	
 	private static void init() {
@@ -73,6 +74,24 @@ public class Main {
 	
 	public static void main(String[] args) {
 		init();
+		step();
+		try{
+		    TimeUnit.MILLISECONDS.sleep(1000);
+	    }catch(InterruptedException e){
+		    e.printStackTrace();
+	    }
+		step();
+		try{
+		    TimeUnit.MILLISECONDS.sleep(1000);
+	    }catch(InterruptedException e){
+		    e.printStackTrace();
+	    }
+		step();
+		try{
+		    TimeUnit.MILLISECONDS.sleep(1000);
+	    }catch(InterruptedException e){
+		    e.printStackTrace();
+	    }
 		step();
 	}
 }
