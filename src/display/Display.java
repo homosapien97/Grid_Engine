@@ -76,7 +76,12 @@ public class Display extends JPanel {
 		return screenDimensions;
 	}
 	
-	
+	/**
+	 * Draws a stone colored square to represent the player.
+	 * @param page the graphics object
+	 * @param x the x position for terrain (not pixels)
+	 * @param y the y position for terrain (not pixels)
+	 */
 	private void drawStone(Graphics page, int x, int y){
 		page.setColor(Color.gray);
 		page.fillRect(x * SPRITE_DIM, y * SPRITE_DIM, SPRITE_DIM, SPRITE_DIM);
@@ -84,6 +89,12 @@ public class Display extends JPanel {
 		page.drawRect(x * SPRITE_DIM, y * SPRITE_DIM, SPRITE_DIM, SPRITE_DIM);
 	}
 	
+	/**
+	 * Draws a sand colored square to represent the player.
+	 * @param page the graphics object
+	 * @param x the x position for terrain (not pixels)
+	 * @param y the y position for terrain (not pixels)
+	 */
 	private void drawQuickSand(Graphics page, int x, int y){
 		Color sand = new Color(242, 239, 145);
 		page.setColor(sand);
@@ -92,6 +103,12 @@ public class Display extends JPanel {
 		page.drawRect(x * SPRITE_DIM, y * SPRITE_DIM, SPRITE_DIM, SPRITE_DIM);
 	}
 	
+	/**
+	 * Draws a green square to represent the player.
+	 * @param page the graphics object
+	 * @param x the x position for entities (not pixels)
+	 * @param y the y position for entities (not pixels)
+	 */
 	private void drawPlayer(Graphics page, int x, int y){
 		Color green = new Color(43, 217, 24);
 		page.setColor(green);
