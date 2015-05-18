@@ -100,8 +100,8 @@ public class LoadedChunks {
 	 * @return is x,y in LoadedChunks?
 	 */
 	public static boolean isLoaded(int absoluteX, int absoluteY) {
-		absoluteX = Tools.absCoordToChunkCoord(absoluteX);
-		absoluteY = Tools.absCoordToChunkCoord(absoluteY);
+		absoluteX = Tools.nav.absCoordToChunkCoord(absoluteX);
+		absoluteY = Tools.nav.absCoordToChunkCoord(absoluteY);
 		return absoluteX >= chunks[0][0].xPos && absoluteX <= chunks[2*RADIUS][2*RADIUS].xPos && absoluteY >= chunks[0][0].yPos && absoluteY <= chunks[2*RADIUS][2*RADIUS].yPos;
 	}
 	
@@ -114,8 +114,8 @@ public class LoadedChunks {
 	public static String terrainSpriteAt(int absoluteX, int absoluteY) {
 //		System.out.println(absoluteX/Chunk.GRID_DIM + " - " + chunks[0][0].xPos);
 //		System.out.println(((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM) + " " + ((absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM));
-		return chunks[Tools.absCoordToChunkCoord(absoluteX) - chunks[0][0].xPos][Tools.absCoordToChunkCoord(absoluteY) - chunks[0][0].yPos].
-				terrainAt(Tools.absCoordToMinorCoord(absoluteX), Tools.absCoordToMinorCoord(absoluteY)).toString();/*spriteFilepath;*/
+		return chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].xPos][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].yPos].
+				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY)).toString();/*spriteFilepath;*/
 	}
 	/**
 	 * Returns the height at the indicated absolute coordinates
@@ -124,8 +124,8 @@ public class LoadedChunks {
 	 * @return height at x, y
 	 */
 	public static int heightAt(int absoluteX, int absoluteY) {
-		return chunks[chunks[0][0].xPos + Tools.absCoordToChunkCoord(absoluteX)][chunks[0][0].yPos + Tools.absCoordToChunkCoord(absoluteY)].
-				heightAt(Tools.absCoordToMinorCoord(absoluteX), Tools.absCoordToMinorCoord(absoluteY));
+		return chunks[chunks[0][0].xPos + Tools.nav.absCoordToChunkCoord(absoluteX)][chunks[0][0].yPos + Tools.nav.absCoordToChunkCoord(absoluteY)].
+				heightAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY));
 	}
 	/**
 	 * Returns a vector containing all entities within the given range, inclusive.
@@ -136,10 +136,10 @@ public class LoadedChunks {
 	 * @return vector of entities within (x1,y1)->(x2,y2)
 	 */
 	public static Vector<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
-		int x1c = Tools.absCoordToChunkCoord(x1) - chunks[0][0].xPos;
-		int y1c = Tools.absCoordToChunkCoord(y1) - chunks[0][0].yPos;
-		int x2c = Tools.absCoordToChunkCoord(x2) - chunks[0][0].xPos;
-		int y2c = Tools.absCoordToChunkCoord(y2) - chunks[0][0].yPos;
+		int x1c = Tools.nav.absCoordToChunkCoord(x1) - chunks[0][0].xPos;
+		int y1c = Tools.nav.absCoordToChunkCoord(y1) - chunks[0][0].yPos;
+		int x2c = Tools.nav.absCoordToChunkCoord(x2) - chunks[0][0].xPos;
+		int y2c = Tools.nav.absCoordToChunkCoord(y2) - chunks[0][0].yPos;
 		Vector<Entity> ret = new Vector<Entity>();
 		for(int i = x1c; i < x2c + 1; i++) {
 			for(int j = y1c; j < y2c + 1; j++) {

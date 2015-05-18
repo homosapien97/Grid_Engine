@@ -4,6 +4,7 @@ import display.Camera;
 import display.TextDisplay;
 import display.Display;
 import entity.Player;
+import general.Tools;
 import terrain.Stone;
 import world.Chunk;
 import world.LoadedChunks;
@@ -75,23 +76,11 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		step();
-		try{
-		    TimeUnit.MILLISECONDS.sleep(1000);
-	    }catch(InterruptedException e){
-		    e.printStackTrace();
-	    }
+		Tools.time.wait(1000);
 		step();
-		try{
-		    TimeUnit.MILLISECONDS.sleep(1000);
-	    }catch(InterruptedException e){
-		    e.printStackTrace();
-	    }
+		Tools.time.wait(1000);
 		step();
-		try{
-		    TimeUnit.MILLISECONDS.sleep(1000);
-	    }catch(InterruptedException e){
-		    e.printStackTrace();
-	    }
+		Tools.time.wait(1000);
 		step();
 	}
 }
