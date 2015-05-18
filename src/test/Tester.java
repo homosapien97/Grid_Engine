@@ -1,5 +1,8 @@
 package test;
 
+import world.Chunk;
+import entity.Entity;
+import entity.Player;
 import general.Methods;
 import geometry.Beam;
 import geometry.Circle;
@@ -29,5 +32,21 @@ public class Tester {
 			}
 			System.out.println();
 		}
+//		test();
 	}
+//	public static Chunk chunk = new Chunk();
+//	public static Entity e = new Entity(0, 0, chunk, "e");
+//	public static Entity f = new Entity(0, 0, chunk, "f");
+//	public static Player a = new Player(0, 0, chunk, "a", 0, 0, "~");
+//	public static void test() {
+//		Class /*<? extends Entity>*/ c = e.getClass();
+//		Class /*<? extends Entity>*/ d = f.getClass();
+//		Class /*<? extends Entity>*/ z = a.getClass();
+//		if(c == d) System.out.println(true); else System.out.println(false);
+//		System.out.println(c.equals(d));
+//		if(c == z) System.out.println(true); else System.out.println(false);
+//		System.out.println(c.equals(z));
+//		System.out.println(c.isAssignableFrom(z));
+//		System.out.println(z.isAssignableFrom(c));
+//	}
 }

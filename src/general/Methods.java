@@ -1,5 +1,7 @@
 package general;
 
+import entity.Entity;
+import entity.Player;
 import world.Chunk;
 
 public class Methods {
@@ -12,4 +14,5 @@ public class Methods {
 	public static int orthoDistance(int x1, int y1, int x2, int y2) {
 		return ((x1 > x2) ? (x1 - x2) : (x2 - x1)) + ((y1 > y2) ? (y1 - y2) : (y2 - y1));
 	}
+	
 }
