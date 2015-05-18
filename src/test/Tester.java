@@ -3,7 +3,7 @@ package test;
 import world.Chunk;
 import entity.Entity;
 import entity.Player;
-import general.Methods;
+import general.Tools;
 import geometry.Beam;
 import geometry.Circle;
 
