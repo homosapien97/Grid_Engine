@@ -55,17 +55,17 @@ public class Main {
 		frame.pack();
 		
 		//icon
-		/*
 		Image gameicon = null;
 		
-		File icon = new File("resources\\icons\\game_icon.jpeg");
+		File icon = new File("resources\\icons\\game_icon.jpg");
 		
 		try{
 			gameicon = ImageIO.read(icon);
-		}catch(IOException e){}
+		}catch(IOException e){
+			System.out.println(e);
+		}
 		
 		frame.setIconImage(gameicon);
-		*/
 		
 		//general
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
