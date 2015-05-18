@@ -1,8 +1,11 @@
 package display;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Display extends JPanel {
 	//dimensions of sprites in screen pixels
@@ -18,6 +21,10 @@ public class Display extends JPanel {
 	
 	//screen size
 	private static Dimension screenDimensions = new Dimension(WIDTH * SPRITE_DIM, HEIGHT * SPRITE_DIM);
+
+	//image
+	private static Image stone;
+	private static Image quicksand;
 	
 	//initialization
 	public Display() {
@@ -26,6 +33,9 @@ public class Display extends JPanel {
 		
 		//background color
 		setBackground(Color.black);
+		
+		//load terrain
+		loadTerrain();
 	}
 	
 	public void paintComponent(Graphics page){
@@ -40,6 +50,10 @@ public class Display extends JPanel {
 		
 		for(int x = 0; x < WIDTH; x++) {
 			for(int y = 0; y < HEIGHT; y++) {
+				
+				drawTerrain(page, x, y, Camera.terrainSnapshot[x][y]);
+				
+				/*
 				switch(Camera.terrainSnapshot[x][y]){
 					case "X":
 						drawStone(page, x, y);
@@ -51,6 +65,7 @@ public class Display extends JPanel {
 						System.out.print("Unknown terrain type: ");
 						System.out.println(Camera.terrainSnapshot[x][y]);
 				}
+				*/
 			}
 		}
 		
@@ -74,6 +89,49 @@ public class Display extends JPanel {
 	
 	public static Dimension getDimensions(){
 		return screenDimensions;
+	}
+	
+	private void loadTerrain(){
+		File temp = new File("resources\\terrain\\stone.png");
+		
+		try{
+			Display.stone = ImageIO.read(temp);
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		
+		temp = new File("resources\\terrain\\quicksand.png");
+		
+		try{
+			Display.quicksand = ImageIO.read(temp);
+		}catch(IOException e){
+			System.out.println(e);
+		}
+	}
+	
+	private void drawTerrain(Graphics page, int x, int y, String filename){
+		Image terrain = null;
+		
+		/*
+		File img = new File("resources\\terrain\\" + filename);
+		
+		try{
+			terrain = ImageIO.read(img);
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		*/
+		
+		switch(filename){
+			case "stone.png":
+				terrain = stone;
+				break;
+			case "quicksand.png":
+				terrain = quicksand;
+				break;
+		}
+		
+		page.drawImage(terrain, x * SPRITE_DIM, y * SPRITE_DIM, SPRITE_DIM, SPRITE_DIM, null);
 	}
 	
 	/**

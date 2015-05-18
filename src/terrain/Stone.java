@@ -2,7 +2,8 @@ package terrain;
 
 public class Stone extends Terrain implements Thermochemical {
 	private static final Stone stone = new Stone();
-	private static final String spriteFilepath = "X";
+	//private static final String spriteFilepath = "X";
+	private static final String spriteFilepath = "stone.png";
 	private static char c = 'A';
 	
 	private Stone() {
