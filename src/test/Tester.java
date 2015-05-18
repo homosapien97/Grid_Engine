@@ -1,6 +1,6 @@
 package test;
 
-import general.Methods;
+import general.Tools;
 import geometry.Beam;
 import geometry.Circle;
 
