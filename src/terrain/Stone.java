@@ -10,7 +10,7 @@ public class Stone extends Terrain implements Thermochemical {
 	private static final String filename = "stone.png";
 	private static char c = 'A';
 	
-	public final Image sprite = Tools.img.loadTerrainSprite(filename);
+	public static final Image sprite = Tools.img.loadTerrainSprite(filename);
 	
 	private Stone() {
 		super("stone",filename);
