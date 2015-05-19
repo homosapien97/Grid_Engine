@@ -1,5 +1,7 @@
 package terrain;
 
+import general.Tools;
+
 import java.awt.Image;
 
 public class Terrain {
@@ -7,7 +9,7 @@ public class Terrain {
 //	public final String name;
 	public final String name;
 	public final String filename;
-	public final Image sprite = null;
+	public final Image sprite;
 	public static String test = "A";
 
 	
@@ -18,12 +20,14 @@ public class Terrain {
 	protected Terrain() {
 		name = "";
 		filename = "";
+		sprite = null;
 		test = String.valueOf('A' + test.charAt(0)%26 + 1 );
 	}
 	
 	protected Terrain(String name, String filename) {
 		this.name = name;
 		this.filename = filename;
+		this.sprite = Tools.img.loadTerrainSprite(filename);
 	}
 	
 	/**
