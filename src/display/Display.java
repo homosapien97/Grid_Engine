@@ -3,6 +3,9 @@ package display;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import terrain.Stone;
+import terrain.Quicksand;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +38,7 @@ public class Display extends JPanel {
 		setBackground(Color.black);
 		
 		//load terrain
-		loadTerrain();
+		//loadTerrain();
 	}
 	
 	public void paintComponent(Graphics page){
@@ -46,12 +49,12 @@ public class Display extends JPanel {
 		page.drawLine(P_WIDTH - 1, P_HEIGHT - 1, P_WIDTH - 1, P_HEIGHT - 1);
 		*/
 		
-		Camera.terrainSnapshot();
+		Camera.terrainImageSnapshot();
 		
 		for(int x = 0; x < WIDTH; x++) {
 			for(int y = 0; y < HEIGHT; y++) {
 				
-				drawTerrain(page, x, y, Camera.terrainSnapshot[x][y]);
+				drawTerrain(page, x, y, Camera.terrainImageSnapshot[x][y]);
 				
 				/*
 				switch(Camera.terrainSnapshot[x][y]){
@@ -109,8 +112,8 @@ public class Display extends JPanel {
 		}
 	}
 	
-	private void drawTerrain(Graphics page, int x, int y, String filename){
-		Image terrain = null;
+	private void drawTerrain(Graphics page, int x, int y, Image img){
+		Image terrain = img;
 		
 		/*
 		File img = new File("resources\\terrain\\" + filename);
@@ -122,6 +125,7 @@ public class Display extends JPanel {
 		}
 		*/
 		
+		/*
 		switch(filename){
 			case "stone.png":
 				terrain = stone;
@@ -130,6 +134,7 @@ public class Display extends JPanel {
 				terrain = quicksand;
 				break;
 		}
+		*/
 		
 		page.drawImage(terrain, x * SPRITE_DIM, y * SPRITE_DIM, SPRITE_DIM, SPRITE_DIM, null);
 	}

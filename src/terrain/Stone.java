@@ -1,13 +1,19 @@
 package terrain;
 
+import java.awt.Image;
+
+import general.Tools;
+
 public class Stone extends Terrain implements Thermochemical {
 	private static final Stone stone = new Stone();
 	//private static final String spriteFilepath = "X";
-	private static final String spriteFilepath = "stone.png";
+	private static final String filename = "stone.png";
 	private static char c = 'A';
 	
+	public final Image sprite = Tools.img.loadTerrainSprite(filename);
+	
 	private Stone() {
-		super("stone",spriteFilepath);
+		super("stone",filename);
 	}
 
 	public static Stone get() {
@@ -15,7 +21,7 @@ public class Stone extends Terrain implements Thermochemical {
 	}
 	
 	public String toString() {
-		return spriteFilepath;
+		return filename;
 	}
 	
 	@Override

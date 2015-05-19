@@ -1,10 +1,13 @@
 package terrain;
 
+import java.awt.Image;
+
 public class Terrain {
 	private static Terrain generic_terrain;
 //	public final String name;
 	public final String name;
-	public final String spriteFilepath;
+	public final String filename;
+	public final Image sprite = null;
 	public static String test = "A";
 
 	
@@ -14,13 +17,13 @@ public class Terrain {
 	
 	protected Terrain() {
 		name = "";
-		spriteFilepath = "";
+		filename = "";
 		test = String.valueOf('A' + test.charAt(0)%26 + 1 );
 	}
 	
-	protected Terrain(String name, String spriteFilepath) {
+	protected Terrain(String name, String filename) {
 		this.name = name;
-		this.spriteFilepath = spriteFilepath;
+		this.filename = filename;
 	}
 	
 	/**
@@ -35,12 +38,12 @@ public class Terrain {
 		return name;
 	}
 	
-	public String getSpriteFilepath() {
-		return spriteFilepath;
+	public String getSpriteFilename() {
+		return filename;
 	}
 	
 	public String toString() {
-		return spriteFilepath;
+		return filename;
 //		test = String.valueOf((int) (Math.random() * 10));
 //		return test;
 	}

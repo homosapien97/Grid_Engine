@@ -1,5 +1,6 @@
 package world;
 
+import java.awt.Image;
 import java.util.Vector;
 
 import entity.Entity;
@@ -95,14 +96,28 @@ public class LoadedChunks {
 	 * Returns the sprite from terrain at the indicated absolute coordinates
 	 * @param absoluteX absolute x coordinate
 	 * @param absoluteY absolute y coordinate
-	 * @return the filepath of the sprite at x,y
+	 * @return the filename of the sprite at x,y
 	 */
-	public static String terrainSpriteAt(int absoluteX, int absoluteY) {
+	public static String terrainSpriteFilenameAt(int absoluteX, int absoluteY) {
 //		System.out.println(absoluteX/Chunk.GRID_DIM + " - " + chunks[0][0].xPos);
 //		System.out.println(((absoluteX%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM) + " " + ((absoluteY%Chunk.GRID_DIM + Chunk.GRID_DIM) % Chunk.GRID_DIM));
 		return chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
 				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY)).toString();/*spriteFilepath;*/
 	}
+	
+	/**
+	 * Returns the sprite from terrain at the indicated absolute coordinates
+	 * @param absoluteX absolute x coordinate
+	 * @param absoluteY absolute y coordinate
+	 * @return the image of the sprite at x,y
+	 */
+	public static Image terrainSpriteAt(int absoluteX, int absoluteY) {
+		Image ret = chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
+				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY)).sprite;
+		System.out.println(ret);
+		return ret;
+	}
+	
 	/**
 	 * Returns the height at the indicated absolute coordinates
 	 * @param absoluteX absolute x coordinate

@@ -1,5 +1,6 @@
 package display;
 
+import java.awt.Image;
 import java.util.Vector;
 
 import entity.Player;
@@ -12,6 +13,7 @@ public class Camera {
 	//public static String[][] snapshot;
 	public static String[][] terrainSnapshot;
 	public static String[][] entitySnapshot;
+	public static Image[][] terrainImageSnapshot;
 	
 	public static Vector<Entity> entities;
 	
@@ -21,6 +23,7 @@ public class Camera {
 		//snapshot = new String[Display.WIDTH][Display.HEIGHT];
 		entitySnapshot = new String[Display.WIDTH][Display.HEIGHT];
 		terrainSnapshot = new String[Display.WIDTH][Display.HEIGHT];
+		terrainImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
 	}
 	
 	public static boolean init(Player p) {
@@ -39,11 +42,24 @@ public class Camera {
 		
 		for(int j = 0; j < Display.HEIGHT; j++) {
 			for(int i = 0; i < Display.WIDTH; i++) {
-				terrainSnapshot[i][j] = LoadedChunks.terrainSpriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
+				terrainSnapshot[i][j] = LoadedChunks.terrainSpriteFilenameAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
 			}
 		}
 		
 		return terrainSnapshot;
+	}
+	
+	public static Image[][] terrainImageSnapshot() {
+		pAbsX = player.getAbsoluteX();
+		pAbsY = player.getAbsoluteY();
+		
+		for(int j = 0; j < Display.HEIGHT; j++) {
+			for(int i = 0; i < Display.WIDTH; i++) {
+				terrainImageSnapshot[i][j] = LoadedChunks.terrainSpriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
+			}
+		}
+		
+		return terrainImageSnapshot;
 	}
 	
 	public static String[][] entitySnapshot() {

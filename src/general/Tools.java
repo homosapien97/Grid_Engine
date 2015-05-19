@@ -1,7 +1,13 @@
 package general;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
+
+import display.Display;
 import world.Chunk;
 
 public class Tools {
@@ -33,6 +39,22 @@ public class Tools {
 		}
 	}
 	
+	//images
+	public static class img {
+		public static Image loadTerrainSprite(String filename){
+			Image img = null;
+			File temp = new File("resources\\terrain\\" + filename);
+			
+			try{
+				img = ImageIO.read(temp);
+			}catch(IOException e){
+				System.out.println(e);
+			}
+			
+			return img;
+		}
+	}
+	
 	//misc functions
 	public static class misc {
 		//newline (like </br> in html)
@@ -51,10 +73,11 @@ public class Tools {
 	//shortcut/simplifying functions, just put here to make it faster to write
 	
 	//faster way to do System.out.print and System.out.println
-	static void p(Object obj){
+	public static void p(Object obj){
 		System.out.print(obj);
 	}
-	static void pln(Object obj){
+	
+	public static void pln(Object obj){
 		System.out.println(obj);
 	}
 }
