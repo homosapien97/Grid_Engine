@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import entity.Entity;
 import general.Tools;
+import geometry.Point;
 
 public class LoadedChunks {
 	public static Chunk[][] chunks;
@@ -52,22 +53,37 @@ public class LoadedChunks {
 	
 	public static void reload() {
 		//TODO optimize this for chunks being stored in a hashmap
-		for(int i = RADIUS - 1; i > -1; i--) {
-			chunks[i][i] = chunks[i + 1][i + 1].getNeighbor(0, 0);
-			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + i);
-		}
-		
+//		for(int i = RADIUS - 1; i > -1; i--) {
+//			chunks[i][i] = chunks[i + 1][i + 1].getNeighbor(0, 0);
+//			if(chunks[i][i] == null) chunks[i][i] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + i);
+//		}
+//		
+//		for(int i = 1; i < 2 * RADIUS + 1; i++) {
+//			chunks[i][0] = chunks[i -1][0].getNeighbor(2, 1);
+//			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS);
+//		}
+//		
+//		for(int i = 0; i < 2 * RADIUS + 1; i++) {
+//			for(int j = 1; j < 2 * RADIUS + 1; j++) {
+//				chunks[i][j] = chunks[i][j-1].getNeighbor(1, 2);
+//				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + j);
+//			}
+//		}
+		chunks[0][0] = Chunk.chunks.get(new Point(center.pos, -RADIUS, -RADIUS));
+		if(chunks[0][0] == null) chunks[0][0] = Generator.generateChunk(center.pos.x - RADIUS, center.pos.y - RADIUS);
 		for(int i = 1; i < 2 * RADIUS + 1; i++) {
-			chunks[i][0] = chunks[i -1][0].getNeighbor(2, 1);
+			chunks[i][0] = chunks[i - 1][0].neighbors[2][1];
 			if(chunks[i][0] == null) chunks[i][0] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS);
 		}
-		
-		for(int i = 0; i < 2 * RADIUS + 1; i++) {
-			for(int j = 1; j < 2 * RADIUS + 1; j++) {
-				chunks[i][j] = chunks[i][j-1].getNeighbor(1, 2);
+		for(int j = 1; j < 2 * RADIUS + 1; j++) {
+			chunks[0][j] = chunks[0][j - 1].neighbors[1][2];
+			if(chunks[0][j] == null) chunks[0][j] = Generator.generateChunk(center.pos.x -RADIUS, center.pos.y - RADIUS + j);
+			for(int i = 1; i < 2 * RADIUS + 1; i++) {
+				chunks[i][j] = chunks[i - 1][j].neighbors[2][1];
 				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + j);
 			}
 		}
+		
 	}
 	public static void reload(Chunk center) {
 		LoadedChunks.center = center;

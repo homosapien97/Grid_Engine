@@ -12,7 +12,7 @@ public class Chunk {
 	public static final int DIM = 16;
 	
 	//stores all chunks
-	private static final HashMap<Point, Chunk> chunks = new HashMap<Point, Chunk>(961);
+	public static final HashMap<Point, Chunk> chunks = new HashMap<Point, Chunk>(961);
 	
 	//chunk instance positions
 //	public final int xPos;
@@ -59,7 +59,7 @@ public class Chunk {
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap && !chunks.containsKey(pos)) {
+		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
 			//neighbors
 			neighbors = new Chunk[3][3];
@@ -85,7 +85,7 @@ public class Chunk {
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap && !chunks.containsKey(pos)) {
+		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
 			//neighbors
 			neighbors = new Chunk[3][3];
@@ -119,7 +119,7 @@ public class Chunk {
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap && !chunks.containsKey(pos)) {
+		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
 			//neighbors
 			neighbors = new Chunk[3][3];
@@ -143,7 +143,7 @@ public class Chunk {
 		
 		entities = new Vector<Entity>();
 		
-		if(checkOverlap && !chunks.containsKey(pos)) {
+		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
 			//neighbors
 			neighbors = new Chunk[3][3];
@@ -169,28 +169,33 @@ public class Chunk {
 	 * Checks for Chunks from the chunks vector to fill any null positions in nearestNeighbors.
 	 */
 	public void updateNeighbors() {
-		Point tempP;
-		Chunk tempC;
+//		Point tempP;
+//		Chunk tempC;
+//		for(int i = 0; i < 3; i++) {
+//			for(int j = 0; j < 3; j++) {
+//				//for each neighbor in the array, check if null
+//				if(neighbors[i][j] == null) {
+//					//if null, search the chunks object to find the neigbors of this chunk
+////					for(Chunk c : chunks) {
+////						if(c.xPos == xPos - 1 + i && c.yPos == yPos - 1 + j) {
+////							neighbors[i][j] = c;
+////							if(c.neighbors[2 - i][2 - j] == null)
+////								c.neighbors[2 - i][2 - j] = this;
+////							break;
+////						}
+////					}
+//					tempP = new Point(pos.x + i - 1, pos.y + i - 1);
+//					if(chunks.get(tempP) != null) {
+//						tempC = chunks.get(tempP);
+//						neighbors[i][j] = tempC;
+//						tempC.neighbors[2 - i][2 - j] = this;
+//					}
+//				}
+//			}
+//		}
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				//for each neighbor in the array, check if null
-				if(neighbors[i][j] == null) {
-					//if null, search the chunks object to find the neigbors of this chunk
-//					for(Chunk c : chunks) {
-//						if(c.xPos == xPos - 1 + i && c.yPos == yPos - 1 + j) {
-//							neighbors[i][j] = c;
-//							if(c.neighbors[2 - i][2 - j] == null)
-//								c.neighbors[2 - i][2 - j] = this;
-//							break;
-//						}
-//					}
-					tempP = new Point(pos.x + i - 1, pos.y + i - 1);
-					if(chunks.containsKey(tempP)) {
-						tempC = chunks.get(tempP);
-						neighbors[i][j] = tempC;
-						tempC.neighbors[2 - i][2 - j] = this;
-					}
-				}
+				neighbors[i][j] = chunks.get(new Point(pos, i - 1, j - 1));
 			}
 		}
 	}

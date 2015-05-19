@@ -32,7 +32,7 @@ public class Entity {
 		return chunk.pos.x * Chunk.DIM + x;
 	}
 	public int getAbsoluteY() {
-		return chunk.pos.x * Chunk.DIM + y;
+		return chunk.pos.y * Chunk.DIM + y;
 	}
 	
 	public String getSpriteFilepath() {

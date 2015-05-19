@@ -8,6 +8,10 @@ public class Point {
 		this.x = x;
 		this.y = y;
 	}
+	public Point(Point p, int dx, int dy) {
+		x = p.x + dx;
+		y = p.y + dy;
+	}
 	
 	@Override
 	public boolean equals(Object obj) {

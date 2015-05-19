@@ -82,5 +82,28 @@ public class Main {
 		step();
 		Tools.time.wait(1000);
 		step();
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(0, 0).terrain[0][0]);
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(1, 0).terrain[0][0]);
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(2, 0).terrain[0][0]);
+		System.out.println();
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(0, 1).terrain[0][0]);
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(1, 1).terrain[0][0]);
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(2, 1).terrain[0][0]);
+		System.out.println();
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(0, 2).terrain[0][0]);
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(1, 2).terrain[0][0]);
+		System.out.print(LoadedChunks.chunks[2 * LoadedChunks.RADIUS - 1][2 * LoadedChunks.RADIUS - 1].getNeighbor(2, 2).terrain[0][0]);
+		
+//		System.out.print(testChunk.getNeighbor(0, 0).terrain[0][0]);
+//		System.out.print(testChunk.getNeighbor(1, 0).terrain[0][0]);
+//		System.out.print(testChunk.getNeighbor(2, 0).terrain[0][0]);
+//		System.out.println();
+//		System.out.print(testChunk.getNeighbor(0, 1).terrain[0][0]);
+//		System.out.print(testChunk.getNeighbor(1, 1).terrain[0][0]);
+//		System.out.print(testChunk.getNeighbor(2, 1).terrain[0][0]);
+//		System.out.println();
+//		System.out.print(testChunk.getNeighbor(0, 2).terrain[0][0]);
+//		System.out.print(testChunk.getNeighbor(1, 2).terrain[0][0]);
+//		System.out.print(testChunk.getNeighbor(2, 2).terrain[0][0]);
 	}
 }

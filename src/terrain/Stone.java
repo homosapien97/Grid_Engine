@@ -21,7 +21,7 @@ public class Stone extends Terrain implements Thermochemical {
 	}
 	
 	public String toString() {
-		return filename;
+		return "X";
 	}
 	
 	@Override

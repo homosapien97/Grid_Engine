@@ -19,4 +19,7 @@ public class Quicksand extends Terrain {
 //		spriteFilepath = (Math.random() > .5) ? "~" : "S";
 		return quicksand;
 	}
+	public String toString() {
+		return "Q";
+	}
 }
