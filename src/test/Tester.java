@@ -36,16 +36,18 @@ public class Tester {
 //			System.out.println();
 //		}
 //		test();
-		HashMap<Point, Dummy> map = new HashMap<Point, Dummy>();
-		Point pos1 = new Point(0,0);
-		Point pos2 = new Point(0,0);
-		System.out.println(pos1.equals(pos2));
-		map.put(pos1, new Dummy("a"));
-		map.put(pos2, new Dummy("b"));
-		System.out.println(map.size());
-		System.out.println(map.get(pos1).name);
-		System.out.println(map.get(pos2).name);
-		System.out.println(map.containsKey(pos2));
+//		HashMap<Point, Dummy> map = new HashMap<Point, Dummy>();
+//		Point pos1 = new Point(0,0);
+//		Point pos2 = new Point(0,0);
+//		System.out.println(pos1.equals(pos2));
+//		map.put(pos1, new Dummy("a"));
+//		map.put(pos2, new Dummy("b"));
+//		System.out.println(map.size());
+//		System.out.println(map.get(pos1).name);
+//		System.out.println(map.get(pos2).name);
+//		System.out.println(map.containsKey(pos2));
+//		Line_2 l = new Line_2(0,0,50,30);
+//		System.out.println(l);
 	}
 //	public static Chunk chunk = new Chunk();
 //	public static Entity e = new Entity(0, 0, chunk, "e");
