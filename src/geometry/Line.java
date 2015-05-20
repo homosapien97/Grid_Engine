@@ -37,7 +37,7 @@ public class Line {
 		construct();
 	}
 	
-	public boolean contains(Point p) {
+	private boolean _contains(Point p) {
 		if(a.x == b.x) {
 			return (p.x == a.x && ((p.y >= a.y && p.y <= b.y) || (p.y >= b.y && p.y <= a.y)));
 		} else {
@@ -47,7 +47,7 @@ public class Line {
 		}
 	}
 	
-	public boolean contains(int x, int y) {
+	private boolean _contains(int x, int y) {
 		if(a.x == b.x) {
 			return (x == a.x && ((y >= a.y && y <= b.y) || (y >= b.y && y <= a.y)));
 		} else {
@@ -56,11 +56,14 @@ public class Line {
 					&& ((x >= a.x && x <= b.x) || (x >= b.x && x <= a.x)) && ((y >= a.y && y <= b.y) || (y >= b.y && a.y <= a.y)));
 		}
 	}
+	public boolean contains(Point p) {
+		return (p.equals(points[p.x - a.x + p.y - a.y]));
+	}
 	
 	private void construct() {
 		points[0] = a;
 		for(int i = 1; i < points.length; i++) {
-			if(contains(points[i - 1].x + xoffset, points[i - 1].y)) {
+			if(_contains(points[i - 1].x + xoffset, points[i - 1].y)) {
 				points[i] = new Point(points[i - 1], xoffset, 0);
 			} else {
 				points[i] = new Point(points[i - 1], 0, yoffset);
