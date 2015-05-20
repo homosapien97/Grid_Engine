@@ -6,7 +6,6 @@ import java.awt.Image;
 
 public class Terrain {
 	private static Terrain generic_terrain;
-//	public final String name;
 	public final String name;
 	public final String filename;
 	public final Image sprite;

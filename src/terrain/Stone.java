@@ -6,14 +6,13 @@ import general.Tools;
 
 public class Stone extends Terrain implements Thermochemical {
 	private static final Stone stone = new Stone();
-	//private static final String spriteFilepath = "X";
 	private static final String filename = "stone.png";
 	private static char c = 'A';
 	
 	public static final Image sprite = Tools.img.loadTerrainSprite(filename);
 	
 	private Stone() {
-		super("stone",filename);
+		super("stone", filename);
 	}
 
 	public static Stone get() {
