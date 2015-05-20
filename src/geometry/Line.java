@@ -37,6 +37,7 @@ public class Line {
 		construct();
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean _contains(Point p) {
 		if(a.x == b.x) {
 			return (p.x == a.x && ((p.y >= a.y && p.y <= b.y) || (p.y >= b.y && p.y <= a.y)));
