@@ -15,8 +15,6 @@ public class Chunk {
 	public static final HashMap<Point, Chunk> chunks = new HashMap<Point, Chunk>(961);
 	
 	//chunk instance positions
-//	public final int xPos;
-//	public final int yPos;
 	public final Point pos;
 	
 	//all entities
@@ -169,30 +167,6 @@ public class Chunk {
 	 * Checks for Chunks from the chunks vector to fill any null positions in nearestNeighbors.
 	 */
 	public void updateNeighbors() {
-//		Point tempP;
-//		Chunk tempC;
-//		for(int i = 0; i < 3; i++) {
-//			for(int j = 0; j < 3; j++) {
-//				//for each neighbor in the array, check if null
-//				if(neighbors[i][j] == null) {
-//					//if null, search the chunks object to find the neigbors of this chunk
-////					for(Chunk c : chunks) {
-////						if(c.xPos == xPos - 1 + i && c.yPos == yPos - 1 + j) {
-////							neighbors[i][j] = c;
-////							if(c.neighbors[2 - i][2 - j] == null)
-////								c.neighbors[2 - i][2 - j] = this;
-////							break;
-////						}
-////					}
-//					tempP = new Point(pos.x + i - 1, pos.y + i - 1);
-//					if(chunks.get(tempP) != null) {
-//						tempC = chunks.get(tempP);
-//						neighbors[i][j] = tempC;
-//						tempC.neighbors[2 - i][2 - j] = this;
-//					}
-//				}
-//			}
-//		}
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				neighbors[i][j] = chunks.get(new Point(pos, i - 1, j - 1));
@@ -225,8 +199,6 @@ public class Chunk {
 	 * Deletes this chunk from the global chunks and from any of its nearest neighbors' nearestNeighbors arrays.
 	 */
 	public void delete() {
-//		updateNeighbors();
-		
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				if(neighbors[i][j] != null && !(i == 1 && j == 1)) {

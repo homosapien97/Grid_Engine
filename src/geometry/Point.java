@@ -1,7 +1,11 @@
 package geometry;
-
+/**
+ * Inefficient for use in most coordinates, but efficient for storing points in vectors;
+ * @author Christian
+ *
+ */
 public class Point {
-	//Inefficient for use in most coordinates, but efficient for storing points in vectors;
+	
 	public final int x;
 	public final int y;
 	public Point(int x, int y) {
