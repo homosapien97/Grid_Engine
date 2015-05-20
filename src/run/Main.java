@@ -39,7 +39,7 @@ public class Main {
 	}
 	
 	private static void stepState() {
-		player.goToRelative(-1, -1);
+		player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
 	}
 	
 	private static void init() {
@@ -74,13 +74,10 @@ public class Main {
 	
 	public static void main(String[] args) {
 		init();
-		step();
-		Tools.time.wait(1000);
-		step();
-		Tools.time.wait(1000);
-		step();
-		Tools.time.wait(1000);
-		step();
+		for(int i = 0; i < 40; i++) {
+			step();
+			Tools.time.wait(500);
+		}
 		
 //		System.out.print(testChunk.getNeighbor(0, 0).terrain[0][0]);
 //		System.out.print(testChunk.getNeighbor(1, 0).terrain[0][0]);
