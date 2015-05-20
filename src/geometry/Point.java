@@ -28,4 +28,8 @@ public class Point {
 	public int hashCode() {
 		return x ;
 	}
+	@Override
+	public String toString() {
+		return "(" + x + " , " + y + ")";
+	}
 }
