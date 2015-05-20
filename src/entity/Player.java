@@ -68,7 +68,9 @@ public class Player extends Entity implements Health, Armored, Mobile {
 	@Override
 	public boolean goToAbsolute(int absoluteX, int absoluteY) {
 		if(LoadedChunks.isLoaded(absoluteX, absoluteY)) {
+			chunk.removeEntity(this);
 			chunk = LoadedChunks.chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Tools.nav.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
+			chunk.addEntity(this);
 			x = Tools.nav.absCoordToMinorCoord(absoluteX);
 			y = Tools.nav.absCoordToMinorCoord(absoluteY);
 			return true;

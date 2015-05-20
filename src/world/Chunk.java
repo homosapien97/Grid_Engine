@@ -206,6 +206,9 @@ public class Chunk {
 				}
 			}
 		}
+		for(Entity e : entities) {
+			e.delete();
+		}
 		
 		chunks.remove(this.pos);
 	}

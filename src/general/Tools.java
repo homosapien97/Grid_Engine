@@ -1,5 +1,7 @@
 package general;
 
+import geometry.Point;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -17,13 +19,22 @@ public class Tools {
 		public static int absCoordToChunkCoord(int abs) {
 			return (abs > -1) ? (abs/Chunk.DIM) : ((abs - Chunk.DIM + 1) / (Chunk.DIM));
 		}
+		public static Point absPointToChunkPoint(Point abs) {
+			return new Point(absCoordToChunkCoord(abs.x), absCoordToChunkCoord(abs.y));
+		}
 		
 		public static int absCoordToMinorCoord(int abs) {
 			return (abs > -1) ? (abs % Chunk.DIM) : ((abs % Chunk.DIM + Chunk.DIM) % Chunk.DIM);
 		}
+		public static Point absPointToMinorPoint(Point abs) {
+			return new Point(absCoordToMinorCoord(abs.x), absCoordToMinorCoord(abs.y));
+		}
 		
 		public static int orthoDistance(int x1, int y1, int x2, int y2) {
 			return ((x1 > x2) ? (x1 - x2) : (x2 - x1)) + ((y1 > y2) ? (y1 - y2) : (y2 - y1));
+		}
+		public static int orthoDistance(Point a, Point b) {
+			return ((a.x > b.x) ? (a.x - b.x) : (b.x - a.x)) + ((a.y > b.y) ? (a.y - b.y) : (b.y - a.y));
 		}
 	}
 	
