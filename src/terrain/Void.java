@@ -11,7 +11,7 @@ public class Void extends Terrain{
 	public static final Image sprite = Tools.img.loadTerrainSprite(filename);
 	
 	private Void() {
-		super("void", filename);
+		super("void", filename, true);
 	}
 	
 	public static Void get() {

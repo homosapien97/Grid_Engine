@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import entity.Entity;
 import general.Tools;
+import generation.Generator;
 import geometry.Point;
 
 public class LoadedChunks {
@@ -69,6 +70,8 @@ public class LoadedChunks {
 //				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + j);
 //			}
 //		}
+		
+		/*
 		chunks[0][0] = Chunk.chunks.get(new Point(center.pos, -RADIUS, -RADIUS));
 		if(chunks[0][0] == null) chunks[0][0] = Generator.generateChunk(center.pos.x - RADIUS, center.pos.y - RADIUS);
 		for(int i = 1; i < 2 * RADIUS + 1; i++) {
@@ -83,6 +86,8 @@ public class LoadedChunks {
 				if(chunks[i][j] == null) chunks[i][j] = Generator.generateChunk(center.pos.x - RADIUS + i, center.pos.y - RADIUS + j);
 			}
 		}
+		*/
+		chunks = Chunk.loadChunks(center.pos.x - RADIUS, center.pos.y - RADIUS, 2 * RADIUS + 1, 2 * RADIUS + 1);
 		
 	}
 	public static void reload(Chunk center) {

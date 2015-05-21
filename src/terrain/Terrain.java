@@ -9,6 +9,7 @@ public class Terrain {
 	public final String name;
 	public final String filename;
 	public final Image sprite;
+	public final boolean clear;
 	public static String test = "A";
 
 	
@@ -20,12 +21,20 @@ public class Terrain {
 		name = "";
 		filename = "";
 		sprite = null;
+		clear = false;
 		test = String.valueOf('A' + test.charAt(0)%26 + 1 );
 	}
 	
 	protected Terrain(String name, String filename) {
 		this.name = name;
 		this.filename = filename;
+		clear = false;
+		this.sprite = Tools.img.loadTerrainSprite(filename);
+	}
+	protected Terrain(String name, String filename, boolean clear) {
+		this.name = name;
+		this.filename = filename;
+		this.clear = clear;
 		this.sprite = Tools.img.loadTerrainSprite(filename);
 	}
 	

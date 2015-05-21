@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import entity.Entity;
+import generation.Generator;
 import geometry.Point;
 import terrain.Terrain;
 
@@ -72,6 +73,31 @@ public class Chunk {
 	}
 	
 	/**
+	 * Creates an empty chunk at position pos in the chunk grid.
+	 * @param xPos the x position in the chunks where the new chunk is located
+	 * @param yPos the y position in the chunks where the new chunk is located
+	 * @param checkOverlap whether to check for any existing chunks with the same coordinates before adding the new chunk to chunks
+	 */
+	public Chunk(Point pos, boolean checkOverlap) {
+		this.pos = pos;
+		
+		entities = new Vector<Entity>();
+		
+		if(checkOverlap && chunks.get(pos) == null) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
+		}
+		
+		//terrain and height
+		terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
+
+	}
+	
+	/**
 	 * Creates an empty chunk at position xPos, yPos in the chunk grid.
 	 * @param xPos the x position in the chunks where the new chunk is located
 	 * @param yPos the y position in the chunks where the new chunk is located
@@ -104,7 +130,39 @@ public class Chunk {
 	}
 	
 	/**
-	 * Creates a chunk at position xPos, yPos in the chunk grid.
+	 * Creates an empty chunk at position pos in the chunk grid.
+	 * @param xPos the x position in the chunks where the new chunk is located
+	 * @param yPos the y position in the chunks where the new chunk is located
+	 * @param checkOverlap whether to check for any existing chunks with the same coordinates before adding the new chunk to chunks
+	 * @param terrain the terrain to set to this new chunk
+	 */
+	public Chunk(Point pos, boolean checkOverlap, Terrain terrain) {
+		this.pos = pos;
+		
+		entities = new Vector<Entity>();
+		
+		if(checkOverlap && chunks.get(pos) == null) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
+		}
+		
+		//terrain and height
+		this.terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
+		for(int i = 0; i < DIM; i++) {
+			for(int j = 0; j < DIM; j++) {
+				this.terrain[i][j] = terrain;
+				heightmap[i][j] = 0;
+			}
+		}
+		
+	}
+	
+	/**
+	 * Creates a chunk at position pos in the chunk grid.
 	 * @param xPos the x position in the chunks where the new chunk is located
 	 * @param yPos the y position in the chunks where the new chunk is located
 	 * @param checkOverlap whether to check for any existing chunks with the same coordinates before adding the new chunk to chunks
@@ -114,6 +172,24 @@ public class Chunk {
 	 */
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Vector<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
 		pos = new Point(xPos, yPos);
+		
+		entities = new Vector<Entity>();
+		
+		if(checkOverlap && chunks.get(pos) == null) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
+		}
+		
+		//terrain and height
+		this.terrain = terrain;
+		this.heightmap = heightmap;
+	}
+	
+	public Chunk(Point pos, boolean checkOverlap, Vector<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
+		this.pos = pos;
 		
 		entities = new Vector<Entity>();
 		
@@ -161,6 +237,94 @@ public class Chunk {
 			}
 		}
 		
+	}
+	
+	/**Creates a copy of chunk without entities at position pos in the chunk grid.
+	 * @param xPos the x position in the chunks where the new chunk is located
+	 * @param yPos the y position in the chunks where the new chunk is located
+	 * @param checkOverlap whether to check for any existing chunks with the same coordinates before adding the new chunk to chunks
+	 * @param chunk chunk to copy
+	 */
+	public Chunk(Point pos, boolean checkOverlap, Chunk chunk) {
+		this.pos = pos;
+		
+		entities = new Vector<Entity>();
+		
+		if(checkOverlap && chunks.get(pos) == null) {
+			chunks.put(pos, this);
+			//neighbors
+			neighbors = new Chunk[3][3];
+			neighbors[1][1] = this;
+			updateNeighbors();
+		}
+		
+		//terrain and height
+		terrain = new Terrain[DIM][DIM];
+		heightmap = new int[DIM][DIM];
+		
+		//copying
+		for(int i = 0; i < DIM; i++) {
+			for(int j = 0; j < DIM; j++) {
+				terrain[i][j] = chunk.terrain[i][j];
+				heightmap[i][j] = chunk.heightmap[i][j];
+			}
+		}
+		
+	}
+	
+	public static Chunk[][] loadChunks(int x, int y, int width, int height) {
+		Chunk[][] ret = new Chunk[width][height];
+		ret[0][0] = chunks.get(new Point(x, y));
+		if(ret[0][0] == null) ret[0][0] = Generator.generateChunk(x, y);
+		for(int i = 1; i < width; i++) {
+			ret[i][0] = ret[i - 1][0].neighbors[2][1];
+			if(ret[i][0] == null) ret[i][0] = Generator.generateChunk(x + i, y);
+		}
+		for(int j = 1; j < height; j++) {
+			ret[0][j] = ret[0][j - 1].neighbors[1][2];
+			if(ret[0][j] == null) ret[0][j] = Generator.generateChunk(x, y + j);
+			for(int i = 1; i < width; i++) {
+				ret[i][j] = ret[i - 1][j].neighbors[2][1];
+				if(ret[i][j] == null) ret[i][j] = Generator.generateChunk(x + i, y + j);
+			}
+		}
+		return ret;
+	}
+	public static Chunk[][] loadChunks(Point pos, int width, int height) {
+		Chunk[][] ret = new Chunk[width][height];
+		ret[0][0] = chunks.get(pos);
+		if(ret[0][0] == null) ret[0][0] = Generator.generateChunk(pos);
+		for(int i = 1; i < width; i++) {
+			ret[i][0] = ret[i - 1][0].neighbors[2][1];
+			if(ret[i][0] == null) ret[i][0] = Generator.generateChunk(pos.x + i, pos.y);
+		}
+		for(int j = 1; j < height; j++) {
+			ret[0][j] = ret[0][j - 1].neighbors[1][2];
+			if(ret[0][j] == null) ret[0][j] = Generator.generateChunk(pos.x, pos.y + j);
+			for(int i = 1; i < width; i++) {
+				ret[i][j] = ret[i - 1][j].neighbors[2][1];
+				if(ret[i][j] == null) ret[i][j] = Generator.generateChunk(pos.x + i, pos.y + j);
+			}
+		}
+		return ret;
+	}
+	public static Chunk[][] loadChunks(Chunk c, int width, int height) {
+		Chunk[][] ret = new Chunk[width][height];
+		ret[0][0] = c;
+		if(ret[0][0] == null) return null;
+		for(int i = 1; i < width; i++) {
+			ret[i][0] = ret[i - 1][0].neighbors[2][1];
+			if(ret[i][0] == null) ret[i][0] = Generator.generateChunk(c.pos.x + i, c.pos.y);
+		}
+		for(int j = 1; j < height; j++) {
+			ret[0][j] = ret[0][j - 1].neighbors[1][2];
+			if(ret[0][j] == null) ret[0][j] = Generator.generateChunk(c.pos.x, c.pos.y + j);
+			for(int i = 1; i < width; i++) {
+				ret[i][j] = ret[i - 1][j].neighbors[2][1];
+				if(ret[i][j] == null) ret[i][j] = Generator.generateChunk(c.pos.x + i, c.pos.y + j);
+			}
+		}
+		return ret;
 	}
 	
 	/**
