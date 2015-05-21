@@ -2,9 +2,14 @@ package run;
 
 import display.Camera;
 import display.Display;
+import display.GameDisplay;
+import display.MainMenu;
+
 import entity.Player;
 import general.Tools;
+
 import terrain.Stone;
+
 import world.Chunk;
 import world.LoadedChunks;
 
@@ -25,21 +30,8 @@ public class Main {
 	
 	//graphics
 	static JFrame frame = new JFrame("Grid Game");
-	
-	public static void step() {
-		stepState();
-		stepGFX();
-	}
-	
-	private static void stepGFX() {
-		//TextDisplay.print();
-		frame.setVisible(true);
-		frame.repaint();
-	}
-	
-	private static void stepState() {
-		player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
-	}
+	static GameDisplay gameDisplay = new GameDisplay();
+	static MainMenu mainMenu = new MainMenu();
 	
 	private static void init() {
 		//general init
@@ -49,7 +41,7 @@ public class Main {
 		//graphics init
 		
 		//content pane
-		frame.getContentPane().add(new Display());
+		frame.getContentPane().add(gameDisplay);
 		frame.setSize(Display.getDimensions());
 		frame.setBackground(Color.black);
 		frame.pack();
@@ -71,11 +63,28 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	public static void step() {
+		stepState();
+		stepGraphics();
+	}
+	
+	private static void stepGraphics() {
+		frame.setVisible(true);
+		frame.repaint();
+	}
+	
+	private static void stepState() {
+		player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
+	}
+	
 	public static void main(String[] args) {
 		init();
+		
+		
 		for(int i = 0; i < 40; i++) {
 			step();
 			Tools.time.wait(500);
 		}
+		
 	}
 }
