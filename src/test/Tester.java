@@ -48,6 +48,13 @@ public class Tester {
 //		System.out.println(map.containsKey(pos2));
 //		Line_2 l = new Line_2(0,0,50,30);
 //		System.out.println(l);
+		int a = (Math.random() > .5) ? (int)(Math.random() * Integer.MAX_VALUE) : (int)(Math.random() * Integer.MIN_VALUE);
+		int b = (Math.random() > .5) ? (int)(Math.random() * Integer.MAX_VALUE) : (int)(Math.random() * Integer.MIN_VALUE);
+		int c = (Math.random() > .5) ? (int)(Math.random() * Integer.MAX_VALUE) : (int)(Math.random() * Integer.MIN_VALUE);
+
+		System.out.println("" + a + "\t:\t" + Tools.transform.msqrt(a) + "\t:\t" + Tools.transform.drshift(a, 1) + "\t:\t" + Tools.transform.bw(a, b));
+		System.out.println("" + b + "\t:\t" + Tools.transform.msqrt(b) + "\t:\t" + Tools.transform.drshift(b, 1) + "\t:\t" + Tools.transform.bw(b, c));
+		System.out.println("" + c + "\t:\t" + Tools.transform.msqrt(c) + "\t:\t" + Tools.transform.drshift(c, 1) + "\t:\t" + Tools.transform.bw(c, a));
 	}
 //	public static Chunk chunk = new Chunk();
 //	public static Entity e = new Entity(0, 0, chunk, "e");

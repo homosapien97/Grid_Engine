@@ -10,7 +10,7 @@ public class MoveAction <T extends Entity & Mobile> extends Action{
 	public int yTarget;
 	public T actor;
 	public MoveAction (T actor, int xTarget, int yTarget, int ticksPerDistance) {
-		super(Clock.time, Tools.nav.orthoDistance(actor.getAbsoluteX(), actor.getAbsoluteY(), xTarget, yTarget) * ticksPerDistance);
+		super(Clock.ticks, Tools.nav.orthoDistance(actor.getAbsoluteX(), actor.getAbsoluteY(), xTarget, yTarget) * ticksPerDistance);
 		this.ticksPerDistance = ticksPerDistance;
 		this.xTarget = xTarget;
 		this.yTarget = yTarget;

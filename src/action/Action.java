@@ -25,9 +25,9 @@ public class Action implements Runnable{
 	
 	public static void runAll() {
 		for(Action a : queue) {
-			if(Clock.time >= a.startTime && (Clock.time <= a.endTime || a.endTime < 0)) {
+			if(Clock.ticks >= a.startTime && (Clock.ticks <= a.endTime || a.endTime < 0)) {
 				a.run();
-			} else if(Clock.time > a.endTime && a.endTime > 0) queue.remove(a);
+			} else if(Clock.ticks > a.endTime && a.endTime > 0) queue.remove(a);
 		}
 	}
 	

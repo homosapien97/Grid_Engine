@@ -26,7 +26,7 @@ public class Chunk {
 	public Terrain[][] terrain;
 	
 	//height should pretty much range between -1 and 1, 0 being ground, -1 being pit/fluid/void, and 0 being ground.
-	private int[][] heightmap;
+	public int[][] heightmap;
 	
 	/**
 	 * Creates the origin chunk at position (0, 0).
@@ -304,6 +304,24 @@ public class Chunk {
 			for(int i = 1; i < width; i++) {
 				ret[i][j] = ret[i - 1][j].neighbors[2][1];
 				if(ret[i][j] == null) ret[i][j] = Generator.generateChunk(pos.x + i, pos.y + j);
+			}
+		}
+		return ret;
+	}
+	public static Chunk[][] loadChunks(Point a, Point b) {
+		Chunk[][] ret = new Chunk[b.x - a.x + 1][b.y - a.y + 1];
+		ret[0][0] = chunks.get(a);
+		if(ret[0][0] == null) ret[0][0] = Generator.generateChunk(a);
+		for(int i = 1; i < ret.length; i++) {
+			ret[i][0] = ret[i - 1][0].neighbors[2][1];
+			if(ret[i][0] == null) ret[i][0] = Generator.generateChunk(a.x + i, a.y);
+		}
+		for(int j = 1; j < ret[0].length; j++) {
+			ret[0][j] = ret[0][j - 1].neighbors[1][2];
+			if(ret[0][j] == null) ret[0][j] = Generator.generateChunk(a.x, a.y + j);
+			for(int i = 1; i < ret.length; i++) {
+				ret[i][j] = ret[i - 1][j].neighbors[2][1];
+				if(ret[i][j] == null) ret[i][j] = Generator.generateChunk(a.x + i, a.y + j);
 			}
 		}
 		return ret;

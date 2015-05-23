@@ -80,6 +80,20 @@ public class Tools {
 			}
 		}
 	}
+	
+	//data transformation methods
+	public static class transform {
+		public static int drshift(int i, int shift) {
+			return (int)(Double.doubleToRawLongBits(Double.valueOf(i)) >> shift);
+		}
+		public static int bw(int a, int b) {
+			return (a | b) + ~(a ^ b) + (a & b);
+		}
+		public static int msqrt(int a) {
+			return (int)((a - Math.sqrt(Math.abs(a))) % (int)Math.sqrt(Math.abs(a)));
+		}
+		
+	}
 
 	//shortcut/simplifying functions, just put here to make it faster to write
 	

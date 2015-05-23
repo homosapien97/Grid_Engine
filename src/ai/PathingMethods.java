@@ -12,6 +12,9 @@ public class PathingMethods {
 		//note to self : actor.obstacles().contains(Class whatever)
 		//note to self : z.isAssignableFrom(c)) (both classes)
 		
+		
+		
+		
 		return false;
 	}
 }
