@@ -1,7 +1,6 @@
 package display;
 
-import world.LoadedChunks;
-
+@SuppressWarnings("serial")
 public class TextDisplay extends Display{
 	public static void print() {
 		Camera.terrainSnapshot();

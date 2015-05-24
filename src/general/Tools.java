@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
-import display.Display;
 import world.Chunk;
 
 public class Tools {
