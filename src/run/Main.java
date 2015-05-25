@@ -46,56 +46,6 @@ public class Main {
 	static Settings settingsPage = new Settings();
 	static About aboutPage = new About();
 	
-	//Initialization
-	private static void init() {
-		//general init
-		Camera.init(player);
-		LoadedChunks.init(testChunk);
-		
-		//graphics init
-		
-		//content pane
-		frame.getContentPane().add(mainMenu);
-		frame.setSize(Display.getDimensions());
-		frame.setBackground(Color.black);
-		frame.pack();
-
-		//game state
-		gameState = GameState.IN_MAIN_MENU;
-		
-		//icon
-		Image gameicon = null;
-		
-		File icon = new File("resources\\icons\\game_icon.jpg");
-		
-		try{
-			gameicon = ImageIO.read(icon);
-		}catch(IOException e){
-			System.out.println(e);
-		}
-		
-		frame.setIconImage(gameicon);
-		
-		//general
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		stepGraphics();
-	}
-	
-	//Stepping Functions
-	public static void step() {
-		stepState();
-		stepGraphics();
-	}
-	
-	private static void stepGraphics() {
-		frame.setVisible(true);
-		frame.repaint();
-	}
-	
-	private static void stepState() {
-		player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
-	}
-	
 	//Main Program
 	public static void main(String[] args) {
 		//initializion
@@ -116,6 +66,59 @@ public class Main {
 					break;
 			}
 		}
+	}
+		
+	//Initialization
+	public static void init() {
+		//general init
+		Camera.init(player);
+		LoadedChunks.init(testChunk);
+		
+		//graphics init
+		
+		//content pane
+		frame.getContentPane().add(mainMenu);
+		frame.setSize(Display.getDimensions());
+		frame.setBackground(Color.black);
+		frame.pack();
+	
+		//game state
+		gameState = GameState.IN_MAIN_MENU;
+		
+		//icon
+		Image gameicon = null;
+		
+		File icon = new File("resources\\icons\\game_icon.jpg");
+		
+		try{
+			gameicon = ImageIO.read(icon);
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		
+		frame.setIconImage(gameicon);
+		
+		//general
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//start
+		frame.setVisible(true);
+		frame.repaint();
+	}
+
+	//Stepping Functions
+	public static void step() {
+		stepState();
+		stepGraphics();
+	}
+	
+	private static void stepGraphics() {
+		frame.setVisible(true);
+		frame.repaint();
+	}
+	
+	private static void stepState() {
+		player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
 	}
 	
 	//Game Functions
