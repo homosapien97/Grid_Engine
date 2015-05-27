@@ -31,6 +31,10 @@ public class Settings extends Display {
 		main.setLayout(mainLayout);
 		main.setSize(P_WIDTH, P_HEIGHT);
 		
+		Container buttons = new Container();
+		BoxLayout buttonLayout = new BoxLayout(buttons, BoxLayout.Y_AXIS);
+		buttons.setLayout(buttonLayout);
+		
 		//space
 		main.add(Box.createRigidArea(new Dimension(0,25)));
 		
@@ -42,7 +46,7 @@ public class Settings extends Display {
 		main.add(title);
 		
 		//space (temp)
-		main.add(Box.createRigidArea(new Dimension(0,700)));
+		buttons.add(Box.createRigidArea(new Dimension(0,700)));
 		
 		//back button
 		JButton mainMenu = newMainButton("BACK");
@@ -51,7 +55,9 @@ public class Settings extends Display {
 		mainMenu.setFont(MainMenu.buttonFont);
 		mainMenu.addActionListener(new ButtonListener(0));
 		
-		main.add(mainMenu);
+		buttons.add(mainMenu);
+		
+		main.add(buttons);
 		
 		this.add(main);
 	}

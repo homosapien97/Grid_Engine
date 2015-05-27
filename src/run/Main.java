@@ -6,25 +6,19 @@ import display.Display;
 import display.GameDisplay;
 import display.MainMenu;
 import display.Settings;
-
 import core.*;
-
 import entity.Player;
-
 import general.Tools;
-
 import terrain.Stone;
-
 import world.Chunk;
 import world.LoadedChunks;
 
 import javax.imageio.ImageIO;
-
 import javax.swing.JFrame;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -85,6 +79,15 @@ public class Main {
 		settingsPage = new Settings();
 		aboutPage = new About();
 		
+		//init settings and about pages
+		frame.setVisible(false);
+		frame.getContentPane().add(settingsPage);
+		frame.pack();
+		frame.getContentPane().remove(settingsPage);
+		frame.getContentPane().add(aboutPage);
+		frame.pack();
+		frame.getContentPane().remove(aboutPage);
+		
 		//content pane
 		frame.getContentPane().add(mainMenu);
 		frame.setSize(Display.getDimensions());
@@ -144,6 +147,7 @@ public class Main {
 	public static void mainMenu(){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(mainMenu);
+		frame.setBackground(Color.black);
 		frame.pack();
 		
 		gameState = GameState.IN_MAIN_MENU;
@@ -153,6 +157,7 @@ public class Main {
 	public static void dispSettings(){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(settingsPage);
+		frame.setBackground(Color.black);
 		frame.pack();
 		
 		gameState = GameState.IN_SETTINGS;
@@ -162,6 +167,7 @@ public class Main {
 	public static void dispAbout(){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(aboutPage);
+		frame.setBackground(Color.black);
 		frame.pack();
 		
 		gameState = GameState.IN_ABOUT;
