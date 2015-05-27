@@ -33,7 +33,7 @@ public class About extends Display {
 			//title
 			JLabel title = new JLabel("ABOUT");
 			title.setAlignmentX(CENTER_ALIGNMENT);
-			title.setFont(new Font("roboto", Font.PLAIN, 50));
+			title.setFont(new Font("Cinzel Decorative", Font.PLAIN, 50));
 			
 			main.add(title);
 			
@@ -44,6 +44,7 @@ public class About extends Display {
 			JButton mainMenu = new JButton("BACK");
 			mainMenu.setAlignmentX(CENTER_ALIGNMENT);
 			mainMenu.setSize(BUTTON_SIZE);
+			mainMenu.setFont(MainMenu.buttonFont);
 			mainMenu.addActionListener(new ButtonListener(0));
 			
 			main.add(mainMenu);

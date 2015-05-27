@@ -23,10 +23,12 @@ import run.Main;
 @SuppressWarnings("serial")
 public class MainMenu extends Display{
 	//button stuff
-	private final Dimension BUTTON_SIZE = new Dimension(100, 30);
+	//private final Dimension BUTTON_SIZE = new Dimension(100, 30);
 	
 	//fonts
-	private final Font titleFont = new Font("roboto", Font.PLAIN, 100);
+	public static final Font titleFont = new Font("Cinzel Decorative", Font.PLAIN, 100);
+	public static final Font buttonFont = new Font("Cinzel", Font.PLAIN, 20);
+	public static final Font bodyFont = new Font("Forum", Font.PLAIN, 20);
 	
 	public MainMenu(){
 		super();
@@ -50,7 +52,6 @@ public class MainMenu extends Display{
 		title.setAlignmentX(LEFT_ALIGNMENT);
 		title.setFont(titleFont);
 		title.setForeground(Color.orange);
-		
 		main.add(title);
 		
 		//space
@@ -59,22 +60,26 @@ public class MainMenu extends Display{
 		//buttons
 		JButton play = new JButton("PLAY");
 		play.setAlignmentX(RIGHT_ALIGNMENT);
-		play.setSize(BUTTON_SIZE);
+		//play.setSize(BUTTON_SIZE);
+		play.setFont(buttonFont);
 		play.addActionListener(new ButtonListener(0));
 		
 		JButton settings = new JButton("SETTINGS");
 		settings.setAlignmentX(RIGHT_ALIGNMENT);
-		settings.setSize(BUTTON_SIZE);
+		//settings.setSize(BUTTON_SIZE);
+		settings.setFont(buttonFont);
 		settings.addActionListener(new ButtonListener(1));
 		
 		JButton about = new JButton("ABOUT");
 		about.setAlignmentX(RIGHT_ALIGNMENT);
-		about.setSize(BUTTON_SIZE);
+		//about.setSize(BUTTON_SIZE);
+		about.setFont(buttonFont);
 		about.addActionListener(new ButtonListener(2));
 		
 		JButton exit = new JButton("EXIT");
 		exit.setAlignmentX(RIGHT_ALIGNMENT);
-		exit.setSize(BUTTON_SIZE);
+		//exit.setSize(BUTTON_SIZE);
+		exit.setFont(buttonFont);
 		exit.addActionListener(new ButtonListener(3));
 		
 		buttons.add(play);
@@ -90,7 +95,11 @@ public class MainMenu extends Display{
 		this.add(main);
 	}
 	
-	public void paintComponent(Graphics page){}
+	public void paintComponent(Graphics page){
+		//debug info
+		page.setColor(Color.white);
+		page.drawString("VERSION 1.0", 0, 10);
+	}
 	
 	private class ButtonListener implements ActionListener {
 		private int buttonIndex;

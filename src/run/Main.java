@@ -41,10 +41,10 @@ public class Main {
 	//graphics
 	public static JFrame frame = new JFrame("Grid Game");
 	
-	static GameDisplay gameDisplay = new GameDisplay();
-	static MainMenu mainMenu = new MainMenu();
-	static Settings settingsPage = new Settings();
-	static About aboutPage = new About();
+	static GameDisplay gameDisplay;
+	static MainMenu mainMenu;
+	static Settings settingsPage;
+	static About aboutPage;
 	
 	//Main Program
 	public static void main(String[] args) {
@@ -75,6 +75,15 @@ public class Main {
 		LoadedChunks.init(testChunk);
 		
 		//graphics init
+
+		//load fonts
+		Display.loadFonts();
+		
+		//load pages
+		gameDisplay = new GameDisplay();
+		mainMenu = new MainMenu();
+		settingsPage = new Settings();
+		aboutPage = new About();
 		
 		//content pane
 		frame.getContentPane().add(mainMenu);
@@ -115,6 +124,7 @@ public class Main {
 	private static void stepGraphics() {
 		frame.setVisible(true);
 		frame.repaint();
+		frame.getContentPane().repaint();
 	}
 	
 	private static void stepState() {
@@ -123,7 +133,7 @@ public class Main {
 	
 	//Game Functions
 	public static void play(){
-		frame.getContentPane().remove(mainMenu);
+		frame.getContentPane().removeAll();
 		frame.getContentPane().add(gameDisplay);
 		frame.pack();
 		
@@ -141,7 +151,7 @@ public class Main {
 	}
 	
 	public static void dispSettings(){
-		frame.getContentPane().remove(mainMenu);
+		frame.getContentPane().removeAll();
 		frame.getContentPane().add(settingsPage);
 		frame.pack();
 		
@@ -150,7 +160,7 @@ public class Main {
 	}
 	
 	public static void dispAbout(){
-		frame.getContentPane().remove(mainMenu);
+		frame.getContentPane().removeAll();
 		frame.getContentPane().add(aboutPage);
 		frame.pack();
 		
