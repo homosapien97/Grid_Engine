@@ -9,7 +9,14 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 @SuppressWarnings("serial")
 public class Display extends JPanel {
@@ -44,12 +51,55 @@ public class Display extends JPanel {
 		setBackground(Color.black);
 	}
 	
-	public void paintComponent(Graphics page){
-	}
+	//static methods
 	
+	//dimensinos
 	public static Dimension getDimensions(){
 		return screenDimensions;
 	}
+	
+	//customized components
+	
+	public static JButton newMainButton(String name){
+		JButton button = new JButton(name); // new Color(219, 158, 107), new Color(135, 90, 53));
+
+		Color hover = new Color(219, 158, 107);
+		Color pressed = new Color(135, 90, 53);
+		Color border = new Color(110, 52, 4);
+		Color foreground = Color.BLACK;
+		Color background = new Color(204, 132, 73);
+		
+		int borderWidth = 3;
+		
+		button.setForeground(foreground);
+		button.setBackground(background);
+
+		Border line = new LineBorder(border, borderWidth);
+		Border margin = new EmptyBorder(5, 15, 5, 15);
+		
+		Border compound = new CompoundBorder(line, margin);
+		
+		button.setFocusPainted(false);
+		
+		button.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				if(button.getModel().isPressed()){
+					button.setBackground(pressed);
+		        }else if(button.getModel().isRollover()){
+		        	button.setBackground(hover);
+		        }else{
+		            button.setBackground(background);
+		        }
+			}
+		});
+		
+		button.setBorder(compound);
+		
+		return button;
+	}
+	
+	//fonts
 	
 	public static void loadFonts(){
 		File font = new File("resources\\fonts\\Cinzel.ttf");

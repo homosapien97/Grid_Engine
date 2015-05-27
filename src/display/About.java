@@ -41,7 +41,7 @@ public class About extends Display {
 			main.add(Box.createRigidArea(new Dimension(0,700)));
 			
 			//back button
-			JButton mainMenu = new JButton("BACK");
+			JButton mainMenu = newMainButton("BACK");
 			mainMenu.setAlignmentX(CENTER_ALIGNMENT);
 			mainMenu.setSize(BUTTON_SIZE);
 			mainMenu.setFont(MainMenu.buttonFont);

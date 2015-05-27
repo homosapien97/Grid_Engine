@@ -12,6 +12,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import run.Main;
 
@@ -58,25 +62,25 @@ public class MainMenu extends Display{
 		main.add(Box.createRigidArea(new Dimension(100,0)));
 		
 		//buttons
-		JButton play = new JButton("PLAY");
+		JButton play = newMainButton("PLAY");
 		play.setAlignmentX(RIGHT_ALIGNMENT);
 		//play.setSize(BUTTON_SIZE);
 		play.setFont(buttonFont);
 		play.addActionListener(new ButtonListener(0));
 		
-		JButton settings = new JButton("SETTINGS");
+		JButton settings = newMainButton("SETTINGS");
 		settings.setAlignmentX(RIGHT_ALIGNMENT);
 		//settings.setSize(BUTTON_SIZE);
 		settings.setFont(buttonFont);
 		settings.addActionListener(new ButtonListener(1));
 		
-		JButton about = new JButton("ABOUT");
+		JButton about = newMainButton("ABOUT");
 		about.setAlignmentX(RIGHT_ALIGNMENT);
 		//about.setSize(BUTTON_SIZE);
 		about.setFont(buttonFont);
 		about.addActionListener(new ButtonListener(2));
 		
-		JButton exit = new JButton("EXIT");
+		JButton exit = newMainButton("EXIT");
 		exit.setAlignmentX(RIGHT_ALIGNMENT);
 		//exit.setSize(BUTTON_SIZE);
 		exit.setFont(buttonFont);
