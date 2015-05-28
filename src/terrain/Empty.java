@@ -4,18 +4,18 @@ import general.Tools;
 
 import java.awt.Image;
 
-public class Void extends Terrain {
-	private static final Void void_ = new Void();
+public class Empty extends Terrain {
+	private static final Empty empty = new Empty();
 	private static final String filename = "void.png";
 
 	public static Image sprite;
 	
-	private Void() {
+	private Empty() {
 		super("void", filename, true);
 	}
 	
-	public static Void get() {
-		return void_;
+	public static Empty get() {
+		return empty;
 	}
 	
 	public String toString() {

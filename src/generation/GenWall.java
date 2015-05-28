@@ -16,6 +16,11 @@ public class GenWall extends Feature{
 		box = new Rectangle(a, b);
 		material = terrain;
 	}
+	public GenWall(int x1, int y1, int x2, int y2, Terrain terrain) {
+		super(new Point(x1, y1));
+		box = new Rectangle(x1, y1, x2, y2);
+		material = terrain;
+	}
 
 	@Override
 	public boolean generate() {
@@ -33,7 +38,7 @@ public class GenWall extends Feature{
 		}
 		chunks = null; //allow for garbage collection. Generator Features should be created once and thrown away.
 		generated = true;
-		return generated;
+		return true;
 	}
 
 	@Override

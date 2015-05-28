@@ -1,15 +1,11 @@
 package run;
 
 import display.Camera;
-
 import core.*;
-
 import entity.Player;
-
 import general.Tools;
-
+import generation.GenWall;
 import terrain.Stone;
-
 import world.Chunk;
 import world.LoadedChunks;
 
@@ -56,9 +52,13 @@ public class Main {
 		//These player init functions have been moved to the player constructor.
 		
 		//startup
-		testChunk.heightmap[10][10] = 1;
-		testChunk.heightmap[11][10] = 1;
-		testChunk.heightmap[5][13] = 1;
+//		testChunk.heightmap[10][10] = 1;
+//		testChunk.heightmap[11][10] = 1;
+//		testChunk.heightmap[5][13] = 1;
+		GenWall testWall = new GenWall(5, 5, 10, 10, Stone.get());
+		testWall.generate();
+		GenWall testWall2 = new GenWall(-2,-2, 20, -7, Stone.get());
+		testWall2.generate();
 		Core.start();
 	}
 

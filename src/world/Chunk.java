@@ -140,7 +140,6 @@ public class Chunk {
 		this.pos = pos;
 		
 		entities = new Vector<Entity>();
-		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
 			//neighbors
@@ -351,7 +350,12 @@ public class Chunk {
 	public void updateNeighbors() {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				neighbors[i][j] = chunks.get(new Point(pos, i - 1, j - 1));
+				if(neighbors[i][j] == null) {
+					neighbors[i][j] = chunks.get(new Point(pos, i - 1, j - 1));
+					if(neighbors[i][j] != null) {
+						neighbors[i][j].updateNeighbors();
+					}
+				}
 			}
 		}
 	}

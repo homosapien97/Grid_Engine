@@ -21,7 +21,7 @@ import run.Main;
 
 import terrain.Quicksand;
 import terrain.Stone;
-import terrain.Void;
+import terrain.Empty;
 
 import display.AboutPage;
 import display.Display;
@@ -125,7 +125,7 @@ public class Core {
 	private static void loadTerrain(){
 		Stone.load();
 		Quicksand.load();
-		Void.load();
+		Empty.load();
 	}
 	
 	//game navigation

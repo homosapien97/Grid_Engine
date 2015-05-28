@@ -6,7 +6,7 @@ import java.util.Vector;
 import entity.Player;
 import entity.Entity;
 import world.LoadedChunks;
-import terrain.Void;
+import terrain.Empty;
 
 public class Camera {
 	public static Player player;
@@ -45,7 +45,7 @@ public class Camera {
 			for(int i = 0; i < Display.WIDTH; i++) {
 				if(player.visionSquare.canSee(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j)) {
 					terrainSnapshot[i][j] = LoadedChunks.terrainSpriteFilenameAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
-				} else terrainSnapshot[i][j] = Void.get().toString();
+				} else terrainSnapshot[i][j] = Empty.get().toString();
 			}
 		}
 		
@@ -61,7 +61,7 @@ public class Camera {
 				if(player.visionSquare.canSee(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j)) {
 					terrainImageSnapshot[i][j] = LoadedChunks.terrainSpriteAt(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j);
 				} else {
-					terrainImageSnapshot[i][j] = Void.sprite;
+					terrainImageSnapshot[i][j] = Empty.sprite;
 				}
 			}
 		}
