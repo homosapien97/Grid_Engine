@@ -23,11 +23,11 @@ import terrain.Quicksand;
 import terrain.Stone;
 import terrain.Void;
 
-import display.About;
+import display.AboutPage;
 import display.Display;
 import display.GameDisplay;
 import display.MainMenu;
-import display.Settings;
+import display.SettingsPage;
 
 import entity.Player;
 
@@ -44,8 +44,8 @@ public class Core {
 	
 	static GameDisplay gameDisplay;
 	static MainMenu mainMenu;
-	static Settings settingsPage;
-	static About aboutPage;
+	static SettingsPage settingsPage;
+	static AboutPage aboutPage;
 	
 	//fonts
 	public static Font cinzel = null;
@@ -63,8 +63,8 @@ public class Core {
 		//load pages
 		gameDisplay = new GameDisplay();
 		mainMenu = new MainMenu();
-		settingsPage = new Settings();
-		aboutPage = new About();
+		settingsPage = new SettingsPage();
+		aboutPage = new AboutPage();
 		
 		//init settings and about pages
 		frame.setVisible(false);
