@@ -4,7 +4,7 @@ import world.LoadedChunks;
 import entity.Entity;
 import entity.Mobile;
 import entity.Pathing;
-import geometry.Line;
+import geometry.Ray;
 import geometry.Point;
 
 public class PathingMethods {
@@ -23,7 +23,7 @@ public class PathingMethods {
 		BranchingPath path = new BranchingPath(actor.getAbsoluteX(), actor.getAbsoluteY());
 		Point end = new Point(absoluteX, absoluteY);
 		Point endPTemp = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE); //I know this is bad practice, but entities should never try to path to this point ever.
-		Line straight = new Line(actor.getAbsoluteX(), actor.getAbsoluteY(), absoluteX, absoluteY);
+		Ray straight = new Ray(actor.getAbsoluteX(), actor.getAbsoluteY(), absoluteX, absoluteY);
 		while(endPTemp != null) {
 			for(int i = 1; i < straight.points.length; i++) {
 				if(actor.terrainWhitelist()) {

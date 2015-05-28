@@ -1,7 +1,7 @@
 package ai;
 
 import world.LoadedChunks;
-import geometry.Line;
+import geometry.Ray;
 import geometry.Point;
 
 public class VisionSquare {
@@ -27,7 +27,7 @@ public class VisionSquare {
 	public int x;
 	public int y;
 	public final boolean[][] mask; //you probs shouldn't access this directly if you're using a global--get it from trace and store a temp copy for your needs.
-	public final Line[] rays;
+	public final Ray[] rays;
 	public VisionSquare(int x, int y, int r) {
 		this.x = x;
 		this.y = y;
@@ -38,45 +38,41 @@ public class VisionSquare {
 				mask[i][j] = false;
 			}
 		}
-		rays = new Line[8 * RADIUS];
+		rays = new Ray[8 * RADIUS];
 		for(int i = 0; i < 2 * RADIUS; i++) {
-			rays[i] = new Line(RADIUS, RADIUS, i, 0);
+			rays[i] = new Ray(RADIUS, RADIUS, i, 0);
 		}
 		for(int i = 0; i < 2 * RADIUS; i++) {
-			rays[i + 2 * RADIUS] = new Line(RADIUS, RADIUS, 2 * RADIUS, i);
+			rays[i + 2 * RADIUS] = new Ray(RADIUS, RADIUS, 2 * RADIUS, i);
 		}
 		for(int i = 0; i < 2 * RADIUS; i++) {
-			rays[i + 4 * RADIUS] = new Line(RADIUS, RADIUS, 2 * RADIUS - i, 2 * RADIUS);
+			rays[i + 4 * RADIUS] = new Ray(RADIUS, RADIUS, 2 * RADIUS - i, 2 * RADIUS);
 		}
 		for(int i = 0; i < 2 * RADIUS; i++) {
-			rays[i + 6 * RADIUS] = new Line(RADIUS, RADIUS, 0, 2 * RADIUS - i);
+			rays[i + 6 * RADIUS] = new Ray(RADIUS, RADIUS, 0, 2 * RADIUS - i);
 		}
 		trace();
 	}
 	
 	public boolean[][] trace() {
 		Point temp;
-		Point lastBlock = null;
-		boolean blocked = false;
-		int l;
-		for(int i = 0; i < 8 * RADIUS; i++) {
-			blocked = false;
-			l = rays[i].points.length;
-			if(rays[i].contains(lastBlock)) {
-				for(int j = rays[i].points.length - 1; !rays[i].points[j + 1].equals(lastBlock); j --) {
-					mask[rays[i].points[j].x][rays[i].points[j].y] = false;
-					l--;
-				}
-				
+		for(int i = 0; i < 2 * RADIUS + 1; i++) {
+			for(int j = 0; j < 2 * RADIUS + 1; j++) {
+				mask[i][j] = false;
 			}
-			for(int j = 0; j < l; j++) {
+		}
+//		boolean blocked = false;
+		for(int i = 0; i < 8 * RADIUS; i++) {
+//			blocked = false;
+			for(int j = 0; j < rays[i].points.length; j++) {
 				temp = rays[i].points[j];
-				if(blocked) {
-					mask[temp.x][temp.y] = false; 
-				} else if(LoadedChunks.heightAt(temp.x - RADIUS + x, temp.y - RADIUS + y) > 0 && !LoadedChunks.terrainAt(temp.x - RADIUS + x, temp.y - RADIUS + y).clear) {
-					blocked = true;
-					lastBlock = temp;
-					mask[temp.x][temp.y] = false; 
+//				if(blocked) {
+//					mask[temp.x][temp.y] = false; 
+//				} else 
+				if(LoadedChunks.heightAt(temp.x - RADIUS + x, temp.y - RADIUS + y) > 0 && !LoadedChunks.terrainAt(temp.x - RADIUS + x, temp.y - RADIUS + y).clear) {
+//					blocked = true;
+					mask[temp.x][temp.y] = false;
+					break;
 				} else {
 					mask[temp.x][temp.y] = true; 
 				}

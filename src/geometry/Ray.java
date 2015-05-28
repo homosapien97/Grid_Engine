@@ -1,6 +1,6 @@
 package geometry;
 
-public class Line {
+public class Ray {
 	public final Point a;
 	public final Point b;
 	private final Point tl;
@@ -12,7 +12,7 @@ public class Line {
 	private final double m;
 	private boolean[][] arr;
 	
-	public Line(Point a, Point b) {
+	public Ray(Point a, Point b) {
 		this.a = a;
 		this.b = b;
 		axLbx = a.x < b.x;
@@ -20,11 +20,14 @@ public class Line {
 		tl = new Point((axLbx) ? a.x : b.x, (ayLby) ? a.y : b.y);
 		xoffset = (axLbx) ? 1 : -1;
 		yoffset = (ayLby) ? 1 : -1;
-		points = new Point[((axLbx) ? (b.x - a.x) : (a.x - b.x)) + ((ayLby) ? (b.y - a.y) : (a.y - b.y)) + 1];
+//		points = new Point[((axLbx) ? (b.x - a.x) : (a.x - b.x)) + ((ayLby) ? (b.y - a.y) : (a.y - b.y)) + 1];
+		int w = (axLbx) ? (b.x - a.x) : (a.x - b.x);
+		w = (ayLby) ? ((b.y - a.y > w) ? (b.y - a.y) : w) : ((a.y - b.y > w) ? (a.y - b.y) : w);
+		points = new Point[w + 1];
 		m = ((double) a.y - b.y) / (a.x - b.x);
 		construct();
 	}
-	public Line(int x1, int y1, int x2, int y2) {
+	public Ray(int x1, int y1, int x2, int y2) {
 		a = new Point(x1, y1);
 		b = new Point(x2, y2);
 		axLbx = a.x < b.x;
@@ -32,7 +35,10 @@ public class Line {
 		tl = new Point((axLbx) ? a.x : b.x, (ayLby) ? a.y : b.y);
 		xoffset = (axLbx) ? 1 : -1;
 		yoffset = (ayLby) ? 1 : -1;
-		points = new Point[((axLbx) ? (b.x - a.x) : (a.x - b.x)) + ((ayLby) ? (b.y - a.y) : (a.y - b.y)) + 1];
+//		points = new Point[((axLbx) ? (b.x - a.x) : (a.x - b.x)) + ((ayLby) ? (b.y - a.y) : (a.y - b.y)) + 1];
+		int w = (axLbx) ? (b.x - a.x) : (a.x - b.x);
+		w = (ayLby) ? ((b.y - a.y > w) ? (b.y - a.y) : w) : ((a.y - b.y > w) ? (a.y - b.y) : w);
+		points = new Point[w + 1];
 		m = ((double) a.y - b.y) / (a.x - b.x);
 		construct();
 	}
@@ -64,7 +70,9 @@ public class Line {
 	private void construct() {
 		points[0] = a;
 		for(int i = 1; i < points.length; i++) {
-			if(_contains(points[i - 1].x + xoffset, points[i - 1].y)) {
+			if(_contains(points[i - 1].x + xoffset, points[i -1].y + yoffset)) {
+				points[i] = new Point(points[i - 1], xoffset, yoffset);
+			} else if(_contains(points[i - 1].x + xoffset, points[i - 1].y)) {
 				points[i] = new Point(points[i - 1], xoffset, 0);
 			} else {
 				points[i] = new Point(points[i - 1], 0, yoffset);

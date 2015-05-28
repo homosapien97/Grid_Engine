@@ -32,10 +32,11 @@ public class Main {
 		while(Core.gameState != GameState.EXITING){
 			switch(Core.gameState){
 				case PLAYING:
-					for(int i = 0; i < 40; i++) {
+					for(int i = 0; i < 10; i++) {
 						step();
 						Tools.time.wait(500);
 					}
+					Tools.time.wait(5000);
 					break;
 				default:
 					//idle cpu
@@ -55,6 +56,9 @@ public class Main {
 		//These player init functions have been moved to the player constructor.
 		
 		//startup
+		testChunk.heightmap[10][10] = 1;
+		testChunk.heightmap[11][10] = 1;
+		testChunk.heightmap[5][13] = 1;
 		Core.start();
 	}
 
@@ -71,6 +75,7 @@ public class Main {
 	}
 	
 	private static void stepState() {
-		Main.player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
+//		Main.player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
+		Main.player.goToRelative(1,0);
 	}
 }
