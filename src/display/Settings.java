@@ -12,7 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import run.Main;
+import core.Core;
 
 /**
  * Displays the settings page and provides settings configuration.
@@ -76,7 +76,7 @@ public class Settings extends Display {
 			switch(this.buttonIndex){
 				case 0:
 					//go back
-					Main.mainMenu();
+					Core.mainMenu();
 					break;
 			}
 		}
