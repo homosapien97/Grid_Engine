@@ -1,27 +1,33 @@
 package entity;
 
+import display.Camera;
+import ai.VisionSquare;
 import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
 
-public class Player extends Entity implements Health, Armored, Mobile {
+public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	public int maxHealth;
 	public int health;
 	public int natArmor;
 	public int armor;
-	public String name;
+	public final String name;
 	public boolean alive;
 	public int ticksPerTile;
+	public final VisionSquare visionSquare;
 	
 	public Player(int x, int y, Chunk c, String s, int hp, int arm, String n) {
 		super(x, y, c, s);
+		Camera.init(this);
+		LoadedChunks.init(c);
 		maxHealth = hp;
 		health = hp;
 		natArmor = arm;
 		armor = arm;
 		name = n;
 		alive = true;
-		
+		visionSquare = VisionSquare.r15;
+		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
 	}
 	
 	@Override
@@ -137,5 +143,10 @@ public class Player extends Entity implements Health, Armored, Mobile {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public VisionSquare vsquare() {
+		return visionSquare;
 	}
 }

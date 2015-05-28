@@ -58,7 +58,7 @@ public class Line {
 		}
 	}
 	public boolean contains(Point p) {
-		return (p.equals(points[p.x - a.x + p.y - a.y]));
+		return (p == null) ? (false) : (p.equals(points[p.x - a.x + p.y - a.y]));
 	}
 	
 	private void construct() {

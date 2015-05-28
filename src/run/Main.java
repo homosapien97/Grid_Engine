@@ -64,9 +64,10 @@ public class Main {
 		
 	//Initialization
 	public static void init() {
-		//general init
-		Camera.init(player);
-		LoadedChunks.init(testChunk);
+		//player init
+//		Camera.init(player);
+//		LoadedChunks.init(testChunk);
+		//These player init functions have been moved to the player constructor.
 		
 		//graphics init
 

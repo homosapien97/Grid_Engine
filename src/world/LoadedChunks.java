@@ -3,6 +3,7 @@ package world;
 import java.awt.Image;
 import java.util.Vector;
 
+import terrain.Terrain;
 import entity.Entity;
 import general.Tools;
 import generation.Generator;
@@ -138,6 +139,10 @@ public class LoadedChunks {
 		
 		return ret;
 	}
+	public static Terrain terrainAt(int absoluteX, int absoluteY) {
+		return chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
+				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY));
+	}
 	
 	/**
 	 * Returns the height at the indicated absolute coordinates
@@ -146,7 +151,7 @@ public class LoadedChunks {
 	 * @return height at x, y
 	 */
 	public static int heightAt(int absoluteX, int absoluteY) {
-		return chunks[chunks[0][0].pos.x + Tools.nav.absCoordToChunkCoord(absoluteX)][chunks[0][0].pos.y + Tools.nav.absCoordToChunkCoord(absoluteY)].
+		return chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
 				heightAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY));
 	}
 	/**
