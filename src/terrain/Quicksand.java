@@ -8,7 +8,7 @@ public class Quicksand extends Terrain {
 	private static final Quicksand quicksand = new Quicksand();
 	private static final String filename = "quicksand.png";
 	
-	public static final Image sprite = Tools.img.loadTerrainSprite(filename);
+	public static Image sprite;
 	
 	private Quicksand() {
 		super("quicksand", filename);
@@ -20,5 +20,9 @@ public class Quicksand extends Terrain {
 	
 	public String toString() {
 		return "Q";
+	}
+
+	public static void load() {
+		sprite = Tools.img.loadTerrainSprite(filename);
 	}
 }

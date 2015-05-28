@@ -12,12 +12,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import run.Main;
+import core.Core;
 
 
 /**
@@ -102,7 +99,7 @@ public class MainMenu extends Display{
 	public void paintComponent(Graphics page){
 		//debug info
 		page.setColor(Color.white);
-		page.drawString("VERSION 1.0", 0, 10);
+		page.drawString("VERSION " + Main.version, 0, 10);
 	}
 	
 	private class ButtonListener implements ActionListener {
@@ -117,19 +114,19 @@ public class MainMenu extends Display{
 			switch(this.buttonIndex){
 				case 0:
 					//play
-					Main.play();
+					Core.play();
 					break;
 				case 1:
 					//settings
-					Main.dispSettings();
+					Core.dispSettings();
 					break;
 				case 2:
 					//about
-					Main.dispAbout();
+					Core.dispAbout();
 					break;
 				case 3:
 					//exit
-					Main.exit();
+					Core.exit();
 			}
 		}
 	}

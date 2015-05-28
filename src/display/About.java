@@ -12,7 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import run.Main;
+import core.Core;
 
 @SuppressWarnings("serial")
 public class About extends Display {
@@ -66,7 +66,7 @@ public class About extends Display {
 				switch(this.buttonIndex){
 					case 0:
 						//go back
-						Main.mainMenu();
+						Core.mainMenu();
 						break;
 				}
 			}

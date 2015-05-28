@@ -9,7 +9,7 @@ public class Stone extends Terrain implements Thermochemical {
 	private static final String filename = "stone.png";
 	private static char c = 'A';
 	
-	public static final Image sprite = Tools.img.loadTerrainSprite(filename);
+	public static Image sprite;
 	
 	private Stone() {
 		super("stone", filename);
@@ -87,5 +87,9 @@ public class Stone extends Terrain implements Thermochemical {
 	public boolean removeHeat(double joules) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public static void load() {
+		sprite = Tools.img.loadTerrainSprite(filename);
 	}
 }
