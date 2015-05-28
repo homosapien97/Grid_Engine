@@ -13,13 +13,23 @@ import javax.imageio.ImageIO;
 
 import javax.swing.JFrame;
 
+import creature.Goblin;
+import creature.Human;
+import creature.Skeleton;
+
 import run.Main;
+
+import terrain.Quicksand;
+import terrain.Stone;
+import terrain.Void;
 
 import display.About;
 import display.Display;
 import display.GameDisplay;
 import display.MainMenu;
 import display.Settings;
+
+import entity.Player;
 
 
 
@@ -43,6 +53,7 @@ public class Core {
 	public static Font forum = null;
 	
 	//core
+	
 	public static void start(){
 		//graphics init
 
@@ -92,6 +103,29 @@ public class Core {
 		//start
 		frame.setVisible(true);
 		frame.repaint();
+		
+		//loading
+		Core.loadCreatures();
+		Core.loadEntities();
+		Core.loadTerrain();
+	}
+	
+	//loading
+	
+	private static void loadCreatures(){
+		Goblin.load();
+		Human.load();
+		Skeleton.load();
+	}
+	
+	private static void loadEntities(){
+		//Player.load(); file does not exist yet
+	}
+	
+	private static void loadTerrain(){
+		Stone.load();
+		Quicksand.load();
+		Void.load();
 	}
 	
 	//game navigation

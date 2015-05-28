@@ -20,6 +20,9 @@ public class Main {
 	//player object
 	static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player");
 	
+	//for debug for now
+	public static final String version = "1.2";
+	
 	//Main Program
 	public static void main(String[] args) {
 		//initializion

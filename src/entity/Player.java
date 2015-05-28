@@ -1,5 +1,7 @@
 package entity;
 
+import java.awt.Image;
+
 import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
@@ -12,6 +14,8 @@ public class Player extends Entity implements Health, Armored, Mobile {
 	public String name;
 	public boolean alive;
 	public int ticksPerTile;
+	public static final String filename = "player.png";;
+	public static Image sprite;
 	
 	public Player(int x, int y, Chunk c, String s, int hp, int arm, String n) {
 		super(x, y, c, s);
@@ -21,7 +25,6 @@ public class Player extends Entity implements Health, Armored, Mobile {
 		armor = arm;
 		name = n;
 		alive = true;
-		
 	}
 	
 	@Override
@@ -137,5 +140,9 @@ public class Player extends Entity implements Health, Armored, Mobile {
 			}
 		}
 		return false;
+	}
+
+	public static void load() {
+		sprite = Tools.img.loadTerrainSprite(filename);
 	}
 }

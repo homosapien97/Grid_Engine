@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import run.Main;
 import core.Core;
 
 
@@ -98,7 +99,7 @@ public class MainMenu extends Display{
 	public void paintComponent(Graphics page){
 		//debug info
 		page.setColor(Color.white);
-		page.drawString("VERSION 1.0", 0, 10);
+		page.drawString("VERSION " + Main.version, 0, 10);
 	}
 	
 	private class ButtonListener implements ActionListener {

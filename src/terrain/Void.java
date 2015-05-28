@@ -4,11 +4,11 @@ import general.Tools;
 
 import java.awt.Image;
 
-public class Void extends Terrain{
+public class Void extends Terrain {
 	private static final Void void_ = new Void();
 	private static final String filename = "void.png";
 
-	public static final Image sprite = Tools.img.loadTerrainSprite(filename);
+	public static Image sprite;
 	
 	private Void() {
 		super("void", filename, true);
@@ -20,5 +20,9 @@ public class Void extends Terrain{
 	
 	public String toString() {
 		return "V";
+	}
+
+	public static void load() {
+		sprite = Tools.img.loadTerrainSprite(filename);
 	}
 }
