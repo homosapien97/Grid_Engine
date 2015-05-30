@@ -57,6 +57,9 @@ public class Core {
 	private static Image bg = null;
 	private static ImageTileBackground background = null;
 	
+	//debug
+	public static Image redHighlight = null;
+	
 	//fonts
 	public static Font cinzel = null;
 	public static Font cinzelDecorative = null;
@@ -74,6 +77,7 @@ public class Core {
 		Core.loadCreatures();
 		Core.loadEntities();
 		Core.loadTerrain();
+		Core.loadHUD();
 		Core.loadAdditionalGraphics();
 		
 		//load pages
@@ -138,7 +142,7 @@ public class Core {
 		ActionMap gameAM = game.getActionMap();
 		
 		//add to input map
-		gameIM.put(KeyStroke.getKeyStroke("SPACE"), "toggleHUD");
+		gameIM.put(KeyStroke.getKeyStroke("H"), "toggleHUD");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());
@@ -162,8 +166,13 @@ public class Core {
 		Empty.load();
 	}
 	
+	private static void loadHUD(){
+		gameDisplay.load();
+	}
+	
 	private static void loadAdditionalGraphics(){
 		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
+		redHighlight = Tools.img.loadImage("redHighlight.png", "debug");
 	}
 	
 	//game navigation

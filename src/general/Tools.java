@@ -54,7 +54,7 @@ public class Tools {
 		public static Image loadImage(String filename, String folder){
 			Image img = null;
 			File temp = new File("resources\\" + folder + "\\" + filename);
-			
+			//System.out.println(temp);
 			try{
 				img = ImageIO.read(temp);
 			}catch(IOException e){

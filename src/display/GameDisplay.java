@@ -14,11 +14,16 @@ import javax.swing.KeyStroke;
 import key_actions.ToggleHUD;
 import core.Core;
 import entity.Player;
+import general.Tools;
 
 @SuppressWarnings("serial")
 public class GameDisplay extends Display {
 	//states of toggleable things
 	private static Boolean hudVisible = true;
+	
+	//HUD icons
+	private static Image heart_transparent = null;
+	private static Image heart_opaque = null;
 	
 	public GameDisplay(){
 		super();
@@ -55,7 +60,7 @@ public class GameDisplay extends Display {
 		
 		//handle UI overlay
 		drawHUD(page);
-		//System.out.println(this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).get(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0)));
+		//System.out.println(this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).get(KeyStroke.getKeyStroke(KeyEvent.H, 0)));
 	}
 	
 	/**
@@ -80,12 +85,17 @@ public class GameDisplay extends Display {
 		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
+	private void redHighlight(Graphics page, int x, int y){
+		page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+	}
+	
 	//game components
 	
 	private void drawHUD(Graphics page){
 		if(hudVisible){
-			page.setColor(Color.GRAY);
-			page.fillRect(0, 0, Display.P_WIDTH, 50);
+			page.setColor(new Color(89, 89, 89, 100));
+			page.fillRect(0, 0, Display.P_WIDTH, 32);
+			page.drawImage(heart_opaque, 50, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 		}
 	}
 	
@@ -93,5 +103,12 @@ public class GameDisplay extends Display {
 	
 	public static void toggleHUD(){
 		hudVisible = !hudVisible;
+	}
+	
+	//loading
+	
+	public static void load(){
+		heart_transparent = Tools.img.loadImage("translucent-heart.png", "icons\\hud"); 
+		heart_opaque = Tools.img.loadImage("opaque-heart.png", "icons\\hud"); 
 	}
 }
