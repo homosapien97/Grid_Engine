@@ -1,5 +1,6 @@
 package magic;
 
+
 public class Spell {
 	
 	public int casting;
