@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.InputEvent;
@@ -25,6 +26,9 @@ public class GameDisplay extends Display {
 	//HUD icons
 	private static Image heart_transparent = null;
 	private static Image heart_opaque = null;
+	
+	//fonts
+	public static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
 	
 	public GameDisplay(){
 		super();
@@ -94,11 +98,20 @@ public class GameDisplay extends Display {
 	
 	private void drawHUD(Graphics page){
 		if(hudVisible){
+			//background
 			page.setColor(new Color(89, 89, 89, 100));
 			page.fillRect(0, 0, Display.P_WIDTH, 32);
-			page.drawImage(heart_opaque, 50, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			
+			//player name
 			page.setColor(Color.white);
-			page.drawString("" + Main.player.health, 80, 20);
+			page.setFont(bodyFont);
+			page.drawString(Main.player.name, 50, 21);
+			
+			//player health
+			page.drawImage(heart_opaque, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			
+			page.setColor(Color.white);
+			page.drawString("" + Main.player.health, 180, 21);
 		}
 	}
 	
