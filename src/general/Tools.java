@@ -58,7 +58,7 @@ public class Tools {
 			try{
 				img = ImageIO.read(temp);
 			}catch(IOException e){
-				System.out.println(e);
+				System.out.println("For file \"" + filename + "\":" + e);
 			}
 			
 			return img;
