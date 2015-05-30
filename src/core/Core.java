@@ -6,11 +6,14 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 import creature.Goblin;
 import creature.Human;
@@ -27,6 +30,7 @@ import display.MainMenu;
 import display.SettingsPage;
 import entity.Player;
 import general.Tools;
+import key_actions.ToggleHUD;
 
 
 
@@ -118,6 +122,24 @@ public class Core {
 		//start
 		frame.setVisible(true);
 		frame.repaint();
+		
+		//add key binds
+		addKeyBinds(gameDisplay);
+	}
+	
+	//key binding
+	
+	private static void addKeyBinds(GameDisplay game){
+		ToggleHUD ToggleHUDAction = new ToggleHUD();
+		
+		//config
+		game.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		
+		//add to input map
+		game.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), "toggleHUD");
+		
+		//add to action map
+		game.getActionMap().put("toggleHUD", ToggleHUDAction);
 	}
 	
 	//loading

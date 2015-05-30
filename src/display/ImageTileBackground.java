@@ -9,6 +9,8 @@ import javax.swing.JPanel;
  * Tiled image background
  * @author Michael
  * inspired by http://stackoverflow.com/questions/16750709/how-can-i-add-repeat-background-image-in-jframe
+ * and
+ * http://stackoverflow.com/questions/24746354/java-jpanel-tiled-background-image
  */
 @SuppressWarnings("serial")
 public class ImageTileBackground extends JPanel {
