@@ -2,6 +2,7 @@ package entity;
 
 
 import display.Camera;
+import ai.Path;
 import ai.VisionSquare;
 
 import java.awt.Image;
@@ -10,7 +11,7 @@ import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
 
-public class Player extends Entity implements Health, Armored, Mobile, Sighted {
+public class Player extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Player> {
 	public int maxHealth;
 	public int health;
 	public int natArmor;
@@ -22,6 +23,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	public double plasmaRes;
 	public final String name;
 	public boolean alive;
+	public final Path<Player> path;
 	
 
 	public final VisionSquare visionSquare;
@@ -46,6 +48,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 		
 		visionSquare = VisionSquare.r21;
 		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
+		path = new Path<Player>(this);
 	}
 		@Override
 	public int getHealth() {
@@ -123,6 +126,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	 */
 	@Override
 	public boolean goToRelative(int relativeX, int relativeY) {
+		System.out.println("gtr " + relativeX + ", " + relativeY);
 		goToAbsolute(getAbsoluteX() + relativeX, getAbsoluteY() + relativeY);
 		return false;
 	}
@@ -185,5 +189,9 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	}
 	public static void load() {
 		sprite = Tools.img.loadEntitySprite(filename);
+	}
+	@Override
+	public Path<Player> getPath() {
+		return path;
 	}
 }

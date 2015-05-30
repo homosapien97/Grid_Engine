@@ -35,6 +35,13 @@ public class Tools {
 		public static int orthoDistance(Point a, Point b) {
 			return ((a.x > b.x) ? (a.x - b.x) : (b.x - a.x)) + ((a.y > b.y) ? (a.y - b.y) : (b.y - a.y));
 		}
+		
+		public static double distance(int x1, int y1, int x2, int y2) {
+			return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+		}
+		public static double distance(Point a, Point b) {
+			return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+		}
 	}
 	
 	//timing
@@ -121,7 +128,14 @@ public class Tools {
 		public static int ilowest(int[] ints, boolean[] ignore) {
 			int ret = 0;
 			for(int i = 0; i < ints.length; i++) {
-				ret = (ret > ints[i] && !ignore[i]) ? (ret) : (ints[i]);
+				ret = ((ints[i] < ints[ret]) && !ignore[i]) ? (i) : (ret);
+			}
+			return ret;
+		}
+		public static int ilowest(double[] doubles, boolean[] ignore) {
+			int ret = 0;
+			for(int i = 0; i < doubles.length; i++) {
+				ret = ((doubles[i] < doubles[ret]) && !ignore[i]) ? (i) : (ret);
 			}
 			return ret;
 		}
@@ -131,8 +145,39 @@ public class Tools {
 			//X1,X2,X3,X4
 			//Y1,Y2,Y3,Y4
 			boolean[] ignore = {false, false, false, false};
+			int l;
 			for(int i = 0; i < 4; i++) {
-				int l = ilowest(dists, ignore);
+				 l = ilowest(dists, ignore);
+				switch(l) {
+				case 0:
+					ret[i][0] = 1;
+					ret[i][1] = 0;
+					break;
+				case 1:
+					ret[i][0] = 0;
+					ret[i][1] = -1;
+					break;
+				case 2:
+					ret[i][0] = -1;
+					ret[i][1] = 0;
+					break;
+				case 3:
+					ret[i][0] = 1;
+					ret[i][1] = 0;
+					break;
+				}
+				ignore[l] = true;
+			}
+			return ret;
+		}
+		public static int[][] offsets(double[] dists) {
+			int[][] ret = new int[4][2];
+			//X1,X2,X3,X4
+			//Y1,Y2,Y3,Y4
+			boolean[] ignore = {false, false, false, false};
+			int l;
+			for(int i = 0; i < 4; i++) {
+				 l = ilowest(dists, ignore);
 				switch(l) {
 				case 0:
 					ret[i][0] = 1;
@@ -180,5 +225,12 @@ public class Tools {
 	
 	public static void pln(Object obj){
 		System.out.println(obj);
+	}
+	
+	public static void main(String[] args) {
+		double[] a = {2.0,1.0,0.0};
+		boolean[] ign = {false, false, true};
+		int l = misc.ilowest(a, ign);
+		System.out.println(l);
 	}
 }

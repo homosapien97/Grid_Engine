@@ -2,7 +2,6 @@ package ai;
 
 import entity.Entity;
 import entity.Mobile;
-import entity.Pathing;
 import entity.Sighted;
 import general.Tools;
 import geometry.Point;
@@ -11,6 +10,8 @@ import geometry.Point;
 public class Path <T extends Entity & Mobile & Sighted> {
 	public char[][] maze;
 	public Point tl;
+	public int targetX;
+	public int targetY;
 	
 	public static char TRIED = 'T';
 	public static char PATH = 'P';
@@ -28,7 +29,21 @@ public class Path <T extends Entity & Mobile & Sighted> {
 //				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
 //			}
 //		}
+		maze = new char[actor.vsquare().RADIUS * 2 + 1][actor.vsquare().RADIUS * 2 + 1];
 		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
+		targetX = actor.getAbsoluteX();
+		targetY = actor.getAbsoluteY();
+	}
+	
+	public boolean goTo(int x, int y) {
+		if(targetX == x && targetY == y) {
+			return go();
+		} else {
+			targetX = x;
+			targetY = y;
+			constructPathTo(targetX, targetY);
+			return go();
+		}
 	}
 	
 	public boolean go() {
@@ -52,24 +67,26 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	
 	
 	/**
-	 * Paths a Mobile, Pathing entity to a given point
+	 * Constructs a path from the actor to any point in their vision square
 	 * @param actor
 	 * @param absoluteX
 	 * @param absoluteY
 	 * @return
 	 */
 	public boolean constructPathTo(int absoluteX, int absoluteY) {
+		System.out.println("Constructing path...");
 		actor.vsquare().trace();
+		if(!actor.vsquare().canSee(absoluteX, absoluteY)) {
+			System.out.println("Cannot go to" + absoluteX + ", " + absoluteY + " because I can't see it");
+			return false;
+		}
 		boolean[][] temp = actor.vsquare().mask;
 		for(int i = 0; i < temp.length; i++) {
 			for(int j = 0; j < temp[0].length; j++) {
 				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
 			}
 		}
-		if (actor.vsquare().canSee(absoluteX, absoluteY)) {
-			return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
-		}
-		return false;
+		return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
 	}
 	
 	/**
@@ -86,9 +103,20 @@ public class Path <T extends Entity & Mobile & Sighted> {
 				done = true;
 			}
 			else {
-				int[][] offsets = Tools.misc.offsets(new int[]{
-						Tools.nav.orthoDistance(row + 1, col, destrow, destcol), Tools.nav.orthoDistance(row, col - 1, destrow, destcol),
-						Tools.nav.orthoDistance(row - 1, col, destrow, destcol), Tools.nav.orthoDistance(row, col + 1, destrow, destcol)});
+				System.out.println(Tools.nav.distance(row + 1, col, destrow, destcol));
+				System.out.println(Tools.nav.distance(row, col - 1, destrow, destcol));
+				System.out.println(Tools.nav.distance(row - 1, col, destrow, destcol));
+				System.out.println(Tools.nav.distance(row, col + 1, destrow, destcol));
+				int[][] offsets = Tools.misc.offsets(new double[]{
+						Tools.nav.distance(row + 1, col, destrow, destcol), Tools.nav.distance(row, col - 1, destrow, destcol),
+						Tools.nav.distance(row - 1, col, destrow, destcol), Tools.nav.distance(row, col + 1, destrow, destcol)});
+				for(int j = 0; j < offsets[0].length; j++) {
+					for(int i = 0; i < offsets.length; i++) {
+						System.out.print(offsets[i][j]);
+					}
+					System.out.println();
+				}
+				System.out.println();
 				done = traverse(row + offsets[0][0], col + offsets[0][1], destrow, destcol);
 				if(!done) {
 					done = traverse(row + offsets[1][0], col + offsets[1][1], destrow, destcol);
