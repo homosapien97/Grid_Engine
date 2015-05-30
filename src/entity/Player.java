@@ -3,7 +3,9 @@ package entity;
 
 import display.Camera;
 import ai.VisionSquare;
+
 import java.awt.Image;
+
 import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
@@ -13,16 +15,21 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	public int health;
 	public int natArmor;
 	public int armor;
+	public int ticksPerTile;
+	public double fireRes;
+	public double earthRes;
+	public double waterRes;
+	public double plasmaRes;
 	public final String name;
 	public boolean alive;
-	public int ticksPerTile;
+	
 
 	public final VisionSquare visionSquare;
 
 	public static final String filename = "player.png";;
 	public static Image sprite;
 	
-	public Player(int x, int y, Chunk c, String s, int hp, int arm, String n) {
+	public Player(int x, int y, Chunk c, int hp, int arm, String s, String n, double fire, double earth, double water, double plasma) {
 		super(x, y, c, s);
 		Camera.init(this);
 		LoadedChunks.init(c);
@@ -32,22 +39,15 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 		armor = arm;
 		name = n;
 		alive = true;
+		fireRes = fire;
+		earthRes = earth;
+		waterRes = water;
+		plasmaRes = plasma;
+		
 		visionSquare = VisionSquare.r21;
 		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
 	}
-	
-	@Override
-	public int getFlatArmor() {
-		return armor;
-	}
-	
-	@Override
-	public int getProportionalArmor() {
-		//TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
+		@Override
 	public int getHealth() {
 		return health;
 	}
@@ -73,6 +73,34 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	public boolean isAlive() {
 		return alive;
 	}
+	@Override
+	public int getFlatArmor() {
+		return armor;
+	}
+	
+	@Override
+	public int getProportionalArmor() {
+		//TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public double getResistanceFire() {
+		return fireRes;
+	}
+	@Override
+	public double getResistanceEarth() {
+		return earthRes;
+	}
+	@Override
+	public double getResistanceWater() {
+		return waterRes;
+	}
+	@Override
+	public double getResistancePlasma() {
+		return plasmaRes;
+	}
+	
+
 	
 	/**
 	 * For now, this teleports the player instantly to wherever you tell it (within LoadedChunks)
