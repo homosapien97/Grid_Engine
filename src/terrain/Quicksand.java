@@ -1,7 +1,6 @@
 package terrain;
 
 import general.Tools;
-
 import java.awt.Image;
 
 public class Quicksand extends Terrain {
