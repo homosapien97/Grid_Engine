@@ -1,35 +1,32 @@
 package core;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
 import javax.swing.JFrame;
 
 import creature.Goblin;
 import creature.Human;
 import creature.Skeleton;
-
 import run.Main;
-
 import terrain.Quicksand;
 import terrain.Stone;
 import terrain.Empty;
-
 import display.AboutPage;
 import display.Display;
 import display.GameDisplay;
+import display.ImageTileBackground;
 import display.MainMenu;
 import display.SettingsPage;
-
 import entity.Player;
+import general.Tools;
 
 
 
@@ -47,6 +44,9 @@ public class Core {
 	static SettingsPage settingsPage;
 	static AboutPage aboutPage;
 	
+	//background
+	private static Image bg = null;
+	
 	//fonts
 	public static Font cinzel = null;
 	public static Font cinzelDecorative = null;
@@ -59,6 +59,12 @@ public class Core {
 
 		//load fonts
 		Core.loadFonts();
+		
+		//loading
+		Core.loadCreatures();
+		Core.loadEntities();
+		Core.loadTerrain();
+		Core.loadAdditionalGraphics();
 		
 		//load pages
 		gameDisplay = new GameDisplay();
@@ -75,12 +81,16 @@ public class Core {
 		frame.pack();
 		frame.getContentPane().remove(aboutPage);
 		
+		//set background
+		ImageTileBackground background = new ImageTileBackground(bg);
+		frame.setContentPane(background);
+		
 		//content pane
 		frame.getContentPane().add(mainMenu);
 		frame.setSize(Display.getDimensions());
 		frame.setBackground(Color.black);
 		frame.pack();
-	
+		
 		//game state
 		gameState = GameState.IN_MAIN_MENU;
 		
@@ -103,12 +113,6 @@ public class Core {
 		//start
 		frame.setVisible(true);
 		frame.repaint();
-		
-		//loading
-		Core.loadCreatures();
-		Core.loadEntities();
-		Core.loadTerrain();
-		Core.loadAdditionalGraphics();
 	}
 	
 	//loading
@@ -130,7 +134,7 @@ public class Core {
 	}
 	
 	private static void loadAdditionalGraphics(){
-		MainMenu.load();
+		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
 	}
 	
 	//game navigation

@@ -41,8 +41,6 @@ public class Main {
 					break;
 			}
 		}
-		
-		System.out.println(Core.frame.getSize());
 	}
 		
 	//Initialization

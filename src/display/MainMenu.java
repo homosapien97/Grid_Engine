@@ -1,10 +1,14 @@
 package display;
 
+import general.Tools;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,26 +41,31 @@ public class MainMenu extends Display{
 		//layout
 		//BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		Container main = new Container();
-		BoxLayout mainLayout = new BoxLayout(main, BoxLayout.X_AXIS);
+		BorderLayout mainLayout = new BorderLayout();
 		main.setLayout(mainLayout);
 		main.setSize(P_WIDTH, P_HEIGHT);
+		
+		Container body = new Container();
+		BoxLayout bodyLayout = new BoxLayout(body, BoxLayout.X_AXIS);
+		body.setLayout(bodyLayout);
+		body.setSize(P_WIDTH, P_HEIGHT);
 		
 		Container buttons = new Container();
 		BoxLayout buttonLayout = new BoxLayout(buttons, BoxLayout.Y_AXIS);
 		buttons.setLayout(buttonLayout);
 		
 		//space
-		main.add(Box.createRigidArea(new Dimension(0,800)));
+		body.add(Box.createRigidArea(new Dimension(0,800)));
 		
 		//title
 		JLabel title = new JLabel("GRID GAME");
 		title.setAlignmentX(LEFT_ALIGNMENT);
 		title.setFont(titleFont);
 		title.setForeground(Color.orange);
-		main.add(title);
+		body.add(title);
 		
 		//space
-		main.add(Box.createRigidArea(new Dimension(100,0)));
+		body.add(Box.createRigidArea(new Dimension(100,0)));
 		
 		//buttons
 		JButton play = newMainButton("PLAY");
@@ -91,7 +100,9 @@ public class MainMenu extends Display{
 		buttons.add(Box.createRigidArea(new Dimension(0,10)));
 		buttons.add(exit);
 		
-		main.add(buttons);
+		body.add(buttons);
+
+		main.add(body);
 		
 		this.add(main);
 	}
