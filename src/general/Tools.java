@@ -51,6 +51,19 @@ public class Tools {
 	
 	//images
 	public static class img {
+		public static Image loadImage(String filename, String folder){
+			Image img = null;
+			File temp = new File("resources\\" + folder + "\\" + filename);
+			
+			try{
+				img = ImageIO.read(temp);
+			}catch(IOException e){
+				System.out.println("For file \"" + filename + "\":" + e);
+			}
+			
+			return img;
+		}
+		
 		public static Image loadTerrainSprite(String filename){
 			Image img = null;
 			File temp = new File("resources\\terrain\\" + filename);
