@@ -5,27 +5,51 @@ import entity.Mobile;
 import entity.Pathing;
 import entity.Sighted;
 import general.Tools;
+import geometry.Point;
 
 
-public class Path <T extends Entity & Mobile & Pathing & Sighted> {
+public class Path <T extends Entity & Mobile & Sighted> {
 	public char[][] maze;
+	public Point tl;
 	
 	public static char TRIED = 'T';
 	public static char PATH = 'P';
 	public static char VISIBLE = 'V';
 	public static char INVISIBLE = 'I';
+	public static char DONE = 'D';
 	
 	public T actor;
 	
 	public Path(T actor) {
 		this.actor = actor;
-		boolean[][] temp = actor.vsquare().mask;
-		for(int i = 0; i < temp.length; i++) {
-			for(int j = 0; j < temp[0].length; j++) {
-				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
-			}
+//		boolean[][] temp = actor.vsquare().mask;
+//		for(int i = 0; i < temp.length; i++) {
+//			for(int j = 0; j < temp[0].length; j++) {
+//				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
+//			}
+//		}
+		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
+	}
+	
+	public boolean go() {
+		maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y] = DONE;
+		if(maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y + 1] == PATH) {
+			actor.goToRelative(0, 1);
+			return true;
+		} else if(maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y - 1] == PATH) {
+			actor.goToRelative(0, -1);
+			return true;
+		} else if(maze[actor.getAbsoluteX() - tl.x + 1][actor.getAbsoluteY() - tl.y] == PATH) {
+			actor.goToRelative(1, 0);
+			return true;
+		} else if(maze[actor.getAbsoluteX() - tl.x - 1][actor.getAbsoluteY() - tl.y] == PATH) {
+			actor.goToRelative(-1, 0);
+			return true;
+		} else {
+			return false;
 		}
 	}
+	
 	
 	/**
 	 * Paths a Mobile, Pathing entity to a given point
@@ -34,8 +58,14 @@ public class Path <T extends Entity & Mobile & Pathing & Sighted> {
 	 * @param absoluteY
 	 * @return
 	 */
-	public boolean pathTo(int absoluteX, int absoluteY) {
+	public boolean constructPathTo(int absoluteX, int absoluteY) {
 		actor.vsquare().trace();
+		boolean[][] temp = actor.vsquare().mask;
+		for(int i = 0; i < temp.length; i++) {
+			for(int j = 0; j < temp[0].length; j++) {
+				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
+			}
+		}
 		if (actor.vsquare().canSee(absoluteX, absoluteY)) {
 			return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
 		}
@@ -43,12 +73,12 @@ public class Path <T extends Entity & Mobile & Pathing & Sighted> {
 	}
 	
 	/**
-	 * I am copying this straight from the book, page 462
+	 * I am copying this straight from the book, page 462 . Acutally, I had to edit a bit, but w/e
 	 * @param row
 	 * @param col
 	 * @return
 	 */
-	public boolean traverse(int row, int col, int destrow, int destcol) {
+	private boolean traverse(int row, int col, int destrow, int destcol) {
 		boolean done = false;
 		if(valid(row, col)) {
 			maze[row][col] = TRIED;
