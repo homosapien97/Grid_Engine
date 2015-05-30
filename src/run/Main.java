@@ -13,7 +13,7 @@ public class Main {
 	static Chunk testChunk = new Chunk(0, 0, true, Stone.get());
 	
 	//player object
-	static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player");
+	static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player", 0, 0, 0, 0);
 	
 	//for debug for now
 	public static final String version = "1.2";

@@ -29,15 +29,15 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 	public static final String filename = "player.png";;
 	public static Image sprite;
 	
-	public Player(int x, int y, Chunk c, int hp, int arm, String s, String n, double fire, double earth, double water, double plasma) {
-		super(x, y, c, s);
+	public Player(int x, int y, Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma) {
+		super(x, y, c, sprite);
 		Camera.init(this);
 		LoadedChunks.init(c);
 		maxHealth = hp;
 		health = hp;
 		natArmor = arm;
 		armor = arm;
-		name = n;
+		this.name = name;
 		alive = true;
 		fireRes = fire;
 		earthRes = earth;
