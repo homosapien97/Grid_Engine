@@ -9,7 +9,7 @@ public class Spell {
 	public int damage;
 	public String name;
 	
-	public Spell (int cast, int chan, int dam, String sprite, String n){
+	public Spell (int cast, int chan, int dam, String sprite, String n /*,SpellType type*/){
 		casting = cast;
 		channel = chan;
 		damage = dam;
