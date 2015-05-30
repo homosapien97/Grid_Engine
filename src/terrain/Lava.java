@@ -3,17 +3,17 @@ package terrain;
 import general.Tools;
 import java.awt.Image;
 
-public class Lava1 extends Terrain {
-	private static final Lava1 lava1 = new Lava1();
+public class Lava extends Terrain {
+	private static final Lava lava1 = new Lava();
 	private static final String filename = "lava1.png";
 	
 	public static Image sprite;
 	
-	private Lava1() {
+	private Lava() {
 		super("lava1", filename);
 	}
 
-	public static Lava1 get() {
+	public static Lava get() {
 		return lava1;
 	}
 	

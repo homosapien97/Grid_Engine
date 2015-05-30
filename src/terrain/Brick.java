@@ -3,17 +3,17 @@ package terrain;
 import general.Tools;
 import java.awt.Image;
 
-public class Brick1 extends Terrain {
-	private static final Brick1 brick1 = new Brick1();
+public class Brick extends Terrain {
+	private static final Brick brick1 = new Brick();
 	private static final String filename = "brick1.png";
 	
 	public static Image sprite;
 	
-	private Brick1() {
+	private Brick() {
 		super("brick1", filename);
 	}
 	
-	public static Brick1 get() {
+	public static Brick get() {
 		return brick1;
 	}
 	

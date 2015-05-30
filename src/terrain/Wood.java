@@ -3,17 +3,17 @@ package terrain;
 import general.Tools;
 import java.awt.Image;
 
-public class Wood1 extends Terrain {
-	private static final Wood1 wood1 = new Wood1();
+public class Wood extends Terrain {
+	private static final Wood wood1 = new Wood();
 	private static final String filename = "wood1.png";
 	
 	public static Image sprite;
 	
-	private Wood1() {
+	private Wood() {
 		super("wood1", filename);
 	}
 
-	public static Wood1 get() {
+	public static Wood get() {
 		return wood1;
 	}
 	

@@ -3,17 +3,17 @@ package terrain;
 import general.Tools;
 import java.awt.Image;
 
-public class Water1 extends Terrain {
-	private static final Water1 water1 = new Water1();
+public class Water extends Terrain {
+	private static final Water water1 = new Water();
 	private static final String filename = "water1.png";
 	
 	public static Image sprite;
 	
-	private Water1() {
+	private Water() {
 		super("water1", filename);
 	}
 
-	public static Water1 get() {
+	public static Water get() {
 		return water1;
 	}
 	
