@@ -1,7 +1,7 @@
 package core;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -37,6 +37,8 @@ public class Core {
 	//graphics
 	public static JFrame frame = new JFrame("Grid Game");
 	
+	private static Container def = null;
+	
 	public final static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	
 	static GameDisplay gameDisplay;
@@ -46,6 +48,7 @@ public class Core {
 	
 	//background
 	private static Image bg = null;
+	private static ImageTileBackground background = null;
 	
 	//fonts
 	public static Font cinzel = null;
@@ -81,8 +84,10 @@ public class Core {
 		frame.pack();
 		frame.getContentPane().remove(aboutPage);
 		
+		def = frame.getContentPane();
+		
 		//set background
-		ImageTileBackground background = new ImageTileBackground(bg);
+		background = new ImageTileBackground(bg);
 		frame.setContentPane(background);
 		
 		//content pane
@@ -124,7 +129,7 @@ public class Core {
 	}
 	
 	private static void loadEntities(){
-		//Player.load(); file does not exist yet
+		Player.load();
 	}
 	
 	private static void loadTerrain(){
@@ -141,6 +146,7 @@ public class Core {
 	
 	public static void play(){
 		frame.getContentPane().removeAll();
+		frame.setContentPane(def);
 		frame.getContentPane().add(gameDisplay);
 		frame.pack();
 		
@@ -150,6 +156,7 @@ public class Core {
 	
 	public static void mainMenu(){
 		frame.getContentPane().removeAll();
+		frame.setContentPane(background);
 		frame.getContentPane().add(mainMenu);
 		frame.setBackground(Color.black);
 		frame.pack();
@@ -160,6 +167,7 @@ public class Core {
 	
 	public static void dispSettings(){
 		frame.getContentPane().removeAll();
+		frame.setContentPane(background);
 		frame.getContentPane().add(settingsPage);
 		frame.setBackground(Color.black);
 		frame.pack();
@@ -170,6 +178,7 @@ public class Core {
 	
 	public static void dispAbout(){
 		frame.getContentPane().removeAll();
+		frame.setContentPane(background);
 		frame.getContentPane().add(aboutPage);
 		frame.setBackground(Color.black);
 		frame.pack();

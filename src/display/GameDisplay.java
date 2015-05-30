@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import entity.Player;
+
 @SuppressWarnings("serial")
 public class GameDisplay extends Display {
 
@@ -32,7 +34,7 @@ public class GameDisplay extends Display {
 				if(Camera.entitySnapshot[x][y] != null){
 					switch(Camera.entitySnapshot[x][y]){
 						case "P":
-							drawPlayer(page, x, y);
+							drawPlayer(page, x, y, Player.sprite);
 							break;
 						default:
 							System.out.print("Unknown entity: ");
@@ -55,20 +57,13 @@ public class GameDisplay extends Display {
 	}
 	
 	/**
-	 * Draws a green square to represent the player.
+	 * Draws the image of the player at a certain location.
 	 * @param page the graphics object
 	 * @param x the x position for entities (not pixels)
 	 * @param y the y position for entities (not pixels)
+	 * @param img the player image file
 	 */
-	private void drawPlayer(Graphics page, int x, int y){
-		Color green = new Color(43, 217, 24);
-		page.setColor(green);
-		page.fillRect(x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM);
-		page.setColor(Color.black);
-		page.drawRect(x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM);
-		page.setColor(Color.white);
-		page.fillRect((x * Display.SPRITE_DIM) - 8, (y * Display.SPRITE_DIM) - 15, 35, 12);
-		page.setColor(Color.darkGray);
-		page.drawString("Player", (x * Display.SPRITE_DIM) - 8, (y * Display.SPRITE_DIM) - 5);
+	private void drawPlayer(Graphics page, int x, int y, Image img){
+		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 }

@@ -1,6 +1,5 @@
 package run;
 
-import display.Camera;
 import core.*;
 import entity.Player;
 import general.Tools;
@@ -8,7 +7,6 @@ import generation.GenWall;
 import terrain.Quicksand;
 import terrain.Stone;
 import world.Chunk;
-import world.LoadedChunks;
 
 public class Main {
 	//example chunk
@@ -33,7 +31,7 @@ public class Main {
 						step();
 						Tools.time.wait(500);
 					}
-					Tools.time.wait(50000);
+					Tools.time.wait(5000);
 					break;
 				default:
 					//idle cpu
