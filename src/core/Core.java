@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
@@ -130,16 +133,15 @@ public class Core {
 	//key binding
 	
 	private static void addKeyBinds(GameDisplay game){
-		ToggleHUD ToggleHUDAction = new ToggleHUD();
-		
-		//config
-		game.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		//get maps
+		InputMap gameIM = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		ActionMap gameAM = game.getActionMap();
 		
 		//add to input map
-		game.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), "toggleHUD");
+		gameIM.put(KeyStroke.getKeyStroke("SPACE"), "toggleHUD");
 		
 		//add to action map
-		game.getActionMap().put("toggleHUD", ToggleHUDAction);
+		gameAM.put("toggleHUD", new ToggleHUD());
 	}
 	
 	//loading

@@ -22,17 +22,6 @@ public class GameDisplay extends Display {
 	
 	public GameDisplay(){
 		super();
-		
-		Action ToggleHUDAction = new ToggleHUD();
-		
-		//config
-		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-		
-		//add to input map
-		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), "toggleHUD");
-		
-		//add to action map
-		this.getActionMap().put("toggleHUD", ToggleHUDAction);
 	}
 	
 	public void paintComponent(Graphics page){
@@ -66,6 +55,7 @@ public class GameDisplay extends Display {
 		
 		//handle UI overlay
 		drawHUD(page);
+		//System.out.println(this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).get(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0)));
 	}
 	
 	/**
