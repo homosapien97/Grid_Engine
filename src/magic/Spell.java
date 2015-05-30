@@ -14,5 +14,4 @@ public class Spell {
 		damage = dam;
 		name = n;
 	}
-
 }

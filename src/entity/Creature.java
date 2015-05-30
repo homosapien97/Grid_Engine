@@ -1,7 +1,5 @@
-package creature;
+package entity;
 import world.Chunk;
-import entity.Entity;
-import entity.Health;
 
 public class Creature extends Entity implements Health{
 	public int maxHealth;

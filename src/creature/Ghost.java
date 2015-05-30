@@ -1,11 +1,9 @@
 package creature;
-
-import entity.Creature;
 import world.Chunk;
+import entity.Creature;
 
-public class Human extends Creature {
-	
-	public Human(int x, int y, Chunk chunk, String sprite){
+public class Ghost extends Creature{
+	public Ghost(int x, int y, Chunk chunk, String sprite){
 		super(x, y, 1, 1, chunk, sprite, "name");
 	}
 
