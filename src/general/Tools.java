@@ -104,6 +104,18 @@ public class Tools {
 				System.out.println();
 			}
 		}
+		
+		static int ilowest(int[] ints) {
+			int ret = 0;
+			for(int i = 0; i < ints.length; i++) {
+				ret = (ret > ints[i]) ? (ret) : (ints[i]);
+			}
+			return ret;
+		}
+		
+		static int[] offsets(int d0, int d1, int d2, int d3) {
+			
+		}
 	}
 	
 	//data transformation methods
