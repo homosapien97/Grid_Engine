@@ -94,27 +94,53 @@ public class Tools {
 	//misc functions
 	public static class misc {
 		//newline (like </br> in html)
-		static void br(){
+		public static void br(){
 			System.out.println();
 		}
 		
 		//multiple newlines
-		static void br(int numNewLines){
+		public static void br(int numNewLines){
 			for(int i = 0; i < numNewLines; i++){
 				System.out.println();
 			}
 		}
 		
-		static int ilowest(int[] ints) {
+		public static int ilowest(int[] ints, boolean[] ignore) {
 			int ret = 0;
 			for(int i = 0; i < ints.length; i++) {
-				ret = (ret > ints[i]) ? (ret) : (ints[i]);
+				ret = (ret > ints[i] && !ignore[i]) ? (ret) : (ints[i]);
 			}
 			return ret;
 		}
 		
-		static int[] offsets(int d0, int d1, int d2, int d3) {
-			
+		public static int[][] offsets(int[] dists) {
+			int[][] ret = new int[4][2];
+			//X1,X2,X3,X4
+			//Y1,Y2,Y3,Y4
+			boolean[] ignore = {false, false, false, false};
+			for(int i = 0; i < 4; i++) {
+				int l = ilowest(dists, ignore);
+				switch(l) {
+				case 0:
+					ret[i][0] = 1;
+					ret[i][1] = 0;
+					break;
+				case 1:
+					ret[i][0] = 0;
+					ret[i][1] = -1;
+					break;
+				case 2:
+					ret[i][0] = -1;
+					ret[i][1] = 0;
+					break;
+				case 3:
+					ret[i][0] = 1;
+					ret[i][1] = 0;
+					break;
+				}
+				ignore[l] = true;
+			}
+			return ret;
 		}
 	}
 	

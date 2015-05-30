@@ -4,6 +4,7 @@ import entity.Entity;
 import entity.Mobile;
 import entity.Pathing;
 import entity.Sighted;
+import general.Tools;
 
 
 public class Path <T extends Entity & Mobile & Pathing & Sighted> {
@@ -12,8 +13,20 @@ public class Path <T extends Entity & Mobile & Pathing & Sighted> {
 	public static char TRIED = 'T';
 	public static char PATH = 'P';
 	public static char VISIBLE = 'V';
+	public static char INVISIBLE = 'I';
 	
 	public T actor;
+	
+	public Path(T actor) {
+		this.actor = actor;
+		boolean[][] temp = actor.vsquare().mask;
+		for(int i = 0; i < temp.length; i++) {
+			for(int j = 0; j < temp[0].length; j++) {
+				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
+			}
+		}
+	}
+	
 	/**
 	 * Paths a Mobile, Pathing entity to a given point
 	 * @param actor
@@ -21,57 +34,13 @@ public class Path <T extends Entity & Mobile & Pathing & Sighted> {
 	 * @param absoluteY
 	 * @return
 	 */
-	public boolean pathTo(T actor, int absoluteX, int absoluteY) {
+	public boolean pathTo(int absoluteX, int absoluteY) {
 		actor.vsquare().trace();
-		int x = actor.getAbsoluteX();
-		int y = actor.getAbsoluteY();
-		while(x != absoluteX && y != absoluteY) {
-			
+		if (actor.vsquare().canSee(absoluteX, absoluteY)) {
+			return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
 		}
-		
 		return false;
 	}
-//	public static boolean completeMaze(int xc, int yc, int xt, int yt) {
-//		// 1 
-//		//2*0
-//		// 3   note that down is positive y
-//		int square = 0;
-////		int horiz = xt - xc;
-////		int vert = yt - yc;
-////		if(horiz > 0) {
-////			if(vert > 0) {
-////				square = (horiz - vert > 0) ? (0) : (3);
-////			} else if(vert < 0) {
-////				square = (horiz + vert > 0) ? (0) : (1);
-////			} else {
-////				square = 0;
-////			}
-////		} else if (horiz < 0) {
-////			if(vert > 0) {
-////				square = (horiz + vert > 0) ? (3) : (2);
-////			} else if(vert < 0) {
-////				square = (horiz - vert > 0) ? (1) : (2);
-////			} else {
-////				square = 2;
-////			}
-////		} else {
-////			if(vert > 0) {
-////				square = 3;
-////			} else if(vert < 0) {
-////				square = 1;
-////			} else {
-////				return true;
-////			}
-////		}
-//		int[] dims = new int[] {Tools.nav.orthoDistance(xc + 1, yc, xt, yt), Tools.nav.orthoDistance(xc + 1, yc, xt, yt), Tools.nav.orthoDistance(xc - 1, yc, xt, yt), Tools.nav.orthoDistance(xc, yc + 1, xt, yt)};
-////		int d0 = Tools.nav.orthoDistance(xc + 1, yc, xt, yt);
-////		int d1 = Tools.nav.orthoDistance(xc + 1, yc, xt, yt);
-////		int d2 = Tools.nav.orthoDistance(xc - 1, yc, xt, yt);
-////		int d3 = Tools.nav.orthoDistance(xc, yc + 1, xt, yt);
-//		
-//		
-//		
-//	}
 	
 	/**
 	 * I am copying this straight from the book, page 462
@@ -79,23 +48,26 @@ public class Path <T extends Entity & Mobile & Pathing & Sighted> {
 	 * @param col
 	 * @return
 	 */
-	public boolean traverse(int row, int col) {
+	public boolean traverse(int row, int col, int destrow, int destcol) {
 		boolean done = false;
 		if(valid(row, col)) {
 			maze[row][col] = TRIED;
-			if(row == maze.length - 1 && col == maze[0].length - 1) {
+			if(row == destrow && col == destcol) {
 				done = true;
 			}
 			else {
-				done = traverse(row + 1, col);
+				int[][] offsets = Tools.misc.offsets(new int[]{
+						Tools.nav.orthoDistance(row + 1, col, destrow, destcol), Tools.nav.orthoDistance(row, col - 1, destrow, destcol),
+						Tools.nav.orthoDistance(row - 1, col, destrow, destcol), Tools.nav.orthoDistance(row, col + 1, destrow, destcol)});
+				done = traverse(row + offsets[0][0], col + offsets[0][1], destrow, destcol);
 				if(!done) {
-					done = traverse(row, col + 1);
+					done = traverse(row + offsets[1][0], col + offsets[1][1], destrow, destcol);
 				}
 				if(!done) {
-					done = traverse(row - 1, col);
+					done = traverse(row + offsets[2][0], col + offsets[2][1], destrow, destcol);
 				}
 				if(!done) {
-					done = traverse(row, col - 1);
+					done = traverse(row + offsets[3][0], col + offsets[3][1], destrow, destcol);
 				}
 			}
 			if(done) {
