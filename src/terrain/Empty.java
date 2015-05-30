@@ -6,7 +6,7 @@ import java.awt.Image;
 
 public class Empty extends Terrain {
 	private static final Empty empty = new Empty();
-	private static final String filename = "void.png";
+	private static final String filename = "empty.png";
 
 	public static Image sprite;
 	
