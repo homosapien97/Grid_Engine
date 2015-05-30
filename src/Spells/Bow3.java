@@ -10,7 +10,7 @@ public class Bow3 extends Spell{
 	public static Image sprite;
 
 	public Bow3(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Bow3 get() {

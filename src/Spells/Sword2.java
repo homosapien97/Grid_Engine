@@ -10,7 +10,7 @@ public class Sword2 extends Spell{
 	public static Image sprite;
 
 	public Sword2(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Sword2 get() {

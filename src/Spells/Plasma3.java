@@ -10,7 +10,7 @@ public static final String filename = "plasma3";
 	public static Image sprite;
 	
 	public Plasma3(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Plasma3 get(){

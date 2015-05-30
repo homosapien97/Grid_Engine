@@ -10,7 +10,7 @@ public class Plasma2 extends Spell{
 	public static Image sprite;
 	
 	public Plasma2(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Plasma2 get(){

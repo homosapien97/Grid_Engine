@@ -10,7 +10,7 @@ public class Earth3 extends Spell {
 	public static Image sprite;
 	
 	public Earth3(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Earth3 get() {

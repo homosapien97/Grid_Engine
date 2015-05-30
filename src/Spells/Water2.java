@@ -10,7 +10,7 @@ public class Water2 extends Spell{
 	public static Image sprite;
 	
 	public Water2(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Water2 get(){

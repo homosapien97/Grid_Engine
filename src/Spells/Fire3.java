@@ -10,7 +10,7 @@ public class Fire3 extends Spell{
 	public static Image sprite;
 	
 	public Fire3(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Fire3 get(){

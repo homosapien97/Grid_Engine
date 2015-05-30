@@ -10,7 +10,7 @@ public class Shield1 extends Spell{
 	public static Image sprite;
 
 	public Shield1(){
-		super(0,0,0,"name");
+		super(0,0,0,filename,"name");
 	}
 	
 	public static Shield1 get() {
