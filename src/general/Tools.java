@@ -63,6 +63,19 @@ public class Tools {
 			
 			return img;
 		}
+		
+		public static Image loadEntitySprite(String filename){
+			Image img = null;
+			File temp = new File("resources\\entities\\" + filename);
+			
+			try{
+				img = ImageIO.read(temp);
+			}catch(IOException e){
+				System.out.println("For file \"" + filename + "\":" + e);
+			}
+			
+			return img;
+		}
 	}
 	
 	//misc functions

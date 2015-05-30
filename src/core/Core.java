@@ -108,6 +108,7 @@ public class Core {
 		Core.loadCreatures();
 		Core.loadEntities();
 		Core.loadTerrain();
+		Core.loadAdditionalGraphics();
 	}
 	
 	//loading
@@ -126,6 +127,10 @@ public class Core {
 		Stone.load();
 		Quicksand.load();
 		Empty.load();
+	}
+	
+	private static void loadAdditionalGraphics(){
+		MainMenu.load();
 	}
 	
 	//game navigation

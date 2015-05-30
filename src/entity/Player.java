@@ -156,6 +156,6 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 		return visionSquare;
 	}
 	public static void load() {
-		sprite = Tools.img.loadTerrainSprite(filename);
+		sprite = Tools.img.loadEntitySprite(filename);
 	}
 }
