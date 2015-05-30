@@ -11,6 +11,7 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import run.Main;
 import key_actions.ToggleHUD;
 import core.Core;
 import entity.Player;
@@ -96,6 +97,8 @@ public class GameDisplay extends Display {
 			page.setColor(new Color(89, 89, 89, 100));
 			page.fillRect(0, 0, Display.P_WIDTH, 32);
 			page.drawImage(heart_opaque, 50, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			page.setColor(Color.white);
+			page.drawString("" + Main.player.health, 80, 20);
 		}
 	}
 	
