@@ -12,11 +12,13 @@ public class VisionSquare {
 	public static final VisionSquare r1;
 	public static final VisionSquare r7;
 	public static final VisionSquare r15;
+	public static final VisionSquare r21;
 	public static final VisionSquare r31;
 	static {
 		r1 = new VisionSquare(0,0,1);
 		r7 = new VisionSquare(0,0,7);
 		r15 = new VisionSquare(0,0,15);
+		r21 = new VisionSquare(0,0,21);
 		r31 = new VisionSquare(0,0,31);
 	}
 	
@@ -69,12 +71,13 @@ public class VisionSquare {
 //				if(blocked) {
 //					mask[temp.x][temp.y] = false; 
 //				} else 
+				mask[temp.x][temp.y]= true; 
 				if(LoadedChunks.heightAt(temp.x - RADIUS + x, temp.y - RADIUS + y) > 0 && !LoadedChunks.terrainAt(temp.x - RADIUS + x, temp.y - RADIUS + y).clear) {
 //					blocked = true;
-					mask[temp.x][temp.y] = false;
+//					mask[temp.x][temp.y] = true;
 					break;
 				} else {
-					mask[temp.x][temp.y] = true; 
+//					mask[temp.x][temp.y] = true; 
 				}
 			}
 		}

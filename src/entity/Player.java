@@ -32,7 +32,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted {
 		armor = arm;
 		name = n;
 		alive = true;
-		visionSquare = VisionSquare.r15;
+		visionSquare = VisionSquare.r21;
 		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
 	}
 	

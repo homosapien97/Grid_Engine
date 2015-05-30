@@ -5,6 +5,7 @@ import core.*;
 import entity.Player;
 import general.Tools;
 import generation.GenWall;
+import terrain.Quicksand;
 import terrain.Stone;
 import world.Chunk;
 import world.LoadedChunks;
@@ -32,7 +33,7 @@ public class Main {
 						step();
 						Tools.time.wait(500);
 					}
-					Tools.time.wait(5000);
+					Tools.time.wait(50000);
 					break;
 				default:
 					//idle cpu
@@ -55,9 +56,9 @@ public class Main {
 //		testChunk.heightmap[10][10] = 1;
 //		testChunk.heightmap[11][10] = 1;
 //		testChunk.heightmap[5][13] = 1;
-		GenWall testWall = new GenWall(5, 5, 10, 10, Stone.get());
+		GenWall testWall = new GenWall(5, 5, 10, 10, Quicksand.get());
 		testWall.generate();
-		GenWall testWall2 = new GenWall(-2,-2, 20, -7, Stone.get());
+		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
 		testWall2.generate();
 		Core.start();
 	}
