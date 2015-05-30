@@ -1,4 +1,4 @@
-package Spells;
+package spells;
 import magic.Spell;
 import general.Tools;
 import java.awt.Image;
