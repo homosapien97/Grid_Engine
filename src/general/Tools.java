@@ -89,6 +89,19 @@ public class Tools {
 			
 			return img;
 		}
+		
+		public static Image loadCreatureSprite(String filename){
+			Image img = null;
+			File temp = new File("resources\\creature\\" + filename);
+			
+			try{
+				img = ImageIO.read(temp);
+			}catch(IOException e){
+				System.out.println("For file \"" + filename + "\":" + e);
+			}
+			
+			return img;
+		}
 	}
 	
 	//misc functions

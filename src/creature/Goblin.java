@@ -13,7 +13,7 @@ public class Goblin extends Creature {
 	}
 
 	public static void load() {
-		sprite = Tools.img.loadEntitySprite(filename);
+		//sprite = Tools.img.loadCreatureSprite(filename);
 	}
 
 }
