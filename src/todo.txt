@@ -26,6 +26,7 @@ Michael:
 		-You have the classstream file i/o javadocs Christian sent you, it would be great for you to start implementing this so Christian can implement serializable for each class that needs to be saved w/ the world
 	-
 Herman:
+	-Make a dungeon on graph paper for the player to walk through. Soon there will be a program to turn a text document with the contents of the dungeon into a save file.
 	-HUD icons
 	-Enemy types
 		-Actual names
