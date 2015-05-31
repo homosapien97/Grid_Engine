@@ -4,16 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.Action;
-import javax.swing.InputMap;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
 
 import run.Main;
-import key_actions.ToggleHUD;
 import core.Core;
 import entity.Player;
 import general.Tools;
@@ -24,8 +16,8 @@ public class GameDisplay extends Display {
 	private static Boolean hudVisible = true;
 	
 	//HUD icons
-	private static Image heart_transparent = null;
-	private static Image heart_opaque = null;
+	private static Image broken_heart = null;
+	private static Image heart = null;
 	
 	//fonts
 	public static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
@@ -68,7 +60,7 @@ public class GameDisplay extends Display {
 		
 		//handle UI overlay
 		drawHUD(page);
-		//System.out.println(this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).get(KeyStroke.getKeyStroke(KeyEvent.H, 0)));
+		
 	}
 	
 	/**
@@ -111,10 +103,16 @@ public class GameDisplay extends Display {
 			page.drawString(Main.player.name, 50, 21);
 			
 			//player health
-			page.drawImage(heart_opaque, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			if(Main.player.health > 100) {
+				page.drawImage(heart, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			} else {
+				page.drawImage(broken_heart, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			}
 			
 			page.setColor(Color.white);
 			page.drawString("" + Main.player.health, 180, 21);
+			
+			//player armor
 		}
 	}
 	
@@ -127,7 +125,7 @@ public class GameDisplay extends Display {
 	//loading
 	
 	public static void load(){
-		heart_transparent = Tools.img.loadImage("translucent-heart.png", "icons\\hud"); 
-		heart_opaque = Tools.img.loadImage("opaque-heart.png", "icons\\hud"); 
+		broken_heart = Tools.img.loadImage("broken-heart.png", "icons\\hud"); 
+		heart = Tools.img.loadImage("heart.png", "icons\\hud"); 
 	}
 }
