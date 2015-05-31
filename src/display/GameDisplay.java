@@ -1,9 +1,14 @@
 package display;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import action.Clock;
 import run.Main;
@@ -27,14 +32,29 @@ public class GameDisplay extends Display {
 	private static Image tick_clock = null;
 	
 	//fonts
-	public static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
-	public static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
+	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
+	private static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
+	
+	//cmdline
+	public JTextField cmdInput = new JTextField();
 	
 	public GameDisplay(){
 		super();
 		
 		this.setFocusable(true);
-		this.requestFocusInWindow();  
+		this.requestFocusInWindow();
+		
+		BorderLayout layout = new BorderLayout();
+		this.setLayout(layout);
+		
+		
+		cmdInput.setBackground(new Color(50, 50, 50, 255));
+		cmdInput.setForeground(Color.white);
+		cmdInput.setFont(cmdFont);
+		Border border = new LineBorder(new Color(50, 50, 50, 255));
+		cmdInput.setBorder(border);
+		cmdInput.setVisible(false);
+		this.add(cmdInput, BorderLayout.PAGE_END);
 	}
 	
 	public void paintComponent(Graphics page){
@@ -141,15 +161,14 @@ public class GameDisplay extends Display {
 	private void drawCMDLine(Graphics page){
 		if(cmdLineVisible){
 			//background
-			page.setColor(new Color(25, 25, 25, 255));
-			page.fillRect(0, Display.P_HEIGHT - 20, Display.P_WIDTH, Display.P_HEIGHT);
+			page.setColor(new Color(50, 50, 50, 255));
+			page.fillRect(0, Display.P_HEIGHT - 24, Display.P_WIDTH, Display.P_HEIGHT);
 			
-			//player name
-			page.setColor(Color.white);
-			page.setFont(cmdFont);
-			page.drawString(">_", 2, Display.P_HEIGHT - 6);
-			
-			
+			//cmd input
+			cmdInput.setVisible(true);
+			cmdInput.requestFocus();
+		}else{
+			cmdInput.setVisible(false);
 		}
 	}
 	

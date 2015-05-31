@@ -139,18 +139,27 @@ public class Core {
 	
 	private static void addKeyBinds(GameDisplay game){
 		//get maps
-		InputMap gameIM = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		InputMap gameIM = game.getInputMap(JComponent.WHEN_FOCUSED);
+		InputMap gameIM_CMDLINE = game.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
+		InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		
 		ActionMap gameAM = game.getActionMap();
+		ActionMap gameAM_CMDLINE = game.cmdInput.getActionMap();
 		
 		//add to input map
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, false), "toggleHUD");
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0, false), "toggleCMDLine");
+		
+		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleCMDLine");
+		
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());
 		gameAM.put("toggleCMDLine", new ToggleCMDLine());
 		gameAM.put("mainMenu", new ExitToMainMenu());
+		
+		gameAM_CMDLINE.put("toggleCMDLine", new ToggleCMDLine());
 	}
 	
 	//loading
