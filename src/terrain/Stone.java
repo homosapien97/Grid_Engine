@@ -6,7 +6,6 @@ import general.Tools;
 public class Stone extends Terrain{
 	private static final Stone stone = new Stone();
 	private static final String filename = "stone.png";
-	private static char c = 'A';
 	
 	public static Image sprite;
 	
