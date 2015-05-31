@@ -29,8 +29,10 @@ Herman:
 	-HUD icons
 	-Enemy types
 		-Actual names
+			[complete]
 		-Actual desired behavior (describe in a comment in each creature)
 		-Actual 16x sprites associated with each enemy
+			[Complete for Skeleton]
 		-Write a flavor text description for each enemy, so that when the player says "examine enemy at x, y" we can give them flavor text and relevant hp/armor/level info (if we want to give them taht info :P)
 	-Spells
 		-Actual names
@@ -38,6 +40,7 @@ Herman:
 		-Actual numbers (damage, ticks, etc)
 		-Implement the interfaces for types
 		-Actual 32x sprites for inventory
+			[Complete]
 	-Terrain names, potential effects if necessary (very few)
 		-Flavor text for terrain too, though very limited. "This is stone. It is grey. You can walk on it" "This is lava. You shouldn't walk on it unless you have Fire affinity of X or above"
 	-Player icon choices (maybe)
