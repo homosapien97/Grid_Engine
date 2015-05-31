@@ -45,7 +45,26 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		earthRes = earth;
 		waterRes = water;
 		plasmaRes = plasma;
-		
+
+		visionSquare = VisionSquare.r21;
+		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
+		path = new Path<Player>(this);
+	}
+	public Player(int x, int y, Chunk c, String sprite) {
+		super(x, y, c, sprite);
+		Camera.init(this);
+		LoadedChunks.init(c);
+		maxHealth = 10;
+		health = 10;
+		natArmor = 0;
+		armor = 0;
+		this.name = "Aeneas";
+		alive = true;
+		fireRes = 0.00;
+		earthRes = 0.00;
+		waterRes = 0.00;
+		plasmaRes = 0.00;
+
 		visionSquare = VisionSquare.r21;
 		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
 		path = new Path<Player>(this);
@@ -58,7 +77,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	@Override
 	public int hurt(int damage) {
 		health -= damage;
-		if(maxHealth - health < -10)
+		if(health - maxHealth < -10)
 			alive = false;
 		return health;
 	}
