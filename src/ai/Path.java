@@ -74,10 +74,10 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	 * @return
 	 */
 	public boolean constructPathTo(int absoluteX, int absoluteY) {
-		System.out.println("Constructing path...");
 		actor.vsquare().trace();
+		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
 		if(!actor.vsquare().canSee(absoluteX, absoluteY)) {
-			System.out.println("Cannot go to" + absoluteX + ", " + absoluteY + " because I can't see it");
+//			System.out.println("Cannot go to" + absoluteX + ", " + absoluteY + " because I can't see it");
 			return false;
 		}
 		boolean[][] temp = actor.vsquare().mask;
@@ -103,20 +103,9 @@ public class Path <T extends Entity & Mobile & Sighted> {
 				done = true;
 			}
 			else {
-				System.out.println(Tools.nav.distance(row + 1, col, destrow, destcol));
-				System.out.println(Tools.nav.distance(row, col - 1, destrow, destcol));
-				System.out.println(Tools.nav.distance(row - 1, col, destrow, destcol));
-				System.out.println(Tools.nav.distance(row, col + 1, destrow, destcol));
 				int[][] offsets = Tools.misc.offsets(new double[]{
 						Tools.nav.distance(row + 1, col, destrow, destcol), Tools.nav.distance(row, col - 1, destrow, destcol),
 						Tools.nav.distance(row - 1, col, destrow, destcol), Tools.nav.distance(row, col + 1, destrow, destcol)});
-				for(int j = 0; j < offsets[0].length; j++) {
-					for(int i = 0; i < offsets.length; i++) {
-						System.out.print(offsets[i][j]);
-					}
-					System.out.println();
-				}
-				System.out.println();
 				done = traverse(row + offsets[0][0], col + offsets[0][1], destrow, destcol);
 				if(!done) {
 					done = traverse(row + offsets[1][0], col + offsets[1][1], destrow, destcol);

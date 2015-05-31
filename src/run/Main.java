@@ -73,23 +73,25 @@ public class Main {
 	private static void stepState() {
 //		Main.player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
 //		Main.player.goToRelative(1,0);
-		if(!player.getPath().goTo(_gtx, _gty)) {
-			System.out.println("Cant' go to " + _gtx + ", " + _gty);
-			for(int j = 0; j < player.getPath().maze[0].length; j++) {
-				for(int i = 0; i < player.getPath().maze.length; i++) {
-					System.out.print(player.getPath().maze[i][j]);
-				}
-				System.out.println();
-			}
-			Tools.time.wait(100000);
-		}
+		
+		
 //		if(!player.getPath().goTo(_gtx, _gty)) {
-//			do {
-//				_gtx = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX());
-//				_gty = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY());
-////				System.out.println("new path to " + _gtx + ", " + _gty + " " + player.vsquare().canSee(_gtx, _gty));
-//			} while(!player.vsquare().canSee(_gtx, _gty));
-//			System.out.println("Going to " + _gtx + ", " + _gty);
+////			System.out.println("Cant' go to " + _gtx + ", " + _gty);
+////			for(int j = 0; j < player.getPath().maze[0].length; j++) {
+////				for(int i = 0; i < player.getPath().maze.length; i++) {
+////					System.out.print(player.getPath().maze[i][j]);
+////				}
+////				System.out.println();
+////			}
+//			Tools.time.wait(100000);
 //		}
+		
+		
+		if(!player.getPath().goTo(_gtx, _gty)) {
+			do {
+				_gtx = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX());
+				_gty = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY());
+			} while(!player.vsquare().canSee(_gtx, _gty));
+		}
 	}
 }

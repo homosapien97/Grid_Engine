@@ -126,7 +126,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	 */
 	@Override
 	public boolean goToRelative(int relativeX, int relativeY) {
-		System.out.println("gtr " + relativeX + ", " + relativeY);
+//		System.out.println("gtr " + relativeX + ", " + relativeY);
 		goToAbsolute(getAbsoluteX() + relativeX, getAbsoluteY() + relativeY);
 		return false;
 	}

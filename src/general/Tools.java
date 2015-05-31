@@ -162,8 +162,8 @@ public class Tools {
 					ret[i][1] = 0;
 					break;
 				case 3:
-					ret[i][0] = 1;
-					ret[i][1] = 0;
+					ret[i][0] = 0;
+					ret[i][1] = 1;
 					break;
 				}
 				ignore[l] = true;
@@ -192,8 +192,8 @@ public class Tools {
 					ret[i][1] = 0;
 					break;
 				case 3:
-					ret[i][0] = 1;
-					ret[i][1] = 0;
+					ret[i][0] = 0;
+					ret[i][1] = 1;
 					break;
 				}
 				ignore[l] = true;
