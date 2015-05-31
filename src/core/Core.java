@@ -163,7 +163,7 @@ public class Core {
 	}
 	
 	private static void loadHUD(){
-		gameDisplay.load();
+		GameDisplay.load();
 	}
 	
 	private static void loadAdditionalGraphics(){
