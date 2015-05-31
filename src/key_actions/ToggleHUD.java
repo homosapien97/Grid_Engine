@@ -12,7 +12,6 @@ public class ToggleHUD extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("H");
 		GameDisplay.toggleHUD();
 	}
 }

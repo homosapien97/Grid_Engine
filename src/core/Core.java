@@ -135,7 +135,6 @@ public class Core {
 	
 	//key binding
 	
-	@SuppressWarnings("serial")
 	private static void addKeyBinds(GameDisplay game){
 		//get maps
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -145,13 +144,7 @@ public class Core {
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, true), "toggleHUD");
 		
 		//add to action map
-		gameAM.put("toggleHUD", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//System.out.println("H");
-				GameDisplay.toggleHUD();
-			}
-		});
+		gameAM.put("toggleHUD", new ToggleHUD());
 	}
 	
 	//loading
