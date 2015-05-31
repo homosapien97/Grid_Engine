@@ -71,42 +71,23 @@ public class Tools {
 			return img;
 		}
 		
-		public static Image loadTerrainSprite(String filename){
-			Image img = null;
-			File temp = new File("resources\\terrain\\" + filename);
-			
-			try{
-				img = ImageIO.read(temp);
-			}catch(IOException e){
-				System.out.println("For file \"" + filename + "\":" + e);
-			}
-			
+		public static Image loadCreatureSprite(String filename){
+			Image img = loadImage(filename, "creature");
 			return img;
 		}
 		
 		public static Image loadEntitySprite(String filename){
-			Image img = null;
-			File temp = new File("resources\\entities\\" + filename);
-			
-			try{
-				img = ImageIO.read(temp);
-			}catch(IOException e){
-				System.out.println("For file \"" + filename + "\":" + e);
-			}
-			
+			Image img = loadImage(filename, "entities");
 			return img;
 		}
 		
-		public static Image loadCreatureSprite(String filename){
-			Image img = null;
-			File temp = new File("resources\\creature\\" + filename);
-			
-			try{
-				img = ImageIO.read(temp);
-			}catch(IOException e){
-				System.out.println("For file \"" + filename + "\":" + e);
-			}
-			
+		public static Image loadHUDSprite(String filename){
+			Image img = loadImage(filename, "icons\\hud");
+			return img;
+		}
+		
+		public static Image loadTerrainSprite(String filename){
+			Image img = loadImage(filename, "terrain");
 			return img;
 		}
 	}

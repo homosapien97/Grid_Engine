@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import action.Clock;
 import run.Main;
 import core.Core;
 import entity.Player;
@@ -18,6 +19,11 @@ public class GameDisplay extends Display {
 	//HUD icons
 	private static Image broken_heart = null;
 	private static Image heart = null;
+	
+	private static Image broken_shield = null;
+	private static Image shield = null;
+	
+	private static Image tick_clock = null;
 	
 	//fonts
 	public static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
@@ -94,7 +100,7 @@ public class GameDisplay extends Display {
 	private void drawHUD(Graphics page){
 		if(hudVisible){
 			//background
-			page.setColor(new Color(89, 89, 89, 100));
+			page.setColor(new Color(89, 89, 89, 255));
 			page.fillRect(0, 0, Display.P_WIDTH, 32);
 			
 			//player name
@@ -113,6 +119,20 @@ public class GameDisplay extends Display {
 			page.drawString("" + Main.player.health, 180, 21);
 			
 			//player armor
+			if(Main.player.armor > 25) {
+				page.drawImage(shield, 250, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			} else {
+				page.drawImage(broken_shield, 250, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			}
+			
+			page.setColor(Color.white);
+			page.drawString("" + Main.player.armor, 280, 21);
+			
+			//tick clock
+			page.drawImage(tick_clock, 350, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			
+			page.setColor(Color.white);
+			page.drawString("" + Clock.getTicks(), 380, 21);
 		}
 	}
 	
@@ -125,7 +145,12 @@ public class GameDisplay extends Display {
 	//loading
 	
 	public static void load(){
-		broken_heart = Tools.img.loadImage("broken-heart.png", "icons\\hud"); 
-		heart = Tools.img.loadImage("heart.png", "icons\\hud"); 
+		heart = Tools.img.loadHUDSprite("heart.png");
+		broken_heart = Tools.img.loadHUDSprite("broken-heart.png");
+
+		shield = Tools.img.loadHUDSprite("shield.png");
+		broken_shield = Tools.img.loadHUDSprite("broken-shield.png");
+		
+		tick_clock = Tools.img.loadHUDSprite("tick-clock.png");
 	}
 }
