@@ -111,4 +111,10 @@ public class Creature extends Entity implements Health, Armored, Mobile, Sighted
 		return ticksPerTile;
 	}
 
+	@Override
+	public boolean pathTo(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
