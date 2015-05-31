@@ -32,6 +32,8 @@ import display.MainMenu;
 import display.SettingsPage;
 import entity.Player;
 import general.Tools;
+import key_actions.ExitToMainMenu;
+import key_actions.ToggleCMDLine;
 import key_actions.ToggleHUD;
 
 
@@ -141,10 +143,14 @@ public class Core {
 		ActionMap gameAM = game.getActionMap();
 		
 		//add to input map
-		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, true), "toggleHUD");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, false), "toggleHUD");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0, false), "toggleCMDLine");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());
+		gameAM.put("toggleCMDLine", new ToggleCMDLine());
+		gameAM.put("mainMenu", new ExitToMainMenu());
 	}
 	
 	//loading
@@ -236,11 +242,11 @@ public class Core {
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error!");
+			System.out.println("Font Error!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error!");
+			System.out.println("Font Error!");
 		}
 		
 		ge.registerFont(cinzel);
@@ -252,11 +258,11 @@ public class Core {
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error!");
+			System.out.println("Font Error!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error!");
+			System.out.println("Font Error!");
 		}
 		
 		ge.registerFont(cinzelDecorative);
@@ -268,11 +274,27 @@ public class Core {
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error!");
+			System.out.println("Font Error!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error!");
+			System.out.println("Font Error!");
+		}
+		
+		ge.registerFont(forum);
+		
+		File font4 = new File("resources\\fonts\\Courier.ttf");
+		
+		try {
+			forum = Font.createFont(Font.TRUETYPE_FONT, font3);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Font Error!");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Font Error!");
 		}
 		
 		ge.registerFont(forum);

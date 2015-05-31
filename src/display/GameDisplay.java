@@ -15,6 +15,7 @@ import general.Tools;
 public class GameDisplay extends Display {
 	//states of toggleable things
 	private static Boolean hudVisible = true;
+	private static Boolean cmdLineVisible = false;
 	
 	//HUD icons
 	private static Image broken_heart = null;
@@ -27,6 +28,7 @@ public class GameDisplay extends Display {
 	
 	//fonts
 	public static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
+	public static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
 	
 	public GameDisplay(){
 		super();
@@ -66,7 +68,7 @@ public class GameDisplay extends Display {
 		
 		//handle UI overlay
 		drawHUD(page);
-		
+		drawCMDLine(page);
 	}
 	
 	/**
@@ -136,10 +138,29 @@ public class GameDisplay extends Display {
 		}
 	}
 	
+	private void drawCMDLine(Graphics page){
+		if(cmdLineVisible){
+			//background
+			page.setColor(new Color(25, 25, 25, 255));
+			page.fillRect(0, Display.P_HEIGHT - 20, Display.P_WIDTH, Display.P_HEIGHT);
+			
+			//player name
+			page.setColor(Color.white);
+			page.setFont(cmdFont);
+			page.drawString(">_", 2, Display.P_HEIGHT - 6);
+			
+			
+		}
+	}
+	
 	//toggle actions
 	
 	public static void toggleHUD(){
 		hudVisible = !hudVisible;
+	}
+	
+	public static void toggleCMDLine(){
+		cmdLineVisible = !cmdLineVisible;
 	}
 	
 	//loading
