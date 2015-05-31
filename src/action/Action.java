@@ -2,9 +2,9 @@ package action;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
+//import java.util.Vector;
 /**
  * Every tick, runAll() is called, which calls the run method of every Action in queue for whom the current time is between their start time and end time (inclusive).
  * If end time is negative, the action is assumed to be indefinite or self-terminating.
@@ -31,14 +31,14 @@ public class Action implements Runnable{
 	}
 	
 	public static void runAll() {
-		System.out.println("Executing a queue of " + queue.size() + " actions");
-		if(queue.size() > 1) {
-			synchronized(queue) {
-				for(Action a : queue) {
-					System.out.println(a);
-				}
-			}
-		}
+//		System.out.println("Executing a queue of " + queue.size() + " actions");
+//		if(queue.size() > 1) {
+//			synchronized(queue) {
+//				for(Action a : queue) {
+//					System.out.println(a);
+//				}
+//			}
+//		}
 		synchronized(queue) {
 			for(Action a : queue) {
 				if(Clock.ticks >= a.startTime && (Clock.ticks <= a.startTime + a.totalTicks || a.totalTicks < 0)) {

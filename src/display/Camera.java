@@ -1,7 +1,8 @@
 package display;
 
 import java.awt.Image;
-import java.util.Vector;
+import java.util.List;
+//import java.util.Vector;
 
 import entity.Player;
 import entity.Entity;
@@ -15,8 +16,9 @@ public class Camera {
 	public static String[][] terrainSnapshot;
 	public static String[][] entitySnapshot;
 	public static Image[][] terrainImageSnapshot;
+	public static Image[][] entityImageSnapshot;
 	
-	public static Vector<Entity> entities;
+	public static List<Entity> entities;
 	
 	public static boolean initialized;
 	
@@ -25,6 +27,7 @@ public class Camera {
 		entitySnapshot = new String[Display.WIDTH][Display.HEIGHT];
 		terrainSnapshot = new String[Display.WIDTH][Display.HEIGHT];
 		terrainImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
+		entityImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
 	}
 	
 	public static boolean init(Player p) {
@@ -76,10 +79,32 @@ public class Camera {
 		
 		for(Entity e : entities) {
 			if(player.visionSquare.canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
-				entitySnapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.spriteFilepath;
+				entitySnapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.filename;
 			}
 		}
 
 		return entitySnapshot;
+	}
+	public static Image[][] entityImageSnapshot() {
+		//TODO rewrite this to use images, once we have them, and update GameDisplay entity handling.
+		pAbsX = player.getAbsoluteX();
+		pAbsY = player.getAbsoluteY();
+		player.visionSquare.trace(pAbsX, pAbsY);
+		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
+		System.out.println(entities.size());
+		for(int i = 0; i < entityImageSnapshot.length; i++) {
+			for(int j = 0; j < entityImageSnapshot[0].length; j++) {
+				entityImageSnapshot[i][j] = null;
+			}
+		}
+		for(Entity e : entities) {
+			System.out.println(e.getClass());
+			if(player.visionSquare.canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
+				System.out.println(e.sprite() == null);
+				entityImageSnapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.sprite();
+			}
+		}
+
+		return entityImageSnapshot;
 	}
 }

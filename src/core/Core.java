@@ -75,7 +75,7 @@ public class Core {
 		Core.loadFonts();
 		
 		//loading
-		Core.loadCreatures();
+//		Core.loadCreatures();
 		Core.loadEntities();
 		Core.loadTerrain();
 		Core.loadHUD();
@@ -169,6 +169,7 @@ public class Core {
 	}
 	
 	private static void loadEntities(){
+		loadCreatures();
 		Player.load();
 	}
 	

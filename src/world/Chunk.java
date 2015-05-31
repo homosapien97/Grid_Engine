@@ -1,7 +1,11 @@
 package world;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
+import java.util.Iterator;
 
 import entity.Entity;
 import generation.Generator;
@@ -19,7 +23,7 @@ public class Chunk {
 	public final Point pos;
 	
 	//all entities
-	public Vector<Entity> entities;
+	public List<Entity> entities;
 	
 	//variables to store data per chunk
 	public Chunk[][] neighbors;
@@ -34,7 +38,8 @@ public class Chunk {
 	private Chunk() {
 		pos = new Point(0,0);
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
 		chunks.put(pos, this);
 		//neighbors
 		neighbors = new Chunk[3][3];
@@ -56,7 +61,8 @@ public class Chunk {
 	public Chunk(int xPos, int yPos, boolean checkOverlap) {
 		pos = new Point(xPos, yPos);
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
@@ -81,7 +87,8 @@ public class Chunk {
 	public Chunk(Point pos, boolean checkOverlap) {
 		this.pos = pos;
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
@@ -107,7 +114,8 @@ public class Chunk {
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Terrain terrain) {
 		pos = new Point(xPos, yPos);
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
@@ -139,7 +147,9 @@ public class Chunk {
 	public Chunk(Point pos, boolean checkOverlap, Terrain terrain) {
 		this.pos = pos;
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
+		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
 			//neighbors
@@ -169,10 +179,11 @@ public class Chunk {
 	 * @param terrain terrain to create in the new chunk.
 	 * @param heightmap heightmap to create in the new chunk.
 	 */
-	public Chunk(int xPos, int yPos, boolean checkOverlap, Vector<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
+	public Chunk(int xPos, int yPos, boolean checkOverlap, List<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
 		pos = new Point(xPos, yPos);
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		this.entities = entities;
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
@@ -187,10 +198,11 @@ public class Chunk {
 		this.heightmap = heightmap;
 	}
 	
-	public Chunk(Point pos, boolean checkOverlap, Vector<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
+	public Chunk(Point pos, boolean checkOverlap, List<Entity> entities, Terrain[][] terrain, int[][] heightmap) {
 		this.pos = pos;
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		this.entities = entities;
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
@@ -214,7 +226,8 @@ public class Chunk {
 	public Chunk(int xPos, int yPos, boolean checkOverlap, Chunk chunk) {
 		pos = new Point(xPos, yPos);
 		
-		entities = new Vector<Entity>();
+//		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);
@@ -392,9 +405,14 @@ public class Chunk {
 				}
 			}
 		}
-		for(Entity e : entities) {
-			e.delete();
+		synchronized(entities) {
+//			for(Entity e : entities) {
+//				e.delete();
+//			}
+//			entities.removeIf(r -> r.deleteSafe());
+			entities.clear();
 		}
+		
 		
 		chunks.remove(this.pos);
 	}
@@ -405,6 +423,9 @@ public class Chunk {
 	public void removeEntity(Entity e) {
 		entities.remove(e);
 	}
+	public void removeEntity(Iterator<Entity> i) {
+		i.remove();
+	}
 	
 	/**
 	 * Checks a location for an entity, and gets that entity if it is present.
@@ -413,12 +434,13 @@ public class Chunk {
 	 * @return returns the entity at position (x, y). If no entity is there, returns null.
 	 */
 	public Entity entityAt(int x, int y) {
-		for(Entity e : entities) {
-			if(e.getX() == x && e.getY() == y){
-				return e;
+		synchronized(entities) {
+			for(Entity e : entities) {
+				if(e.getX() == x && e.getY() == y){
+					return e;
+				}
 			}
 		}
-		
 		return null;
 	}
 	
@@ -428,12 +450,15 @@ public class Chunk {
 	 * @param y the y of the coordinate to check for entities
 	 * @return returns the entities at position (x, y). If no entities are there, returns null.
 	 */
-	public Vector<Entity> entitiesAt(int x, int y) {
-		Vector<Entity> ret = new Vector<Entity>();
-		
-		for(Entity e: entities) {
-			if(e.getX() == x && e.getY() == y) 
-				ret.add(e);
+	public List<Entity> entitiesAt(int x, int y) {
+		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
+		synchronized(entities) {
+			synchronized(ret) {
+				for(Entity e: entities) {
+					if(e.getX() == x && e.getY() == y) 
+						ret.add(e);
+				}
+			}
 		}
 		
 		return ret;

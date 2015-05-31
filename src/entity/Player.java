@@ -33,6 +33,10 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	public static final String filename = "player.png";;
 	public static Image sprite;
 	
+	static {
+		load();
+	}
+	
 	public Player(int x, int y, Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, int ticksPerTile, int maxActions) {
 		super(x, y, c, sprite, maxActions);
 		Camera.init(this);
@@ -214,6 +218,10 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	}
 	public static void load() {
 		sprite = Tools.img.loadEntitySprite(filename);
+	}
+	@Override
+	public Image sprite() {
+		return sprite;
 	}
 	@Override
 	public Path<Player> getPath() {

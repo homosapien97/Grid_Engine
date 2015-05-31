@@ -13,7 +13,7 @@ import javax.swing.border.LineBorder;
 import action.Clock;
 import run.Main;
 import core.Core;
-import entity.Player;
+//import entity.Player;
 import general.Tools;
 
 @SuppressWarnings("serial")
@@ -64,24 +64,31 @@ public class GameDisplay extends Display {
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
 				//draw this element
-				drawTerrain(page, x, y, Camera.terrainImageSnapshot[x][y]);
+//				drawTerrain(page, x, y, Camera.terrainImageSnapshot[x][y]);
+				drawSprite(page, x, y, Camera.terrainImageSnapshot[x][y]);
 			}
 		}
 		
 		//handle entities
-		Camera.entitySnapshot();
+//		Camera.entitySnapshot();
+		Camera.entityImageSnapshot();
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-				if(Camera.entitySnapshot[x][y] != null){
-					switch(Camera.entitySnapshot[x][y]){
-						case "P":
-							drawPlayer(page, x, y, Player.sprite);
-							break;
-						default:
-							System.out.print("Unknown entity: ");
-							System.out.println(Camera.entitySnapshot[x][y]);
-					}
+//				if(Camera.entitySnapshot[x][y] != null){
+//					switch(Camera.entitySnapshot[x][y]){
+//						case "P":
+//							drawPlayer(page, x, y, Player.sprite);
+//							break;
+//						default:
+//							System.out.print("Unknown entity: ");
+//							System.out.println(Camera.entitySnapshot[x][y]);
+//					}
+//				}
+				if(Camera.entityImageSnapshot[x][y] != null) {
+					System.out.println("*");
+//					drawEntity(page, x, y, Camera.entityImageSnapshot[x][y]);
+					drawSprite(page, x, y, Camera.entityImageSnapshot[x][y]);
 				}
 			}
 		}
@@ -91,26 +98,42 @@ public class GameDisplay extends Display {
 		drawCMDLine(page);
 	}
 	
-	/**
-	 * Draws the image of ceratin terrain at a certain location.
-	 * @param page the graphics page object
-	 * @param x the x location in sprites where the image should be placed
-	 * @param y the y location in sprites where the image should be placed
-	 * @param img the terrain image
-	 */
-	private void drawTerrain(Graphics page, int x, int y, Image img){
-		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-	}
+//	/**
+//	 * Draws the image of ceratin terrain at a certain location.
+//	 * @param page the graphics page object
+//	 * @param x the x location in sprites where the image should be placed
+//	 * @param y the y location in sprites where the image should be placed
+//	 * @param img the terrain image
+//	 */
+//	private void drawTerrain(Graphics page, int x, int y, Image img){
+//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+//	}
+//	
+//	/**
+//	 * Draws the image of the player at a certain location.
+//	 * @param page the graphics object
+//	 * @param x the x position for entities (not pixels)
+//	 * @param y the y position for entities (not pixels)
+//	 * @param img the player image file
+//	 */
+//	private void drawPlayer(Graphics page, int x, int y, Image img){
+//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+//	}
+//	
+//	/**
+//	 * Draws the image of an entity at a certain location.
+//	 * @param page the graphics object
+//	 * @param x the x position for entities (not pixels)
+//	 * @param y the y position for entities (not pixels)
+//	 * @param img the player image file
+//	 */
+//	private void drawEntity(Graphics page, int x, int y, Image img){
+//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+//	}
 	
-	/**
-	 * Draws the image of the player at a certain location.
-	 * @param page the graphics object
-	 * @param x the x position for entities (not pixels)
-	 * @param y the y position for entities (not pixels)
-	 * @param img the player image file
-	 */
-	private void drawPlayer(Graphics page, int x, int y, Image img){
+	private void drawSprite(Graphics page, int x, int y, Image img) {
 		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+		
 	}
 	
 	private void redHighlight(Graphics page, int x, int y){

@@ -3,7 +3,7 @@ import ai.Path;
 import ai.VisionSquare;
 import world.Chunk;
 
-public class Creature extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Creature>{
+public abstract class Creature extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Creature>{
 	public int maxHealth;
 	public int health;
 	public int natArmor;

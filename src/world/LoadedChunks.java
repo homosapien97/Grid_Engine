@@ -1,6 +1,9 @@
 package world;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Vector;
 
 import terrain.Terrain;
@@ -162,22 +165,26 @@ public class LoadedChunks {
 	 * @param y2 y coordinate of the bottom right corner of the range
 	 * @return vector of entities within (x1,y1)->(x2,y2)
 	 */
-	public static Vector<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
+	public  static List<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
 		int x1c = Tools.nav.absCoordToChunkCoord(x1) - chunks[0][0].pos.x;
 		int y1c = Tools.nav.absCoordToChunkCoord(y1) - chunks[0][0].pos.y;
 		int x2c = Tools.nav.absCoordToChunkCoord(x2) - chunks[0][0].pos.x;
 		int y2c = Tools.nav.absCoordToChunkCoord(y2) - chunks[0][0].pos.y;
-		Vector<Entity> ret = new Vector<Entity>();
+		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
 		for(int i = x1c; i < x2c + 1; i++) {
 			for(int j = y1c; j < y2c + 1; j++) {
-				for(Entity e : chunks[i][j].entities) {
-					if(e.getAbsoluteX() >= x1 && e.getAbsoluteX() <= x2 && e.getAbsoluteY() >= y1 && e.getAbsoluteY() <= y2) ret.add(e);
+//				synchronized(chunks[i][j].entities) {
+				synchronized(ret) {
+					for(Entity e : chunks[i][j].entities) {
+						if(e.getAbsoluteX() >= x1 && e.getAbsoluteX() <= x2 && e.getAbsoluteY() >= y1 && e.getAbsoluteY() <= y2) ret.add(e);
+					}
 				}
+//				}
 			}
 		}
 		return ret;
 	}
-	public static Vector<Entity> entitiesAt(int x, int y) {
+	public static List<Entity> entitiesAt(int x, int y) {
 		return chunks[Tools.nav.absCoordToChunkCoord(x) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(y) - chunks[0][0].pos.y].
 				entitiesAt(Tools.nav.absCoordToMinorCoord(x), Tools.nav.absCoordToMinorCoord(y));
 	}
