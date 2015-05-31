@@ -18,8 +18,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 
-import creature.Goblin;
-import creature.Human;
 import creature.Skeleton;
 import run.Main;
 import terrain.Quicksand;
@@ -151,8 +149,6 @@ public class Core {
 	//loading
 	
 	private static void loadCreatures(){
-		Goblin.load();
-		Human.load();
 		Skeleton.load();
 	}
 	
