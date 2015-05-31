@@ -86,7 +86,7 @@ public class GameDisplay extends Display {
 //					}
 //				}
 				if(Camera.entityImageSnapshot[x][y] != null) {
-					System.out.println("*");
+//					System.out.println("*");
 //					drawEntity(page, x, y, Camera.entityImageSnapshot[x][y]);
 					drawSprite(page, x, y, Camera.entityImageSnapshot[x][y]);
 				}
