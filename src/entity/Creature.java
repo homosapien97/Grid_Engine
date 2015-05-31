@@ -3,7 +3,7 @@ import ai.Path;
 import ai.VisionSquare;
 import world.Chunk;
 
-public class Creature extends Entity implements Health, Armored, Mobile, Sighted, Pathing{
+public class Creature extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Creature>{
 	public int maxHealth;
 	public int health;
 	public int natArmor;
@@ -83,7 +83,7 @@ public class Creature extends Entity implements Health, Armored, Mobile, Sighted
 	}
 
 	@Override
-	public Path<Player> getPath() {
+	public Path<Creature> getPath() {
 		// TODO Auto-generated method stub
 		return null;
 	}
