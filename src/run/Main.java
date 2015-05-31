@@ -1,5 +1,7 @@
 package run;
 
+import action.Action;
+import action.Clock;
 import core.*;
 import entity.Player;
 import general.Tools;
@@ -13,7 +15,7 @@ public class Main {
 	static Chunk testChunk = new Chunk(0, 0, true, Stone.get());
 	
 	//player object
-	public static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player", 0, 0, 0, 0);
+	public static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1);
 	
 	//for debug for now
 	public static final String version = "1.2";
@@ -86,12 +88,15 @@ public class Main {
 //			Tools.time.wait(100000);
 //		}
 		
-		
-		if(!player.getPath().goTo(_gtx, _gty)) {
-			do {
-				_gtx = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX());
-				_gty = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY());
-			} while(!player.vsquare().canSee(_gtx, _gty));
-		}
+		//random walk
+//		if(!player.getPath().goTo(_gtx, _gty)) {
+//			do {
+//				_gtx = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX());
+//				_gty = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY());
+//			} while(!player.vsquare().canSee(_gtx, _gty));
+//		}
+		player.pathTo((int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX()), (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY()));
+		Action.runAll();
+		Clock.tick();
 	}
 }

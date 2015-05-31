@@ -8,12 +8,12 @@ public class Creature extends Entity implements Health{
 	public String name;
 	public boolean alive;
 	
-	public Creature (int x, int y, int hp, int arm, Chunk c, String s, String n){
-		super(x, y, c, s);
+	public Creature (int x, int y, int hp, int arm, Chunk c, String sprite, String name, int maxActions){
+		super(x, y, c, sprite, maxActions);
 		maxHealth = hp;
 		health = hp;
 		natArmor = arm;
-		name = n;
+		this.name = name;
 		alive = true;
 	}
 

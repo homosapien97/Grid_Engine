@@ -35,6 +35,18 @@ public class Path <T extends Entity & Mobile & Sighted> {
 		targetY = actor.getAbsoluteY();
 	}
 	
+	public int length() {
+//		maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y] = DONE;
+		int ret = 0;
+		for(int i = 0; i < maze.length; i++) {
+			for(int j = 0; j < maze[0].length; j++) {
+				if(maze[i][j] == PATH) ret++;
+			}
+		}
+		return ret;
+		//This can be done by following the path 
+	}
+	
 	public boolean goTo(int x, int y) {
 		if(targetX == x && targetY == y) {
 			return go();
@@ -67,13 +79,13 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	
 	
 	/**
-	 * Constructs a path from the actor to any point in their vision square
+	 * Constructs a path from the actor to any point in their vision square. Only call this explicitly if you need the path to be constructed but you don't want to actually move. Expensive.
 	 * @param actor
 	 * @param absoluteX
 	 * @param absoluteY
 	 * @return
 	 */
-	private boolean constructPathTo(int absoluteX, int absoluteY) {
+	public boolean constructPathTo(int absoluteX, int absoluteY) {
 		actor.vsquare().trace();
 		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
 		if(!actor.vsquare().canSee(absoluteX, absoluteY)) {

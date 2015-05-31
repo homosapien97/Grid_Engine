@@ -172,7 +172,7 @@ public class Core {
 	
 	private static void loadAdditionalGraphics(){
 		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
-		redHighlight = Tools.img.loadImage("redHighlight.png", "debug");
+		redHighlight = Tools.img.loadImage("redHighlight.png", "general");
 	}
 	
 	//game navigation
