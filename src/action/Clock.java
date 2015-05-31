@@ -5,7 +5,7 @@ public class Clock {
 	public static int tick() {
 		return ++ticks;
 	}
-	public static int ticks() {
+	public static int getTicks() {
 		return ticks;
 	}
 }
