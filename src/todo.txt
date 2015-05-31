@@ -41,3 +41,7 @@ Herman:
 		-Flavor text for terrain too, though very limited. "This is stone. It is grey. You can walk on it" "This is lava. You shouldn't walk on it unless you have Fire affinity of X or above"
 	-Player icon choices (maybe)
 	-Write up details about how you want things to work.
+Group:
+	-Playable "game" with basic mechanics like movement and executing actions by TUESDAY.
+	-Flesh out features and niceify things by THURSDAY
+	-Last-minute panic stuff by FRIDAY
