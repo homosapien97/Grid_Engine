@@ -66,7 +66,6 @@ public class Main {
 	
 	public static void stepGraphics() {
 		Core.frame.setVisible(true);
-		Core.frame.validate();
 		Core.frame.repaint();
 		Core.frame.getContentPane().repaint();
 	}
