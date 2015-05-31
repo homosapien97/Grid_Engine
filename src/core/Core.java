@@ -6,12 +6,13 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Action;
+import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -134,16 +135,23 @@ public class Core {
 	
 	//key binding
 	
+	@SuppressWarnings("serial")
 	private static void addKeyBinds(GameDisplay game){
 		//get maps
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		ActionMap gameAM = game.getActionMap();
 		
 		//add to input map
-		gameIM.put(KeyStroke.getKeyStroke("H"), "toggleHUD");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, true), "toggleHUD");
 		
 		//add to action map
-		gameAM.put("toggleHUD", new ToggleHUD());
+		gameAM.put("toggleHUD", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//System.out.println("H");
+				GameDisplay.toggleHUD();
+			}
+		});
 	}
 	
 	//loading
@@ -180,6 +188,7 @@ public class Core {
 		frame.pack();
 		
 		gameState = GameState.PLAYING;
+		gameDisplay.requestFocusInWindow();
 		Main.stepGraphics();
 	}
 	

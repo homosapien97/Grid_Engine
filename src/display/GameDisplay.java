@@ -32,6 +32,9 @@ public class GameDisplay extends Display {
 	
 	public GameDisplay(){
 		super();
+		
+		this.setFocusable(true);
+		this.requestFocusInWindow();  
 	}
 	
 	public void paintComponent(Graphics page){
