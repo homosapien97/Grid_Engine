@@ -8,6 +8,7 @@ Christian:
 	-Change entities to store their absolute coords instead of their chunk:minor coords--will improve efficiency, since chunk:minor coords are very rarely used and absolute coords are always used.
 		-WARNING: when I work on this it will touch many files and potentially introduce many bugs, so I should do this when noone else is working
 	-Implement Serializable for each class that will be saved with the world.
+	-Make a random unique naming system for creatures so that the player can refer to them by name when using commands
 Michael:
 	-Keyboard input
 	-Mouse click input (return coordinates of the square the player clicks on, and whether left or right click)

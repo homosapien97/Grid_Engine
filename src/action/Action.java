@@ -10,7 +10,7 @@ import java.util.Vector;
 public class Action implements Runnable{
 	public static Vector<Action> queue;
 	public final int startTime;
-	public final int endTime;
+	public final int totalTicks;
 	@Override
 	/**
 	 * To be overriden
@@ -18,16 +18,16 @@ public class Action implements Runnable{
 	public void run() {
 	}
 	
-	public Action(int startTime, int endTime) {
+	public Action(int startTime, int totalTicks) {
 		this.startTime = startTime;
-		this.endTime = endTime;
+		this.totalTicks = totalTicks;
 	}
 	
 	public static void runAll() {
 		for(Action a : queue) {
-			if(Clock.ticks >= a.startTime && (Clock.ticks <= a.endTime || a.endTime < 0)) {
+			if(Clock.ticks >= a.startTime && (Clock.ticks <= a.startTime + a.totalTicks || a.totalTicks < 0)) {
 				a.run();
-			} else if(Clock.ticks > a.endTime && a.endTime > 0) queue.remove(a);
+			} else if(Clock.ticks > a.startTime + a.totalTicks && a.totalTicks > 0) queue.remove(a);
 		}
 	}
 	
