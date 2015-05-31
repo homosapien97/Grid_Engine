@@ -1,7 +1,7 @@
 package entity;
 import world.Chunk;
 
-public class Creature extends Entity implements Health, Armored{
+public class Creature extends Entity implements Health, Armored, Mobile, Sighted, Pathing{
 	public int maxHealth;
 	public int health;
 	public int natArmor;

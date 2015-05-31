@@ -29,6 +29,7 @@ Herman:
 	-HUD icons
 	-Enemy types
 		-Actual names
+			[complete]
 		-Actual desired behavior (describe in a comment in each creature)
 		-Actual 16x sprites associated with each enemy
 			[Complete for Skeleton]
