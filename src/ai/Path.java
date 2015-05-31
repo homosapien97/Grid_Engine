@@ -73,7 +73,7 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	 * @param absoluteY
 	 * @return
 	 */
-	public boolean constructPathTo(int absoluteX, int absoluteY) {
+	private boolean constructPathTo(int absoluteX, int absoluteY) {
 		actor.vsquare().trace();
 		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
 		if(!actor.vsquare().canSee(absoluteX, absoluteY)) {
