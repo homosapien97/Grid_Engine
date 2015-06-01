@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -47,6 +50,12 @@ public class GameDisplay extends Display {
 	private Container main = new Container();
 	private Container center = new Container();
 	public Inventory inventory = new Inventory();
+	
+	//mouse listener
+	GridMouseListener listener = new GridMouseListener();
+	
+	//mouse debug
+	private static Image mouseHighlight = null;
 	
 	public GameDisplay(){
 		super();
@@ -91,6 +100,8 @@ public class GameDisplay extends Display {
 		main.add(Box.createRigidArea(new Dimension(0,100)));
 		
 		this.add(main);
+		
+		this.addMouseListener(listener);
 	}
 	
 	public void paintComponent(Graphics page){
@@ -133,40 +144,10 @@ public class GameDisplay extends Display {
 		drawHUD(page);
 		drawCMDLine(page);
 		drawInventory(page);
+		
+		//debugging
+		debugClick(page);
 	}
-	
-//	/**
-//	 * Draws the image of ceratin terrain at a certain location.
-//	 * @param page the graphics page object
-//	 * @param x the x location in sprites where the image should be placed
-//	 * @param y the y location in sprites where the image should be placed
-//	 * @param img the terrain image
-//	 */
-//	private void drawTerrain(Graphics page, int x, int y, Image img){
-//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-//	}
-//	
-//	/**
-//	 * Draws the image of the player at a certain location.
-//	 * @param page the graphics object
-//	 * @param x the x position for entities (not pixels)
-//	 * @param y the y position for entities (not pixels)
-//	 * @param img the player image file
-//	 */
-//	private void drawPlayer(Graphics page, int x, int y, Image img){
-//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-//	}
-//	
-//	/**
-//	 * Draws the image of an entity at a certain location.
-//	 * @param page the graphics object
-//	 * @param x the x position for entities (not pixels)
-//	 * @param y the y position for entities (not pixels)
-//	 * @param img the player image file
-//	 */
-//	private void drawEntity(Graphics page, int x, int y, Image img){
-//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-//	}
 	
 	private void drawSprite(Graphics page, int x, int y, Image img) {
 		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
@@ -175,6 +156,12 @@ public class GameDisplay extends Display {
 	
 	private void redHighlight(Graphics page, int x, int y){
 		page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+	}
+	
+	private void debugClick(Graphics page){
+		int x = listener.getCoordinateClicked().x;
+		int y = listener.getCoordinateClicked().y;
+		page.drawImage(mouseHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
 	//game components
@@ -283,5 +270,37 @@ public class GameDisplay extends Display {
 		broken_shield = Tools.img.loadHUDSprite("broken-shield.png");
 		
 		tick_clock = Tools.img.loadHUDSprite("tick-clock.png");
+		
+		mouseHighlight = Tools.img.loadImage("clickHighlight.png", "general");
+	}
+	
+	//mouse listener
+	
+	public class GridMouseListener implements MouseListener{
+		//note to christian: this is java.awt.Point, not yours
+		private Point clickedGridPoint = new Point(0, 0);
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			//rounding makes it bad
+			clickedGridPoint.x = (int)/* Math.round*/((double) e.getX() / (double) Display.SPRITE_DIM);
+			clickedGridPoint.y = (int)/* Math.round*/((double) e.getY() / (double) Display.SPRITE_DIM);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+		
+		public Point getCoordinateClicked(){
+			return clickedGridPoint;
+		}
 	}
 }
