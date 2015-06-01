@@ -4,18 +4,18 @@ import general.Tools;
 
 import java.awt.Image;
 
-public class StoneBrick extends Terrain {
-	private static final StoneBrick stoneBrick = new StoneBrick();
-	private static final String filename = "stoneBrick.png";
+public class Pit extends Terrain {
+	private static final Pit pit = new Pit();
+	private static final String filename = "pit.png";
 	
 	public static Image sprite;
 	
-	private StoneBrick() {
+	private Pit() {
 		super();
 	}
 
-	public static StoneBrick get() {
-		return stoneBrick;
+	public static Pit get() {
+		return pit;
 	}
 	
 	public String toString() {
@@ -29,7 +29,7 @@ public class StoneBrick extends Terrain {
 
 	@Override
 	public String name() {
-		return "stone brick";
+		return "pit";
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public class VisionSquare {
 //					mask[temp.x][temp.y] = false; 
 //				} else 
 				
-				if(LoadedChunks.heightAt(temp.x - RADIUS + x, temp.y - RADIUS + y) > 0 && !LoadedChunks.terrainAt(temp.x - RADIUS + x, temp.y - RADIUS + y).clear) {
+				if(LoadedChunks.heightAt(temp.x - RADIUS + x, temp.y - RADIUS + y) > 0 && !LoadedChunks.terrainAt(temp.x - RADIUS + x, temp.y - RADIUS + y).clear()) {
 //					blocked = true;
 					mask[temp.x][temp.y] = false;
 					break;

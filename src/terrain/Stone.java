@@ -1,6 +1,7 @@
 package terrain;
 
 import java.awt.Image;
+
 import general.Tools;
 
 public class Stone extends Terrain{
@@ -10,7 +11,7 @@ public class Stone extends Terrain{
 	public static Image sprite;
 	
 	private Stone() {
-		super("stone", filename);
+		super();
 	}
 
 	public static Stone get() {
@@ -23,5 +24,26 @@ public class Stone extends Terrain{
 
 	public static void load() {
 		sprite = Tools.img.loadTerrainSprite(filename);
+	}
+	
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
+
+	@Override
+	public String name() {
+		return "stone";
+	}
+
+	@Override
+	public String getSpriteFilename() {
+		return filename;
+	}
+
+	@Override
+	public boolean clear() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

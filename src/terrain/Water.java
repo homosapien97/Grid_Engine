@@ -1,20 +1,21 @@
 package terrain;
 
 import general.Tools;
+
 import java.awt.Image;
 
 public class Water extends Terrain {
-	private static final Water water1 = new Water();
-	private static final String filename = "water1.png";
+	private static final Water water = new Water();
+	private static final String filename = "water.png";
 	
 	public static Image sprite;
 	
 	private Water() {
-		super("water1", filename);
+		super();
 	}
 
 	public static Water get() {
-		return water1;
+		return water;
 	}
 	
 	public String toString() {
@@ -24,5 +25,26 @@ public class Water extends Terrain {
 
 	public static void load() {
 		sprite = Tools.img.loadTerrainSprite(filename);
+	}
+
+	@Override
+	public String name() {
+		return "water";
+	}
+
+	@Override
+	public String getSpriteFilename() {
+		return filename;
+	}
+
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
+
+	@Override
+	public boolean clear() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

@@ -1,20 +1,21 @@
 package terrain;
 
 import general.Tools;
+
 import java.awt.Image;
 
 public class Brick extends Terrain {
-	private static final Brick brick1 = new Brick();
-	private static final String filename = "brick1.png";
+	private static final Brick brick = new Brick();
+	private static final String filename = "brick.png";
 	
 	public static Image sprite;
 	
 	private Brick() {
-		super("brick1", filename);
+		super();
 	}
 	
 	public static Brick get() {
-		return brick1;
+		return brick;
 	}
 	
 	public String toString() {
@@ -24,6 +25,27 @@ public class Brick extends Terrain {
 	
 	public static void load() {
 		sprite = Tools.img.loadEntitySprite(filename);
+	}
+
+	@Override
+	public String name() {
+		return "brick";
+	}
+
+	@Override
+	public String getSpriteFilename() {
+		return filename;
+	}
+
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
+
+	@Override
+	public boolean clear() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

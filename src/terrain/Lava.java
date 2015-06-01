@@ -1,20 +1,21 @@
 package terrain;
 
 import general.Tools;
+
 import java.awt.Image;
 
 public class Lava extends Terrain {
-	private static final Lava lava1 = new Lava();
-	private static final String filename = "lava1.png";
+	private static final Lava lava = new Lava();
+	private static final String filename = "lava.png";
 	
 	public static Image sprite;
 	
 	private Lava() {
-		super("lava1", filename);
+		super();
 	}
 
 	public static Lava get() {
-		return lava1;
+		return lava;
 	}
 	
 	public String toString() {
@@ -24,5 +25,26 @@ public class Lava extends Terrain {
 
 	public static void load() {
 		sprite = Tools.img.loadTerrainSprite(filename);
+	}
+
+	@Override
+	public String name() {
+		return "lava";
+	}
+
+	@Override
+	public String getSpriteFilename() {
+		return filename;
+	}
+
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
+
+	@Override
+	public boolean clear() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -138,7 +138,7 @@ public class LoadedChunks {
 	 */
 	public static Image terrainSpriteAt(int absoluteX, int absoluteY) {
 		Image ret = chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
-				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY)).sprite;
+				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY)).sprite();
 		
 		return ret;
 	}

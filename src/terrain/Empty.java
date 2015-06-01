@@ -11,7 +11,7 @@ public class Empty extends Terrain {
 	public static Image sprite;
 	
 	private Empty() {
-		super("void", filename, true);
+		super();
 	}
 	
 	public static Empty get() {
@@ -24,5 +24,26 @@ public class Empty extends Terrain {
 
 	public static void load() {
 		sprite = Tools.img.loadTerrainSprite(filename);
+	}
+
+	@Override
+	public String name() {
+		return "empty";
+	}
+
+	@Override
+	public String getSpriteFilename() {
+		return filename;
+	}
+
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
+
+	@Override
+	public boolean clear() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

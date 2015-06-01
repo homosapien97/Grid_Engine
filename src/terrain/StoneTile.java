@@ -1,20 +1,21 @@
 package terrain;
 
 import general.Tools;
+
 import java.awt.Image;
 
 public class StoneTile extends Terrain {
-	private static final StoneTile stoneTile1 = new StoneTile();
-	private static final String filename = "stoneTile1.png";
+	private static final StoneTile stoneTile = new StoneTile();
+	private static final String filename = "stoneTile.png";
 	
 	public static Image sprite;
 	
 	private StoneTile() {
-		super("stoneTile1", filename);
+		super();
 	}
 
 	public static StoneTile get() {
-		return stoneTile1;
+		return stoneTile;
 	}
 	
 	public String toString() {
@@ -24,5 +25,26 @@ public class StoneTile extends Terrain {
 
 	public static void load() {
 		sprite = Tools.img.loadTerrainSprite(filename);
+	}
+
+	@Override
+	public String name() {
+		return "stone tile";
+	}
+
+	@Override
+	public String getSpriteFilename() {
+		return filename;
+	}
+
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
+
+	@Override
+	public boolean clear() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
