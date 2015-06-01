@@ -6,13 +6,11 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -21,6 +19,13 @@ import javax.swing.KeyStroke;
 
 import creature.Skeleton;
 import run.Main;
+import spells.BowSpell;
+import spells.EarthSpell;
+import spells.FireSpell;
+import spells.PlasmaSpell;
+import spells.ShieldSpell;
+import spells.SwordSpell;
+import spells.WaterSpell;
 import terrain.Quicksand;
 import terrain.Stone;
 import terrain.Empty;
@@ -28,6 +33,7 @@ import display.AboutPage;
 import display.Display;
 import display.GameDisplay;
 import display.ImageTileBackground;
+import display.Inventory;
 import display.MainMenu;
 import display.SettingsPage;
 import entity.Player;
@@ -35,6 +41,7 @@ import general.Tools;
 import key_actions.ExitToMainMenu;
 import key_actions.ToggleCMDLine;
 import key_actions.ToggleHUD;
+import key_actions.ToggleInventory;
 
 
 
@@ -65,6 +72,7 @@ public class Core {
 	public static Font cinzel = null;
 	public static Font cinzelDecorative = null;
 	public static Font forum = null;
+	public static Font courier = null;
 	
 	//core
 	
@@ -78,7 +86,7 @@ public class Core {
 //		Core.loadCreatures();
 		Core.loadEntities();
 		Core.loadTerrain();
-		Core.loadHUD();
+		Core.loadUIGraphics();
 		Core.loadAdditionalGraphics();
 		
 		//load pages
@@ -141,18 +149,23 @@ public class Core {
 		//get maps
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_CMDLINE = game.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
-		InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		InputMap gameIM_INVENTORY = game.inventory.getInputMap(JComponent.WHEN_FOCUSED);
+		//InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		
 		ActionMap gameAM = game.getActionMap();
 		ActionMap gameAM_CMDLINE = game.cmdInput.getActionMap();
+		ActionMap gameAM_INVENTORY = game.inventory.getActionMap();
 		
 		//add to input map
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, false), "toggleHUD");
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0, false), "toggleCMDLine");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
+		
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
 		
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleCMDLine");
 		
-		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
+		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleInventory");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());
@@ -160,6 +173,7 @@ public class Core {
 		gameAM.put("mainMenu", new ExitToMainMenu());
 		
 		gameAM_CMDLINE.put("toggleCMDLine", new ToggleCMDLine());
+		gameAM_INVENTORY.put("toggleInventory", new ToggleInventory());
 	}
 	
 	//loading
@@ -179,8 +193,19 @@ public class Core {
 		Empty.load();
 	}
 	
-	private static void loadHUD(){
+	private static void loadUIGraphics(){
 		GameDisplay.load();
+	}
+	
+	private static void loadCards(){
+		EarthSpell.load();
+		FireSpell.load();
+		PlasmaSpell.load();
+		WaterSpell.load();
+		
+		BowSpell.load();
+		ShieldSpell.load();
+		SwordSpell.load();
 	}
 	
 	private static void loadAdditionalGraphics(){
@@ -245,69 +270,29 @@ public class Core {
 	//fonts
 	
 	public static void loadFonts(){
-		File font = new File("resources\\fonts\\Cinzel.ttf");
+		cinzel = loadFont("Cinzel.ttf");
+		cinzelDecorative = loadFont("CinzelDecorative.ttf");
+		forum = loadFont("Forum.ttf");
+		courier = loadFont("Courier.ttf");
+	}
+	
+	public static Font loadFont(String filename){
+		Font font = null;
+		File file = new File("resources\\fonts\\" + filename);
 		
 		try {
-			cinzel = Font.createFont(Font.TRUETYPE_FONT, font);
+			font = Font.createFont(Font.TRUETYPE_FONT, file);
 		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Font Error!");
+			System.out.println("Font Error! (" + filename + ")");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Font Error!");
+			System.out.println("Font Error! (" + filename + ")");
 		}
 		
-		ge.registerFont(cinzel);
+		ge.registerFont(font);
 		
-		File font2 = new File("resources\\fonts\\CinzelDecorative.ttf");
-		
-		try {
-			cinzelDecorative = Font.createFont(Font.TRUETYPE_FONT, font2);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Font Error!");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Font Error!");
-		}
-		
-		ge.registerFont(cinzelDecorative);
-		
-		File font3 = new File("resources\\fonts\\Forum.ttf");
-		
-		try {
-			forum = Font.createFont(Font.TRUETYPE_FONT, font3);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Font Error!");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Font Error!");
-		}
-		
-		ge.registerFont(forum);
-		
-		File font4 = new File("resources\\fonts\\Courier.ttf");
-		
-		try {
-			forum = Font.createFont(Font.TRUETYPE_FONT, font3);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Font Error!");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Font Error!");
-		}
-		
-		ge.registerFont(forum);
+		return font;
 	}
 	
 	public static void debugFonts(){

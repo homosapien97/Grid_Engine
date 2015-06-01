@@ -21,6 +21,7 @@ public class GameDisplay extends Display {
 	//states of toggleable things
 	private static Boolean hudVisible = true;
 	private static Boolean cmdLineVisible = false;
+	private static Boolean inventoryVisible = false;
 	
 	//HUD icons
 	private static Image broken_heart = null;
@@ -33,10 +34,14 @@ public class GameDisplay extends Display {
 	
 	//fonts
 	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
+	private static final Font inventoryFont = new Font("Cinzel", Font.PLAIN, 18);
 	private static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
 	
 	//cmdline
 	public JTextField cmdInput = new JTextField();
+	
+	//inventory
+	public Inventory inventory = new Inventory();
 	
 	public GameDisplay(){
 		super();
@@ -47,13 +52,15 @@ public class GameDisplay extends Display {
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		
+		inventory.setVisible(inventoryVisible);
+		this.add(inventory, BorderLayout.CENTER);
 		
 		cmdInput.setBackground(new Color(50, 50, 50, 255));
 		cmdInput.setForeground(Color.white);
 		cmdInput.setFont(cmdFont);
 		Border border = new LineBorder(new Color(50, 50, 50, 255));
 		cmdInput.setBorder(border);
-		cmdInput.setVisible(false);
+		cmdInput.setVisible(cmdLineVisible);
 		this.add(cmdInput, BorderLayout.PAGE_END);
 	}
 	
@@ -93,9 +100,10 @@ public class GameDisplay extends Display {
 			}
 		}
 		
-		//handle UI overlay
+		//handle UI overlays
 		drawHUD(page);
 		drawCMDLine(page);
+		drawInventory(page);
 	}
 	
 //	/**
@@ -195,6 +203,14 @@ public class GameDisplay extends Display {
 		}
 	}
 	
+	private void drawInventory(Graphics page){
+		if(inventoryVisible){
+			//background
+			page.setColor(new Color(50, 50, 50, 255));
+			page.fillRect(0, Display.P_HEIGHT - 24, Display.P_WIDTH, Display.P_HEIGHT);
+		}
+	}
+	
 	//toggle actions
 	
 	public static void toggleHUD(){
@@ -203,6 +219,10 @@ public class GameDisplay extends Display {
 	
 	public static void toggleCMDLine(){
 		cmdLineVisible = !cmdLineVisible;
+	}
+	
+	public static void toggleInventory(){
+		inventoryVisible = !inventoryVisible;
 	}
 	
 	//loading

@@ -29,7 +29,7 @@ public class WaterSpell extends Spell{
 	public static void load() {
 //		sprite = Tools.img.loadEntitySprite(filename);
 		for(int i = 0; i < NUM_LEVELS; i++) {
-			sprite[i] = Tools.img.loadEntitySprite(filename[i]);
+			sprite[i] = Tools.img.loadCard(filename[i]);
 		}
 	}
 

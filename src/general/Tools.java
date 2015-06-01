@@ -90,6 +90,11 @@ public class Tools {
 			Image img = loadImage(filename, "terrain");
 			return img;
 		}
+
+		public static Image loadCard(String filename) {
+			Image img = loadImage(filename, "cards");
+			return img;
+		}
 	}
 	
 	//misc functions
