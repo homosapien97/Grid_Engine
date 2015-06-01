@@ -33,7 +33,6 @@ import display.AboutPage;
 import display.Display;
 import display.GameDisplay;
 import display.ImageTileBackground;
-import display.Inventory;
 import display.MainMenu;
 import display.SettingsPage;
 import entity.Player;
@@ -87,6 +86,7 @@ public class Core {
 		Core.loadEntities();
 		Core.loadTerrain();
 		Core.loadUIGraphics();
+		Core.loadCards();
 		Core.loadAdditionalGraphics();
 		
 		//load pages
@@ -165,15 +165,20 @@ public class Core {
 		
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleCMDLine");
 		
+		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleInventory");
+		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0, false), "toggleCMDLine");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());
 		gameAM.put("toggleCMDLine", new ToggleCMDLine());
+		gameAM.put("toggleInventory", new ToggleInventory());
 		gameAM.put("mainMenu", new ExitToMainMenu());
 		
 		gameAM_CMDLINE.put("toggleCMDLine", new ToggleCMDLine());
+		
 		gameAM_INVENTORY.put("toggleInventory", new ToggleInventory());
+		gameAM_INVENTORY.put("toggleCMDLine", new ToggleCMDLine());
 	}
 	
 	//loading

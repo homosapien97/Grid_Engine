@@ -2,10 +2,14 @@ package display;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -34,13 +38,14 @@ public class GameDisplay extends Display {
 	
 	//fonts
 	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
-	private static final Font inventoryFont = new Font("Cinzel", Font.PLAIN, 18);
 	private static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
 	
 	//cmdline
 	public JTextField cmdInput = new JTextField();
 	
 	//inventory
+	private Container main = new Container();
+	private Container center = new Container();
 	public Inventory inventory = new Inventory();
 	
 	public GameDisplay(){
@@ -49,11 +54,12 @@ public class GameDisplay extends Display {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		
+		//root layout
+		
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		
-		inventory.setVisible(inventoryVisible);
-		this.add(inventory, BorderLayout.CENTER);
+		//command input
 		
 		cmdInput.setBackground(new Color(50, 50, 50, 255));
 		cmdInput.setForeground(Color.white);
@@ -61,7 +67,30 @@ public class GameDisplay extends Display {
 		Border border = new LineBorder(new Color(50, 50, 50, 255));
 		cmdInput.setBorder(border);
 		cmdInput.setVisible(cmdLineVisible);
+		
 		this.add(cmdInput, BorderLayout.PAGE_END);
+		
+		//inventory (manual padding everywhere)
+		
+		inventory.setVisible(inventoryVisible);
+		
+		BoxLayout layout_inv = new BoxLayout(main, BoxLayout.Y_AXIS);
+		main.setLayout(layout_inv);
+		
+		main.add(Box.createRigidArea(new Dimension(0,100)));
+		
+		BoxLayout layout_inv2 = new BoxLayout(center, BoxLayout.X_AXIS);
+		center.setLayout(layout_inv2);
+		
+		center.add(Box.createRigidArea(new Dimension(350,0)));
+		center.add(inventory, BorderLayout.CENTER);
+		center.add(Box.createRigidArea(new Dimension(350,0)));
+		
+		main.add(center);
+		
+		main.add(Box.createRigidArea(new Dimension(0,100)));
+		
+		this.add(main);
 	}
 	
 	public void paintComponent(Graphics page){
@@ -205,9 +234,16 @@ public class GameDisplay extends Display {
 	
 	private void drawInventory(Graphics page){
 		if(inventoryVisible){
-			//background
-			page.setColor(new Color(50, 50, 50, 255));
-			page.fillRect(0, Display.P_HEIGHT - 24, Display.P_WIDTH, Display.P_HEIGHT);
+			inventory.setVisible(true);
+			
+			if(cmdLineVisible){
+				cmdInput.requestFocus();
+			}else{
+				inventory.requestFocus();
+			}
+			
+		}else{
+			inventory.setVisible(false);
 		}
 	}
 	
@@ -215,14 +251,26 @@ public class GameDisplay extends Display {
 	
 	public static void toggleHUD(){
 		hudVisible = !hudVisible;
+		
+		if(hudVisible){
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	public static void toggleCMDLine(){
 		cmdLineVisible = !cmdLineVisible;
+		
+		if(cmdLineVisible){
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	public static void toggleInventory(){
 		inventoryVisible = !inventoryVisible;
+		
+		if(inventoryVisible){
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	//loading
