@@ -55,8 +55,9 @@ public class GameDisplay extends Display {
 	//mouse listener
 	GridMouseListener listener = new GridMouseListener();
 	
-	//mouse debug
-	private static Image mouseHighlight = null;
+	//mouse clicks
+	private static Image leftClickHighlight = null;
+	private static Image rightClickHighlight = null;
 	
 	public GameDisplay(){
 		super();
@@ -161,8 +162,8 @@ public class GameDisplay extends Display {
 		}
 		*/
 		
-		//debugging
-		debugClick(page);
+		//mouse clicks
+		drawClicks(page);
 		
 		//handle UI overlays
 		drawHUD(page);
@@ -179,11 +180,13 @@ public class GameDisplay extends Display {
 		page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
-	private void debugClick(Graphics page){
+	private void drawClicks(Graphics page){
 		int x = listener.getCoordinateClicked().x;
 		int y = listener.getCoordinateClicked().y;
 		
-		page.drawImage(mouseHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+		Image img = (listener.getClickButton() == 1) ? leftClickHighlight : rightClickHighlight;
+		
+		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
 	//game components
@@ -293,7 +296,8 @@ public class GameDisplay extends Display {
 		
 		tick_clock = Tools.img.loadHUDSprite("tick-clock.png");
 		
-		mouseHighlight = Tools.img.loadImage("leftClickHighlight.png", "general");
+		leftClickHighlight = Tools.img.loadImage("leftClickHighlight.png", "general");
+		rightClickHighlight = Tools.img.loadImage("rightClickHighlight.png", "general");
 	}
 	
 	//mouse listener
@@ -301,12 +305,13 @@ public class GameDisplay extends Display {
 	public class GridMouseListener implements MouseListener{
 		//note to christian: this is java.awt.Point, not yours
 		private Point clickedGridPoint = new Point(-1, -1);
-		private int modifiers = 0;
+		private int button = 0;
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			//rounding makes it bad
-			e.getButton();
+			button = e.getButton();
+			
 			clickedGridPoint.x = (int)/* Math.round*/((double) e.getX() / (double) Display.SPRITE_DIM);
 			clickedGridPoint.y = (int)/* Math.round*/((double) e.getY() / (double) Display.SPRITE_DIM);
 		}
@@ -327,10 +332,8 @@ public class GameDisplay extends Display {
 			return clickedGridPoint;
 		}
 		
-		public boolean getClickButton(){
-			
-			return false;
-			
+		public int getClickButton(){
+			return button;
 		}
 	}
 }
