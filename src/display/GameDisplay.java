@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import action.Action;
 import action.Clock;
 import run.Main;
 import core.Core;
@@ -137,6 +138,14 @@ public class GameDisplay extends Display {
 //					drawEntity(page, x, y, Camera.entityImageSnapshot[x][y]);
 					drawSprite(page, x, y, Camera.entityImageSnapshot[x][y]);
 				}
+			}
+		}
+		
+		//handle action highlighting
+		for(Action a : Action.toHighlight()){
+			for(geometry.Point p : a.pointsToHighlight()){
+				redHighlight(page, p.x, p.y);
+				System.out.println(p);
 			}
 		}
 		

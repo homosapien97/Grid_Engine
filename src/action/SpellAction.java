@@ -22,7 +22,7 @@ public class SpellAction extends Action{
 	}
 
 	@Override
-	public PointCollection toHighlight() {
+	public PointCollection pointsToHighlight() {
 		return spell.preview(actor, x, y);
 	}
 	

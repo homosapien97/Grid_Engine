@@ -70,8 +70,8 @@ public class Main {
 		Core.frame.getContentPane().repaint();
 	}
 	
-	private static int _gtx = 5;
-	private static  int _gty = 12;
+//	private static int _gtx = 5;
+//	private static  int _gty = 12;
 	private static void stepState() {
 //		Main.player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
 //		Main.player.goToRelative(1,0);

@@ -31,7 +31,7 @@ public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T> > exte
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public PointCollection toHighlight() {
+	public PointCollection pointsToHighlight() {
 		return ((T)(actor)).getPath().path();
 	}
 

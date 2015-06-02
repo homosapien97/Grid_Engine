@@ -158,7 +158,7 @@ public class Core {
 		
 		//add to input map
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, false), "toggleHUD");
-		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0, false), "toggleCMDLine");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLine");
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
@@ -167,7 +167,7 @@ public class Core {
 		
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleInventory");
-		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0, false), "toggleCMDLine");
+		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLine");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());

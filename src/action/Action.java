@@ -61,9 +61,9 @@ public abstract class Action implements Runnable{
 		return Clock.ticks >= startTime + totalTicks;
 	}
 	
-	public static List<Action> hightlightable() {
+	public static List<Action> toHighlight() {
 		return highlightable;
 	}
 	
-	public abstract PointCollection toHighlight();
+	public abstract PointCollection pointsToHighlight();
 }
