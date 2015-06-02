@@ -64,8 +64,15 @@ public class Core {
 	private static Image bg = null;
 	private static ImageTileBackground background = null;
 	
-	//debug
+	//highlight
+	public static Image blueHighlight = null;
+	public static Image cyanHighlight = null;
+	public static Image greenHighlight = null;
+	public static Image greyHighlight = null;
+	public static Image purpleHighlight = null;
 	public static Image redHighlight = null;
+	public static Image whiteHighlight = null;
+	public static Image yellowHighlight = null;
 	
 	//fonts
 	public static Font cinzel = null;
@@ -215,7 +222,14 @@ public class Core {
 	
 	private static void loadAdditionalGraphics(){
 		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
+		blueHighlight = Tools.img.loadImage("blueHighlight.png", "general");
+		cyanHighlight = Tools.img.loadImage("cyanHighlight.png", "general");
+		greenHighlight = Tools.img.loadImage("greenHighlight.png", "general");
+		greyHighlight = Tools.img.loadImage("greyHighlight.png", "general");
+		purpleHighlight = Tools.img.loadImage("purpleHighlight.png", "general");
 		redHighlight = Tools.img.loadImage("redHighlight.png", "general");
+		whiteHighlight = Tools.img.loadImage("whiteHighlight.png", "general");
+		yellowHighlight = Tools.img.loadImage("yellowHighlight", "general");
 	}
 	
 	//game navigation

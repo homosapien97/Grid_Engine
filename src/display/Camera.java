@@ -6,7 +6,11 @@ import java.util.List;
 
 
 
+
+
 import action.Action;
+import action.MoveAction;
+import action.SpellAction;
 import entity.Player;
 import entity.Entity;
 import geometry.Point;
@@ -14,6 +18,12 @@ import world.LoadedChunks;
 import terrain.Empty;
 
 public class Camera {
+	public static final char PATH = 'r';	//redHighlight
+	public static final char RADIUS = 'c';	//cyanHighlight
+	public static final char SPELL = 'p';	//purpleHighlight
+	public static final char GENERIC = 'g';	//greenHighlight
+	public static final char NONE = 'n';	//no highlight
+	
 	public static Player player;
 	
 	//public static String[][] snapshot;
@@ -21,7 +31,7 @@ public class Camera {
 	public static String[][] entitySnapshot;
 	public static Image[][] terrainImageSnapshot;
 	public static Image[][] entityImageSnapshot;
-	public static boolean[][] highlightSnapshot;
+	public static char[][] highlightSnapshot;
 	
 	public static List<Entity> entities;
 	public static List<Action> actions;
@@ -34,7 +44,7 @@ public class Camera {
 		terrainSnapshot = new String[Display.WIDTH][Display.HEIGHT];
 		terrainImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
 		entityImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
-		highlightSnapshot = new boolean[Display.WIDTH][Display.HEIGHT];
+		highlightSnapshot = new char[Display.WIDTH][Display.HEIGHT];
 	}
 	
 	public static boolean init(Player p) {
@@ -111,18 +121,26 @@ public class Camera {
 
 		return entityImageSnapshot;
 	}
-	public static boolean[][] highlightSnapshot() {
+	private static char tempChar;
+	public static char[][] highlightSnapshot() {
 		pAbsX = player.getAbsoluteX();
 		pAbsY = player.getAbsoluteY();
 		actions = Action.toHighlight();
 		for(int i = 0; i < highlightSnapshot.length; i++) {
 			for(int j = 0; j < highlightSnapshot[0].length; j++) {
-				highlightSnapshot[i][j] = false;
+				highlightSnapshot[i][j] = NONE;
 			}
 		}
 		for(Action a : actions) {
+			if(a instanceof MoveAction) {
+				tempChar = PATH;
+			} else if(a instanceof SpellAction) {
+				tempChar = SPELL;
+			} else {
+				tempChar = GENERIC;
+			}
 			for(Point p : a.pointsToHighlight()) {
-				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = true;
+				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
 			}
 		}
 		return highlightSnapshot;

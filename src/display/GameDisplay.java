@@ -147,9 +147,10 @@ public class GameDisplay extends Display {
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-				if(Camera.highlightSnapshot[x][y]) {
-					redHighlight(page, x, y);
-				}
+//				if(Camera.highlightSnapshot[x][y]) {
+//					redHighlight(page, x, y);
+//				}
+				highlight(page, Camera.highlightSnapshot[x][y], x, y);
 			}
 		}
 		
@@ -176,8 +177,25 @@ public class GameDisplay extends Display {
 		
 	}
 	
-	private void redHighlight(Graphics page, int x, int y){
-		page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+	private void highlight(Graphics page, char c, int x, int y){
+//		page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+		switch(c) {
+		case Camera.NONE:
+			break;
+		case Camera.SPELL:
+			page.drawImage(Core.purpleHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			break;
+		case Camera.RADIUS:
+			page.drawImage(Core.cyanHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			break;
+		case Camera.GENERIC:
+			page.drawImage(Core.greenHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			break;
+		case Camera.PATH:
+			page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			break;
+		default:
+		}
 	}
 	
 	private void drawClicks(Graphics page){
