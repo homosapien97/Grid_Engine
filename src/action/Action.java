@@ -1,5 +1,7 @@
 package action;
 
+import entity.Entity;
+import entity.Player;
 import geometry.PointCollection;
 
 import java.util.ArrayList;
@@ -15,52 +17,53 @@ import java.util.List;
  */
 public abstract class Action implements Runnable{
 	public static List<Action> queue = Collections.synchronizedList(new ArrayList<Action>());
+	public static List<Action> highlightable = Collections.synchronizedList(new ArrayList<Action>());
+	public final boolean highlight;
 	public final int startTime;
 	public int totalTicks;
+	public Entity actor;
 	@Override
 	/**
 	 * To be overriden
 	 */
 	public abstract void run();
 	
-	protected Action(int startTime, int totalTicks) {
+	protected Action(Entity actor, int startTime, int totalTicks, boolean highlight) {
+		this.actor = actor;
 		this.startTime = startTime;
 		this.totalTicks = totalTicks;
+		this.highlight = highlight;
 		synchronized(queue) {
 			queue.add(this);
+		}
+		if((actor instanceof Player) && highlight) {
+			synchronized(highlightable) {
+				highlightable.add(this);
+			}
 		}
 	}
 	
 	public static void runAll() {
-//		System.out.println("Executing a queue of " + queue.size() + " actions");
-//		if(queue.size() > 1) {
-//			synchronized(queue) {
-//				for(Action a : queue) {
-//					System.out.println(a);
-//				}
-//			}
-//		}
 		synchronized(queue) {
 			for(Action a : queue) {
 				if(Clock.ticks >= a.startTime && (Clock.ticks <= a.startTime + a.totalTicks || a.totalTicks < 0)) {
 					a.run();
 				}
-//				if(a.done() && a.totalTicks > 0) queue.remove(a);
 			}
-//			for(Action a: queue) {
-//				if(a.done()) queue.remove(a);
-//			}
-//			Iterator<Action> i = queue.iterator();
-//			while(i.hasNext()) {
-//				Action a = i.next();
-//				if(a.done()) i.remove();
-//			}
 			queue.removeIf(s -> (s.done()));
+			synchronized(highlightable) {
+				highlightable.removeIf(s -> (!queue.contains(s)));
+			}
 		}
 	}
 	
 	public boolean done() {
 		return Clock.ticks >= startTime + totalTicks;
 	}
+	
+	public static List<Action> hightlightable() {
+		return highlightable;
+	}
+	
 	public abstract PointCollection toHighlight();
 }
