@@ -4,8 +4,12 @@ import java.awt.Image;
 import java.util.List;
 //import java.util.Vector;
 
+
+
+import action.Action;
 import entity.Player;
 import entity.Entity;
+import geometry.Point;
 import world.LoadedChunks;
 import terrain.Empty;
 
@@ -17,8 +21,10 @@ public class Camera {
 	public static String[][] entitySnapshot;
 	public static Image[][] terrainImageSnapshot;
 	public static Image[][] entityImageSnapshot;
+	public static boolean[][] highlightSnapshot;
 	
 	public static List<Entity> entities;
+	public static List<Action> actions;
 	
 	public static boolean initialized;
 	
@@ -28,6 +34,7 @@ public class Camera {
 		terrainSnapshot = new String[Display.WIDTH][Display.HEIGHT];
 		terrainImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
 		entityImageSnapshot = new Image[Display.WIDTH][Display.HEIGHT];
+		highlightSnapshot = new boolean[Display.WIDTH][Display.HEIGHT];
 	}
 	
 	public static boolean init(Player p) {
@@ -103,5 +110,21 @@ public class Camera {
 		}
 
 		return entityImageSnapshot;
+	}
+	public static boolean[][] highlightSnapshot() {
+		pAbsX = player.getAbsoluteX();
+		pAbsY = player.getAbsoluteY();
+		actions = Action.toHighlight();
+		for(int i = 0; i < highlightSnapshot.length; i++) {
+			for(int j = 0; j < highlightSnapshot[0].length; j++) {
+				highlightSnapshot[i][j] = false;
+			}
+		}
+		for(Action a : actions) {
+			for(Point p : a.pointsToHighlight()) {
+				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = true;
+			}
+		}
+		return highlightSnapshot;
 	}
 }
