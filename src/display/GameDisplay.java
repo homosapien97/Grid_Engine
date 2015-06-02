@@ -142,20 +142,32 @@ public class GameDisplay extends Display {
 		}
 		
 		//handle action highlighting
+		Camera.highlightSnapshot();
+		
+		for(int x = 0; x < Display.WIDTH; x++) {
+			for(int y = 0; y < Display.HEIGHT; y++) {
+				if(Camera.entityImageSnapshot[x][y] != null) {
+					redHighlight(page, x, y);
+				}
+			}
+		}
+		
+		/*
 		for(Action a : Action.toHighlight()){
 			for(geometry.Point p : a.pointsToHighlight()){
 				redHighlight(page, p.x, p.y);
 				System.out.println(p);
 			}
 		}
+		*/
+		
+		//debugging
+		debugClick(page);
 		
 		//handle UI overlays
 		drawHUD(page);
 		drawCMDLine(page);
 		drawInventory(page);
-		
-		//debugging
-		debugClick(page);
 	}
 	
 	private void drawSprite(Graphics page, int x, int y, Image img) {
