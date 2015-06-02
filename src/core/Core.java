@@ -38,6 +38,7 @@ import display.SettingsPage;
 import entity.Player;
 import general.Tools;
 import key_actions.ExitToMainMenu;
+import key_actions.Pause;
 import key_actions.ToggleCMDLine;
 import key_actions.ToggleHUD;
 import key_actions.ToggleInventory;
@@ -169,6 +170,7 @@ public class Core {
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "pause");
 		
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleCMDLine");
 		
@@ -181,6 +183,7 @@ public class Core {
 		gameAM.put("toggleCMDLine", new ToggleCMDLine());
 		gameAM.put("toggleInventory", new ToggleInventory());
 		gameAM.put("mainMenu", new ExitToMainMenu());
+		gameAM.put("pause", new Pause());
 		
 		gameAM_CMDLINE.put("toggleCMDLine", new ToggleCMDLine());
 		
@@ -229,7 +232,7 @@ public class Core {
 		purpleHighlight = Tools.img.loadImage("purpleHighlight.png", "general");
 		redHighlight = Tools.img.loadImage("redHighlight.png", "general");
 		whiteHighlight = Tools.img.loadImage("whiteHighlight.png", "general");
-		yellowHighlight = Tools.img.loadImage("yellowHighlight", "general");
+		yellowHighlight = Tools.img.loadImage("yellowHighlight.png", "general");
 	}
 	
 	//game navigation

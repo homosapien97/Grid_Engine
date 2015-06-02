@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import action.Action;
 import action.Clock;
 import run.Main;
 import core.Core;

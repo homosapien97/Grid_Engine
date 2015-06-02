@@ -32,6 +32,9 @@ public class Main {
 					step();
 					Tools.time.wait(400);
 					break;
+//				case PAUSED:
+//					
+//					break;
 				default:
 					//idle cpu
 					Tools.time.wait(1);
@@ -70,31 +73,8 @@ public class Main {
 		Core.frame.getContentPane().repaint();
 	}
 	
-//	private static int _gtx = 5;
-//	private static  int _gty = 12;
+
 	private static void stepState() {
-//		Main.player.goToRelative((int)(Math.random() * 3) - 1, (int)(Math.random() * 3) - 1);
-//		Main.player.goToRelative(1,0);
-		
-		
-//		if(!player.getPath().goTo(_gtx, _gty)) {
-////			System.out.println("Cant' go to " + _gtx + ", " + _gty);
-////			for(int j = 0; j < player.getPath().maze[0].length; j++) {
-////				for(int i = 0; i < player.getPath().maze.length; i++) {
-////					System.out.print(player.getPath().maze[i][j]);
-////				}
-////				System.out.println();
-////			}
-//			Tools.time.wait(100000);
-//		}
-		
-		//random walk
-//		if(!player.getPath().goTo(_gtx, _gty)) {
-//			do {
-//				_gtx = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX());
-//				_gty = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY());
-//			} while(!player.vsquare().canSee(_gtx, _gty));
-//		}
 		player.pathTo((int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX()), 
 				(int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY()));
 		Action.runAll();
