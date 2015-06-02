@@ -146,7 +146,7 @@ public class GameDisplay extends Display {
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-				if(Camera.entityImageSnapshot[x][y] != null) {
+				if(Camera.highlightSnapshot[x][y] == true) {
 					redHighlight(page, x, y);
 				}
 			}
@@ -182,6 +182,7 @@ public class GameDisplay extends Display {
 	private void debugClick(Graphics page){
 		int x = listener.getCoordinateClicked().x;
 		int y = listener.getCoordinateClicked().y;
+		
 		page.drawImage(mouseHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
@@ -292,18 +293,20 @@ public class GameDisplay extends Display {
 		
 		tick_clock = Tools.img.loadHUDSprite("tick-clock.png");
 		
-		mouseHighlight = Tools.img.loadImage("clickHighlight.png", "general");
+		mouseHighlight = Tools.img.loadImage("leftClickHighlight.png", "general");
 	}
 	
 	//mouse listener
 	
 	public class GridMouseListener implements MouseListener{
 		//note to christian: this is java.awt.Point, not yours
-		private Point clickedGridPoint = new Point(0, 0);
+		private Point clickedGridPoint = new Point(-1, -1);
+		private int modifiers = 0;
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			//rounding makes it bad
+			e.getButton();
 			clickedGridPoint.x = (int)/* Math.round*/((double) e.getX() / (double) Display.SPRITE_DIM);
 			clickedGridPoint.y = (int)/* Math.round*/((double) e.getY() / (double) Display.SPRITE_DIM);
 		}
@@ -322,6 +325,12 @@ public class GameDisplay extends Display {
 		
 		public Point getCoordinateClicked(){
 			return clickedGridPoint;
+		}
+		
+		public boolean getClickButton(){
+			
+			return false;
+			
 		}
 	}
 }
