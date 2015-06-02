@@ -4,7 +4,7 @@ import entity.Entity;
 import entity.Mobile;
 import entity.Pathing;
 import entity.Sighted;
-import general.Tools;
+import geometry.PointCollection;
 
 public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T>> extends Action{
 	public int ticksPerDistance;
@@ -28,6 +28,10 @@ public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T>> exten
 	@Override
 	public String toString() {
 		return "Move action to (" + xTarget + ", " + yTarget + ") " + (Clock.ticks - startTime) + "/" + totalTicks;
+	}
+	@Override
+	public PointCollection toHighlight() {
+		return actor.getPath().path();
 	}
 
 }

@@ -26,4 +26,7 @@ public class Circle {
 		}
 		return mask;
 	}
+	public int area() {
+		return ((int) (Math.PI * r * r));
+	}
 }

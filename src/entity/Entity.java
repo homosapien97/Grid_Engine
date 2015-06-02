@@ -1,7 +1,5 @@
 package entity;
 
-import general.Tools;
-
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,11 +1,14 @@
 package magic;
 
+import entity.Entity;
+import geometry.PointCollection;
+
 import java.awt.Image;
 
 
 public abstract class Spell {
 	/**
-	 * Each of these should be overriden in subclasses
+	 * Each of these should be overriden in subclasses, and can be changed to final. There is really no point in having public static uninstantiated arrays in an abstract class, but they're here as a template.
 	 */
 	public static int[] casting;
 	public static int[] channel;
@@ -55,4 +58,12 @@ public abstract class Spell {
 	public abstract String filename();
 	public abstract Image sprite();
 	
+	/**
+	 * Returns the area over which the spell is cast given x and y as a point collection, and applies the effect of the spell at the points specified.
+	 * @param x the x coordinate at which to cast the spell
+	 * @param y the y coordinate at which to cast the spell
+	 * @return
+	 */
+	public abstract PointCollection cast(Entity caster, int x, int y);
+	public abstract PointCollection preview(Entity caster, int x, int y);
 }

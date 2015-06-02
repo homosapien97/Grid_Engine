@@ -1,19 +1,28 @@
 package spells;
 import magic.Spell;
+import entity.Entity;
 import general.Tools;
+import geometry.Point;
+import geometry.PointCollection;
 
 import java.awt.Image;
 
+import world.LoadedChunks;
+
 public class ShieldSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
-	public static int[] casting = {0,0,0,0,0,0,0};
-	public static int[] channel = {0,0,0,0,0,0,0};
-	public static int[] trueDamage = {0,0,0,0,0,0,0};
-	public static int[] damage = {0,0,0,0,0,0,0};
-	public static String[] name = {"Shield level 0", "Shield level 1", "Shield level 2", "Shield level 3", "Shield level 4", "Shield level 5", "Shield level 6",};
+	public static final int[] casting = {0,0,0,0,0,0,0};
+	public static final int[] channel = {0,0,0,0,0,0,0};
+	public static final int[] trueDamage = {0,0,0,0,0,0,0};
+	public static final int[] damage = {0,0,0,0,0,0,0};
+	public static final String[] name = {"Shield level 0", "Shield level 1", "Shield level 2", "Shield level 3", "Shield level 4", "Shield level 5", "Shield level 6",};
 	public static final String[] filename = {"Shield1.png","Shield2.png","Shield3.png","Shield4.png","Shield5.png","Shield6.png","Shield7.png"};
-	public static Image[] sprite = new Image[7];
-	public static ShieldSpell[] spells = {new ShieldSpell(0), new ShieldSpell(1), new ShieldSpell(2), new ShieldSpell(3), new ShieldSpell(4), new ShieldSpell(5), new ShieldSpell(6)};
+	public static final Image[] sprite = new Image[7];
+	public static final ShieldSpell[] spells = {new ShieldSpell(0), new ShieldSpell(1), new ShieldSpell(2), new ShieldSpell(3), new ShieldSpell(4), new ShieldSpell(5), new ShieldSpell(6)};
+	
+	public int ticks = 0;
+	public static Point[][] area;
+	public static int[][] oldHeights;
 	
 	protected ShieldSpell(int level){
 //		super(0,0,0,"Shield lv" + level, filenames[level]);
@@ -74,6 +83,47 @@ public class ShieldSpell extends Spell{
 	@Override
 	public Image sprite() {
 		return sprite[level];
+	}
+
+
+	@Override
+	public PointCollection cast(Entity caster, int duration, int irrelevant) {
+		if(ticks == 0) {
+			for(int i = -1; i < 2; i++) {
+				for(int j = -1; j < 2; j++) {
+					oldHeights[i + 1][j + 1] = LoadedChunks.heightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j);
+					if((i != 0 || j != 0) && LoadedChunks.entitiesAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j).size() == 0) {
+						area[i + 1][j + 1] = new Point(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j);
+						LoadedChunks.setHeightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j, 1);
+					} else {
+						area[i + 1][j + 1] = null;
+					}
+				}
+			}
+		}
+		if(ticks == duration) {
+			for(int i = -1; i < 2; i++) {
+				for(int j = -1; j < 2; j++) {
+					LoadedChunks.setHeightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j, oldHeights[i + 1][j + 1]);
+				}
+			}
+			ticks = -1;
+		}
+		ticks++;
+		PointCollection ret = new PointCollection(8);
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				if(area[i][j] != null) ret.add(area[i][j]);
+			}
+		}
+		return ret;
+	}
+
+
+	@Override
+	public PointCollection preview(Entity caster, int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

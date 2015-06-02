@@ -10,7 +10,12 @@ import terrain.Terrain;
 import entity.Entity;
 import general.Tools;
 import generation.Generator;
+import geometry.Circle;
+import geometry.Line;
 import geometry.Point;
+import geometry.PointCollection;
+import geometry.Ray;
+import geometry.Rectangle;
 
 public class LoadedChunks {
 	public static Chunk[][] chunks;
@@ -116,6 +121,27 @@ public class LoadedChunks {
 		absoluteY = Tools.nav.absCoordToChunkCoord(absoluteY);
 		return absoluteX >= chunks[0][0].pos.x && absoluteX <= chunks[2*RADIUS][2*RADIUS].pos.x && absoluteY >= chunks[0][0].pos.y && absoluteY <= chunks[2*RADIUS][2*RADIUS].pos.y;
 	}
+	public static boolean isLoaded(Circle c) {
+		return isLoaded(c.x, c.y + c.r) && isLoaded(c.x, c.y - c.r) && isLoaded(c.x + c.r, c.y) && isLoaded(c.x - c.r, c.y);  
+	}
+	public static boolean isLoaded(Line l) {
+		return isLoaded(l.a.x, l.a.y) && isLoaded(l.b.x, l.b.y); 
+	}
+	public static boolean isLoaded(Ray r) {
+		return isLoaded(r.a.x, r.a.y) && isLoaded(r.b.x, r.b.y); 
+	}
+	public static boolean isLoaded(Point p) {
+		return isLoaded(p.x, p.y);
+	}
+	public static boolean isLoaded(Rectangle r) {
+		return isLoaded(r.a.x, r.a.y) && isLoaded(r.b.x, r.b.y);
+	}
+	public static boolean isLoaded(PointCollection p) {
+		for(Point t : p) {
+			if(!isLoaded(t.x, t.y)) return false;
+		}
+		return true;
+	}
 	
 	/**
 	 * Returns the sprite from terrain at the indicated absolute coordinates
@@ -146,6 +172,10 @@ public class LoadedChunks {
 		return chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
 				terrainAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY));
 	}
+	public static void setTerrainAt(int absoluteX, int absoluteY, Terrain t) {
+		chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
+				terrain[Tools.nav.absCoordToMinorCoord(absoluteX)][Tools.nav.absCoordToMinorCoord(absoluteY)] = t;
+	}
 	
 	/**
 	 * Returns the height at the indicated absolute coordinates
@@ -157,6 +187,10 @@ public class LoadedChunks {
 		return chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
 				heightAt(Tools.nav.absCoordToMinorCoord(absoluteX), Tools.nav.absCoordToMinorCoord(absoluteY));
 	}
+	public static void setHeightAt(int absoluteX, int absoluteY, int h) {
+		chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(absoluteY) - chunks[0][0].pos.y].
+				heightmap[Tools.nav.absCoordToMinorCoord(absoluteX)][Tools.nav.absCoordToMinorCoord(absoluteY)] = h;
+	}
 	/**
 	 * Returns a vector containing all entities within the given range, inclusive.
 	 * @param x1 x coordinate of the top left corner of the range
@@ -165,7 +199,7 @@ public class LoadedChunks {
 	 * @param y2 y coordinate of the bottom right corner of the range
 	 * @return vector of entities within (x1,y1)->(x2,y2)
 	 */
-	public  static List<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
+	public static List<Entity> entitiesIn(int x1, int y1, int x2, int y2) { //bounds inclusive
 		int x1c = Tools.nav.absCoordToChunkCoord(x1) - chunks[0][0].pos.x;
 		int y1c = Tools.nav.absCoordToChunkCoord(y1) - chunks[0][0].pos.y;
 		int x2c = Tools.nav.absCoordToChunkCoord(x2) - chunks[0][0].pos.x;
@@ -181,6 +215,47 @@ public class LoadedChunks {
 				}
 //				}
 			}
+		}
+		return ret;
+	}
+	public static List<Entity> entitiesIn(Circle c) {
+		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
+		synchronized(ret) {
+			for(int i = c.x - c.r; i < c.x + c.r + 1; i++) {
+				for(int j = c.y - c.r; j < c.y + c.r + 1; j++) {
+					if(c.inside(i, j)) {
+						ret.addAll(entitiesAt(i, j));
+					}
+				}
+			}
+		}
+		return ret;
+	}
+	public static List<Entity> entitiesIn(Line l) {
+		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
+		synchronized(ret) {
+			for(int i = 0; i < l.points.length; i++) {
+				ret.addAll(entitiesAt(l.points[i].x, l.points[i].y));
+			}
+		}
+		return ret;
+	}
+	public static List<Entity> entitiesIn(Ray r) {
+		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
+		synchronized(ret) {
+			for(int i = 0; i < r.points.length; i++) {
+				ret.addAll(entitiesAt(r.points[i].x, r.points[i].y));
+			}
+		}
+		return ret;
+	}
+	public static List<Entity> entitiesIn(Rectangle r) {
+		return entitiesIn(r.a.x, r.a.y, r.b.x, r.b.y);
+	}
+	public static List<Entity> entitiesIn(PointCollection p) {
+		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
+		for(Point t : p) {
+			ret.addAll(entitiesAt(t.x, t.y));
 		}
 		return ret;
 	}

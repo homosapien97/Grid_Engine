@@ -1,5 +1,7 @@
 package geometry;
 
+import general.Tools;
+
 public class Ray {
 	public final Point a;
 	public final Point b;
@@ -41,6 +43,37 @@ public class Ray {
 		points = new Point[w + 1];
 		m = ((double) a.y - b.y) / (a.x - b.x);
 		construct();
+	}
+	public Ray(Ray from, int length) {
+		if(length < from.points.length && length > 0) {
+			a = from.a;
+			Point temp = null;
+			for(int i = 0; i < from.points.length && Tools.nav.distance(a, from.points[i]) <= length; i++) {
+				temp = from.points[i];
+			}
+			b = temp;
+			axLbx = a.x < b.x;
+			ayLby = a.y < b.y;
+			tl = new Point((axLbx) ? a.x : b.x, (ayLby) ? a.y : b.y);
+			xoffset = (axLbx) ? 1 : -1;
+			yoffset = (ayLby) ? 1 : -1;
+			int w = (axLbx) ? (b.x - a.x) : (a.x - b.x);
+			w = (ayLby) ? ((b.y - a.y > w) ? (b.y - a.y) : w) : ((a.y - b.y > w) ? (a.y - b.y) : w);
+			points = new Point[w + 1];
+			m = ((double) a.y - b.y) / (a.x - b.x);
+			construct();
+		} else {
+			//TODO implement line lengthening
+			a = null;
+			b = null;
+			axLbx = false;
+			ayLby = false;
+			tl = null;
+			xoffset = 0;
+			yoffset = 0;
+			points = null;
+			m = 0;
+		}
 	}
 	
 	@SuppressWarnings("unused")

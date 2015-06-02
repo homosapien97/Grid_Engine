@@ -1,5 +1,7 @@
 package action;
 
+import geometry.PointCollection;
+
 import java.util.ArrayList;
 import java.util.Collections;
 //import java.util.Iterator;
@@ -11,7 +13,7 @@ import java.util.List;
  * @author Christian
  *
  */
-public class Action implements Runnable{
+public abstract class Action implements Runnable{
 	public static List<Action> queue = Collections.synchronizedList(new ArrayList<Action>());
 	public final int startTime;
 	public int totalTicks;
@@ -19,10 +21,9 @@ public class Action implements Runnable{
 	/**
 	 * To be overriden
 	 */
-	public void run() {
-	}
+	public abstract void run();
 	
-	public Action(int startTime, int totalTicks) {
+	protected Action(int startTime, int totalTicks) {
 		this.startTime = startTime;
 		this.totalTicks = totalTicks;
 		synchronized(queue) {
@@ -61,4 +62,5 @@ public class Action implements Runnable{
 	public boolean done() {
 		return Clock.ticks >= startTime + totalTicks;
 	}
+	public abstract PointCollection toHighlight();
 }

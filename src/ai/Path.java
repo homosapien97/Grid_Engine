@@ -5,6 +5,7 @@ import entity.Mobile;
 import entity.Sighted;
 import general.Tools;
 import geometry.Point;
+import geometry.PointCollection;
 
 
 public class Path <T extends Entity & Mobile & Sighted> {
@@ -138,5 +139,15 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	
 	private boolean valid(int row, int col) {
 		return (row>= 0 && row < maze.length && col >= 0 && col < maze[row].length && maze[row][col] == VISIBLE);
+	}
+	
+	public PointCollection path() {
+		PointCollection ret = new PointCollection();
+		for(int i = 0; i < maze.length; i++) {
+			for(int j = 0; j < maze[0].length; j++) {
+				if(maze[i][j] == PATH) ret.add(new Point(tl, i, j));
+			}
+		}
+		return ret;
 	}
 }

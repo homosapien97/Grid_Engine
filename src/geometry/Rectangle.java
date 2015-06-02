@@ -20,4 +20,8 @@ public class Rectangle {
 	public boolean contains(int x, int y) {
 		return (x >= a.x && x <= b.x && y >= a.y && y <= b.y);
 	}
+	
+	public int area() {
+		return (a.x - b.x + 1) * (a.y - b.y + 1);
+	}
 }
