@@ -146,7 +146,7 @@ public class GameDisplay extends Display {
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-				if(Camera.highlightSnapshot[x][y] == true) {
+				if(Camera.highlightSnapshot[x][y]) {
 					redHighlight(page, x, y);
 				}
 			}

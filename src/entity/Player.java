@@ -229,18 +229,23 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	}
 	@Override
 	public boolean pathTo(int x, int y) {
-		if(path.constructPathTo(x, y)) {
+//		for(Action a : actions) {
+//			if(a instanceof MoveAction) {
+//				if(a.done()) {
+//					actions.remove(a);
+////					return addAction(new MoveAction<Player>(this, x, y));
+//				} else return false;
+//			}
+//		}
+		synchronized(actions) {
+			actions.removeIf(s -> ((s instanceof MoveAction) && s.done()));
 			for(Action a : actions) {
-				if(a instanceof MoveAction) {
-					if(a.done()) {
-						actions.remove(a);
-						return addAction(new MoveAction<Player>(this, x, y));
-					}
-					return false;
-				}
+				if(a instanceof MoveAction) return false;
 			}
-			return addAction(new MoveAction<Player>(this, x, y));
+			if(path.constructPathTo(x, y)) {
+				return addAction(new MoveAction<Player>(this, x, y));
+			}
+			return false;
 		}
-		return false;
 	}
 }

@@ -95,7 +95,8 @@ public class Main {
 //				_gty = (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY());
 //			} while(!player.vsquare().canSee(_gtx, _gty));
 //		}
-		player.pathTo((int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX()), (int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY()));
+		player.pathTo((int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX()), 
+				(int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY()));
 		Action.runAll();
 		Clock.tick();
 	}
