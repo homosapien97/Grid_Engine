@@ -170,38 +170,38 @@ public class GameDisplay extends Display {
 		if(hudVisible){
 			//background
 			page.setColor(new Color(89, 89, 89, 255));
-			page.fillRect(0, 0, Display.P_WIDTH, 32);
+			page.fillRect(0, 0, Display.P_WIDTH, 48);
 			
 			//player name
 			page.setColor(Color.white);
 			page.setFont(bodyFont);
-			page.drawString(Main.player.name, 50, 21);
+			page.drawString(Main.player.name, 50, 29);
 			
 			//player health
 			if(Main.player.health > 100) {
-				page.drawImage(heart, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(heart, 150, 8, 32, 32, null);
 			} else {
-				page.drawImage(broken_heart, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(broken_heart, 150, 8, 32, 32, null);
 			}
 			
 			page.setColor(Color.white);
-			page.drawString("" + Main.player.health, 180, 21);
+			page.drawString("" + Main.player.health, 196, 29);
 			
 			//player armor
 			if(Main.player.armor > 25) {
-				page.drawImage(shield, 250, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(shield, 250, 8, 32, 32, null);
 			} else {
-				page.drawImage(broken_shield, 250, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(broken_shield, 250, 8, 32, 32, null);
 			}
 			
 			page.setColor(Color.white);
-			page.drawString("" + Main.player.armor, 280, 21);
+			page.drawString("" + Main.player.armor, 296, 29);
 			
 			//tick clock
-			page.drawImage(tick_clock, 350, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			page.drawImage(tick_clock, 350, 8, 32, 32, null);
 			
 			page.setColor(Color.white);
-			page.drawString("" + Clock.getTicks(), 380, 21);
+			page.drawString("" + Clock.getTicks(), 396, 29);
 		}
 	}
 	

@@ -16,6 +16,7 @@ public class Main {
 	
 	//player object
 	public static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1, 1);
+	
 	//for debug for now
 	public static final String version = "1.2";
 	
