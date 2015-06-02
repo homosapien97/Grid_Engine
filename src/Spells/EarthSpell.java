@@ -5,7 +5,6 @@ import entity.Health;
 import general.Tools;
 import geometry.Line;
 import geometry.PointCollection;
-import geometry.Ray;
 
 import java.awt.Image;
 import java.util.List;

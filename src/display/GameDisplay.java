@@ -2,10 +2,17 @@ package display;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -34,14 +41,21 @@ public class GameDisplay extends Display {
 	
 	//fonts
 	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
-	private static final Font inventoryFont = new Font("Cinzel", Font.PLAIN, 18);
 	private static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
 	
 	//cmdline
 	public JTextField cmdInput = new JTextField();
 	
 	//inventory
+	private Container main = new Container();
+	private Container center = new Container();
 	public Inventory inventory = new Inventory();
+	
+	//mouse listener
+	GridMouseListener listener = new GridMouseListener();
+	
+	//mouse debug
+	private static Image mouseHighlight = null;
 	
 	public GameDisplay(){
 		super();
@@ -49,11 +63,12 @@ public class GameDisplay extends Display {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		
+		//root layout
+		
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		
-		inventory.setVisible(inventoryVisible);
-		this.add(inventory, BorderLayout.CENTER);
+		//command input
 		
 		cmdInput.setBackground(new Color(50, 50, 50, 255));
 		cmdInput.setForeground(Color.white);
@@ -61,7 +76,32 @@ public class GameDisplay extends Display {
 		Border border = new LineBorder(new Color(50, 50, 50, 255));
 		cmdInput.setBorder(border);
 		cmdInput.setVisible(cmdLineVisible);
+		
 		this.add(cmdInput, BorderLayout.PAGE_END);
+		
+		//inventory (manual padding everywhere)
+		
+		inventory.setVisible(inventoryVisible);
+		
+		BoxLayout layout_inv = new BoxLayout(main, BoxLayout.Y_AXIS);
+		main.setLayout(layout_inv);
+		
+		main.add(Box.createRigidArea(new Dimension(0,100)));
+		
+		BoxLayout layout_inv2 = new BoxLayout(center, BoxLayout.X_AXIS);
+		center.setLayout(layout_inv2);
+		
+		center.add(Box.createRigidArea(new Dimension(350,0)));
+		center.add(inventory, BorderLayout.CENTER);
+		center.add(Box.createRigidArea(new Dimension(350,0)));
+		
+		main.add(center);
+		
+		main.add(Box.createRigidArea(new Dimension(0,100)));
+		
+		this.add(main);
+		
+		this.addMouseListener(listener);
 	}
 	
 	public void paintComponent(Graphics page){
@@ -104,40 +144,10 @@ public class GameDisplay extends Display {
 		drawHUD(page);
 		drawCMDLine(page);
 		drawInventory(page);
+		
+		//debugging
+		debugClick(page);
 	}
-	
-//	/**
-//	 * Draws the image of ceratin terrain at a certain location.
-//	 * @param page the graphics page object
-//	 * @param x the x location in sprites where the image should be placed
-//	 * @param y the y location in sprites where the image should be placed
-//	 * @param img the terrain image
-//	 */
-//	private void drawTerrain(Graphics page, int x, int y, Image img){
-//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-//	}
-//	
-//	/**
-//	 * Draws the image of the player at a certain location.
-//	 * @param page the graphics object
-//	 * @param x the x position for entities (not pixels)
-//	 * @param y the y position for entities (not pixels)
-//	 * @param img the player image file
-//	 */
-//	private void drawPlayer(Graphics page, int x, int y, Image img){
-//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-//	}
-//	
-//	/**
-//	 * Draws the image of an entity at a certain location.
-//	 * @param page the graphics object
-//	 * @param x the x position for entities (not pixels)
-//	 * @param y the y position for entities (not pixels)
-//	 * @param img the player image file
-//	 */
-//	private void drawEntity(Graphics page, int x, int y, Image img){
-//		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
-//	}
 	
 	private void drawSprite(Graphics page, int x, int y, Image img) {
 		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
@@ -148,44 +158,50 @@ public class GameDisplay extends Display {
 		page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
+	private void debugClick(Graphics page){
+		int x = listener.getCoordinateClicked().x;
+		int y = listener.getCoordinateClicked().y;
+		page.drawImage(mouseHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+	}
+	
 	//game components
 	
 	private void drawHUD(Graphics page){
 		if(hudVisible){
 			//background
 			page.setColor(new Color(89, 89, 89, 255));
-			page.fillRect(0, 0, Display.P_WIDTH, 32);
+			page.fillRect(0, 0, Display.P_WIDTH, 48);
 			
 			//player name
 			page.setColor(Color.white);
 			page.setFont(bodyFont);
-			page.drawString(Main.player.name, 50, 21);
+			page.drawString(Main.player.name, 50, 29);
 			
 			//player health
 			if(Main.player.health > 100) {
-				page.drawImage(heart, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(heart, 150, 8, 32, 32, null);
 			} else {
-				page.drawImage(broken_heart, 150, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(broken_heart, 150, 8, 32, 32, null);
 			}
 			
 			page.setColor(Color.white);
-			page.drawString("" + Main.player.health, 180, 21);
+			page.drawString("" + Main.player.health, 196, 29);
 			
 			//player armor
 			if(Main.player.armor > 25) {
-				page.drawImage(shield, 250, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(shield, 250, 8, 32, 32, null);
 			} else {
-				page.drawImage(broken_shield, 250, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+				page.drawImage(broken_shield, 250, 8, 32, 32, null);
 			}
 			
 			page.setColor(Color.white);
-			page.drawString("" + Main.player.armor, 280, 21);
+			page.drawString("" + Main.player.armor, 296, 29);
 			
 			//tick clock
-			page.drawImage(tick_clock, 350, 8, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+			page.drawImage(tick_clock, 350, 8, 32, 32, null);
 			
 			page.setColor(Color.white);
-			page.drawString("" + Clock.getTicks(), 380, 21);
+			page.drawString("" + Clock.getTicks(), 396, 29);
 		}
 	}
 	
@@ -205,9 +221,16 @@ public class GameDisplay extends Display {
 	
 	private void drawInventory(Graphics page){
 		if(inventoryVisible){
-			//background
-			page.setColor(new Color(50, 50, 50, 255));
-			page.fillRect(0, Display.P_HEIGHT - 24, Display.P_WIDTH, Display.P_HEIGHT);
+			inventory.setVisible(true);
+			
+			if(cmdLineVisible){
+				cmdInput.requestFocus();
+			}else{
+				inventory.requestFocus();
+			}
+			
+		}else{
+			inventory.setVisible(false);
 		}
 	}
 	
@@ -215,14 +238,26 @@ public class GameDisplay extends Display {
 	
 	public static void toggleHUD(){
 		hudVisible = !hudVisible;
+		
+		if(hudVisible){
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	public static void toggleCMDLine(){
 		cmdLineVisible = !cmdLineVisible;
+		
+		if(cmdLineVisible){
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	public static void toggleInventory(){
 		inventoryVisible = !inventoryVisible;
+		
+		if(inventoryVisible){
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	//loading
@@ -235,5 +270,37 @@ public class GameDisplay extends Display {
 		broken_shield = Tools.img.loadHUDSprite("broken-shield.png");
 		
 		tick_clock = Tools.img.loadHUDSprite("tick-clock.png");
+		
+		mouseHighlight = Tools.img.loadImage("clickHighlight.png", "general");
+	}
+	
+	//mouse listener
+	
+	public class GridMouseListener implements MouseListener{
+		//note to christian: this is java.awt.Point, not yours
+		private Point clickedGridPoint = new Point(0, 0);
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			//rounding makes it bad
+			clickedGridPoint.x = (int)/* Math.round*/((double) e.getX() / (double) Display.SPRITE_DIM);
+			clickedGridPoint.y = (int)/* Math.round*/((double) e.getY() / (double) Display.SPRITE_DIM);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+		
+		public Point getCoordinateClicked(){
+			return clickedGridPoint;
+		}
 	}
 }

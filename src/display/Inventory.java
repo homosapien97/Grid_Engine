@@ -1,121 +1,138 @@
 package display;
 
-import general.Tools;
-
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+
+import spells.BowSpell;
+import spells.EarthSpell;
+import spells.FireSpell;
+import spells.PlasmaSpell;
+import spells.ShieldSpell;
+import spells.SwordSpell;
+import spells.WaterSpell;
 
 @SuppressWarnings("serial")
 public class Inventory extends Display {
 	
-	//the items the player can get
-	/*
-	private static Image bow1 = null;
-	private static Image bow2 = null;
-	private static Image bow3 = null;
-	private static Image bow4 = null;
-	private static Image bow5 = null;
-	private static Image bow6 = null;
-	private static Image bow7 = null;
-	private static Image shield1 = null;
-	private static Image shield2 = null;
-	private static Image shield3 = null;
-	private static Image shield4 = null;
-	private static Image shield5 = null;
-	private static Image shield6 = null;
-	private static Image shield7 = null;
-	private static Image sword1 = null;
-	private static Image sword2 = null;
-	private static Image sword3 = null;
-	private static Image sword4 = null;
-	private static Image sword5 = null;
-	private static Image sword6 = null;
-	private static Image sword7 = null;
+	//private static Image mystery1 = null;
 	
-	private static Image earth1 = null;
-	private static Image earth2 = null;
-	private static Image earth3 = null;
-	private static Image earth4 = null;
-	private static Image earth5 = null;
-	private static Image earth6 = null;
-	private static Image earth7 = null;
-	private static Image fire1 = null;
-	private static Image fire2 = null;
-	private static Image fire3 = null;
-	private static Image fire4 = null;
-	private static Image fire5 = null;
-	private static Image fire6 = null;
-	private static Image fire7 = null;
-	private static Image plasma1 = null;
-	private static Image plasma2 = null;
-	private static Image plasma3 = null;
-	private static Image plasma4 = null;
-	private static Image plasma5 = null;
-	private static Image plasma6 = null;
-	private static Image plasma7 = null;
-	private static Image water1 = null;
-	private static Image water2 = null;
-	private static Image water3 = null;
-	private static Image water4 = null;
-	private static Image water5 = null;
-	private static Image water6 = null;
-	private static Image water7 = null;
-	*/
-	
-	private static Image[] bows = new Image[7];
-	private static Image[] shields = new Image[7];
-	private static Image[] swords = new Image[7];
-	
-	private static Image[] earth = new Image[7];
-	private static Image[] fire = new Image[7];
-	private static Image[] plasma = new Image[7];
-	private static Image[] water = new Image[7];
-	
-	private static Image mystery1 = null;
+	//fonts
+	private static final Font inventoryFont = new Font("Cinzel Decorative", Font.PLAIN, 30);
+	public static final Font buttonFont = new Font("Cinzel", Font.PLAIN, 20);
+	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
 	
 	public Inventory(){
-		Container main = new Container();
-		BoxLayout bodyLayout = new BoxLayout(main, BoxLayout.X_AXIS);
-		main.setLayout(bodyLayout);
-		main.setSize(P_WIDTH, P_HEIGHT);
+		super();
+
+		this.setBackground(new Color(110, 52, 4, 200));
 		
+		Color borderColor = new Color(61, 28, 1);
+		Border line = new LineBorder(borderColor, 4);
+		this.setBorder(line);
+		
+		Container main = new Container();
+		BoxLayout mainLayout = new BoxLayout(main, BoxLayout.Y_AXIS);
+		main.setLayout(mainLayout);
+		
+		JLabel title = new JLabel("Inventory");
+		title.setAlignmentX(CENTER_ALIGNMENT);
+		title.setFont(inventoryFont);
+		title.setForeground(Color.white);
+		
+		main.add(title);
+		
+		main.add(Box.createRigidArea(new Dimension(0,32)));
+		
+		Container inventory = new Container();
+		GridLayout inventoryLayout = new GridLayout(7, 7, 50, 32);
+		inventory.setLayout(inventoryLayout);
+		
+		addCards(inventory);
+		
+		main.add(inventory);
+
+		main.add(Box.createRigidArea(new Dimension(0,100)));
+		
+		JButton close = newMainButton("CLOSE");
+		close.setAlignmentX(CENTER_ALIGNMENT);
+		close.setFont(buttonFont);
+		close.addActionListener(new ButtonListener());
+		
+		main.add(close);
+		
+		this.add(main);
 	}
 	
-	public static class load {
-		public void bow(){
-//			bow1 = Tools.img.loadCard("bow1.png");
-//			bow2 = Tools.img.loadCard("bow2.png");
-//			bow3 = Tools.img.loadCard("bow3.png");
-//			bow4 = Tools.img.loadCard("bow4.png");
-//			bow5 = Tools.img.loadCard("bow5.png");
-//			bow6 = Tools.img.loadCard("bow6.png");
-//			bow7 = Tools.img.loadCard("bow7.png");
-			for(int i = 0; i < bows.length; i++){
-				bows[i] = Tools.img.loadCard("bow" + (i + 1) + ".png");
-			}
+	private static void addCards(Container c){
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(EarthSpell.sprite[i], i));
 		}
 		
-		public void sword(){
-//			sword1 = Tools.img.loadCard("sword1.png");
-//			sword2 = Tools.img.loadCard("sword2.png");
-//			sword3 = Tools.img.loadCard("sword3.png");
-//			sword4 = Tools.img.loadCard("sword4.png");
-//			sword5 = Tools.img.loadCard("sword5.png");
-//			sword6 = Tools.img.loadCard("sword6.png");
-//			sword7 = Tools.img.loadCard("sword7.png");
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(FireSpell.sprite[i], i));
 		}
 		
-		public void shield(){
-//			shield1 = Tools.img.loadCard("shield1.png");
-//			shield2 = Tools.img.loadCard("shield2.png");
-//			shield3 = Tools.img.loadCard("shield3.png");
-//			shield4 = Tools.img.loadCard("shield4.png");
-//			shield5 = Tools.img.loadCard("shield5.png");
-//			shield6 = Tools.img.loadCard("shield6.png");
-//			shield7 = Tools.img.loadCard("shield7.png");
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(WaterSpell.sprite[i], i));
 		}
 		
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i));
+		}
+		
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(BowSpell.sprite[i], i));
+		}
+		
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(SwordSpell.sprite[i], i));
+		}
+		
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(ShieldSpell.sprite[i], i));
+		}
+	}
+	
+	private static Container getCardAsComponent(Image img, int i){
+		Container c = new Container();
+		BoxLayout l = new BoxLayout(c, BoxLayout.X_AXIS);
+		c.setLayout(l);
+		
+		JLabel image = new JLabel();
+		JLabel amount = new JLabel(" x " + 0);
+		
+		amount.setFont(bodyFont);
+		amount.setForeground(new Color(201, 166, 137));
+		
+		ImageIcon icon = new ImageIcon(img);
+		
+		image.setIcon(icon);
+		image.setSize(32, 32);
+		
+		c.add(image);
+		c.add(amount);
+		
+		return c;
+	}
+	
+	private class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			GameDisplay.toggleInventory();
+		}
 	}
 }
