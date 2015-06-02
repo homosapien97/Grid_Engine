@@ -145,7 +145,7 @@ public class Path <T extends Entity & Mobile & Sighted> {
 		PointCollection ret = new PointCollection();
 		for(int i = 0; i < maze.length; i++) {
 			for(int j = 0; j < maze[0].length; j++) {
-				if(maze[i][j] == PATH) ret.add(new Point(tl, i, j));
+				if(maze[i][j] == PATH || maze[i][j] == DONE) ret.add(new Point(tl, i, j));
 			}
 		}
 		return ret;
