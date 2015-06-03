@@ -40,7 +40,8 @@ import entity.Player;
 import general.Tools;
 import key_actions.ExitToMainMenu;
 import key_actions.Pause;
-import key_actions.ToggleCMDLine;
+import key_actions.SubmitCommand;
+import key_actions.ToggleCMDLog;
 import key_actions.ToggleHUD;
 import key_actions.ToggleInventory;
 
@@ -170,29 +171,31 @@ public class Core {
 		
 		//add to input map
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0, false), "toggleHUD");
-		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLine");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLog");
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "pause");
 		
-		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleCMDLine");
+		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleCMDLog");
+		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "submitCommand");
 		
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleInventory");
-		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLine");
+		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLog");
 		
 		//add to action map
 		gameAM.put("toggleHUD", new ToggleHUD());
-		gameAM.put("toggleCMDLine", new ToggleCMDLine());
+		gameAM.put("toggleCMDLog", new ToggleCMDLog());
 		gameAM.put("toggleInventory", new ToggleInventory());
 		gameAM.put("mainMenu", new ExitToMainMenu());
 		gameAM.put("pause", new Pause());
 		
-		gameAM_CMDLINE.put("toggleCMDLine", new ToggleCMDLine());
+		gameAM_CMDLINE.put("toggleCMDLog", new ToggleCMDLog());
+		gameAM_CMDLINE.put("submitCommand", new SubmitCommand());
 		
 		gameAM_INVENTORY.put("toggleInventory", new ToggleInventory());
-		gameAM_INVENTORY.put("toggleCMDLine", new ToggleCMDLine());
+		gameAM_INVENTORY.put("toggleCMDLog", new ToggleCMDLog());
 	}
 	
 	//loading

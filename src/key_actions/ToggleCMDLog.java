@@ -8,10 +8,10 @@ import display.GameDisplay;
 
 
 @SuppressWarnings("serial")
-public class ToggleCMDLine extends AbstractAction {
+public class ToggleCMDLog extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		GameDisplay.toggleCMDLine();
+		GameDisplay.toggleCMDLog();
 	}
 }

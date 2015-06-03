@@ -8,11 +8,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -27,7 +30,7 @@ import general.Tools;
 public class GameDisplay extends Display {
 	//states of toggleable things
 	private static Boolean hudVisible = true;
-	private static Boolean cmdLineVisible = false;
+	private static Boolean cmdLogVisible = false;
 	private static Boolean inventoryVisible = false;
 	
 	//HUD icons
@@ -43,8 +46,12 @@ public class GameDisplay extends Display {
 	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
 	private static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
 	
-	//cmdline
-	public JTextField cmdInput = new JTextField();
+	//cmd
+	private Container cmd = new Container();
+	public static JTextField cmdInput = new JTextField();
+	
+	public static JTextArea cmdLog = new JTextArea();
+	JScrollPane logScrollPane = null;
 	
 	//inventory
 	private Container main = new Container();
@@ -69,16 +76,46 @@ public class GameDisplay extends Display {
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		
+		//command box
+		BoxLayout cmdLayout = new BoxLayout(cmd, BoxLayout.Y_AXIS);
+		cmd.setLayout(cmdLayout);
+		
+		//command log
+		
+		cmdLog.setFont(cmdFont);
+		cmdLog.setBackground(new Color(25, 25, 25, 100));
+		cmdLog.setForeground(new Color(200, 200, 200, 255));
+		Border logBorder = new LineBorder(new Color(25, 25, 25, 200));
+		cmdLog.setBorder(logBorder);
+		cmdLog.setVisible(cmdLogVisible);
+		cmdLog.setFocusable(false);
+		//cmdLog.setPreferredSize(new Dimension(P_WIDTH, 22 * 10)); 
+		
+		//logScrollPane.add(cmdLog);
+
+		logScrollPane = new JScrollPane(cmdLog);
+		
+		logScrollPane.setPreferredSize(new Dimension(P_WIDTH, 22 * 10)); //22px per line for 16pt font cause yay http://reeddesign.co.uk/test/points-pixels.html
+		logScrollPane.setBackground(new Color(0, 0, 0, 0));
+		logScrollPane.setForeground(new Color(0, 0, 0, 0));
+		logScrollPane.setVisible(cmdLogVisible);
+		logScrollPane.setWheelScrollingEnabled(true);
+		logScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		cmd.add(logScrollPane);
+		
 		//command input
 		
 		cmdInput.setBackground(new Color(50, 50, 50, 255));
 		cmdInput.setForeground(Color.white);
 		cmdInput.setFont(cmdFont);
-		Border border = new LineBorder(new Color(50, 50, 50, 255));
-		cmdInput.setBorder(border);
-		cmdInput.setVisible(cmdLineVisible);
+		Border cmdBorder = new LineBorder(new Color(50, 50, 50, 255));
+		cmdInput.setBorder(cmdBorder);
+		cmdInput.setVisible(true);
 		
-		this.add(cmdInput, BorderLayout.PAGE_END);
+		cmd.add(cmdInput);
+		
+		this.add(cmd, BorderLayout.PAGE_END);
 		
 		//inventory (manual padding everywhere)
 		
@@ -111,31 +148,16 @@ public class GameDisplay extends Display {
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-				//draw this element
-//				drawTerrain(page, x, y, Camera.terrainImageSnapshot[x][y]);
 				drawSprite(page, x, y, Camera.terrainImageSnapshot[x][y]);
 			}
 		}
 		
 		//handle entities
-//		Camera.entitySnapshot();
 		Camera.entityImageSnapshot();
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-//				if(Camera.entitySnapshot[x][y] != null){
-//					switch(Camera.entitySnapshot[x][y]){
-//						case "P":
-//							drawPlayer(page, x, y, Player.sprite);
-//							break;
-//						default:
-//							System.out.print("Unknown entity: ");
-//							System.out.println(Camera.entitySnapshot[x][y]);
-//					}
-//				}
 				if(Camera.entityImageSnapshot[x][y] != null) {
-//					System.out.println("*");
-//					drawEntity(page, x, y, Camera.entityImageSnapshot[x][y]);
 					drawSprite(page, x, y, Camera.entityImageSnapshot[x][y]);
 				}
 			}
@@ -146,28 +168,16 @@ public class GameDisplay extends Display {
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
-//				if(Camera.highlightSnapshot[x][y]) {
-//					redHighlight(page, x, y);
-//				}
 				highlight(page, Camera.highlightSnapshot[x][y], x, y);
 			}
 		}
-		
-		/*
-		for(Action a : Action.toHighlight()){
-			for(geometry.Point p : a.pointsToHighlight()){
-				redHighlight(page, p.x, p.y);
-				System.out.println(p);
-			}
-		}
-		*/
 		
 		//mouse clicks
 		drawClicks(page);
 		
 		//handle UI overlays
 		drawHUD(page);
-		drawCMDLine(page);
+		CMD_UI(page);
 		drawInventory(page);
 	}
 	
@@ -204,6 +214,21 @@ public class GameDisplay extends Display {
 		Image img = (listener.getClickButton() == 1) ? leftClickHighlight : rightClickHighlight;
 		
 		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+	}
+	
+	//command logging
+	public static void submitCommand(){
+		if(!cmdInput.getText().equals("")){
+			if(cmdLog.getText().equals("")){
+				cmdLog.setText(cmdInput.getText());
+			}else{
+				cmdLog.append("\n" + cmdInput.getText());
+			}
+			
+			cmdInput.setText("");
+			
+			Core.frame.getContentPane().repaint();
+		}
 	}
 	
 	//game components
@@ -247,17 +272,22 @@ public class GameDisplay extends Display {
 		}
 	}
 	
-	private void drawCMDLine(Graphics page){
-		if(cmdLineVisible){
-			//background
-			page.setColor(new Color(50, 50, 50, 255));
-			page.fillRect(0, Display.P_HEIGHT - 24, Display.P_WIDTH, Display.P_HEIGHT);
-			
+	private void CMD_UI(Graphics page){
+		cmdLog.setVisible(cmdLogVisible);
+		logScrollPane.setVisible(cmdLogVisible);
+		
+		if(cmdLogVisible){
 			//cmd input
-			cmdInput.setVisible(true);
 			cmdInput.requestFocus();
+			
+			//cmd log
+			//cmdLog.append("test");
 		}else{
-			cmdInput.setVisible(false);
+			if(inventory.isVisible()){
+				inventory.requestFocus();
+			}else{
+				this.requestFocusInWindow();
+			}
 		}
 	}
 	
@@ -265,7 +295,7 @@ public class GameDisplay extends Display {
 		if(inventoryVisible){
 			inventory.setVisible(true);
 			
-			if(cmdLineVisible){
+			if(cmdLogVisible){
 				cmdInput.requestFocus();
 			}else{
 				inventory.requestFocus();
@@ -286,10 +316,10 @@ public class GameDisplay extends Display {
 		}
 	}
 	
-	public static void toggleCMDLine(){
-		cmdLineVisible = !cmdLineVisible;
+	public static void toggleCMDLog(){
+		cmdLogVisible = !cmdLogVisible;
 		
-		if(cmdLineVisible){
+		if(cmdLogVisible){
 			Core.frame.getContentPane().repaint();
 		}
 	}
