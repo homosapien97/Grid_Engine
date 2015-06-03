@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import action.Clock;
 import run.Main;
 import core.Core;
+import core.GameState;
 //import entity.Player;
 import general.Tools;
 
@@ -44,6 +45,7 @@ public class GameDisplay extends Display {
 	
 	//fonts
 	private static final Font bodyFont = new Font("Forum", Font.PLAIN, 18);
+	private static final Font italicBodyFont = new Font("Forum", Font.ITALIC, 18);
 	private static final Font cmdFont = new Font("Consolas", Font.PLAIN, 16);
 	
 	//cmd
@@ -208,12 +210,19 @@ public class GameDisplay extends Display {
 	}
 	
 	private void drawClicks(Graphics page){
-		int x = listener.getCoordinateClicked().x;
-		int y = listener.getCoordinateClicked().y;
+//		int x = listener.getCoordinateClicked().x;
+//		int y = listener.getCoordinateClicked().y;
+		
+		int xA = listener.getAbsCoordClicked().x;
+		int yA = listener.getAbsCoordClicked().y;
+		
+		System.out.println(listener.getCoordinateClicked());
+		
+		geometry.Point p = Tools.nav.absCoordToScreenCoord(xA, yA);
 		
 		Image img = (listener.getClickButton() == 1) ? leftClickHighlight : rightClickHighlight;
 		
-		page.drawImage(img, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+		page.drawImage(img, p.x * Display.SPRITE_DIM, p.y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 	}
 	
 	//command logging
@@ -269,6 +278,23 @@ public class GameDisplay extends Display {
 			
 			page.setColor(Color.white);
 			page.drawString("" + Clock.getTicks(), 396, 29);
+			
+			//game state paused?
+			if(Core.gameState == GameState.PAUSED){
+				page.setFont(italicBodyFont);
+				page.drawString("Paused", 496, 29);
+			}
+			
+			//click coordinates
+			int x = listener.getAbsCoordClicked().x;
+			int y = listener.getAbsCoordClicked().y;
+			
+			//geometry.Point p = Tools.nav.screenCoordToAbsCoord(x, y);
+			
+			page.setFont(bodyFont);
+			page.drawString("X: " + x, 1400, 29);
+			page.drawString("Y: " + y, 1475, 29);
+			
 		}
 	}
 	
@@ -352,6 +378,7 @@ public class GameDisplay extends Display {
 	public class GridMouseListener implements MouseListener{
 		//note to christian: this is java.awt.Point, not yours
 		private Point clickedGridPoint = new Point(-1, -1);
+		private geometry.Point absGridPoint = new geometry.Point(0, 0);
 		private int button = 0;
 		
 		@Override
@@ -361,6 +388,8 @@ public class GameDisplay extends Display {
 			
 			clickedGridPoint.x = (int)/* Math.round*/((double) e.getX() / (double) Display.SPRITE_DIM);
 			clickedGridPoint.y = (int)/* Math.round*/((double) e.getY() / (double) Display.SPRITE_DIM);
+			
+			absGridPoint = Tools.nav.screenCoordToAbsCoord(clickedGridPoint.x, clickedGridPoint.y);
 		}
 
 		@Override
@@ -374,6 +403,10 @@ public class GameDisplay extends Display {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {}
+		
+		public geometry.Point getAbsCoordClicked(){
+			return absGridPoint;
+		}
 		
 		public Point getCoordinateClicked(){
 			return clickedGridPoint;
