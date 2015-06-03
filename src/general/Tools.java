@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+import display.Camera;
+import display.Display;
 import world.Chunk;
 
 public class Tools {
@@ -41,6 +43,12 @@ public class Tools {
 		}
 		public static double distance(Point a, Point b) {
 			return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+		}
+//		public static int screenCoordToAbsCoord(int screen) {
+//			return Display.
+//		}
+		public static Point screenCoordToAbsCoord(int sx, int sy) {
+			return new Point(Camera.player.getAbsoluteX() - Display.WIDTH/2 + sx, Camera.player.getAbsoluteY() - Display.HEIGHT/2 + sy);
 		}
 	}
 	
