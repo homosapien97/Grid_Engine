@@ -6,6 +6,7 @@ import core.*;
 import entity.Player;
 import general.Tools;
 import generation.GenWall;
+import terminal.Command;
 import terrain.Quicksand;
 import terrain.Stone;
 import world.Chunk;
@@ -32,9 +33,9 @@ public class Main {
 					step();
 					Tools.time.wait(400);
 					break;
-//				case PAUSED:
-//					
-//					break;
+				case PAUSED:
+					stepGraphics();
+					break;
 				default:
 					//idle cpu
 					Tools.time.wait(1);
@@ -59,6 +60,7 @@ public class Main {
 		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
 		testWall2.generate();
 		Core.start();
+		Command.init(player);
 	}
 
 	//Stepping Functions

@@ -9,6 +9,7 @@ import ai.VisionSquare;
 
 import java.awt.Image;
 
+import magic.Spell;
 import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
@@ -27,11 +28,15 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	public boolean alive;
 	public final Path<Player> path;
 	
+	public final Spell[] spellInventory = new Spell[49];
+	
 
 	public final VisionSquare visionSquare;
 
 	public static final String filename = "player.png";;
 	public static Image sprite;
+	
+	public static Spell slectedSpell;
 	
 	static {
 		load();
@@ -243,9 +248,15 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 				if(a instanceof MoveAction) return false;
 			}
 			if(path.constructPathTo(x, y)) {
-				return addAction(new MoveAction<Player>(this, x, y));
+				return addAction(new MoveAction<Player>(this, x, y, true));
 			}
 			return false;
 		}
+	}
+	public MoveAction<Player> pathToPreview(int x, int y) {
+		if(path.constructPathTo(x, y)) {
+			return new MoveAction<Player>(this, x, y, false);
+		}
+		return null;
 	}
 }

@@ -28,13 +28,15 @@ public abstract class Action implements Runnable{
 	 */
 	public abstract void run();
 	
-	protected Action(Entity actor, int startTime, int totalTicks, boolean highlight) {
+	protected Action(Entity actor, int startTime, int totalTicks, boolean execute, boolean highlight) {
 		this.actor = actor;
 		this.startTime = startTime;
 		this.totalTicks = totalTicks;
 		this.highlight = highlight;
-		synchronized(queue) {
-			queue.add(this);
+		if(execute) {
+			synchronized(queue) {
+				queue.add(this);
+			}
 		}
 		if((actor instanceof Player) && highlight) {
 			synchronized(highlightable) {
@@ -59,6 +61,14 @@ public abstract class Action implements Runnable{
 	
 	public boolean done() {
 		return Clock.ticks >= startTime + totalTicks;
+	}
+	public boolean addToQueue() {
+		synchronized(queue) {
+			if(queue.contains(this)) {
+				return false;
+			}
+			return queue.add(this);
+		}
 	}
 	
 	public static List<Action> toHighlight() {

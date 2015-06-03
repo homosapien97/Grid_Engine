@@ -26,6 +26,7 @@ import spells.PlasmaSpell;
 import spells.ShieldSpell;
 import spells.SwordSpell;
 import spells.WaterSpell;
+import terminal.Command;
 import terrain.Quicksand;
 import terrain.Stone;
 import terrain.Empty;
@@ -149,6 +150,9 @@ public class Core {
 		
 		//add key binds
 		addKeyBinds(gameDisplay);
+		
+		//initialize commands
+		
 	}
 	
 	//key binding

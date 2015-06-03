@@ -11,8 +11,8 @@ public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T> > exte
 	public int xTarget;
 	public int yTarget;
 //	public T actor;
-	public MoveAction (T actor, int xTarget, int yTarget) {
-		super(actor, Clock.ticks, 0, true);
+	public MoveAction (T actor, int xTarget, int yTarget, boolean execute) {
+		super(actor, Clock.ticks, 0, execute, true);
 		this.ticksPerDistance = actor.ticksPerTileWalked();
 		this.xTarget = xTarget;
 		this.yTarget = yTarget;
