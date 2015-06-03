@@ -50,4 +50,24 @@ public abstract class Command {
 			return false;
 		}
 	}
+	
+	public static PointCollection previewCurrent(String[] args) {
+		if(args.length > 0) {
+			if(commands.get(args[0]) == null) {
+				return new PointCollection();
+			} else {
+				return commands.get(args[0]).preview(args);
+			}
+		} return new PointCollection();
+	}
+	public static boolean runCurrent(String[] args) {
+		if(args.length > 0) {
+			if(commands.get(args[0]) == null) {
+				return false;
+			} else {
+				return commands.get(args[0]).run(args);
+			}
+		}
+		return false;
+	}
 }
