@@ -35,6 +35,7 @@ public class Main {
 					break;
 				case PAUSED:
 					stepGraphics();
+					Tools.time.wait(1);
 					break;
 				default:
 					//idle cpu

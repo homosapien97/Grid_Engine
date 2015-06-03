@@ -216,7 +216,7 @@ public class GameDisplay extends Display {
 		int xA = listener.getAbsCoordClicked().x;
 		int yA = listener.getAbsCoordClicked().y;
 		
-		System.out.println(listener.getCoordinateClicked());
+//		System.out.println(listener.getCoordinateClicked());
 		
 		geometry.Point p = Tools.nav.absCoordToScreenCoord(xA, yA);
 		
@@ -227,17 +227,22 @@ public class GameDisplay extends Display {
 	
 	//command logging
 	public static void submitCommand(){
-		if(!cmdInput.getText().equals("")){
+//		if(!cmdInput.getText().equals("")){
 			if(cmdLog.getText().equals("")){
 				cmdLog.setText(cmdInput.getText());
 			}else{
 				cmdLog.append("\n" + cmdInput.getText());
 			}
-			
 			cmdInput.setText("");
 			
+			cmdLogVisible = !cmdLogVisible;
+			
+//			if(cmdLogVisible){
+//				Core.frame.getContentPane().repaint();
+//			}
+			
 			Core.frame.getContentPane().repaint();
-		}
+//		}
 	}
 	
 	//game components

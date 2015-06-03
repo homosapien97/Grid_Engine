@@ -230,10 +230,10 @@ public class Tools {
 		System.out.println(obj);
 	}
 	
-	public static void main(String[] args) {
-		double[] a = {2.0,1.0,0.0};
-		boolean[] ign = {false, false, true};
-		int l = misc.ilowest(a, ign);
-		System.out.println(l);
-	}
+//	public static void main(String[] args) {
+//		double[] a = {2.0,1.0,0.0};
+//		boolean[] ign = {false, false, true};
+//		int l = misc.ilowest(a, ign);
+//		System.out.println(l);
+//	}
 }

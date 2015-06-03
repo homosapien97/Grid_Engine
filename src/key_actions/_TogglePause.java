@@ -8,7 +8,7 @@ import core.Core;
 import core.GameState;
 
 @SuppressWarnings("serial")
-public class Pause extends AbstractAction {
+public class _TogglePause extends AbstractAction {
 	public static GameState oldState = null;
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
