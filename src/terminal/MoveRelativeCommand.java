@@ -28,9 +28,15 @@ public class MoveRelativeCommand extends Command{
 			return false;
 		}
 	}
-
+	private MoveAction<Player> temp;
 	@Override
 	public PointCollection preview(String[] args) {
-		return player.pathToPreview(player.getAbsoluteX() + Integer.parseInt(args[1]), player.getAbsoluteY() + Integer.parseInt(args[2])).pointsToHighlight();
+//		return player.pathToPreview(player.getAbsoluteX() + Integer.parseInt(args[1]), player.getAbsoluteY() + Integer.parseInt(args[2])).pointsToHighlight();
+		if(args.length != 3) return PointCollection.blank;
+		temp = player.pathToPreview(player.getAbsoluteX() + Integer.parseInt(args[1]), player.getAbsoluteY() + Integer.parseInt(args[2]));
+		if(temp == null) {
+			return PointCollection.blank;
+		}
+		return temp.pointsToHighlight();
 	}
 }

@@ -20,6 +20,7 @@ import geometry.Rectangle;
 public class LoadedChunks {
 	public static Chunk[][] chunks;
 	public static final int RADIUS = 15;
+	public static final int UPDATE_RADIUS = 4;
 	public static Chunk center;
 	
 	static {

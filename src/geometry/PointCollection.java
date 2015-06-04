@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PointCollection implements Collection<Point> {
 	public final List<Point> points;
-	
+	public static final PointCollection blank = new PointCollection(0);
 	public PointCollection() {
 		points = Collections.synchronizedList(new ArrayList<Point>());
 	}

@@ -28,9 +28,14 @@ public class MoveCommand extends Command{
 			return false;
 		}
 	}
-
+	private MoveAction<Player> temp;
 	@Override
 	public PointCollection preview(String[] args) {
-		return player.pathToPreview(Integer.parseInt(args[1]), Integer.parseInt(args[2])).pointsToHighlight();
+		if(args.length != 3) return PointCollection.blank;
+		temp = player.pathToPreview(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+		if(temp == null) {
+			return PointCollection.blank;
+		}
+		return temp.pointsToHighlight();
 	}
 }
