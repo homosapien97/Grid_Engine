@@ -1,5 +1,6 @@
 package terminal;
 
+import entity.Player;
 import geometry.PointCollection;
 import action.SpellAction;
 
@@ -14,7 +15,7 @@ public class CastCommand extends Command{
 		if(args.length != 4) return false; 
 		try {
 			if(action == null) {
-				action = new SpellAction(player.spellInventory[Integer.parseInt(args[1])], player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), true);
+				action = new SpellAction(Player.player.spellInventory[Integer.parseInt(args[1])], Player.player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), true);
 				action = null; //set action to null once executed.
 				return true;
 			} else {
@@ -31,7 +32,7 @@ public class CastCommand extends Command{
 	public PointCollection preview(String[] args) { //takes args including first token, which should be same as header.
 		if(args.length != 4) return new PointCollection();
 		try {
-			action = new SpellAction(player.spellInventory[Integer.parseInt(args[1])], player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), false);
+			action = new SpellAction(Player.player.spellInventory[Integer.parseInt(args[1])], Player.player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), false);
 			return action.pointsToHighlight();
 		} catch(NumberFormatException e) {
 			return new PointCollection();

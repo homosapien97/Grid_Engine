@@ -16,7 +16,7 @@ public class MoveCommand extends Command{
 		if(args.length != 3) return false;
 		try {
 			if(action == null) {
-				action = new MoveAction<Player>(player, Integer.parseInt(args[1]), Integer.parseInt(args[2]), true);
+				action = new MoveAction<Player>(Player.player, Integer.parseInt(args[1]), Integer.parseInt(args[2]), true);
 				action = null; //set action to null once executed.
 				return true;
 			} else {
@@ -32,7 +32,7 @@ public class MoveCommand extends Command{
 	@Override
 	public PointCollection preview(String[] args) {
 		if(args.length != 3) return PointCollection.blank;
-		temp = player.pathToPreview(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+		temp = Player.player.pathToPreview(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 		if(temp == null) {
 			return PointCollection.blank;
 		}

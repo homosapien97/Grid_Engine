@@ -1,7 +1,7 @@
 package entity;
 
 
-import display.Camera;
+//import display.Camera;
 import action.Action;
 import action.MoveAction;
 import ai.Path;
@@ -16,12 +16,14 @@ import spells.PlasmaSpell;
 import spells.ShieldSpell;
 import spells.SwordSpell;
 import spells.WaterSpell;
+import terrain.Stone;
 import magic.Spell;
 import general.Tools;
 import world.Chunk;
 import world.LoadedChunks;
 
 public class Player extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Player> {
+	public static final Player player = new Player(0, 0, new Chunk(0, 0, true, Stone.get()), "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1, 1);
 	public int maxHealth;
 	public int health;
 	public int natArmor;
@@ -102,7 +104,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	
 	public Player(int x, int y, Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, int ticksPerTile, int maxActions) {
 		super(x, y, c, sprite, maxActions);
-		Camera.init(this);
+//		Camera.init(this);
 		LoadedChunks.init(c);
 		maxHealth = hp;
 		health = hp;
@@ -123,7 +125,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	}
 	public Player(int x, int y, Chunk c, String sprite) {
 		super(x, y, c, sprite, 1);
-		Camera.init(this);
+//		Camera.init(this);
 		LoadedChunks.init(c);
 		maxHealth = 10;
 		health = 10;

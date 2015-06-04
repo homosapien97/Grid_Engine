@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import display.Camera;
 import display.Display;
+import entity.Player;
 import world.Chunk;
 
 public class Tools {
@@ -48,16 +49,16 @@ public class Tools {
 //			return Display.
 //		}
 		public static Point screenCoordToAbsCoord(int sx, int sy) {
-			return new Point(Camera.player.getAbsoluteX() - Display.WIDTH/2 + sx, Camera.player.getAbsoluteY() - Display.HEIGHT/2 + sy);
+			return new Point(Player.player.getAbsoluteX() - Display.WIDTH/2 + sx, Player.player.getAbsoluteY() - Display.HEIGHT/2 + sy);
 		}
 		public static Point screenCoordToAbsCoord(Point p) {
-			return new Point(p, Camera.player.getAbsoluteX() - Display.WIDTH/2, Camera.player.getAbsoluteY() - Display.HEIGHT/2);
+			return new Point(p, Player.player.getAbsoluteX() - Display.WIDTH/2, Player.player.getAbsoluteY() - Display.HEIGHT/2);
 		}
 		public static Point absCoordToScreenCoord(int ax, int ay) {
-			return new Point(Display.WIDTH/2 + ax - Camera.player.getAbsoluteX(), Display.HEIGHT/2 + ay - Camera.player.getAbsoluteY());
+			return new Point(Display.WIDTH/2 + ax - Player.player.getAbsoluteX(), Display.HEIGHT/2 + ay - Player.player.getAbsoluteY());
 		}
 		public static Point absCoordToScreenCoord(Point p) {
-			return new Point(p, Display.WIDTH/2 - Camera.player.getAbsoluteX(), Display.HEIGHT/2 - Camera.player.getAbsoluteY());
+			return new Point(p, Display.WIDTH/2 - Player.player.getAbsoluteX(), Display.HEIGHT/2 - Player.player.getAbsoluteY());
 		}
 	}
 	

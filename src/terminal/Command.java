@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import entity.Player;
+//import entity.Player;
 import geometry.PointCollection;
 import action.Action;
 
@@ -12,7 +12,7 @@ public abstract class Command {
 	public static Map<String, Command> commands = Collections.synchronizedMap(new HashMap<String, Command>());
 	public final String header;
 	public Action action;
-	protected static Player player = null;
+//	protected static Player player = null;
 	
 	protected Command(String header) {
 		System.out.println("Creating new command: " + header);
@@ -20,12 +20,12 @@ public abstract class Command {
 		commands.put(header, this);
 	}
 	
-	public static boolean init(Player p) {
-		if(player == null) {
-			player = p;
-		}
-		return false;
-	}
+//	public static boolean init(Player p) {
+//		if(player == null) {
+//			player = p;
+//		}
+//		return false;
+//	}
 	
 	public abstract boolean run(String[] args);
 	
