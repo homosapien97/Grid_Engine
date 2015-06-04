@@ -38,11 +38,16 @@ public class Line {
 		m = ((double) a.y - b.y) / (a.x - b.x);
 		construct();
 	}
+	/**
+	 * Only cuts, doesn't lengthen
+	 * @param from
+	 * @param length
+	 */
 	public Line(Line from, int length) {
 		if(length < from.points.length && length > 0) {
 			a = from.a;
 			Point temp = null;
-			for(int i = 0; i < from.points.length && Tools.nav.distance(a, from.points[i]) <= length; i++) {
+			for(int i = 0; i < length/*from.points.length && Tools.nav.distance(a, from.points[i]) <= length*/; i++) {
 				temp = from.points[i];
 			}
 			b = temp;
@@ -56,15 +61,15 @@ public class Line {
 			construct();
 		} else {
 			//TODO implement line lengthening
-			a = null;
-			b = null;
-			axLbx = false;
-			ayLby = false;
-			tl = null;
-			xoffset = 0;
-			yoffset = 0;
-			points = null;
-			m = 0;
+			a = from.a;
+			b = from.b;
+			axLbx = from.axLbx;
+			ayLby = from.ayLby;
+			tl = from.tl;
+			xoffset = from.xoffset;
+			yoffset = from.yoffset;
+			points = from.points;
+			m = from.m;
 		}
 	}
 	

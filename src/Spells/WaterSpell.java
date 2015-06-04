@@ -94,6 +94,7 @@ public class WaterSpell extends Spell{
 	public PointCollection cast(Entity caster, int x, int y) {
 		areaL = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
 		areaL = new Line(areaL, range[level]);
+		areaC = null;
 		List<Entity> temp;
 		for(int i = 1; i < areaL.points.length; i++) {
 			if(LoadedChunks.heightAt(areaL.points[i].x, areaL.points[i].y) > 0) {
@@ -119,6 +120,9 @@ public class WaterSpell extends Spell{
 				}
 				break;
 			}
+		}
+		if(areaC == null) {
+			areaC = new Circle(areaL.b.x, areaL.b.y, radius[level]);
 		}
 		PointCollection ret = new PointCollection(areaL);
 		ret.addAll(new PointCollection(areaC));

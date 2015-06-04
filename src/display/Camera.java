@@ -8,12 +8,14 @@ import java.util.List;
 
 
 
+
 import action.Action;
 import action.MoveAction;
 import action.SpellAction;
 import entity.Player;
 import entity.Entity;
 import geometry.Point;
+import geometry.PointCollection;
 import world.LoadedChunks;
 import terrain.Empty;
 
@@ -122,6 +124,7 @@ public class Camera {
 		return entityImageSnapshot;
 	}
 	private static char tempChar;
+	private static PointCollection tempPC;
 	public static char[][] highlightSnapshot() {
 		pAbsX = player.getAbsoluteX();
 		pAbsY = player.getAbsoluteY();
@@ -139,8 +142,11 @@ public class Camera {
 			} else {
 				tempChar = GENERIC;
 			}
-			for(Point p : a.pointsToHighlight()) {
-				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
+			tempPC = a.pointsToHighlight();
+			if(tempPC != null) {
+				for(Point p : a.pointsToHighlight()) {
+					highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
+				}
 			}
 		}
 		return highlightSnapshot;

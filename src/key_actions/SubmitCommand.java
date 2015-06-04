@@ -9,12 +9,12 @@ import display.GameDisplay;
 
 @SuppressWarnings("serial")
 public class SubmitCommand extends AbstractAction {
-
+	public static String[] last;
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 //		GameDisplay.submitCommand();
 		System.out.println("cmd submitted");
 		Core.gameState = OpenCMDLog.oldState;
-		GameDisplay.submitCommand();
+		last = GameDisplay.submitCommand().split(" ");
 	}
 }

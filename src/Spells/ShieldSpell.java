@@ -21,8 +21,8 @@ public class ShieldSpell extends Spell{
 	public static final ShieldSpell[] spells = {new ShieldSpell(0), new ShieldSpell(1), new ShieldSpell(2), new ShieldSpell(3), new ShieldSpell(4), new ShieldSpell(5), new ShieldSpell(6)};
 	
 	public int ticks = 0;
-	public static Point[][] area;
-	public static int[][] oldHeights;
+	public static Point[][] area = new Point[3][3];
+	public static int[][] oldHeights = new int[3][3];
 	
 	protected ShieldSpell(int level){
 //		super(0,0,0,"Shield lv" + level, filenames[level]);
@@ -101,7 +101,7 @@ public class ShieldSpell extends Spell{
 				}
 			}
 		}
-		if(ticks == duration) {
+		if(ticks >= duration) {
 			for(int i = -1; i < 2; i++) {
 				for(int j = -1; j < 2; j++) {
 					LoadedChunks.setHeightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j, oldHeights[i + 1][j + 1]);

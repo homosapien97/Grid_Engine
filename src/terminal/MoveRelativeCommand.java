@@ -4,10 +4,10 @@ import action.MoveAction;
 import geometry.PointCollection;
 import entity.Player;
 
-public class MoveCommand extends Command{
-	public static final MoveCommand moveCommand = new MoveCommand();
-	protected MoveCommand() {
-		super("move");
+public class MoveRelativeCommand extends Command{
+	public static final MoveRelativeCommand moveRelativeCommand = new MoveRelativeCommand();
+	protected MoveRelativeCommand() {
+		super("mr");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -16,7 +16,7 @@ public class MoveCommand extends Command{
 		if(args.length != 3) return false;
 		try {
 			if(action == null) {
-				action = new MoveAction<Player>(player, Integer.parseInt(args[1]), Integer.parseInt(args[2]), true);
+				action = new MoveAction<Player>(player, player.getAbsoluteX() + Integer.parseInt(args[1]), player.getAbsoluteY() + Integer.parseInt(args[2]), true);
 				action = null; //set action to null once executed.
 				return true;
 			} else {

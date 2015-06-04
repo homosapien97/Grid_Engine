@@ -1,5 +1,6 @@
 package run;
 
+import key_actions.SubmitCommand;
 import action.Action;
 import action.Clock;
 import core.*;
@@ -34,6 +35,7 @@ public class Main {
 					Tools.time.wait(400);
 					break;
 				case PAUSED:
+//					System.out.println("p");
 					stepGraphics();
 					Tools.time.wait(1);
 					break;
@@ -70,17 +72,19 @@ public class Main {
 		stepGraphics();
 	}
 	
-	public static void stepGraphics() {
-		Core.frame.setVisible(true);
+	public static void stepGraphics() {		
 		Core.frame.repaint();
+//		Core.frame.setVisible(true); //THIS CAUSES RANDOM INFINITE HANGUPS
 		Core.frame.getContentPane().repaint();
 	}
 	
 
 	private static void stepState() {
-		player.pathTo((int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteX()), 
-				(int)(Math.random() * player.vsquare().RADIUS * 2 + 1 - player.vsquare().RADIUS + player.getAbsoluteY()));
+		if(SubmitCommand.last != null) {
+			Command.submitCurrent(SubmitCommand.last);
+			SubmitCommand.last = null;
+		}
 		Action.runAll();
-		Clock.tick();
+		System.out.println(Clock.tick());
 	}
 }

@@ -226,22 +226,25 @@ public class GameDisplay extends Display {
 	}
 	
 	//command logging
-	public static void submitCommand(){
+	private static String command;
+	public static String submitCommand(){
 //		if(!cmdInput.getText().equals("")){
-			if(cmdLog.getText().equals("")){
-				cmdLog.setText(cmdInput.getText());
-			}else{
-				cmdLog.append("\n" + cmdInput.getText());
-			}
-			cmdInput.setText("");
-			
-			cmdLogVisible = !cmdLogVisible;
-			
-//			if(cmdLogVisible){
-//				Core.frame.getContentPane().repaint();
-//			}
-			
-			Core.frame.getContentPane().repaint();
+		command = cmdInput.getText();
+		if(cmdLog.getText().equals("")){
+			cmdLog.setText(command);
+		}else{
+			cmdLog.append("\n" + command);
+		}
+		cmdInput.setText("");
+		
+		cmdLogVisible = !cmdLogVisible;
+		
+//		if(cmdLogVisible){
+//			Core.frame.getContentPane().repaint();
+//		}
+		
+		Core.frame.getContentPane().repaint();
+		return command;
 //		}
 	}
 	

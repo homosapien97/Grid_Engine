@@ -19,8 +19,8 @@ public class PointCollection implements Collection<Point> {
 	public PointCollection(Circle c) {
 		points = Collections.synchronizedList(new ArrayList<Point>(c.area()));
 		synchronized(points) {
-			for(int i = c.x - c.r; i < c.r * 2 + 1; i++) {
-				for(int j = c.y - c.r; j < c.r * 2 + 1; j++) {
+			for(int i = c.x - c.r; i < c.x + c.r + 1; i++) {
+				for(int j = c.y - c.r; j < c.y + c.r + 1; j++) {
 					if(c.inside(i, j)) points.add(new Point(i, j));
 				}
 			}

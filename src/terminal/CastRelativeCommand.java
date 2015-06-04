@@ -3,18 +3,19 @@ package terminal;
 import geometry.PointCollection;
 import action.SpellAction;
 
-public class CastCommand extends Command{
-	public static final CastCommand castCommand = new CastCommand();
-	protected CastCommand() {
-		super("cast");
+public class CastRelativeCommand extends Command{
+	public static final CastRelativeCommand castRelativeCommand = new CastRelativeCommand();
+	protected CastRelativeCommand() {
+		super("cr");
 	}
 
 	@Override
 	public boolean run(String[] args) {
-		if(args.length != 4) return false; 
+		if(args.length != 4 && Integer.parseInt(args[1]) < player.spellInventory.length) return false; 
 		try {
 			if(action == null) {
-				action = new SpellAction(player.spellInventory[Integer.parseInt(args[1])], player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), true);
+				action = new SpellAction(player.spellInventory[Integer.parseInt(args[1])], player, player.getAbsoluteX() + Integer.parseInt(args[2]), 
+						player.getAbsoluteY() + Integer.parseInt(args[3]), true);
 				action = null; //set action to null once executed.
 				return true;
 			} else {

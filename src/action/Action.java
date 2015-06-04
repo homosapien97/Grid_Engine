@@ -48,14 +48,16 @@ public abstract class Action implements Runnable{
 	public static void runAll() {
 		synchronized(queue) {
 			for(Action a : queue) {
+				
 				if(Clock.ticks >= a.startTime && (Clock.ticks <= a.startTime + a.totalTicks || a.totalTicks < 0)) {
+					System.out.println("executing " + a.getClass() + " from " + a.startTime + " to " + (a.startTime + a.totalTicks));
 					a.run();
 				}
 			}
-			queue.removeIf(s -> (s.done()));
 			synchronized(highlightable) {
 				highlightable.removeIf(s -> (!queue.contains(s)));
 			}
+			queue.removeIf(s -> (s.done()));
 		}
 	}
 	

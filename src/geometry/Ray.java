@@ -44,11 +44,16 @@ public class Ray {
 		m = ((double) a.y - b.y) / (a.x - b.x);
 		construct();
 	}
+	/**
+	 * Only cuts, doesnt' lengthen
+	 * @param from
+	 * @param length
+	 */
 	public Ray(Ray from, int length) {
 		if(length < from.points.length && length > 0) {
 			a = from.a;
 			Point temp = null;
-			for(int i = 0; i < from.points.length && Tools.nav.distance(a, from.points[i]) <= length; i++) {
+			for(int i = 0; i < length/*from.points.length && Tools.nav.distance(a, from.points[i]) <= length*/; i++) {
 				temp = from.points[i];
 			}
 			b = temp;
@@ -64,15 +69,16 @@ public class Ray {
 			construct();
 		} else {
 			//TODO implement line lengthening
-			a = null;
-			b = null;
-			axLbx = false;
-			ayLby = false;
-			tl = null;
-			xoffset = 0;
-			yoffset = 0;
-			points = null;
-			m = 0;
+			System.out.println("Null Ray");
+			a = from.a;
+			b = from.b;
+			axLbx = from.axLbx;
+			ayLby = from.axLbx;
+			tl = from.tl;
+			xoffset = from.xoffset;
+			yoffset = from.yoffset;
+			points = from.points;
+			m = from.m;
 		}
 	}
 	

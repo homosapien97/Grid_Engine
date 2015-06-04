@@ -26,7 +26,11 @@ import spells.PlasmaSpell;
 import spells.ShieldSpell;
 import spells.SwordSpell;
 import spells.WaterSpell;
+import terminal.CastRelativeCommand;
 import terminal.Command;
+import terminal.MoveCommand;
+import terminal.CastCommand;
+import terminal.MoveRelativeCommand;
 import terrain.Quicksand;
 import terrain.Stone;
 import terrain.Empty;
@@ -99,6 +103,7 @@ public class Core {
 		Core.loadUIGraphics();
 		Core.loadCards();
 		Core.loadAdditionalGraphics();
+		Core.loadCommands();
 		
 		//load pages
 		gameDisplay = new GameDisplay();
@@ -229,6 +234,12 @@ public class Core {
 		BowSpell.load();
 		ShieldSpell.load();
 		SwordSpell.load();
+	}
+	private static void loadCommands() {
+		Object a = MoveCommand.moveCommand;
+		a = CastCommand.castCommand;
+		a = MoveRelativeCommand.moveRelativeCommand;
+		a = CastRelativeCommand.castRelativeCommand;
 	}
 	
 	private static void loadAdditionalGraphics(){

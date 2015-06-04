@@ -10,7 +10,7 @@ public class SpellAction extends Action{
 	int y;
 
 	public SpellAction(Spell spell, Entity caster, int x, int y, boolean execute) {
-		super(caster, Clock.getTicks() + spell.casting(), spell.channel(), execute, true);
+		super(caster, Clock.getTicks() + spell.casting(), spell.channel() + 1, execute, true);
 		this.spell = spell;
 		this.x = x;
 		this.y = y;
