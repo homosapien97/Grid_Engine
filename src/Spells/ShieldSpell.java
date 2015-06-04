@@ -11,8 +11,8 @@ import world.LoadedChunks;
 
 public class ShieldSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
-	public static final int[] casting = {0,0,0,0,0,0,0};
-	public static final int[] channel = {0,0,0,0,0,0,0};
+	public static final int[] casting = {1,1,1,1,1,1,0};
+	public static final int[] channel = {1,2,3,4,5,6,7};
 	public static final int[] trueDamage = {0,0,0,0,0,0,0};
 	public static final int[] damage = {0,0,0,0,0,0,0};
 	public static final String[] name = {"Shield level 0", "Shield level 1", "Shield level 2", "Shield level 3", "Shield level 4", "Shield level 5", "Shield level 6",};

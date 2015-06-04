@@ -31,6 +31,6 @@ public class MoveRelativeCommand extends Command{
 
 	@Override
 	public PointCollection preview(String[] args) {
-		return player.pathToPreview(Integer.parseInt(args[1]), Integer.parseInt(args[2])).pointsToHighlight();
+		return player.pathToPreview(player.getAbsoluteX() + Integer.parseInt(args[1]), player.getAbsoluteY() + Integer.parseInt(args[2])).pointsToHighlight();
 	}
 }

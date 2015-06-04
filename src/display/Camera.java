@@ -9,6 +9,8 @@ import java.util.List;
 
 
 
+
+import key_actions.PreviewCommand;
 import action.Action;
 import action.MoveAction;
 import action.SpellAction;
@@ -147,6 +149,11 @@ public class Camera {
 				for(Point p : a.pointsToHighlight()) {
 					highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
 				}
+			}
+		}
+		if(PreviewCommand.current != null) {
+			for(Point p : PreviewCommand.current) {
+				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = GENERIC;
 			}
 		}
 		return highlightSnapshot;

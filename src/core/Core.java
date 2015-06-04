@@ -45,6 +45,7 @@ import general.Tools;
 import key_actions.CloseCMDLog;
 import key_actions.ExitToMainMenu;
 import key_actions.OpenCMDLog;
+import key_actions.PreviewCommand;
 //import key_actions.TogglePause;
 import key_actions.SubmitCommand;
 import key_actions.ToggleHUD;
@@ -185,6 +186,7 @@ public class Core {
 		
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "closeCMDLog");
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "submitCommand");
+		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "previewCommand");
 		
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleInventory");
@@ -199,6 +201,7 @@ public class Core {
 		
 		gameAM_CMDLINE.put("closeCMDLog", new CloseCMDLog());
 		gameAM_CMDLINE.put("submitCommand", new SubmitCommand());
+		gameAM_CMDLINE.put("previewCommand", new PreviewCommand());
 		
 		gameAM_INVENTORY.put("toggleInventory", new ToggleInventory());
 //		gameAM_INVENTORY.put("toggleCMDLog", new ToggleCMDLog());

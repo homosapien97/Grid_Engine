@@ -16,5 +16,6 @@ public class SubmitCommand extends AbstractAction {
 		System.out.println("cmd submitted");
 		Core.gameState = OpenCMDLog.oldState;
 		last = GameDisplay.submitCommand().split(" ");
+		PreviewCommand.current = null;
 	}
 }
