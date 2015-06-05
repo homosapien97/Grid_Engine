@@ -37,6 +37,7 @@ import display.AboutPage;
 import display.Display;
 import display.GameDisplay;
 import display.ImageTileBackground;
+import display.LoadingScreen;
 import display.MainMenu;
 import display.SettingsPage;
 import entity.Player;
@@ -67,6 +68,7 @@ public class Core {
 	static MainMenu mainMenu;
 	static SettingsPage settingsPage;
 	static AboutPage aboutPage;
+	static LoadingScreen loadingScreen;
 	
 	//background
 	private static Image bg = null;
@@ -110,6 +112,7 @@ public class Core {
 		mainMenu = new MainMenu();
 		settingsPage = new SettingsPage();
 		aboutPage = new AboutPage();
+		loadingScreen = new LoadingScreen();
 		
 		//init settings and about pages
 		frame.setVisible(false);
@@ -123,11 +126,11 @@ public class Core {
 		def = frame.getContentPane();
 		
 		//set background
-		background = new ImageTileBackground(bg);
-		frame.setContentPane(background);
+		//background = new ImageTileBackground(bg);
+		//frame.setContentPane(background);
 		
 		//content pane
-		frame.getContentPane().add(mainMenu);
+		frame.getContentPane().add(loadingScreen);
 		frame.setSize(Display.getDimensions());
 		frame.setBackground(Color.black);
 		frame.pack();
