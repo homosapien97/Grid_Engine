@@ -92,7 +92,7 @@ public class WaterSpell extends Spell{
 
 	@Override
 	public PointCollection cast(Entity caster, int x, int y) {
-		areaL = new Line(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
+		areaL = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
 		areaL = new Line(areaL, range[level]);
 		areaC = null;
 		List<Entity> temp;
@@ -132,7 +132,7 @@ public class WaterSpell extends Spell{
 
 	@Override
 	public PointCollection preview(Entity caster, int x, int y) {
-		areaL = new Line(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
+		areaL = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
 		areaL = new Line(areaL, range[level]);
 		for(int i = 1; i < areaL.points.length; i++) {
 			if(LoadedChunks.heightAt(areaL.points[i].x, areaL.points[i].y) > 0) {

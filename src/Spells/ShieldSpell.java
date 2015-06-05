@@ -91,10 +91,10 @@ public class ShieldSpell extends Spell{
 		if(ticks == 0) {
 			for(int i = -1; i < 2; i++) {
 				for(int j = -1; j < 2; j++) {
-					oldHeights[i + 1][j + 1] = LoadedChunks.heightAt(caster.REFACTORSTUFFgetAbsoluteX() + i, caster.REFACTORSTUFFgetAbsoluteY() + j);
-					if((i != 0 || j != 0) && LoadedChunks.entitiesAt(caster.REFACTORSTUFFgetAbsoluteX() + i, caster.REFACTORSTUFFgetAbsoluteY() + j).size() == 0) {
-						area[i + 1][j + 1] = new Point(caster.REFACTORSTUFFgetAbsoluteX() + i, caster.REFACTORSTUFFgetAbsoluteY() + j);
-						LoadedChunks.setHeightAt(caster.REFACTORSTUFFgetAbsoluteX() + i, caster.REFACTORSTUFFgetAbsoluteY() + j, 1);
+					oldHeights[i + 1][j + 1] = LoadedChunks.heightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j);
+					if((i != 0 || j != 0) && LoadedChunks.entitiesAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j).size() == 0) {
+						area[i + 1][j + 1] = new Point(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j);
+						LoadedChunks.setHeightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j, 1);
 					} else {
 						area[i + 1][j + 1] = null;
 					}
@@ -104,7 +104,7 @@ public class ShieldSpell extends Spell{
 		if(ticks >= duration) {
 			for(int i = -1; i < 2; i++) {
 				for(int j = -1; j < 2; j++) {
-					LoadedChunks.setHeightAt(caster.REFACTORSTUFFgetAbsoluteX() + i, caster.REFACTORSTUFFgetAbsoluteY() + j, oldHeights[i + 1][j + 1]);
+					LoadedChunks.setHeightAt(caster.getAbsoluteX() + i, caster.getAbsoluteY() + j, oldHeights[i + 1][j + 1]);
 				}
 			}
 			ticks = -1;

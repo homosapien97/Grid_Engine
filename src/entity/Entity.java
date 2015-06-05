@@ -43,11 +43,11 @@ public abstract class Entity {
 	
 	//position in relation to all chunks
 	
-	public int REFACTORSTUFFgetAbsoluteX() {
+	public int getAbsoluteX() {
 //		return chunk.pos.x * Chunk.DIM + absoluteX;
 		return absoluteX;
 	}
-	public int REFACTORSTUFFgetAbsoluteY() {
+	public int getAbsoluteY() {
 //		return chunk.pos.y * Chunk.DIM + absoluteY;
 		return absoluteY;
 	}

@@ -49,16 +49,16 @@ public class Tools {
 //			return Display.
 //		}
 		public static Point screenCoordToAbsCoord(int sx, int sy) {
-			return new Point(Player.player.REFACTORSTUFFgetAbsoluteX() - Display.WIDTH/2 + sx, Player.player.REFACTORSTUFFgetAbsoluteY() - Display.HEIGHT/2 + sy);
+			return new Point(Player.player.getAbsoluteX() - Display.WIDTH/2 + sx, Player.player.getAbsoluteY() - Display.HEIGHT/2 + sy);
 		}
 		public static Point screenCoordToAbsCoord(Point p) {
-			return new Point(p, Player.player.REFACTORSTUFFgetAbsoluteX() - Display.WIDTH/2, Player.player.REFACTORSTUFFgetAbsoluteY() - Display.HEIGHT/2);
+			return new Point(p, Player.player.getAbsoluteX() - Display.WIDTH/2, Player.player.getAbsoluteY() - Display.HEIGHT/2);
 		}
 		public static Point absCoordToScreenCoord(int ax, int ay) {
-			return new Point(Display.WIDTH/2 + ax - Player.player.REFACTORSTUFFgetAbsoluteX(), Display.HEIGHT/2 + ay - Player.player.REFACTORSTUFFgetAbsoluteY());
+			return new Point(Display.WIDTH/2 + ax - Player.player.getAbsoluteX(), Display.HEIGHT/2 + ay - Player.player.getAbsoluteY());
 		}
 		public static Point absCoordToScreenCoord(Point p) {
-			return new Point(p, Display.WIDTH/2 - Player.player.REFACTORSTUFFgetAbsoluteX(), Display.HEIGHT/2 - Player.player.REFACTORSTUFFgetAbsoluteY());
+			return new Point(p, Display.WIDTH/2 - Player.player.getAbsoluteX(), Display.HEIGHT/2 - Player.player.getAbsoluteY());
 		}
 	}
 	

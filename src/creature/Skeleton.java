@@ -33,12 +33,12 @@ public class Skeleton extends Creature {
 	@Override
 	public void tick() {
 		synchronized(super.vsquare()) {
-			super.vsquare().trace(REFACTORSTUFFgetAbsoluteX(), REFACTORSTUFFgetAbsoluteY());
+			super.vsquare().trace(getAbsoluteX(), getAbsoluteY());
 			entities = LoadedChunks.entitiesIn(super.vsquare().x - super.vsquare().RADIUS, super.vsquare().y - super.vsquare().RADIUS, 
 					super.vsquare().x + super.vsquare().RADIUS, super.vsquare().y + super.vsquare().RADIUS);
 			for(Entity e : entities) {
-				if(e instanceof Player && super.vsquare().canSee(e.REFACTORSTUFFgetAbsoluteX(), e.REFACTORSTUFFgetAbsoluteY())) {
-					super.pathTo(e.REFACTORSTUFFgetAbsoluteX(), e.REFACTORSTUFFgetAbsoluteY());
+				if(e instanceof Player && super.vsquare().canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
+					super.pathTo(e.getAbsoluteX(), e.getAbsoluteY());
 				}
 			}
 		}

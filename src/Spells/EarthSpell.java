@@ -94,7 +94,7 @@ public class EarthSpell extends Spell{
 	 */
 	public PointCollection cast(Entity caster, int x, int y) {
 		//This doesn't pass thru enemies. Maybe for higher levels it should? Or should that be a separate spell?
-		area = new Line(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
+		area = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
 		area = new Line(area, range[level]);
 		List<Entity> temp;
 		int tempi;
@@ -126,7 +126,7 @@ public class EarthSpell extends Spell{
 
 	@Override
 	public PointCollection preview(Entity caster, int x, int y) {
-		area = new Line(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
+		area = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
 		area = new Line(area, range[level]);
 		for(int i = 1; i < area.points.length; i++) {
 			if(LoadedChunks.heightAt(area.points[i].x, area.points[i].y) > 0) {

@@ -62,8 +62,8 @@ public class Camera {
 	private static int pAbsY;
 	
 	public static String[][] terrainSpriteFilenameSnapshot() {
-		pAbsX = Player.player.REFACTORSTUFFgetAbsoluteX();
-		pAbsY = Player.player.REFACTORSTUFFgetAbsoluteY();
+		pAbsX = Player.player.getAbsoluteX();
+		pAbsY = Player.player.getAbsoluteY();
 		
 		for(int j = 0; j < Display.HEIGHT; j++) {
 			for(int i = 0; i < Display.WIDTH; i++) {
@@ -77,9 +77,9 @@ public class Camera {
 	}
 	
 	public static Image[][] terrainImageSnapshot() {
-		pAbsX = Player.player.REFACTORSTUFFgetAbsoluteX();
-		pAbsY = Player.player.REFACTORSTUFFgetAbsoluteY();
-		Player.player.visionSquare.trace(Player.player.REFACTORSTUFFgetAbsoluteX(), Player.player.REFACTORSTUFFgetAbsoluteY());
+		pAbsX = Player.player.getAbsoluteX();
+		pAbsY = Player.player.getAbsoluteY();
+		Player.player.visionSquare.trace(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
 		for(int j = 0; j < Display.HEIGHT; j++) {
 			for(int i = 0; i < Display.WIDTH; i++) {
 				if(Player.player.visionSquare.canSee(pAbsX - Display.WIDTH / 2 + i, pAbsY - Display.HEIGHT / 2 + j)) {
@@ -95,12 +95,12 @@ public class Camera {
 	
 	public static String[][] entitySnapshot() {
 		//TODO rewrite this to use images, once we have them, and update GameDisplay entity handling. 
-		Player.player.visionSquare.trace(Player.player.REFACTORSTUFFgetAbsoluteX(), Player.player.REFACTORSTUFFgetAbsoluteY());
+		Player.player.visionSquare.trace(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
 		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
 		
 		for(Entity e : entities) {
-			if(Player.player.visionSquare.canSee(e.REFACTORSTUFFgetAbsoluteX(), e.REFACTORSTUFFgetAbsoluteY())) {
-				entitySnapshot[Display.WIDTH/2 + e.REFACTORSTUFFgetAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.REFACTORSTUFFgetAbsoluteY() - pAbsY] = e.filename;
+			if(Player.player.visionSquare.canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
+				entitySnapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.filename;
 			}
 		}
 
@@ -108,8 +108,8 @@ public class Camera {
 	}
 	public static Image[][] entityImageSnapshot() {
 		//TODO rewrite this to use images, once we have them, and update GameDisplay entity handling.
-		pAbsX = Player.player.REFACTORSTUFFgetAbsoluteX();
-		pAbsY = Player.player.REFACTORSTUFFgetAbsoluteY();
+		pAbsX = Player.player.getAbsoluteX();
+		pAbsY = Player.player.getAbsoluteY();
 		Player.player.visionSquare.trace(pAbsX, pAbsY);
 		entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
 		for(int i = 0; i < entityImageSnapshot.length; i++) {
@@ -118,8 +118,8 @@ public class Camera {
 			}
 		}
 		for(Entity e : entities) {
-			if(Player.player.visionSquare.canSee(e.REFACTORSTUFFgetAbsoluteX(), e.REFACTORSTUFFgetAbsoluteY())) {
-				entityImageSnapshot[Display.WIDTH/2 + e.REFACTORSTUFFgetAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.REFACTORSTUFFgetAbsoluteY() - pAbsY] = e.sprite();
+			if(Player.player.visionSquare.canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
+				entityImageSnapshot[Display.WIDTH/2 + e.getAbsoluteX() - pAbsX][Display.HEIGHT/2 + e.getAbsoluteY() - pAbsY] = e.sprite();
 			}
 		}
 
@@ -128,8 +128,8 @@ public class Camera {
 	private static char tempChar;
 	private static PointCollection tempPC;
 	public static char[][] highlightSnapshot() {
-		pAbsX = Player.player.REFACTORSTUFFgetAbsoluteX();
-		pAbsY = Player.player.REFACTORSTUFFgetAbsoluteY();
+		pAbsX = Player.player.getAbsoluteX();
+		pAbsY = Player.player.getAbsoluteY();
 		actions = Action.toHighlight();
 		for(int i = 0; i < highlightSnapshot.length; i++) {
 			for(int j = 0; j < highlightSnapshot[0].length; j++) {

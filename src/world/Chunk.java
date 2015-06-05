@@ -441,7 +441,7 @@ public class Chunk {
 	public Entity REFACTORSTUFFentityAt(int absoluteX, int absoluteY) {
 		synchronized(entities) {
 			for(Entity e : entities) {
-				if(e.REFACTORSTUFFgetAbsoluteX() == absoluteX && e.REFACTORSTUFFgetAbsoluteY() == absoluteY){
+				if(e.getAbsoluteX() == absoluteX && e.getAbsoluteY() == absoluteY){
 					return e;
 				}
 			}
@@ -460,7 +460,7 @@ public class Chunk {
 		synchronized(entities) {
 			synchronized(ret) {
 				for(Entity e: entities) {
-					if(e.REFACTORSTUFFgetAbsoluteX() == absoluteX && e.REFACTORSTUFFgetAbsoluteY() == absoluteY) 
+					if(e.getAbsoluteX() == absoluteX && e.getAbsoluteY() == absoluteY) 
 						ret.add(e);
 				}
 			}

@@ -90,12 +90,12 @@ public class SwordSpell extends Spell{
 	public PointCollection cast(Entity caster, int x, int y) {
 //		area = new Point(x, y);
 		List<Entity> temp;
-		if(Math.abs(caster.REFACTORSTUFFgetAbsoluteX() - x) < 2 && Math.abs(caster.REFACTORSTUFFgetAbsoluteY() - y) < 2) {
+		if(Math.abs(caster.getAbsoluteX() - x) < 2 && Math.abs(caster.getAbsoluteY() - y) < 2) {
 			area = new Point(x, y);
 			temp = LoadedChunks.entitiesAt(x, y);
 		} else {
-			area = new Point(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteX());
-			temp = LoadedChunks.entitiesAt(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY());
+			area = new Point(caster.getAbsoluteX(), caster.getAbsoluteX());
+			temp = LoadedChunks.entitiesAt(caster.getAbsoluteX(), caster.getAbsoluteY());
 		}
 		if(temp.size() > 0) {
 			int tempi = (int)(Math.random() * temp.size());
@@ -110,10 +110,10 @@ public class SwordSpell extends Spell{
 	@Override
 	public PointCollection preview(Entity caster, int x, int y) {
 		area = new Point(x, y);
-		if(Math.abs(caster.REFACTORSTUFFgetAbsoluteX() - x) < 2 && Math.abs(caster.REFACTORSTUFFgetAbsoluteY() - y) < 2) {
+		if(Math.abs(caster.getAbsoluteX() - x) < 2 && Math.abs(caster.getAbsoluteY() - y) < 2) {
 			area = new Point(x, y);
 		} else {
-			area = new Point(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteX());
+			area = new Point(caster.getAbsoluteX(), caster.getAbsoluteX());
 		}
 		return new PointCollection(area);
 	}

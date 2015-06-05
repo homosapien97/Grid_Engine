@@ -183,7 +183,7 @@ public class LoadedChunks {
 //				synchronized(chunks[i][j].entities) {
 				synchronized(ret) {
 					for(Entity e : chunks[i][j].entities) {
-						if(e.REFACTORSTUFFgetAbsoluteX() >= x1 && e.REFACTORSTUFFgetAbsoluteX() <= x2 && e.REFACTORSTUFFgetAbsoluteY() >= y1 && e.REFACTORSTUFFgetAbsoluteY() <= y2) ret.add(e);
+						if(e.getAbsoluteX() >= x1 && e.getAbsoluteX() <= x2 && e.getAbsoluteY() >= y1 && e.getAbsoluteY() <= y2) ret.add(e);
 					}
 				}
 //				}
