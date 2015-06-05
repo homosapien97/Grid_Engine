@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,10 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import action.Action;
 import action.Clock;
-import action.MoveAction;
-import run.Main;
+import terminal.Command;
 import core.Core;
 import core.GameState;
 import entity.Player;
@@ -394,7 +391,6 @@ public class GameDisplay extends Display {
 		private Point clickedGridPoint = new Point(-1, -1);
 		private geometry.Point absGridPoint = new geometry.Point(0, 0);
 		private int button = 0;
-		//private Action action;
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -407,7 +403,8 @@ public class GameDisplay extends Display {
 			absGridPoint = Tools.nav.screenCoordToAbsCoord(clickedGridPoint.x, clickedGridPoint.y);
 			
 			//move player if right click
-			if(button == 1){
+			if(button == 3){
+				Command.submitCurrent(new String[] {"move", "" + absGridPoint.x, "" + absGridPoint.y});
 			}
 		}
 

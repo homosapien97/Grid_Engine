@@ -1,8 +1,6 @@
 package entity;
 
 
-//import display.Camera;
-import action.Action;
 import action.MoveAction;
 import ai.Path;
 import ai.VisionSquare;
@@ -241,17 +239,21 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	public VisionSquare vsquare() {
 		return visionSquare;
 	}
+	
 	public static void load() {
 		sprite = Tools.img.loadEntitySprite(filename);
 	}
+	
 	@Override
 	public Image sprite() {
 		return sprite;
 	}
+	
 	@Override
 	public Path<Player> getPath() {
 		return path;
 	}
+	
 	@Override
 	public boolean pathTo(int x, int y) {
 //		synchronized(actions) {
@@ -267,6 +269,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 			return false;
 //		}
 	}
+	
 	public MoveAction<Player> pathToPreview(int x, int y) {
 		if(path.constructPathTo(x, y)) {
 			return new MoveAction<Player>(this, x, y, false);

@@ -27,7 +27,6 @@ import spells.ShieldSpell;
 import spells.SwordSpell;
 import spells.WaterSpell;
 import terminal.CastRelativeCommand;
-import terminal.Command;
 import terminal.MoveCommand;
 import terminal.CastCommand;
 import terminal.MoveRelativeCommand;
@@ -163,17 +162,25 @@ public class Core {
 		
 	}
 	
+	//game re-creation
+	public static void newGame(){
+		//gameDisplay = new GameDisplay();
+		//addKeyBinds(gameDisplay);
+
+		//Player.resetPlayer();
+	}
+	
 	//key binding
 	
 	private static void addKeyBinds(GameDisplay game){
 		//get maps
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_FOCUSED);
-		InputMap gameIM_CMDLINE = game.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
+		InputMap gameIM_CMDLINE = GameDisplay.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_INVENTORY = game.inventory.getInputMap(JComponent.WHEN_FOCUSED);
 		//InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		
 		ActionMap gameAM = game.getActionMap();
-		ActionMap gameAM_CMDLINE = game.cmdInput.getActionMap();
+		ActionMap gameAM_CMDLINE = GameDisplay.cmdInput.getActionMap();
 		ActionMap gameAM_INVENTORY = game.inventory.getActionMap();
 		
 		//add to input map
@@ -240,6 +247,7 @@ public class Core {
 	}
 	
 	private static void loadCommands() {
+		@SuppressWarnings("unused")
 		Object a = MoveCommand.moveCommand;
 		a = CastCommand.castCommand;
 		a = MoveRelativeCommand.moveRelativeCommand;
@@ -268,6 +276,17 @@ public class Core {
 		
 		gameState = GameState.PLAYING;
 		gameDisplay.requestFocusInWindow();
+		Main.stepGraphics();
+	}
+	
+	public static void quitGame(){
+		frame.getContentPane().removeAll();
+		frame.setContentPane(background);
+		frame.getContentPane().add(mainMenu);
+		frame.setBackground(Color.black);
+		frame.pack();
+		
+		gameState = GameState.JUST_QUIT_GAME;
 		Main.stepGraphics();
 	}
 	

@@ -41,6 +41,12 @@ public class Main {
 					stepGraphics();
 					Tools.time.wait(1);
 					break;
+				case JUST_QUIT_GAME:
+					//creates a new game display object, essentially makes it so you can play a new game
+					Core.newGame();
+					Tools.time.wait(1);
+					Core.gameState = GameState.IN_MAIN_MENU;
+					break;
 				default:
 					//idle cpu
 					Tools.time.wait(1);
@@ -60,6 +66,7 @@ public class Main {
 //		testChunk.heightmap[10][10] = 1;
 //		testChunk.heightmap[11][10] = 1;
 //		testChunk.heightmap[5][13] = 1;
+		@SuppressWarnings("unused")
 		Player initPlayer = Player.player;
 		GenWall testWall = new GenWall(5, 5, 10, 10, Quicksand.get());
 		testWall.generate();
@@ -79,11 +86,10 @@ public class Main {
 		Core.frame.repaint();
 		
 		EventQueue.invokeLater(new Runnable() {
-	        public void run()
-	        {
+	        public void run() {
 	        	Core.frame.setVisible(true);    
 	        }
-	      });
+	    });
 		
 		Core.frame.getContentPane().repaint();
 	}
@@ -94,6 +100,7 @@ public class Main {
 			Command.submitCurrent(SubmitCommand.last);
 			SubmitCommand.last = null;
 		}
+		
 		Action.runAll();
 		System.out.println(Clock.tick());
 	}
