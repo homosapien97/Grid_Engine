@@ -2,7 +2,6 @@ package display;
 
 import general.Tools;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -13,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
 import core.Core;
@@ -25,6 +25,9 @@ public class LoadingScreen extends Display {
 	
 	//load its resources cause it is running before the load scripts
 	public static Image loadingImage = Tools.img.loadImage("GridSplashX.png", "icons");
+	
+	//the loading bar
+	public JProgressBar progressBar = new JProgressBar(0, 100);
 	
 	public LoadingScreen(){
 		super();
@@ -49,12 +52,16 @@ public class LoadingScreen extends Display {
 		loading.setLayout(loadingLayout);
 		loading.setSize(P_WIDTH, P_HEIGHT);
 		
-		//loading.add(Box.createRigidArea(new Dimension(0,0)));
+		loading.add(Box.createRigidArea(new Dimension(0,50)));
 		
 		//loading text
-		JLabel loadingText = new JLabel("Loading...");
+		JLabel loadingText = new JLabel("Loading...    ");
 		loadingText.setForeground(Color.white);
 		loading.add(loadingText);
+		
+		//loading bar
+		progressBar.setForeground(new Color(204, 132, 73));
+		loading.add(progressBar);
 		
 		//show
 		main.add(loading);
@@ -71,9 +78,6 @@ public class LoadingScreen extends Display {
 
 		@Override
 		protected Object doInBackground() {
-			//load fonts
-			Core.loadFonts();
-			
 			//load graphics
 			Core.loadEntities();
 			Core.loadTerrain();
@@ -81,6 +85,9 @@ public class LoadingScreen extends Display {
 			Core.loadCards();
 			Core.loadAdditionalGraphics();
 			Core.loadCommands();
+
+			//load fonts
+			Core.loadFonts();
 			
 			//load pages
 			Core.gameDisplay = new GameDisplay();

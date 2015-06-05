@@ -221,34 +221,51 @@ public class Core {
 	
 	//loading
 	
+	public static void incrementLoadingProgress(int n){
+		loadingScreen.progressBar.setValue(loadingScreen.progressBar.getValue() + n);
+	}
+	
 	public static void loadCreatures(){
 		Skeleton.load();
+		incrementLoadingProgress(2);
 	}
 	
 	public static void loadEntities(){
 		loadCreatures();
 		Player.load();
+		incrementLoadingProgress(2);
 	}
 	
 	public static void loadTerrain(){
 		Stone.load();
+		incrementLoadingProgress(4);
 		Quicksand.load();
+		incrementLoadingProgress(4);
 		Empty.load();
+		incrementLoadingProgress(4);
 	}
 	
 	public static void loadUIGraphics(){
 		GameDisplay.load();
+		incrementLoadingProgress(4);
 	}
 	
 	public static void loadCards(){
 		EarthSpell.load();
+		incrementLoadingProgress(4);
 		FireSpell.load();
+		incrementLoadingProgress(4);
 		PlasmaSpell.load();
+		incrementLoadingProgress(4);
 		WaterSpell.load();
+		incrementLoadingProgress(4);
 		
 		BowSpell.load();
+		incrementLoadingProgress(4);
 		ShieldSpell.load();
+		incrementLoadingProgress(4);
 		SwordSpell.load();
+		incrementLoadingProgress(4);
 	}
 	
 	public static void loadCommands() {
@@ -261,16 +278,25 @@ public class Core {
 	
 	public static void loadAdditionalGraphics(){
 		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
+		incrementLoadingProgress(4);
 		background = new ImageTileBackground(bg);
 		
 		blueHighlight = Tools.img.loadImage("blueHighlight.png", "general");
+		incrementLoadingProgress(4);
 		cyanHighlight = Tools.img.loadImage("cyanHighlight.png", "general");
+		incrementLoadingProgress(4);
 		greenHighlight = Tools.img.loadImage("greenHighlight.png", "general");
+		incrementLoadingProgress(4);
 		greyHighlight = Tools.img.loadImage("greyHighlight.png", "general");
+		incrementLoadingProgress(4);
 		purpleHighlight = Tools.img.loadImage("purpleHighlight.png", "general");
+		incrementLoadingProgress(4);
 		redHighlight = Tools.img.loadImage("redHighlight.png", "general");
+		incrementLoadingProgress(4);
 		whiteHighlight = Tools.img.loadImage("whiteHighlight.png", "general");
+		incrementLoadingProgress(4);
 		yellowHighlight = Tools.img.loadImage("yellowHighlight.png", "general");
+		incrementLoadingProgress(4);
 	}
 	
 	//game navigation
@@ -342,9 +368,13 @@ public class Core {
 	
 	public static void loadFonts(){
 		cinzel = loadFont("Cinzel.ttf");
+		incrementLoadingProgress(4);
 		cinzelDecorative = loadFont("CinzelDecorative.ttf");
+		incrementLoadingProgress(4);
 		forum = loadFont("Forum.ttf");
+		incrementLoadingProgress(4);
 		courier = loadFont("Courier.ttf");
+		incrementLoadingProgress(4);
 	}
 	
 	public static Font loadFont(String filename){
