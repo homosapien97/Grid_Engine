@@ -64,10 +64,10 @@ public class Core {
 	
 	public final static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	
-	static GameDisplay gameDisplay;
-	static MainMenu mainMenu;
-	static SettingsPage settingsPage;
-	static AboutPage aboutPage;
+	public static GameDisplay gameDisplay;
+	public static MainMenu mainMenu;
+	public static SettingsPage settingsPage;
+	public static AboutPage aboutPage;
 	static LoadingScreen loadingScreen;
 	
 	//background
@@ -95,39 +95,39 @@ public class Core {
 	public static void start(){
 		//graphics init
 
-		//load fonts
-		Core.loadFonts();
-		
-		//loading
-//		Core.loadCreatures();
-		Core.loadEntities();
-		Core.loadTerrain();
-		Core.loadUIGraphics();
-		Core.loadCards();
-		Core.loadAdditionalGraphics();
-		Core.loadCommands();
-		
-		//load pages
-		gameDisplay = new GameDisplay();
-		mainMenu = new MainMenu();
-		settingsPage = new SettingsPage();
-		aboutPage = new AboutPage();
+//		//load fonts
+//		Core.loadFonts();
+//		
+//		//loading
+////		Core.loadCreatures();
+//		Core.loadEntities();
+//		Core.loadTerrain();
+//		Core.loadUIGraphics();
+//		Core.loadCards();
+//		Core.loadAdditionalGraphics();
+//		Core.loadCommands();
+//		
+//		//load pages
+//		gameDisplay = new GameDisplay();
+//		mainMenu = new MainMenu();
+//		settingsPage = new SettingsPage();
+//		aboutPage = new AboutPage();
 		loadingScreen = new LoadingScreen();
 		
-		//init settings and about pages
-		frame.setVisible(false);
-		frame.getContentPane().add(settingsPage);
-		frame.pack();
-		frame.getContentPane().remove(settingsPage);
-		frame.getContentPane().add(aboutPage);
-		frame.pack();
-		frame.getContentPane().remove(aboutPage);
+//		//init settings and about pages
+//		frame.setVisible(false);
+//		frame.getContentPane().add(settingsPage);
+//		frame.pack();
+//		frame.getContentPane().remove(settingsPage);
+//		frame.getContentPane().add(aboutPage);
+//		frame.pack();
+//		frame.getContentPane().remove(aboutPage);
 		
 		def = frame.getContentPane();
-		
-		//set background
-		//background = new ImageTileBackground(bg);
-		//frame.setContentPane(background);
+//		
+//		//set background
+//		background = new ImageTileBackground(bg);
+//		frame.setContentPane(background);
 		
 		//content pane
 		frame.getContentPane().add(loadingScreen);
@@ -159,10 +159,12 @@ public class Core {
 		frame.repaint();
 		
 		//add key binds
-		addKeyBinds(gameDisplay);
+//		addKeyBinds(gameDisplay);
 		
 		//initialize commands
 		
+		//load game resources
+		loadingScreen.loadGameResources();
 	}
 	
 	//game re-creation
@@ -175,7 +177,7 @@ public class Core {
 	
 	//key binding
 	
-	private static void addKeyBinds(GameDisplay game){
+	public static void addKeyBinds(GameDisplay game){
 		//get maps
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_CMDLINE = GameDisplay.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
@@ -219,26 +221,26 @@ public class Core {
 	
 	//loading
 	
-	private static void loadCreatures(){
+	public static void loadCreatures(){
 		Skeleton.load();
 	}
 	
-	private static void loadEntities(){
+	public static void loadEntities(){
 		loadCreatures();
 		Player.load();
 	}
 	
-	private static void loadTerrain(){
+	public static void loadTerrain(){
 		Stone.load();
 		Quicksand.load();
 		Empty.load();
 	}
 	
-	private static void loadUIGraphics(){
+	public static void loadUIGraphics(){
 		GameDisplay.load();
 	}
 	
-	private static void loadCards(){
+	public static void loadCards(){
 		EarthSpell.load();
 		FireSpell.load();
 		PlasmaSpell.load();
@@ -249,7 +251,7 @@ public class Core {
 		SwordSpell.load();
 	}
 	
-	private static void loadCommands() {
+	public static void loadCommands() {
 		@SuppressWarnings("unused")
 		Object a = MoveCommand.moveCommand;
 		a = CastCommand.castCommand;
@@ -257,8 +259,10 @@ public class Core {
 		a = CastRelativeCommand.castRelativeCommand;
 	}
 	
-	private static void loadAdditionalGraphics(){
+	public static void loadAdditionalGraphics(){
 		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
+		background = new ImageTileBackground(bg);
+		
 		blueHighlight = Tools.img.loadImage("blueHighlight.png", "general");
 		cyanHighlight = Tools.img.loadImage("cyanHighlight.png", "general");
 		greenHighlight = Tools.img.loadImage("greenHighlight.png", "general");

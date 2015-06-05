@@ -13,6 +13,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
+
+import core.Core;
 
 @SuppressWarnings("serial")
 public class LoadingScreen extends Display {
@@ -51,12 +54,57 @@ public class LoadingScreen extends Display {
 		//loading text
 		JLabel loadingText = new JLabel("Loading...");
 		loadingText.setForeground(Color.white);
-		loadingText.setAlignmentX(CENTER_ALIGNMENT);
 		loading.add(loadingText);
 		
 		//show
 		main.add(loading);
 		this.add(main);
 		main.setVisible(true);
+	}
+	
+	public void loadGameResources(){
+		(new loadGameResources()).execute();
+		
+	}
+	
+	public class loadGameResources extends SwingWorker<Object, Object> {
+
+		@Override
+		protected Object doInBackground() {
+			//load fonts
+			Core.loadFonts();
+			
+			//load graphics
+			Core.loadEntities();
+			Core.loadTerrain();
+			Core.loadUIGraphics();
+			Core.loadCards();
+			Core.loadAdditionalGraphics();
+			Core.loadCommands();
+			
+			//load pages
+			Core.gameDisplay = new GameDisplay();
+			Core.mainMenu = new MainMenu();
+			Core.settingsPage = new SettingsPage();
+			Core.aboutPage = new AboutPage();
+			
+			Core.addKeyBinds(Core.gameDisplay);
+			
+			//init settings and about pages
+			Core.frame.setVisible(false);
+			Core.frame.getContentPane().add(Core.settingsPage);
+			Core.frame.pack();
+			Core.frame.getContentPane().remove(Core.settingsPage);
+			Core.frame.getContentPane().add(Core.aboutPage);
+			Core.frame.pack();
+			Core.frame.getContentPane().remove(Core.aboutPage);
+			
+			return null;
+		}
+		
+		@Override
+		protected void done(){
+			Core.mainMenu();
+		}
 	}
 }
