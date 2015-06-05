@@ -1,5 +1,7 @@
 package run;
 
+import java.awt.EventQueue;
+
 import key_actions.SubmitCommand;
 import action.Action;
 import action.Clock;
@@ -73,9 +75,16 @@ public class Main {
 		stepGraphics();
 	}
 	
-	public static void stepGraphics() {		
+	public static void stepGraphics() {
 		Core.frame.repaint();
-//		Core.frame.setVisible(true); //THIS CAUSES RANDOM INFINITE HANGUPS
+		
+		EventQueue.invokeLater(new Runnable() {
+	        public void run()
+	        {
+	        	Core.frame.setVisible(true);    
+	        }
+	      });
+		
 		Core.frame.getContentPane().repaint();
 	}
 	

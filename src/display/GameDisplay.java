@@ -20,7 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import action.Action;
 import action.Clock;
+import action.MoveAction;
 import run.Main;
 import core.Core;
 import core.GameState;
@@ -228,14 +230,17 @@ public class GameDisplay extends Display {
 	
 	//command logging
 	private static String command;
+	
 	public static String submitCommand(){
 //		if(!cmdInput.getText().equals("")){
 		command = cmdInput.getText();
+		
 		if(cmdLog.getText().equals("")){
 			cmdLog.setText(command);
 		}else{
 			cmdLog.append("\n" + command);
 		}
+		
 		cmdInput.setText("");
 		
 		cmdLogVisible = !cmdLogVisible;
@@ -389,6 +394,7 @@ public class GameDisplay extends Display {
 		private Point clickedGridPoint = new Point(-1, -1);
 		private geometry.Point absGridPoint = new geometry.Point(0, 0);
 		private int button = 0;
+		//private Action action;
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -399,6 +405,10 @@ public class GameDisplay extends Display {
 			clickedGridPoint.y = (int)/* Math.round*/((double) e.getY() / (double) Display.SPRITE_DIM);
 			
 			absGridPoint = Tools.nav.screenCoordToAbsCoord(clickedGridPoint.x, clickedGridPoint.y);
+			
+			//move player if right click
+			if(button == 1){
+			}
 		}
 
 		@Override

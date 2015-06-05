@@ -238,6 +238,7 @@ public class Core {
 		ShieldSpell.load();
 		SwordSpell.load();
 	}
+	
 	private static void loadCommands() {
 		Object a = MoveCommand.moveCommand;
 		a = CastCommand.castCommand;
