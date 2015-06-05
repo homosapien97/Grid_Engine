@@ -105,7 +105,9 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	public Player(int x, int y, Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, int ticksPerTile, int maxActions) {
 		super(x, y, c, sprite, maxActions);
 //		Camera.init(this);
-		LoadedChunks.init(c);
+		
+		LoadedChunks.init(c);	//Don't think this needs to exist anymore.
+		
 		maxHealth = hp;
 		health = hp;
 		natArmor = arm;
@@ -120,13 +122,15 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		this.ticksPerTile = ticksPerTile;
 
 		visionSquare = VisionSquare.r21;
-		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
+		visionSquare.trace(super.absoluteX,super.absoluteY); //LC must be init before calling this.
 		path = new Path<Player>(this);
 	}
 	public Player(int x, int y, Chunk c, String sprite) {
 		super(x, y, c, sprite, 1);
 //		Camera.init(this);
-		LoadedChunks.init(c);
+		
+		LoadedChunks.init(c);	//Don't think this needs to exist anymore.
+		
 		maxHealth = 10;
 		health = 10;
 		natArmor = 0;
@@ -141,7 +145,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		ticksPerTile = 1;
 		
 		visionSquare = VisionSquare.r21;
-		visionSquare.trace(getAbsoluteX(),getAbsoluteY()); //LC must be init before calling this.
+		visionSquare.trace(super.absoluteX,super.absoluteY); //LC must be init before calling this.
 		path = new Path<Player>(this);
 	}
 		@Override
@@ -208,8 +212,10 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 			chunk.removeEntity(this);
 			chunk = LoadedChunks.chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Tools.nav.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
 			chunk.addEntity(this);
-			x = Tools.nav.absCoordToMinorCoord(absoluteX);
-			y = Tools.nav.absCoordToMinorCoord(absoluteY);
+//			x = Tools.nav.absCoordToMinorCoord(absoluteX);
+//			y = Tools.nav.absCoordToMinorCoord(absoluteY);
+			super.absoluteX = absoluteX;
+			super.absoluteY = absoluteY;
 			return true;
 		}
 		return false;
@@ -221,7 +227,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	@Override
 	public boolean goToRelative(int relativeX, int relativeY) {
 //		System.out.println("gtr " + relativeX + ", " + relativeY);
-		goToAbsolute(getAbsoluteX() + relativeX, getAbsoluteY() + relativeY);
+		goToAbsolute(super.absoluteX + relativeX, super.absoluteY + relativeY);
 		return false;
 	}
 	
@@ -230,52 +236,6 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	public int ticksPerTileWalked() {
 		return ticksPerTile;
 	}
-	
-//	//for the use of stepTowards;
-//	private static double[][] stepChoices = new double[3][3];
-//	private static double lowest = Integer.MAX_VALUE;
-//	private static int choices = 0;
-//	@Override
-//	public boolean moveTowards(int absoluteX, int absoluteY) {
-////		lowest = Integer.MAX_VALUE;
-////		for(int i = 0; i < 3; i++) {
-////			for(int j = 0; j < 3; j++) {
-////				if(LoadedChunks.heightAt(x -1 + i, y - 1 + i) == 0) {
-////					stepChoices[i][j] = Math.sqrt((x - 1 + i - absoluteX) * (x - 1 + i - absoluteX) + (y - 1 + j - absoluteY) * (y - 1 + j - absoluteY));
-////				} else {
-////					stepChoices[i][j] = Integer.MAX_VALUE;
-////				}
-////				if(stepChoices[i][j] < lowest) {
-////					choices = 1;
-////					lowest = stepChoices[i][j];
-////					for(int k = 0; k < 3; k++) {
-////						for(int l = 0; l < 3; l++) {
-////							if(stepChoices[k][l] == -1) stepChoices[i][j] = -2;
-////						}
-////					}
-////					stepChoices[i][j] = -1;
-////				} else if(stepChoices[i][j] == lowest) {
-////					choices++;
-////					stepChoices [i][j] = -1;
-////				}
-////			}
-////		}
-////		if(choices == 0) return false;
-////		//repurposing lowest here
-////		lowest = Math.random() * choices;
-////		for(int i = 0; i < 3; i++) {
-////			for(int j = 0; j < 3; j++) {
-////				if(stepChoices[i][j] == -1) {
-////					if(lowest < 1) {
-////						goToRelative(i + 1, j + 1);
-////						return true;
-////					}
-////					lowest -= 1;
-////				}
-////			}
-////		}
-////		return false;
-//	}
 
 	@Override
 	public VisionSquare vsquare() {
@@ -294,24 +254,18 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	}
 	@Override
 	public boolean pathTo(int x, int y) {
-//		for(Action a : actions) {
-//			if(a instanceof MoveAction) {
-//				if(a.done()) {
-//					actions.remove(a);
-////					return addAction(new MoveAction<Player>(this, x, y));
-//				} else return false;
+//		synchronized(actions) {
+//			actions.removeIf(s -> ((s instanceof MoveAction) && s.done()));
+//			for(Action a : actions) {
+//				if(a instanceof MoveAction) return false;
 //			}
-//		}
-		synchronized(actions) {
-			actions.removeIf(s -> ((s instanceof MoveAction) && s.done()));
-			for(Action a : actions) {
-				if(a instanceof MoveAction) return false;
-			}
 			if(path.constructPathTo(x, y)) {
-				return addAction(new MoveAction<Player>(this, x, y, true));
+//				return addAction(new MoveAction<Player>(this, x, y, true));
+				new MoveAction<Player>(this, x, y, true);
+				return true;
 			}
 			return false;
-		}
+//		}
 	}
 	public MoveAction<Player> pathToPreview(int x, int y) {
 		if(path.constructPathTo(x, y)) {

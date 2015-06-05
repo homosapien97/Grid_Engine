@@ -31,9 +31,9 @@ public class Path <T extends Entity & Mobile & Sighted> {
 //			}
 //		}
 		maze = new char[actor.vsquare().RADIUS * 2 + 1][actor.vsquare().RADIUS * 2 + 1];
-		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
-		targetX = actor.getAbsoluteX();
-		targetY = actor.getAbsoluteY();
+		tl = new Point(actor.REFACTORSTUFFgetAbsoluteX() - actor.vsquare().RADIUS, actor.REFACTORSTUFFgetAbsoluteY() - actor.vsquare().RADIUS);
+		targetX = actor.REFACTORSTUFFgetAbsoluteX();
+		targetY = actor.REFACTORSTUFFgetAbsoluteY();
 	}
 	
 	public int length() {
@@ -60,17 +60,17 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	}
 	
 	public boolean go() {
-		maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y] = DONE;
-		if(maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y + 1] == PATH) {
+		maze[actor.REFACTORSTUFFgetAbsoluteX() - tl.x][actor.REFACTORSTUFFgetAbsoluteY() - tl.y] = DONE;
+		if(maze[actor.REFACTORSTUFFgetAbsoluteX() - tl.x][actor.REFACTORSTUFFgetAbsoluteY() - tl.y + 1] == PATH) {
 			actor.goToRelative(0, 1);
 			return true;
-		} else if(maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y - 1] == PATH) {
+		} else if(maze[actor.REFACTORSTUFFgetAbsoluteX() - tl.x][actor.REFACTORSTUFFgetAbsoluteY() - tl.y - 1] == PATH) {
 			actor.goToRelative(0, -1);
 			return true;
-		} else if(maze[actor.getAbsoluteX() - tl.x + 1][actor.getAbsoluteY() - tl.y] == PATH) {
+		} else if(maze[actor.REFACTORSTUFFgetAbsoluteX() - tl.x + 1][actor.REFACTORSTUFFgetAbsoluteY() - tl.y] == PATH) {
 			actor.goToRelative(1, 0);
 			return true;
-		} else if(maze[actor.getAbsoluteX() - tl.x - 1][actor.getAbsoluteY() - tl.y] == PATH) {
+		} else if(maze[actor.REFACTORSTUFFgetAbsoluteX() - tl.x - 1][actor.REFACTORSTUFFgetAbsoluteY() - tl.y] == PATH) {
 			actor.goToRelative(-1, 0);
 			return true;
 		} else {
@@ -88,7 +88,7 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	 */
 	public boolean constructPathTo(int absoluteX, int absoluteY) {
 		actor.vsquare().trace();
-		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
+		tl = new Point(actor.REFACTORSTUFFgetAbsoluteX() - actor.vsquare().RADIUS, actor.REFACTORSTUFFgetAbsoluteY() - actor.vsquare().RADIUS);
 		if(!actor.vsquare().canSee(absoluteX, absoluteY)) {
 //			System.out.println("Cannot go to" + absoluteX + ", " + absoluteY + " because I can't see it");
 			return false;
@@ -99,7 +99,7 @@ public class Path <T extends Entity & Mobile & Sighted> {
 				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
 			}
 		}
-		return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
+		return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.REFACTORSTUFFgetAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.REFACTORSTUFFgetAbsoluteY());
 	}
 	
 	/**

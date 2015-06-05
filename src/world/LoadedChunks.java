@@ -4,10 +4,11 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
+//import java.util.Vector;
 
 import terrain.Terrain;
 import entity.Entity;
+//import entity.Player;
 import general.Tools;
 import generation.Generator;
 import geometry.Circle;
@@ -26,6 +27,8 @@ public class LoadedChunks {
 	static {
 		chunks = new Chunk[RADIUS * 2 + 1][RADIUS * 2 + 1];
 		center = null;
+//		Player temp = Player.player;
+//		init(Player.player.chunk);
 	}
 	
 	public static void init(Chunk center) {
@@ -180,7 +183,7 @@ public class LoadedChunks {
 //				synchronized(chunks[i][j].entities) {
 				synchronized(ret) {
 					for(Entity e : chunks[i][j].entities) {
-						if(e.getAbsoluteX() >= x1 && e.getAbsoluteX() <= x2 && e.getAbsoluteY() >= y1 && e.getAbsoluteY() <= y2) ret.add(e);
+						if(e.REFACTORSTUFFgetAbsoluteX() >= x1 && e.REFACTORSTUFFgetAbsoluteX() <= x2 && e.REFACTORSTUFFgetAbsoluteY() >= y1 && e.REFACTORSTUFFgetAbsoluteY() <= y2) ret.add(e);
 					}
 				}
 //				}
@@ -231,6 +234,6 @@ public class LoadedChunks {
 	}
 	public static List<Entity> entitiesAt(int x, int y) {
 		return chunks[Tools.nav.absCoordToChunkCoord(x) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(y) - chunks[0][0].pos.y].
-				entitiesAt(Tools.nav.absCoordToMinorCoord(x), Tools.nav.absCoordToMinorCoord(y));
+				REFACTORSTUFFentitiesAt(x, y);
 	}
 }

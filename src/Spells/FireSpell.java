@@ -91,10 +91,10 @@ public class FireSpell extends Spell{
 
 	@Override
 	public PointCollection cast(Entity caster, int x, int y) {
-		if(Tools.nav.orthoDistance(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y) <= range[level]) {
+		if(Tools.nav.orthoDistance(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y) <= range[level]) {
 			area = new Circle(x, y, radius[level]);
 		} else {
-			Line temp = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
+			Line temp = new Line(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
 			temp = new Line(temp, radius[level]);
 			area = new Circle(temp.b.x, temp.b.y, radius[level]);
 		}
@@ -111,10 +111,10 @@ public class FireSpell extends Spell{
 
 	@Override
 	public PointCollection preview(Entity caster, int x, int y) {
-		if(Tools.nav.orthoDistance(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y) <= range[level]) {
+		if(Tools.nav.orthoDistance(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y) <= range[level]) {
 			area = new Circle(x, y, radius[level]);
 		} else {
-			Line temp = new Line(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
+			Line temp = new Line(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
 			temp = new Line(temp, radius[level]);
 			area = new Circle(temp.b.x, temp.b.y, radius[level]);
 		}

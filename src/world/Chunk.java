@@ -35,6 +35,7 @@ public class Chunk {
 	/**
 	 * Creates the origin chunk at position (0, 0).
 	 */
+	@SuppressWarnings("unused")
 	private Chunk() {
 		pos = new Point(0,0);
 		
@@ -418,10 +419,14 @@ public class Chunk {
 	}
 	
 	public void addEntity(Entity e) {
-		entities.add(e);
+		synchronized(entities) {
+			entities.add(e);
+		}
 	}
 	public void removeEntity(Entity e) {
-		entities.remove(e);
+		synchronized(entities) {
+			entities.remove(e);
+		}
 	}
 	public void removeEntity(Iterator<Entity> i) {
 		i.remove();
@@ -433,10 +438,10 @@ public class Chunk {
 	 * @param y the y of the coordinate to check for an entity
 	 * @return returns the entity at position (x, y). If no entity is there, returns null.
 	 */
-	public Entity entityAt(int x, int y) {
+	public Entity REFACTORSTUFFentityAt(int absoluteX, int absoluteY) {
 		synchronized(entities) {
 			for(Entity e : entities) {
-				if(e.getX() == x && e.getY() == y){
+				if(e.REFACTORSTUFFgetAbsoluteX() == absoluteX && e.REFACTORSTUFFgetAbsoluteY() == absoluteY){
 					return e;
 				}
 			}
@@ -450,12 +455,12 @@ public class Chunk {
 	 * @param y the y of the coordinate to check for entities
 	 * @return returns the entities at position (x, y). If no entities are there, returns null.
 	 */
-	public List<Entity> entitiesAt(int x, int y) {
+	public List<Entity> REFACTORSTUFFentitiesAt(int absoluteX, int absoluteY) {
 		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
 		synchronized(entities) {
 			synchronized(ret) {
 				for(Entity e: entities) {
-					if(e.getX() == x && e.getY() == y) 
+					if(e.REFACTORSTUFFgetAbsoluteX() == absoluteX && e.REFACTORSTUFFgetAbsoluteY() == absoluteY) 
 						ret.add(e);
 				}
 			}

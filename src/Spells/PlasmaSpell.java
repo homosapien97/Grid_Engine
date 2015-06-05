@@ -89,7 +89,7 @@ public class PlasmaSpell extends Spell{
 
 	@Override
 	public PointCollection cast(Entity caster, int x, int y) {
-		area = new Ray(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
+		area = new Ray(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
 		area = new Ray(area, range[level]);
 		for(int i = 0; i < area.points.length; i++) {
 			if(LoadedChunks.heightAt(area.points[i].x, area.points[i].y) > 0) {
@@ -109,7 +109,7 @@ public class PlasmaSpell extends Spell{
 
 	@Override
 	public PointCollection preview(Entity caster, int x, int y) {
-		area = new Ray(caster.getAbsoluteX(), caster.getAbsoluteY(), x, y);
+		area = new Ray(caster.REFACTORSTUFFgetAbsoluteX(), caster.REFACTORSTUFFgetAbsoluteY(), x, y);
 		area = new Ray(area, range[level]);
 		for(int i = 0; i < area.points.length; i++) {
 			if(LoadedChunks.heightAt(area.points[i].x, area.points[i].y) > 0) {
