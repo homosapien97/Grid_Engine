@@ -1,5 +1,6 @@
 package display;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -43,6 +44,7 @@ public class SettingsPage extends Display {
 		JLabel title = new JLabel("SETTINGS");
 		title.setAlignmentX(CENTER_ALIGNMENT);
 		title.setFont(new Font("Cinzel Decorative", Font.PLAIN, 50));
+		title.setForeground(Color.orange);
 		
 		main.add(title);
 		
@@ -51,12 +53,14 @@ public class SettingsPage extends Display {
 		JLabel graphics = new JLabel("Graphics");
 		graphics.setAlignmentX(CENTER_ALIGNMENT);
 		graphics.setFont(new Font("Cinzel", Font.PLAIN, 30));
+		graphics.setForeground(Color.orange);
 		
 		main.add(graphics);
 		
 		JLabel set1 = new JLabel("Aspect Ratio");
 		set1.setAlignmentX(CENTER_ALIGNMENT);
 		set1.setFont(MainMenu.bodyFont);
+		set1.setForeground(Color.orange);
 		
 		main.add(set1);
 		

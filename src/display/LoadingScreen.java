@@ -19,7 +19,7 @@ import core.Core;
 
 @SuppressWarnings("serial")
 public class LoadingScreen extends Display {
-	//use a font that is one "of all widely-supported cross-platform fonts" http://templates.mailchimp.com/design/typography/
+	//use a font that is one "of all widely-supported cross-platform fonts" (reference on about page)
 	//so we don't have to load one for the loading screen
 	public static final Font font = new Font("Trebuchet MS", Font.PLAIN, 20);
 	

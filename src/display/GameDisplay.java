@@ -97,7 +97,7 @@ public class GameDisplay extends Display {
 
 		logScrollPane = new JScrollPane(cmdLog);
 		
-		logScrollPane.setPreferredSize(new Dimension(P_WIDTH, 22 * 10)); //22px per line for 16pt font cause yay http://reeddesign.co.uk/test/points-pixels.html
+		logScrollPane.setPreferredSize(new Dimension(P_WIDTH, 22 * 10)); //22px per line for 16pt font cause yay (source on about page)
 		logScrollPane.setBackground(new Color(0, 0, 0, 0));
 		logScrollPane.setForeground(new Color(0, 0, 0, 0));
 		logScrollPane.setVisible(cmdLogVisible);

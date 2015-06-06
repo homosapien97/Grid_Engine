@@ -1,5 +1,6 @@
 package display;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import core.Core;
 
@@ -34,11 +36,24 @@ public class AboutPage extends Display {
 			JLabel title = new JLabel("ABOUT");
 			title.setAlignmentX(CENTER_ALIGNMENT);
 			title.setFont(new Font("Cinzel Decorative", Font.PLAIN, 50));
+			title.setForeground(Color.orange);
 			
 			main.add(title);
 			
-			//space (temp) (about will go here)
-			main.add(Box.createRigidArea(new Dimension(0,700)));
+			//space
+			main.add(Box.createRigidArea(new Dimension(0, 50)));
+			
+			JTextArea aboutText = new JTextArea();
+			aboutText.setForeground(Color.white);
+			aboutText.setBackground(new Color(25, 25, 25, 200));
+			aboutText.setPreferredSize(new Dimension(1400, 600));
+			aboutText.setFont(new Font("Consolas", Font.PLAIN, 16));
+			addSources(aboutText);
+			
+			main.add(aboutText);
+			
+			//space
+			main.add(Box.createRigidArea(new Dimension(0, 50)));
 			
 			//back button
 			JButton mainMenu = newMainButton("BACK");
@@ -53,6 +68,41 @@ public class AboutPage extends Display {
 		}
 		
 		public void paintComponent(Graphics page){}
+		
+		private void addSources(JTextArea t){
+			t.append("Sources\n\n");
+			
+			t.append("General\n\n");
+			
+			t.append("Cross Platform Font List: http://templates.mailchimp.com/design/typography/\n");
+			t.append("Font Size to Pixel:       http://reeddesign.co.uk/test/points-pixels.html\n");
+			t.append("SetVisible hangup:        https://community.oracle.com/thread/1357662\n\n");
+			
+			t.append("A Lot of Stack Overflow Pages...a lot...swing is annoying sometimes...\n\n");
+			t.append("A Bunch of Java SE 7 API Documentation Pages\n\n");
+			
+			/*
+			t.append("setVisible bug:        http://stackoverflow.com/questions/4413310/setvisible-method-in-java-swing-hangs-system\n");
+			t.append("Scrolling:             http://stackoverflow.com/questions/23365847/how-to-auto-scroll-down-jtextarea-after-append\n");
+			t.append("Set Size:              http://stackoverflow.com/questions/5714214/set-size-wont-work-in-java\n");
+			t.append("Image as a JComponent: http://stackoverflow.com/questions/3775373/java-how-to-add-image-to-jlabel\n");
+			t.append("JPanel sizing issues:  http://stackoverflow.com/questions/5921175/how-to-set-jpanels-width-and-height\n");
+			t.append("Nested JPanel issue:   http://stackoverflow.com/questions/12021249/adding-jpanel-from-another-class-to-jpanel-in-jframe-begginer-java-programmer");
+			t.append("                       http://stackoverflow.com/questions/913139/adding-additional-jpanels-to-a-jpanel\n");
+			t.append("Positioning issues:    http://stackoverflow.com/questions/7221876/how-can-i-change-the-position-of-a-jtextfield\n");
+			t.append("Repaint issues:        http://stackoverflow.com/questions/5822353/swing-repainting\n");
+			t.append("(duplication issue below actually due to code bug but also helped I think)\n");
+			t.append("Duplication issues:    http://stackoverflow.com/questions/12506941/jframe-duplicates-drawings-when-resizing\n");
+			t.append("                       http://stackoverflow.com/questions/16536670/java-redrawing-duplicate-image\n");
+			t.append("Key binding bug:       http://stackoverflow.com/questions/15753551/java-keybindings-how-does-it-work\n");
+			t.append("                       http://stackoverflow.com/questions/17984912/java-key-bindings-not-working\n");
+			t.append("                       http://stackoverflow.com/questions/11003206/java-jpanel-doesnt-pick-up-keyboard-bindings\n");
+			t.append("                       http://stackoverflow.com/questions/15993331/keybinding-code-not-working\n");
+			t.append("                       http://stackoverflow.com/questions/22741215/how-to-use-key-bindings-instead-of-key-listeners\n");
+			*/
+			
+			t.append("");
+		}
 		
 		private class ButtonListener implements ActionListener {
 			private int buttonIndex;
