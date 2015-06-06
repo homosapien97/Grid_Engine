@@ -57,6 +57,9 @@ public abstract class Entity {
 	}
 	public void delete() {
 		chunk.removeEntity(this);
+		synchronized (Action.queue) {
+			Action.queue.remove(this);
+		}
 	}
 	public boolean deleteSafe() {
 		return true;

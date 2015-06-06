@@ -13,6 +13,7 @@ import terminal.Command;
 import terrain.Quicksand;
 import terrain.Stone;
 //import world.Chunk;
+import world.LoadedChunks;
 
 public class Main {
 	//example chunk
@@ -31,6 +32,7 @@ public class Main {
 		
 		//main loop
 		while(Core.gameState != GameState.EXITING){
+			LoadedChunks.reload();
 			switch(Core.gameState){
 				case PLAYING:
 					step();

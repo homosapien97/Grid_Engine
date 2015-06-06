@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.List;
 //import java.util.Vector;
 
+
 import terrain.Terrain;
 import entity.Entity;
+import entity.Player;
 //import entity.Player;
 import general.Tools;
 import generation.Generator;
@@ -73,9 +75,14 @@ public class LoadedChunks {
 		LoadedChunks.center = center;
 		reloadCurrent();
 	}
-//	public static void reload() {
-//		
-//	}
+	public static void reload() {
+		//TODO If edge of UPDATE_RADIUS around player reaches within one chunk of the edge of loadedChunks, recenter.
+		if((Player.player.chunk.pos.x + UPDATE_RADIUS >= chunks[2*RADIUS][0].pos.x) || (Player.player.chunk.pos.x - UPDATE_RADIUS <= chunks[0][0].pos.x) ||
+				(Player.player.chunk.pos.y + UPDATE_RADIUS >= chunks[0][2*RADIUS].pos.y) || Player.player.chunk.pos.y - UPDATE_RADIUS <= chunks[0][0].pos.y)
+		{
+			reload(Player.player.chunk);
+		}
+	}
 	
 	public static int getTopLeftX() {
 		return chunks[0][0].pos.x;

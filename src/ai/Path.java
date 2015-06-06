@@ -59,18 +59,24 @@ public class Path <T extends Entity & Mobile & Sighted> {
 		}
 	}
 	
+	int tempa;
+	int tempb;
+//	int tempc;
+//	int tempd;
 	public boolean go() {
-		maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y] = DONE;
-		if(maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y + 1] == PATH) {
+		tempa = actor.getAbsoluteX() - tl.x;
+		tempb = actor.getAbsoluteY() - tl.y;
+		maze[tempa][tempb] = DONE;
+		if((tempb + 1 < maze[0].length) && (maze[tempa][tempb + 1] == PATH)) {
 			actor.goToRelative(0, 1);
 			return true;
-		} else if(maze[actor.getAbsoluteX() - tl.x][actor.getAbsoluteY() - tl.y - 1] == PATH) {
+		} else if((tempb - 1 >= 0) && (maze[tempa][tempb - 1] == PATH)) {
 			actor.goToRelative(0, -1);
 			return true;
-		} else if(maze[actor.getAbsoluteX() - tl.x + 1][actor.getAbsoluteY() - tl.y] == PATH) {
+		} else if((tempa + 1 < maze.length) && (maze[tempa + 1][tempb] == PATH)) {
 			actor.goToRelative(1, 0);
 			return true;
-		} else if(maze[actor.getAbsoluteX() - tl.x - 1][actor.getAbsoluteY() - tl.y] == PATH) {
+		} else if((tempa - 1 >= 0) && (maze[tempa - 1][tempb] == PATH)) {
 			actor.goToRelative(-1, 0);
 			return true;
 		} else {
