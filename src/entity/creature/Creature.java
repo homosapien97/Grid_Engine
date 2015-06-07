@@ -30,7 +30,7 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 	public Path<Creature> path = null;
 	public VisionSquare visionSquare;
 	
-	public Creature (int x, int y,Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, VisionSquare vsquare){
+	public Creature (int x, int y,Chunk c, String sprite, int hp, int arm, int ticksPerTile, VisionSquare vsquare, double fire, double earth, double water, double plasma, String name){
 		super(x, y, c, sprite);
 
 		maxHealth = hp;

@@ -110,6 +110,6 @@ public class Main {
 		}
 		
 		Action.runAll();
-		System.out.println(Clock.tick());
+		System.out.println(":" + Clock.tick());
 	}
 }

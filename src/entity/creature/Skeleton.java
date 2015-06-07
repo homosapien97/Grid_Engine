@@ -21,10 +21,10 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	public SpellAction shot;
 	
 	public Skeleton(int absoluteX, int absoluteY, Chunk chunk, int hp, int arm, double fire, double earth, double water, double plasma){
-		super(absoluteX, absoluteY, chunk, filename, hp, arm, "Skeleton",fire, earth, water, plasma, VisionSquare.r15);
+		super(absoluteX, absoluteY, chunk, filename, hp, arm, 2, VisionSquare.r15, fire, earth, water, plasma, "Skeleton");
 	}
 	public Skeleton(int absoluteX, int absoluteY, Chunk chunk){
-		super(absoluteX, absoluteY, chunk, filename, 10, 1, "Skeleton", 0.10, -0.10, -0.10, 0.10, VisionSquare.r15);
+		super(absoluteX, absoluteY, chunk, filename, 10, 1, 2, VisionSquare.r15, 0.10, -0.10, -0.10, 0.10, "Skeleton");
 		
 	}
 	/*
@@ -40,6 +40,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	private boolean followingPlayer = false;
 	@Override
 	public void tick() {
+		System.out.println("ticking skelly");
 		if(!followingPlayer) {
 			synchronized(super.vsquare()) {
 				super.vsquare().trace(getAbsoluteX(), getAbsoluteY());
@@ -54,7 +55,6 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 				followingPlayer = super.pathTo(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
 			}
 		} else {
-			if(shot.done()) shot = null;
 			if(shot == null) {
 				for(Point p : bow.preview(this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
 					if(p.equals(new Point(Player.player.getAbsoluteX(), Player.player.getAbsoluteY()))) {
@@ -63,6 +63,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 					}
 				}
 			}
+			if(shot.done()) shot = null;
 		}
 		
 	}
