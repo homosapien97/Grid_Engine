@@ -4,12 +4,15 @@ import entity.creature.Skeleton;
 import geometry.Point;
 import terrain.Quicksand;
 import terrain.Stone;
+import terrain.StoneBrick;
 import tools.Tools;
 import world.Chunk;
 import world.LoadedChunks;
 
 public class Generator {
-	public static final char FLOOR = 'o';
+	public static final char FLOOR_STONE = 'o';
+	public static final char FLOOR_QUICKSAND = 'q';
+	public static final char FLOOR_STONEBRICK = 'b';
 	public static final char WALL = 'x';
 	
 	
@@ -33,9 +36,15 @@ public class Generator {
 			for(int i = 0; i < Chunk.DIM; i++) {
 				for(int j = 0; j < Chunk.DIM; j++) {
 					switch(chars[tempx + i][tempy + j]) {
-					case FLOOR:
-						ret.heightmap[i][j] = 0;
+					case FLOOR_STONE:
+//						ret.heightmap[i][j] = 0;
+						ret.terrain[i][j] = Stone.get();
 						break;
+					case FLOOR_QUICKSAND:
+						ret.terrain[i][j] = Quicksand.get();
+						break;
+					case FLOOR_STONEBRICK:
+						ret.terrain[i][j] = StoneBrick.get();
 					case WALL:
 						ret.heightmap[i][j] = 1;
 						break;
