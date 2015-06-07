@@ -1,14 +1,19 @@
 package entity.creature;
 import entity.Entity;
+import entity.Player;
+//import entity.Player;
 import entity.interfaces.Armored;
 import entity.interfaces.Health;
 import entity.interfaces.Intelligent;
 import entity.interfaces.Mobile;
 import entity.interfaces.Pathing;
 import entity.interfaces.Sighted;
+import action.MoveAction;
 import ai.Path;
 import ai.VisionSquare;
+import tools.Tools;
 import world.Chunk;
+import world.LoadedChunks;
 
 public abstract class Creature extends Entity implements Health, Armored, Mobile, Sighted, Intelligent, Pathing<Creature>{
 	public int maxHealth;
@@ -22,7 +27,10 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 	public String name;
 	public boolean alive;
 	
-	public Creature (int x, int y,Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma){
+	public Path<Creature> path = null;
+	public VisionSquare visionSquare;
+	
+	public Creature (int x, int y,Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, VisionSquare vsquare){
 		super(x, y, c, sprite);
 
 		maxHealth = hp;
@@ -34,6 +42,12 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 		earthRes = earth;
 		waterRes = water;
 		plasmaRes = plasma;
+		
+		visionSquare = vsquare;
+		synchronized(visionSquare) {
+			visionSquare.trace(super.absoluteX, super.absoluteY);
+		}
+		path = new Path<Creature>(this);
 	}
 
 	@Override
@@ -91,26 +105,34 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 
 	@Override
 	public Path<Creature> getPath() {
-		// TODO Auto-generated method stub
-		return null;
+		return path;
 	}
 
 	@Override
 	public VisionSquare vsquare() {
-		// TODO Auto-generated method stub
-		return null;
+		return visionSquare;
 	}
 
 	@Override
 	public boolean goToAbsolute(int absoluteX, int absoluteY) {
-		// TODO Auto-generated method stub
+		if(LoadedChunks.isLoaded(absoluteX, absoluteY)) {
+			synchronized(chunk.entities) {
+				chunk.removeEntity(this);
+			}
+			chunk = LoadedChunks.chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Tools.nav.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];
+			synchronized(chunk.entities) {
+				chunk.addEntity(this);
+			}
+			super.absoluteX = absoluteX;
+			super.absoluteY = absoluteY;
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean goToRelative(int relativeX, int relativeY) {
-		// TODO Auto-generated method stub
-		return false;
+		return goToAbsolute(super.absoluteX + relativeX, super.absoluteY + relativeY);
 	}
 
 	@Override
@@ -120,8 +142,18 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 
 	@Override
 	public boolean pathTo(int x, int y) {
-		// TODO Auto-generated method stub
+		if(path.constructPathTo(x, y)) {
+			new MoveAction<Creature>(this, x, y, true);
+			return true;
+		}
 		return false;
 	}
-
+	
+	@Override
+	public MoveAction<Creature> pathToPreview(int x, int y) {
+		if(path.constructPathTo(x, y)) {
+			return new MoveAction<Creature>(this, x, y, false);
+		}
+		return null;
+	}
 }

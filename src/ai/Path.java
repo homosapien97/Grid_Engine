@@ -93,19 +93,21 @@ public class Path <T extends Entity & Mobile & Sighted> {
 	 * @return
 	 */
 	public boolean constructPathTo(int absoluteX, int absoluteY) {
-		actor.vsquare().trace();
-		tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
-		if(!actor.vsquare().canSee(absoluteX, absoluteY)) {
-//			System.out.println("Cannot go to" + absoluteX + ", " + absoluteY + " because I can't see it");
-			return false;
-		}
-		boolean[][] temp = actor.vsquare().mask;
-		for(int i = 0; i < temp.length; i++) {
-			for(int j = 0; j < temp[0].length; j++) {
-				maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
+		synchronized(actor.vsquare()) {
+			actor.vsquare().trace();
+			tl = new Point(actor.getAbsoluteX() - actor.vsquare().RADIUS, actor.getAbsoluteY() - actor.vsquare().RADIUS);
+			if(!actor.vsquare().canSee(absoluteX, absoluteY)) {
+	//			System.out.println("Cannot go to" + absoluteX + ", " + absoluteY + " because I can't see it");
+				return false;
 			}
+			boolean[][] temp = actor.vsquare().mask;
+			for(int i = 0; i < temp.length; i++) {
+				for(int j = 0; j < temp[0].length; j++) {
+					maze[i][j] = (temp[i][j]) ? VISIBLE : INVISIBLE;
+				}
+			}
+			return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
 		}
-		return traverse(actor.vsquare().RADIUS, actor.vsquare().RADIUS, actor.vsquare().RADIUS + absoluteX - actor.getAbsoluteX(), actor.vsquare().RADIUS + absoluteY - actor.getAbsoluteY());
 	}
 	
 	/**

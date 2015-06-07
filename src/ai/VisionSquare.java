@@ -6,7 +6,7 @@ import geometry.Point;
 
 public class VisionSquare {
 	
-	//Some public static final visionsquares for global use. Don't rely on their xy staying the same. Definitely will break w/multithreading
+	//Some public static final visionsquares for global use. Don't rely on their xy staying the same. Definitely will break w/multithreading --> Access only in synchronized blocks when multithreading
 	//Only reason for this is that these are fairly intense objects. Why make more than you gotta? Most things will have a few set denominations
 	//of sight range--all creatures with the same sight range can use the same global. Might add more later if it seems like we need them.
 	public static final VisionSquare r1;
