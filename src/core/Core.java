@@ -35,6 +35,7 @@ import ui.SettingsPage;
 import ui.display.Display;
 import ui.display.GameDisplay;
 import ui.display.ImageTileBackground;
+import ui.key_actions.ClickModifier;
 import ui.key_actions.CloseCMDLog;
 import ui.key_actions.ExitToMainMenu;
 import ui.key_actions.OpenCMDLog;
@@ -93,41 +94,9 @@ public class Core {
 	//core
 	
 	public static void start(){
-		//graphics init
-
-//		//load fonts
-//		Core.loadFonts();
-//		
-//		//loading
-////		Core.loadCreatures();
-//		Core.loadEntities();
-//		Core.loadTerrain();
-//		Core.loadUIGraphics();
-//		Core.loadCards();
-//		Core.loadAdditionalGraphics();
-//		Core.loadCommands();
-//		
-//		//load pages
-//		gameDisplay = new GameDisplay();
-//		mainMenu = new MainMenu();
-//		settingsPage = new SettingsPage();
-//		aboutPage = new AboutPage();
 		loadingScreen = new LoadingScreen();
 		
-//		//init settings and about pages
-//		frame.setVisible(false);
-//		frame.getContentPane().add(settingsPage);
-//		frame.pack();
-//		frame.getContentPane().remove(settingsPage);
-//		frame.getContentPane().add(aboutPage);
-//		frame.pack();
-//		frame.getContentPane().remove(aboutPage);
-		
 		def = frame.getContentPane();
-//		
-//		//set background
-//		background = new ImageTileBackground(bg);
-//		frame.setContentPane(background);
 		
 		//content pane
 		frame.getContentPane().add(loadingScreen);
@@ -158,11 +127,6 @@ public class Core {
 		frame.setVisible(true);
 		frame.repaint();
 		
-		//add key binds
-//		addKeyBinds(gameDisplay);
-		
-		//initialize commands
-		
 		//load game resources
 		loadingScreen.loadGameResources();
 	}
@@ -182,7 +146,7 @@ public class Core {
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_CMDLINE = GameDisplay.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_INVENTORY = game.inventory.getInputMap(JComponent.WHEN_FOCUSED);
-		//InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		
 		ActionMap gameAM = game.getActionMap();
 		ActionMap gameAM_CMDLINE = GameDisplay.cmdInput.getActionMap();
@@ -200,6 +164,9 @@ public class Core {
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "submitCommand");
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "previewCommand");
 		
+		//gameIM_MASTER.put(KeyStroke.getKeyStroke(KeyEvent.VK_CONTROL, 0, false), "ctrlModifier");
+		//gameIM_MASTER.put(KeyStroke.getKeyStroke(KeyEvent.VK_ALT, 0, false), "altModifier");
+		
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "toggleInventory");
 //		gameIM_INVENTORY.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "toggleCMDLog");
@@ -214,6 +181,9 @@ public class Core {
 		gameAM_CMDLINE.put("closeCMDLog", new CloseCMDLog());
 		gameAM_CMDLINE.put("submitCommand", new SubmitCommand());
 		gameAM_CMDLINE.put("previewCommand", new PreviewCommand());
+		
+		//gameAM.put("ctrlModifier", new ClickModifier());
+		//gameAM.put("altModifier", new ClickModifier());
 		
 		gameAM_INVENTORY.put("toggleInventory", new ToggleInventory());
 //		gameAM_INVENTORY.put("toggleCMDLog", new ToggleCMDLog());

@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -22,6 +24,7 @@ import javax.swing.border.LineBorder;
 import tools.Tools;
 import ui.Camera;
 import ui.Inventory;
+import ui.key_actions.ClickModifier;
 import ui.terminal.Command;
 import core.Clock;
 import core.Core;
@@ -411,7 +414,12 @@ public class GameDisplay extends Display {
 			
 			//enter into terminal if left click
 			if(button == 1 && cmdLogVisible){
-				cmdInput.setText(cmdInput.getText() + absGridPoint.x + " " + absGridPoint.y + " ");
+				//if(ClickModifier.keyModifier == KeyEvent.ALT_DOWN_MASK){
+					cmdInput.setText(cmdInput.getText() + absGridPoint.x + " " + absGridPoint.y);
+				//	ClickModifier.keyModifier = -1;
+				//}else{
+				//	cmdInput.setText(cmdInput.getText() + (clickedGridPoint.x - 48) + " " + (clickedGridPoint.y - 27));
+				//}
 			}
 		}
 

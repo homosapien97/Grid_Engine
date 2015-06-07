@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -31,6 +32,7 @@ import spells.SwordSpell;
 import spells.WaterSpell;
 import ui.display.Display;
 import ui.display.GameDisplay;
+import ui.key_actions.ClickModifier;
 import ui.key_actions.TogglePause;
 
 @SuppressWarnings("serial")
@@ -239,7 +241,11 @@ public class Inventory extends Display {
 			
 			//type command into terminal
 			GameDisplay.toggleCMDLog();
-			GameDisplay.cmdInput.setText("cast " + index + " ");
+			//if(ClickModifier.keyModifier == KeyEvent.ALT_DOWN_MASK){
+			//	GameDisplay.cmdInput.setText("cr " + index + " ");
+			//}else{
+				GameDisplay.cmdInput.setText("cast " + index + " ");
+			//}
 		}
 	}
 	
