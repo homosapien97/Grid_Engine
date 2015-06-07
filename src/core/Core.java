@@ -42,6 +42,7 @@ import ui.key_actions.PreviewCommand;
 import ui.key_actions.SubmitCommand;
 import ui.key_actions.ToggleHUD;
 import ui.key_actions.ToggleInventory;
+import ui.key_actions.TogglePause;
 import ui.terminal.CastCommand;
 import ui.terminal.CastRelativeCommand;
 import ui.terminal.MoveCommand;
@@ -193,7 +194,7 @@ public class Core {
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false), "toggleInventory");
 		
 		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "mainMenu");
-//		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "togglePause");
+		gameIM.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "togglePause");
 		
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "closeCMDLog");
 		gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "submitCommand");
@@ -208,7 +209,7 @@ public class Core {
 		gameAM.put("openCMDLog", new OpenCMDLog());
 		gameAM.put("toggleInventory", new ToggleInventory());
 		gameAM.put("mainMenu", new ExitToMainMenu());
-//		gameAM.put("togglePause", new TogglePause());
+		gameAM.put("togglePause", new TogglePause());
 		
 		gameAM_CMDLINE.put("closeCMDLog", new CloseCMDLog());
 		gameAM_CMDLINE.put("submitCommand", new SubmitCommand());

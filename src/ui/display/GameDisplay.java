@@ -408,6 +408,11 @@ public class GameDisplay extends Display {
 			if(button == 3){
 				Command.submitCurrent(new String[] {"move", "" + absGridPoint.x, "" + absGridPoint.y});
 			}
+			
+			//enter into terminal if left click
+			if(button == 1 && cmdLogVisible){
+				cmdInput.setText(cmdInput.getText() + absGridPoint.x + " " + absGridPoint.y + " ");
+			}
 		}
 
 		@Override

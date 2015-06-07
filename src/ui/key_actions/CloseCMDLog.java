@@ -18,7 +18,7 @@ public class CloseCMDLog extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("cmd closed");
-		Core.gameState = OpenCMDLog.oldState;
+		Core.gameState = TogglePause.oldState;
 		GameDisplay.toggleCMDLog();
 	}
 }

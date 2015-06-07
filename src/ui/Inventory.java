@@ -31,7 +31,7 @@ import spells.SwordSpell;
 import spells.WaterSpell;
 import ui.display.Display;
 import ui.display.GameDisplay;
-import ui.key_actions.ToggleInventory;
+import ui.key_actions.TogglePause;
 
 @SuppressWarnings("serial")
 public class Inventory extends Display {
@@ -210,9 +210,9 @@ public class Inventory extends Display {
 			GameDisplay.toggleInventory();
 			
 			if(Core.gameState == GameState.PAUSED) {
-				Core.gameState = ToggleInventory.oldState;
+				Core.gameState = TogglePause.oldState;
 			} else {
-				ToggleInventory.oldState = Core.gameState;
+				TogglePause.oldState = Core.gameState;
 				Core.gameState = GameState.PAUSED;
 			}
 		}
@@ -226,8 +226,20 @@ public class Inventory extends Display {
 		}
 		
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
+			//close inventory
+			GameDisplay.toggleInventory();
 			
+			if(Core.gameState == GameState.PAUSED) {
+				Core.gameState = TogglePause.oldState;
+			} else {
+				TogglePause.oldState = Core.gameState;
+				Core.gameState = GameState.PAUSED;
+			}
+			
+			//type command into terminal
+			GameDisplay.toggleCMDLog();
+			GameDisplay.cmdInput.setText("cast " + index + " ");
 		}
 	}
 	

@@ -17,11 +17,10 @@ public class OpenCMDLog extends AbstractAction {
 //		GameDisplay.toggleCMDLog();
 //	}
 	
-	public static GameState oldState = null;
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("cmd opened");
-		oldState = Core.gameState;
+		TogglePause.oldState = Core.gameState;
 		Core.gameState = GameState.PAUSED;
 		GameDisplay.toggleCMDLog();
 	}
