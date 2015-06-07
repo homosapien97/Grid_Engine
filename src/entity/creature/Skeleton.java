@@ -40,30 +40,33 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	 */
 
 	public static void load() {
-		sprite = Tools.img.loadEntitySprite(filename);
+		sprite = Tools.img.loadCreatureSprite(filename);
 	}
 	
-	private List<Entity> entities;
+//	private List<Entity> entities;
 	private boolean followingPlayer = false;
 	@Override
 	public void tick() {
-		if(!(followingPlayer || shot == null)) {
+		if(!followingPlayer) {
 			synchronized(super.vsquare()) {
 				super.vsquare().trace(getAbsoluteX(), getAbsoluteY());
-				entities = LoadedChunks.entitiesIn(super.vsquare().x - super.vsquare().RADIUS, super.vsquare().y - super.vsquare().RADIUS, 
-						super.vsquare().x + super.vsquare().RADIUS, super.vsquare().y + super.vsquare().RADIUS);
-				for(Entity e : entities) {
-					if(e instanceof Player && super.vsquare().canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
-						followingPlayer = super.pathTo(e.getAbsoluteX(), e.getAbsoluteY());
-						break;
-					}
-				}
+//				entities = LoadedChunks.entitiesIn(super.vsquare().x - super.vsquare().RADIUS, super.vsquare().y - super.vsquare().RADIUS, 
+//						super.vsquare().x + super.vsquare().RADIUS, super.vsquare().y + super.vsquare().RADIUS);
+//				for(Entity e : entities) {
+//					if(e instanceof Player && super.vsquare().canSee(e.getAbsoluteX(), e.getAbsoluteY())) {
+//						followingPlayer = super.pathTo(e.getAbsoluteX(), e.getAbsoluteY());
+//						break;
+//					}
+//				}
+				followingPlayer = super.pathTo(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
 			}
 		} else {
-			if(shot.done()) {
+			if(shot.done()) shot = null;
+			if(shot == null) {
 				for(Point p : bow.preview(this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
 					if(p.equals(new Point(Player.player.getAbsoluteX(), Player.player.getAbsoluteY()))) {
 						shot = new SpellAction(bow, this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY(), true);
+						followingPlayer = false;
 					}
 				}
 			}
