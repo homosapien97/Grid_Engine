@@ -1,172 +1,51 @@
 package tools;
 
-
-public class Map_maker 
-{
-	public static void main (String[]args)
-	{
-		final int PARAM1  = 64;
-		final int PARAM2  = 52;
-		final int PARAM3  = 16;
-		final int PARAM4  = 256;
-		final int PARAM5  = 56;
-		final int PARAM6  = 56;
-		final int PARAM7  = 0;
-		final int PARAM8  = 0;
-		final int PARAM9  = 0;
-		final int PARAM10 = 256;
-		final int PARAM11 = 16;
-		
-		for(int a = 0; a<PARAM6; a++)
+public class Map_maker{	
+	final int WPARAM = 256;
+	final int LPARAM = 256;
+//-------------------------------------------------------------------
+	final int PARAM0  = 0;
+	final int PARAM1  = 256;
+	final int PARAM2  = 15;
+	final int PARAM3  = 15;
+	final int PARAM4  = 10;
+	final int PARAM5  = 10;
+	final int PARAM6  = 0;
+	final int PARAM7  = 0;
+	final int PARAM8  = 0;
+	final int PARAM9  = 0;
+	final int PARAM10 = 0;
+	final int PARAM11 = 0;
+	
+//-------------------------------------------------------------------
+	public Map_maker(){
+		char[][] map = new char[WPARAM][LPARAM];
+		for(int i = 0; i < PARAM1; i++)
 		{
-			for(int b = 0; b<PARAM2; b++)
+			for(int j = 0; j < PARAM1; j++)
 			{
-				System.out.print("x");
+				map[i][j] = 'x';
 			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			System.out.println();
 		}
-//----------------------------------------------------------------------------------
-		for(int a = 0; a<PARAM11; a++)
-		{
-			for(int b = 0; b<PARAM10; b++)
-			{
-				System.out.print("o");
+		for(int i = PARAM0+1; i<PARAM1-1; i++){
+			for(int a = PARAM2; a<PARAM1-(1+PARAM3); a+=40){
+				for(int j = 0+a; j<a+PARAM3; j++){
+					map[i][j] = 'o';
+				}
 			}
-			System.out.println();
 		}
-//----------------------------------------------------------------------------------
-		for(int a = 0; a<PARAM6; a++)
-		{
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
+		for(int i = PARAM0+1; i<PARAM1-1; i++){
+			while(i%16 == 0){
+				for(int j = 0+i; j<PARAM4+i; j++){
+					for(int k = 1; k<PARAM1-1; k++){
+						map[j][k] = 'o';
+					}
+				}
+				i+=1;
 			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			System.out.println();	
 		}
-//----------------------------------------------------------------------------------
-		for(int a = 0; a<PARAM6; a++)
-		{
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			System.out.println();
-		}
-//----------------------------------------------------------------------------------
-		for(int a = 0; a<PARAM11; a++)
-		{
-			for(int b = 0; b<PARAM10; b++)
-			{
-				System.out.print("o");
-			}
-			System.out.println();
-		}
-//----------------------------------------------------------------------------------
-		for(int a = 0; a<PARAM6; a++)
-		{
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			for(int b = 0; b<PARAM3; b++)
-			{
-				System.out.print("o");
-			}
-			for(int b = 0; b<PARAM2; b++)
-			{
-				System.out.print("x");
-			}
-			System.out.println();	
-		}
-//----------------------------------------------------------------------------------
 	}
-
+	public char[] mapReturn(char[] map){
+		return map;
+	}
 }
