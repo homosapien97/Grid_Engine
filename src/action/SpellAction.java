@@ -1,6 +1,7 @@
 package action;
 
-import magic.Spell;
+import core.Clock;
+import spells.Spell;
 import entity.Entity;
 import geometry.PointCollection;
 

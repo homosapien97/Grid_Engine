@@ -1,8 +1,8 @@
 package terrain;
 
-import general.Tools;
-
 import java.awt.Image;
+
+import tools.Tools;
 
 public class Wood extends Terrain {
 	private static final Wood wood = new Wood();

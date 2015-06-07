@@ -1,8 +1,8 @@
 package generation;
 
-import general.Tools;
 import geometry.Point;
 import terrain.Quicksand;
+import tools.Tools;
 import world.Chunk;
 
 public class Generator {

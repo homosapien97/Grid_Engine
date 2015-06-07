@@ -7,11 +7,12 @@ import java.util.List;
 //import java.util.Vector;
 
 
+
 import terrain.Terrain;
+import tools.Tools;
 import entity.Entity;
 import entity.Player;
 //import entity.Player;
-import general.Tools;
 import generation.Generator;
 import geometry.Circle;
 import geometry.Line;

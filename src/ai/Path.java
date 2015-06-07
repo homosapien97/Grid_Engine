@@ -1,9 +1,9 @@
 package ai;
 
+import tools.Tools;
 import entity.Entity;
-import entity.Mobile;
-import entity.Sighted;
-import general.Tools;
+import entity.interfaces.Mobile;
+import entity.interfaces.Sighted;
 import geometry.Point;
 import geometry.PointCollection;
 

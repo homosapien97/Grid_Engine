@@ -1,8 +1,8 @@
 package terrain;
 
-import general.Tools;
-
 import java.awt.Image;
+
+import tools.Tools;
 
 public class Lava extends Terrain {
 	private static final Lava lava = new Lava();

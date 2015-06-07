@@ -7,21 +7,26 @@ import ai.VisionSquare;
 
 import java.awt.Image;
 
+import entity.interfaces.Armored;
+import entity.interfaces.Health;
+import entity.interfaces.Mobile;
+import entity.interfaces.Pathing;
+import entity.interfaces.Sighted;
 import spells.BowSpell;
 import spells.EarthSpell;
 import spells.FireSpell;
 import spells.PlasmaSpell;
 import spells.ShieldSpell;
+import spells.Spell;
 import spells.SwordSpell;
 import spells.WaterSpell;
 import terrain.Stone;
-import magic.Spell;
-import general.Tools;
+import tools.Tools;
 import world.Chunk;
 import world.LoadedChunks;
 
 public class Player extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Player> {
-	public static final Player player = new Player(0, 0, new Chunk(0, 0, true, Stone.get()), "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1, 1);
+	public static final Player player = new Player(0, 0, new Chunk(0, 0, true, Stone.get()), "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1);
 	public int maxHealth;
 	public int health;
 	public int natArmor;
@@ -100,8 +105,8 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		load();
 	}
 	
-	public Player(int x, int y, Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, int ticksPerTile, int maxActions) {
-		super(x, y, c, sprite, maxActions);
+	public Player(int x, int y, Chunk c, String sprite, int hp, int arm, String name, double fire, double earth, double water, double plasma, int ticksPerTile) {
+		super(x, y, c, sprite);
 //		Camera.init(this);
 		
 		LoadedChunks.init(c);	//Don't think this needs to exist anymore.
@@ -124,7 +129,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		path = new Path<Player>(this);
 	}
 	public Player(int x, int y, Chunk c, String sprite) {
-		super(x, y, c, sprite, 1);
+		super(x, y, c, sprite);
 //		Camera.init(this);
 		
 		LoadedChunks.init(c);	//Don't think this needs to exist anymore.

@@ -2,7 +2,7 @@ package terrain;
 
 import java.awt.Image;
 
-import general.Tools;
+import tools.Tools;
 
 public class Stone extends Terrain{
 	private static final Stone stone = new Stone();

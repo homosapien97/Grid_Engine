@@ -1,7 +1,5 @@
 package entity;
 
-import general.Tools;
-
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +7,9 @@ import java.util.List;
 //import java.util.Vector;
 
 
+
 import action.Action;
+import tools.Tools;
 import world.Chunk;
 
 public abstract class Entity {
@@ -22,7 +22,7 @@ public abstract class Entity {
 	
 	public static Image sprite;
 	
-	public Entity(int absoluteX, int absoluteY, Chunk chunk, String sprite, int maxActions) {
+	public Entity(int absoluteX, int absoluteY, Chunk chunk, String sprite) {
 		this.absoluteX = absoluteX;
 		this.absoluteY = absoluteY;
 		this.chunk = chunk;

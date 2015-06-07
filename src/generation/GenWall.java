@@ -1,8 +1,8 @@
 package generation;
 
 import terrain.Terrain;
+import tools.Tools;
 import world.Chunk;
-import general.Tools;
 import geometry.Point;
 import geometry.Rectangle;
 

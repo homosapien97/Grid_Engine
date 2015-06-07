@@ -1,8 +1,8 @@
 package terrain;
 
-import general.Tools;
-
 import java.awt.Image;
+
+import tools.Tools;
 
 public class StoneBrick extends Terrain {
 	private static final StoneBrick stoneBrick = new StoneBrick();

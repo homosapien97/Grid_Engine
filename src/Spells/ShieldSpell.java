@@ -1,12 +1,11 @@
 package spells;
-import magic.Spell;
 import entity.Entity;
-import general.Tools;
 import geometry.Point;
 import geometry.PointCollection;
 
 import java.awt.Image;
 
+import tools.Tools;
 import world.LoadedChunks;
 
 public class ShieldSpell extends Spell{

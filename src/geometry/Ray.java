@@ -1,6 +1,6 @@
 package geometry;
 
-import general.Tools;
+import tools.Tools;
 
 public class Ray {
 	public final Point a;

@@ -2,10 +2,10 @@ package test;
 
 import java.util.HashMap;
 
+import tools.Tools;
 import world.Chunk;
 import entity.Entity;
 import entity.Player;
-import general.Tools;
 import geometry.Ray;
 import geometry.Circle;
 import geometry.Point;

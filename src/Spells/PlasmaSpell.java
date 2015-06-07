@@ -1,14 +1,13 @@
 package spells;
-import magic.Spell;
 import entity.Entity;
-import entity.Health;
-import general.Tools;
+import entity.interfaces.Health;
 import geometry.PointCollection;
 import geometry.Ray;
 
 import java.awt.Image;
 import java.util.List;
 
+import tools.Tools;
 import world.LoadedChunks;
 
 public class PlasmaSpell extends Spell{
