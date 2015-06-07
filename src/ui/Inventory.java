@@ -16,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import core.Core;
 import core.GameState;
@@ -76,7 +78,7 @@ public class Inventory extends Display {
 		JButton close = newMainButton("CLOSE");
 		close.setAlignmentX(CENTER_ALIGNMENT);
 		close.setFont(buttonFont);
-		close.addActionListener(new ButtonListener());
+		close.addActionListener(new CloseButtonListener());
 		
 		main.add(close);
 		
@@ -152,7 +154,7 @@ public class Inventory extends Display {
 			count = Integer.toString(x);
 		}
 		
-		JLabel image = new JLabel();
+		JButton image = new JButton();
 		JLabel amount = new JLabel(" x " + count);
 		
 		amount.setFont(bodyFont);
@@ -160,8 +162,41 @@ public class Inventory extends Display {
 		
 		ImageIcon icon = new ImageIcon(img);
 		
+		image.setForeground(Color.black);
+		image.setBackground(Color.black);
+		
+		Color hoverColor = new Color(219, 158, 107);
+		Color pressedColor = new Color(135, 90, 53);
+		Color borderColor = new Color(110, 52, 4);
+		
+		Border line = new LineBorder(borderColor, 2);
+		Border hover = new LineBorder(hoverColor, 2);
+		Border pressed = new LineBorder(pressedColor, 2);
+		
+		image.setBorder(line);
+		
+		image.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				if(image.getModel().isPressed()){
+					image.setBorder(pressed);
+		        }else if(image.getModel().isRollover()){
+		        	image.setBorder(hover);
+		        }else{
+		        	image.setBorder(line);
+		        }
+			}
+		});
+		
+		int index = i + 7 * s.ordinal();
+		
+		image.setToolTipText("" + index);
+		
+		image.setPreferredSize(new Dimension(32, 32));
+		
 		image.setIcon(icon);
-		image.setSize(32, 32);
+		
+		image.addActionListener(new SpellButtonListener(index));
 		
 		c.add(image);
 		c.add(amount);
@@ -169,7 +204,7 @@ public class Inventory extends Display {
 		return c;
 	}
 	
-	private class ButtonListener implements ActionListener {
+	private class CloseButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			GameDisplay.toggleInventory();
@@ -180,6 +215,19 @@ public class Inventory extends Display {
 				ToggleInventory.oldState = Core.gameState;
 				Core.gameState = GameState.PAUSED;
 			}
+		}
+	}
+	
+	private static class SpellButtonListener implements ActionListener {
+		private int index = -1;
+		
+		public SpellButtonListener(int index){
+			this.index = index;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
 		}
 	}
 	
