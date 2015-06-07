@@ -8,10 +8,12 @@ import java.util.List;
 
 
 
+
 import terrain.Terrain;
 import tools.Tools;
 import entity.Entity;
 import entity.Player;
+import entity.interfaces.Intelligent;
 //import entity.Player;
 import generation.Generator;
 import geometry.Circle;
@@ -243,5 +245,19 @@ public class LoadedChunks {
 	public static List<Entity> entitiesAt(int x, int y) {
 		return chunks[Tools.nav.absCoordToChunkCoord(x) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(y) - chunks[0][0].pos.y].
 				REFACTORSTUFFentitiesAt(x, y);
+	}
+	
+	public static void updateAI() {
+		for(int i = Player.player.chunk.pos.x - center.pos.x + RADIUS - UPDATE_RADIUS; i < Player.player.chunk.pos.x - center.pos.x + RADIUS + UPDATE_RADIUS; i++) {
+			for(int j = Player.player.chunk.pos.y - center.pos.y + RADIUS - UPDATE_RADIUS; j < Player.player.chunk.pos.y - center.pos.y + RADIUS - UPDATE_RADIUS; j++) {
+				synchronized(chunks[i][j].entities) {
+					for(Entity e : chunks[i][j].entities) {
+						if(e instanceof Intelligent) {
+							((Intelligent) e).tick();
+						}
+					}
+				}
+			}
+		}
 	}
 }

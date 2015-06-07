@@ -96,6 +96,7 @@ public class Main {
 	
 
 	private static void stepState() {
+		LoadedChunks.updateAI();
 		if(SubmitCommand.last != null) {
 			Command.submitCurrent(SubmitCommand.last);
 			SubmitCommand.last = null;
