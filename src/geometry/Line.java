@@ -1,7 +1,5 @@
 package geometry;
 
-import tools.Tools;
-
 public class Line {
 	public final Point a;
 	public final Point b;
