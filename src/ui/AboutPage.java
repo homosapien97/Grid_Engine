@@ -84,15 +84,20 @@ public class AboutPage extends Display {
 			t.append("Repainting:               http://www.java2s.com/Questions_And_Answers/Swing/Graphics/Repaint.htm\n");
 			t.append("Key Binding:              http://www.coderanch.com/t/606742/GUI/java/key-bindings\n");
 			t.append("                          http://www.dreamincode.net/forums/topic/245148-java-key-binding-tutorial-and-demo-program/\n");
-			t.append("                          http://www.dreamincode.net/forums/topic/245148-java-key-binding-tutorial-and-demo-program/\n\n");
+			t.append("                          http://www.dreamincode.net/forums/topic/245148-java-key-binding-tutorial-and-demo-program/\n");
+			t.append("Pathing:                  The book, ISBN 0-201-88259-0\n\n");
 			
 			
-			t.append("A Lot of Stack Overflow Pages...a lot...swing is annoying sometimes...\n\n");
+			t.append("A Lot of Stack Overflow Pages...a lot...swing is annoying sometimes... and so is synchronization...\n\n");
 			t.append("A Bunch of Java SE 7 API Documentation Pages\n\n");
 			t.append("Oracle Community Pages\n\n");
 			t.append("Oracle Documentation/Help Pages\n\n");
 			t.append("Google Fonts (Cinzel, Cinzel Decorative, Forum)\n\n");
 			t.append("Windows Fonts (Consolas)\n\n");
+//			t.append("\n\n\n");
+//			t.append("Christian's Sources:\n\n");
+//			t.append("http://www.stackoverflow.com\n");
+//			t.append("http://www.coderanch.com\n");
 			
 			/*
 			t.append("setVisible bug:        http://stackoverflow.com/questions/4413310/setvisible-method-in-java-swing-hangs-system\n");

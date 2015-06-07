@@ -1,0 +1,13 @@
+Christian Gutowski
+	I learned quite a bit doing this project. Of course, I learned some mechanics (such as synchronization for container access, the amazingness of HashMaps), but the most
+valuable thing I learned while working on this game is that efficiency doesn’t matter. I used to think it did, but now seeing the kind of stress I can put on the JVM without
+any kind of lag showing has convinced me that efficiency is not a worthwhile goal when writing something unless you’re writing some general-purpose algorithm.
+	Firstly, in terms of memory efficiency, I gave up at the start—I already had some idea that it was worthwhile to trade memory efficiency for computational efficiency,
+but now I’m sure. It’s just completely irrelevant how much memory my program uses. Immediately when the game starts, I load/create 246016 individual tiles (not individual
+tile objects, just arrays containing data that together represent tile objects) and Java doesn’t bat an eyelash. There is plenty of redundant storage for the sake of easy
+access—for example, every terrain tile is possible to access through a map from points to chunks (Chunk objects are essentially 16x16 arrays of tiles), but rather than
+computing the hash function of the map every time you want to access a chunk, I have chunks store their nearest neighbors, so that you can access all chunks around a certain
+chunk with only that chunk object. This was probably completely unnecessary, though, given the next thing I learned.
+	Time efficiency doesn’t matter. I could have reloaded all the chunks I needed every game tick from the HashMap and thrown efficiency out the window, and the user wouldn’t
+have been able to tell the difference in performance. Modern computers are just too fast for that to matter. Towards the end of my project, I started paying less and less
+attention to efficiency, and it continued to not matter.
