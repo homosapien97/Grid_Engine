@@ -41,57 +41,58 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	public final Path<Player> path;
 	
 //	public final Spell[] spellInventory = new Spell[49];
-	public final Spell[] spellInventory = {
-		BowSpell.get(0),	//0
-		BowSpell.get(1),
-		BowSpell.get(2),
-		BowSpell.get(3),
-		BowSpell.get(4),
-		BowSpell.get(5),
-		BowSpell.get(6),
-		EarthSpell.get(0),	//7
-		EarthSpell.get(1),
-		EarthSpell.get(2),
-		EarthSpell.get(3),
-		EarthSpell.get(4),
-		EarthSpell.get(5),
-		EarthSpell.get(6),
-		FireSpell.get(0),	//14
-		FireSpell.get(1),
-		FireSpell.get(2),
-		FireSpell.get(3),
-		FireSpell.get(4),
-		FireSpell.get(5),
-		FireSpell.get(6),
-		PlasmaSpell.get(0),	//21
-		PlasmaSpell.get(1),
-		PlasmaSpell.get(2),
-		PlasmaSpell.get(3),
-		PlasmaSpell.get(4),
-		PlasmaSpell.get(5),
-		PlasmaSpell.get(6),
-		ShieldSpell.get(0),	//28
-		ShieldSpell.get(1),
-		ShieldSpell.get(2),
-		ShieldSpell.get(3),
-		ShieldSpell.get(4),
-		ShieldSpell.get(5),
-		ShieldSpell.get(6),
-		SwordSpell.get(0),	//35
-		SwordSpell.get(1),
-		SwordSpell.get(2),
-		SwordSpell.get(3),
-		SwordSpell.get(4),
-		SwordSpell.get(5),
-		SwordSpell.get(6),
-		WaterSpell.get(0),	//42
-		WaterSpell.get(1),
-		WaterSpell.get(2),
-		WaterSpell.get(3),
-		WaterSpell.get(4),
-		WaterSpell.get(5),
-		WaterSpell.get(6),
-	};
+//	public final Spell[] spellInventory = {
+//		BowSpell.get(0),	//0
+//		BowSpell.get(1),
+//		BowSpell.get(2),
+//		BowSpell.get(3),
+//		BowSpell.get(4),
+//		BowSpell.get(5),
+//		BowSpell.get(6),
+//		EarthSpell.get(0),	//7
+//		EarthSpell.get(1),
+//		EarthSpell.get(2),
+//		EarthSpell.get(3),
+//		EarthSpell.get(4),
+//		EarthSpell.get(5),
+//		EarthSpell.get(6),
+//		FireSpell.get(0),	//14
+//		FireSpell.get(1),
+//		FireSpell.get(2),
+//		FireSpell.get(3),
+//		FireSpell.get(4),
+//		FireSpell.get(5),
+//		FireSpell.get(6),
+//		PlasmaSpell.get(0),	//21
+//		PlasmaSpell.get(1),
+//		PlasmaSpell.get(2),
+//		PlasmaSpell.get(3),
+//		PlasmaSpell.get(4),
+//		PlasmaSpell.get(5),
+//		PlasmaSpell.get(6),
+//		ShieldSpell.get(0),	//28
+//		ShieldSpell.get(1),
+//		ShieldSpell.get(2),
+//		ShieldSpell.get(3),
+//		ShieldSpell.get(4),
+//		ShieldSpell.get(5),
+//		ShieldSpell.get(6),
+//		SwordSpell.get(0),	//35
+//		SwordSpell.get(1),
+//		SwordSpell.get(2),
+//		SwordSpell.get(3),
+//		SwordSpell.get(4),
+//		SwordSpell.get(5),
+//		SwordSpell.get(6),
+//		WaterSpell.get(0),	//42
+//		WaterSpell.get(1),
+//		WaterSpell.get(2),
+//		WaterSpell.get(3),
+//		WaterSpell.get(4),
+//		WaterSpell.get(5),
+//		WaterSpell.get(6),
+//	};
+	public final Inventory spellInventory = new Inventory();
 	
 
 	public final VisionSquare visionSquare;
@@ -127,6 +128,10 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		visionSquare = VisionSquare.r21;
 		visionSquare.trace(super.absoluteX,super.absoluteY); //LC must be init before calling this.
 		path = new Path<Player>(this);
+		
+		for(int i = 0; i < Inventory.spells.length; i++) {
+			spellInventory.set(i, Integer.MAX_VALUE);
+		}
 	}
 	public Player(int x, int y, Chunk c, String sprite) {
 		super(x, y, c, sprite);
@@ -150,6 +155,10 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		visionSquare = VisionSquare.r21;
 		visionSquare.trace(super.absoluteX,super.absoluteY); //LC must be init before calling this.
 		path = new Path<Player>(this);
+		
+		for(int i = 0; i < Inventory.spells.length; i++) {
+			spellInventory.set(i, Integer.MAX_VALUE);
+		}
 	}
 		@Override
 	public int getHealth() {
