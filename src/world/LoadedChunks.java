@@ -9,13 +9,14 @@ import java.util.List;
 
 
 
+
 import terrain.Terrain;
 import tools.Tools;
+import world.generation.Generator;
 import entity.Entity;
 import entity.Player;
 import entity.interfaces.Intelligent;
 //import entity.Player;
-import generation.Generator;
 import geometry.Circle;
 import geometry.Line;
 import geometry.Point;

@@ -1,4 +1,4 @@
-package tools;
+package world.generation;
 
 public class Map_makerPrime {
 	public static void main (String[]args)

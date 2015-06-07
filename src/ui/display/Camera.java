@@ -1,8 +1,9 @@
-package ui;
+package ui.display;
 
 import java.awt.Image;
 import java.util.List;
 //import java.util.Vector;
+
 
 
 
@@ -21,7 +22,6 @@ import geometry.Point;
 import geometry.PointCollection;
 import world.LoadedChunks;
 import terrain.Empty;
-import ui.display.Display;
 import ui.key_actions.PreviewCommand;
 
 public class Camera {
@@ -153,8 +153,8 @@ public class Camera {
 			tempPC = a.pointsToHighlight();
 			if(tempPC != null) {
 				for(Point p : a.pointsToHighlight()) {
-					if(Display.WIDTH / 2 + p.x - pAbsX > 0 && Display.WIDTH / 2 + p.x - pAbsX < highlightSnapshot.length
-							&& Display.HEIGHT / 2 + p.y - pAbsY > 0 && Display.HEIGHT / 2 + p.y < highlightSnapshot[0].length)
+					if(Display.WIDTH / 2 + p.x - pAbsX >= 0 && Display.WIDTH / 2 + p.x - pAbsX < highlightSnapshot.length
+							&& Display.HEIGHT / 2 + p.y - pAbsY >= 0 && Display.HEIGHT / 2 + p.y - pAbsY < highlightSnapshot[0].length)
 					{
 						highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
 					}

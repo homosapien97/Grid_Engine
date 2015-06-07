@@ -62,8 +62,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 						followingPlayer = false;
 					}
 				}
-			}
-			if(shot.done()) shot = null;
+			} else if(shot.done()) shot = null;
 		}
 		
 	}

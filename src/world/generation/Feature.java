@@ -1,4 +1,4 @@
-package generation;
+package world.generation;
 
 import geometry.Point;
 

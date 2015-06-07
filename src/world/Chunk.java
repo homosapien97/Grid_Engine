@@ -8,9 +8,9 @@ import java.util.Vector;
 import java.util.Iterator;
 
 import entity.Entity;
-import generation.Generator;
 import geometry.Point;
 import terrain.Terrain;
+import world.generation.Generator;
 
 public class Chunk {
 	//grid dimensions (square)

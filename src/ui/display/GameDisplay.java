@@ -22,7 +22,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import tools.Tools;
-import ui.Camera;
 import ui.Inventory;
 import ui.key_actions.ClickModifier;
 import ui.terminal.Command;

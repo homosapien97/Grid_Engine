@@ -1,4 +1,4 @@
-package generation;
+package world.generation;
 
 import terrain.Stone;
 import terrain.Terrain;

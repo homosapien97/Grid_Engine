@@ -1,4 +1,4 @@
-package generation;
+package world.generation;
 
 import java.util.HashMap;
 
