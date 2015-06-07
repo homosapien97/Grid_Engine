@@ -55,6 +55,7 @@ public abstract class Entity {
 		}
 	}
 	public boolean deleteSafe() {
+		delete();
 		return true;
 	}
 //	protected boolean addAction(Action a) {

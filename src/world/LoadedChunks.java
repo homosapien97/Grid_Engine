@@ -248,11 +248,11 @@ public class LoadedChunks {
 	}
 	
 	public static void updateAI() {
-		System.out.println(Player.player.chunk.pos.x - center.pos.x + RADIUS - UPDATE_RADIUS);
-		System.out.println(Player.player.chunk.pos.x - center.pos.x + RADIUS + UPDATE_RADIUS);
+//		System.out.println(Player.player.chunk.pos.x - center.pos.x + RADIUS - UPDATE_RADIUS);
+//		System.out.println(Player.player.chunk.pos.x - center.pos.x + RADIUS + UPDATE_RADIUS);
 		for(int i = Player.player.chunk.pos.x - center.pos.x + RADIUS - UPDATE_RADIUS; i < Player.player.chunk.pos.x - center.pos.x + RADIUS + UPDATE_RADIUS; i++) {
 			for(int j = Player.player.chunk.pos.y - center.pos.y + RADIUS - UPDATE_RADIUS; j < Player.player.chunk.pos.y - center.pos.y + RADIUS + UPDATE_RADIUS; j++) {
-				System.out.println(chunks[i][j].pos);
+//				System.out.println(chunks[i][j].pos);
 				synchronized(chunks[i][j].entities) {
 					for(Entity e : chunks[i][j].entities) {
 						if(e instanceof Intelligent) {

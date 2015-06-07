@@ -18,10 +18,16 @@ public class Tools {
 	//navigational tools
 	public static class nav {
 		public static int absCoordToChunkCoord(int abs) {
-			return (abs > -1) ? (abs/Chunk.DIM) : ((abs - Chunk.DIM + 1) / (Chunk.DIM));
+			return (abs > -1) ? (abs / Chunk.DIM) : ((abs - Chunk.DIM + 1) / (Chunk.DIM));
 		}
 		public static Point absPointToChunkPoint(Point abs) {
 			return new Point(absCoordToChunkCoord(abs.x), absCoordToChunkCoord(abs.y));
+		}
+		public static int chunkCoordToAbsCoord(int ch) {
+			return ch * Chunk.DIM;
+		}
+		public static Point chunkPointToAbsPoint(Point ch) {
+			return new Point(chunkCoordToAbsCoord(ch.x), chunkCoordToAbsCoord(ch.y));
 		}
 		
 		public static int absCoordToMinorCoord(int abs) {
