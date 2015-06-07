@@ -49,6 +49,8 @@ public class AboutPage extends Display {
 			aboutText.setBackground(new Color(25, 25, 25, 200));
 			aboutText.setPreferredSize(new Dimension(1400, 600));
 			aboutText.setFont(new Font("Consolas", Font.PLAIN, 16));
+			aboutText.setEditable(false);
+			aboutText.setFocusable(false);
 			addSources(aboutText);
 			
 			main.add(aboutText);
