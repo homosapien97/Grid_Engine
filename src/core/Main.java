@@ -8,6 +8,7 @@ import generation.GenWall;
 import terrain.Quicksand;
 import terrain.Stone;
 import tools.Tools;
+import ui.display.GameDisplay;
 import ui.key_actions.SubmitCommand;
 import ui.terminal.Command;
 //import world.Chunk;
@@ -28,11 +29,24 @@ public class Main {
 			switch(Core.gameState){
 				case PLAYING:
 					step();
+					
 					Tools.time.wait(400);
+					
+					if(Action.queue.get(Player.player) == null){
+						Core.gameState = GameState.PAUSED;
+					}
+					
 					break;
 				case PAUSED:
 					stepGraphics();
+					
 					Tools.time.wait(1);
+					
+					//unpause if the player has queued actions and the cmd line is closed
+					if(Action.queue.get(Player.player) != null && !GameDisplay.cmdLogVisible){
+						Core.gameState = GameState.PLAYING;
+					}
+					
 					break;
 				case JUST_QUIT_GAME:
 					//creates a new game display object, essentially makes it so you can play a new game

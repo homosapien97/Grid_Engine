@@ -33,7 +33,7 @@ import entity.Player;
 public class GameDisplay extends Display {
 	//states of toggleable things
 	private static Boolean hudVisible = true;
-	private static Boolean cmdLogVisible = false;
+	public static Boolean cmdLogVisible = false;
 	private static Boolean inventoryVisible = false;
 	
 	//HUD icons
