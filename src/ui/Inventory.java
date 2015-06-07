@@ -19,6 +19,7 @@ import javax.swing.border.LineBorder;
 
 import core.Core;
 import core.GameState;
+import entity.Player;
 import spells.BowSpell;
 import spells.EarthSpell;
 import spells.FireSpell;
@@ -84,41 +85,75 @@ public class Inventory extends Display {
 	
 	private static void addCards(Container c){
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(EarthSpell.sprite[i], i));
+			c.add(getCardAsComponent(BowSpell.sprite[i], i, spell.BOW_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(FireSpell.sprite[i], i));
+			c.add(getCardAsComponent(EarthSpell.sprite[i], i, spell.EARTH_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(WaterSpell.sprite[i], i));
+			c.add(getCardAsComponent(FireSpell.sprite[i], i, spell.FIRE_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i));
+			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i, spell.PLASMA_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(BowSpell.sprite[i], i));
+			c.add(getCardAsComponent(ShieldSpell.sprite[i], i, spell.SHIELD_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(SwordSpell.sprite[i], i));
+			c.add(getCardAsComponent(SwordSpell.sprite[i], i, spell.SWORD_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(ShieldSpell.sprite[i], i));
+			c.add(getCardAsComponent(WaterSpell.sprite[i], i, spell.WATER_SPELL));
 		}
 	}
 	
-	private static Container getCardAsComponent(Image img, int i){
+	private static Container getCardAsComponent(Image img, int i, spell s){
 		Container c = new Container();
 		BoxLayout l = new BoxLayout(c, BoxLayout.X_AXIS);
 		c.setLayout(l);
 		
+		int x = 0;
+		
+		switch(s){
+			case BOW_SPELL:
+				x = Player.player.spellInventory.nums[i];
+				break;
+			case EARTH_SPELL:
+				x = Player.player.spellInventory.nums[i + 7];
+				break;
+			case FIRE_SPELL:
+				x = Player.player.spellInventory.nums[i + 14];
+				break;
+			case PLASMA_SPELL:
+				x = Player.player.spellInventory.nums[i + 21];
+				break;
+			case SHIELD_SPELL:
+				x = Player.player.spellInventory.nums[i + 28];
+				break;
+			case SWORD_SPELL:
+				x = Player.player.spellInventory.nums[i + 35];
+				break;
+			case WATER_SPELL:
+				x = Player.player.spellInventory.nums[i + 42];
+				break;
+		}
+		
+		String count;
+		
+		if(x > 999){
+			count = "a lot";
+		}else{
+			count = Integer.toString(x);
+		}
+		
 		JLabel image = new JLabel();
-		JLabel amount = new JLabel(" x " + 0);
+		JLabel amount = new JLabel(" x " + count);
 		
 		amount.setFont(bodyFont);
 		amount.setForeground(new Color(201, 166, 137));
@@ -147,4 +182,6 @@ public class Inventory extends Display {
 			}
 		}
 	}
+	
+	private enum spell { BOW_SPELL, EARTH_SPELL, FIRE_SPELL, PLASMA_SPELL, SHIELD_SPELL, SWORD_SPELL, WATER_SPELL }
 }
