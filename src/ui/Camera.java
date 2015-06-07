@@ -118,7 +118,6 @@ public class Camera {
 		synchronized(Player.player.visionSquare) {
 			Player.player.visionSquare.trace(pAbsX, pAbsY);
 			entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
-			System.out.println(entities.size() + " entities");
 			for(int i = 0; i < entityImageSnapshot.length; i++) {
 				for(int j = 0; j < entityImageSnapshot[0].length; j++) {
 					entityImageSnapshot[i][j] = null;

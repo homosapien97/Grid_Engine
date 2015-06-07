@@ -67,7 +67,7 @@ public class Ray {
 			construct();
 		} else {
 			//TODO implement line lengthening
-			System.out.println("Null Ray");
+//			System.out.println("Null Ray");
 			a = from.a;
 			b = from.b;
 			axLbx = from.axLbx;

@@ -69,8 +69,6 @@ public abstract class Entity {
 //		}
 //		return false;
 //	}
-	public Image sprite() {
-		return sprite;
-	}
+	public abstract Image sprite();
 //	public abstract void load();
 }

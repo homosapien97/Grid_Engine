@@ -66,5 +66,9 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 		}
 		
 	}
+	@Override
+	public Image sprite() {
+		return sprite;
+	}
 
 }
