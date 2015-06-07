@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 
 import entity.Player;
-import ui.Camera;
 import ui.display.Display;
 import world.Chunk;
 

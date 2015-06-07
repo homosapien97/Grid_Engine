@@ -77,10 +77,22 @@ public class AboutPage extends Display {
 			
 			t.append("Cross Platform Font List: http://templates.mailchimp.com/design/typography/\n");
 			t.append("Font Size to Pixel:       http://reeddesign.co.uk/test/points-pixels.html\n");
-			t.append("SetVisible hangup:        https://community.oracle.com/thread/1357662\n\n");
+			t.append("SetVisible hangup:        https://community.oracle.com/thread/1357662\n");
+			t.append("                          https://weblogs.java.net/blog/cayhorstmann/archive/2007/06/the_single_thre.html\n");
+			t.append("                          https://bitguru.wordpress.com/2007/03/21/will-the-real-swing-single-threading-rule-please-stand-up/\n");
+			t.append("JTextArea Resizing:       http://forums.codeguru.com/showthread.php?494250-resizing-text-area-in-a-JFrame\n");
+			t.append("Repainting:               http://www.java2s.com/Questions_And_Answers/Swing/Graphics/Repaint.htm\n");
+			t.append("Key Binding:              http://www.coderanch.com/t/606742/GUI/java/key-bindings\n");
+			t.append("                          http://www.dreamincode.net/forums/topic/245148-java-key-binding-tutorial-and-demo-program/\n");
+			t.append("                          http://www.dreamincode.net/forums/topic/245148-java-key-binding-tutorial-and-demo-program/\n\n");
+			
 			
 			t.append("A Lot of Stack Overflow Pages...a lot...swing is annoying sometimes...\n\n");
 			t.append("A Bunch of Java SE 7 API Documentation Pages\n\n");
+			t.append("Oracle Community Pages\n\n");
+			t.append("Oracle Documentation/Help Pages\n\n");
+			t.append("Google Fonts (Cinzel, Cinzel Decorative, Forum)\n\n");
+			t.append("Windows Fonts (Consolas)\n\n");
 			
 			/*
 			t.append("setVisible bug:        http://stackoverflow.com/questions/4413310/setvisible-method-in-java-swing-hangs-system\n");

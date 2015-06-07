@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import core.Core;
+import core.GameState;
 import spells.BowSpell;
 import spells.EarthSpell;
 import spells.FireSpell;
@@ -26,6 +28,7 @@ import spells.SwordSpell;
 import spells.WaterSpell;
 import ui.display.Display;
 import ui.display.GameDisplay;
+import ui.key_actions.ToggleInventory;
 
 @SuppressWarnings("serial")
 public class Inventory extends Display {
@@ -135,6 +138,13 @@ public class Inventory extends Display {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			GameDisplay.toggleInventory();
+			
+			if(Core.gameState == GameState.PAUSED) {
+				Core.gameState = ToggleInventory.oldState;
+			} else {
+				ToggleInventory.oldState = Core.gameState;
+				Core.gameState = GameState.PAUSED;
+			}
 		}
 	}
 }

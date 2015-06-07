@@ -3,7 +3,6 @@ package core;
 import java.awt.EventQueue;
 
 import action.Action;
-import core.*;
 import entity.Player;
 import generation.GenWall;
 import terrain.Quicksand;
@@ -15,12 +14,6 @@ import ui.terminal.Command;
 import world.LoadedChunks;
 
 public class Main {
-	//example chunk
-//	static Chunk testChunk = new Chunk(0, 0, true, Stone.get());
-//	
-//	//player object
-//	public static Player player = new Player(0, 0, testChunk, "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1, 1);
-	
 	//for debug for now
 	public static final String version = "alpha_0_3";
 	
@@ -38,7 +31,6 @@ public class Main {
 					Tools.time.wait(400);
 					break;
 				case PAUSED:
-//					System.out.println("p");
 					stepGraphics();
 					Tools.time.wait(1);
 					break;
@@ -58,23 +50,16 @@ public class Main {
 		
 	//Initialization
 	public static void init() {
-		//player init
-//		Camera.init(player);
-//		LoadedChunks.init(testChunk);
-		//These player init functions have been moved to the player constructor.
-		
-		//startup
-//		testChunk.heightmap[10][10] = 1;
-//		testChunk.heightmap[11][10] = 1;
-//		testChunk.heightmap[5][13] = 1;
 		@SuppressWarnings("unused")
 		Player initPlayer = Player.player;
+		
 		GenWall testWall = new GenWall(5, 5, 10, 10, Quicksand.get());
 		testWall.generate();
+		
 		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
 		testWall2.generate();
+		
 		Core.start();
-//		Command.init(Player.player);
 	}
 
 	//Stepping Functions
