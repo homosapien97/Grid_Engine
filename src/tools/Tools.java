@@ -89,7 +89,7 @@ public class Tools {
 		}
 		
 		public static Image loadCreatureSprite(String filename){
-			Image img = loadImage(filename, "creature");
+			Image img = loadImage(filename, "creatures");
 			return img;
 		}
 		

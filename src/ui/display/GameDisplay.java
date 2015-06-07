@@ -148,7 +148,7 @@ public class GameDisplay extends Display {
 	
 	public void paintComponent(Graphics page){
 		//handle terrain
-		Camera.terrainImageSnapshot();
+//		Camera.terrainImageSnapshot();
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {
@@ -157,7 +157,7 @@ public class GameDisplay extends Display {
 		}
 		
 		//handle entities
-		Camera.entityImageSnapshot();
+//		Camera.entityImageSnapshot();
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {

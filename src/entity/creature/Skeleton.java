@@ -2,19 +2,12 @@ package entity.creature;
 import spells.BowSpell;
 import tools.Tools;
 import world.Chunk;
-import world.LoadedChunks;
-import entity.Entity;
 import entity.Player;
-//import general.Tools;
-
-
-
 import entity.interfaces.Mobile;
 import entity.interfaces.Sighted;
 import geometry.Point;
 
 import java.awt.Image;
-import java.util.List;
 
 import action.MoveAction;
 import action.SpellAction;
@@ -27,11 +20,11 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	public static BowSpell bow = BowSpell.get(5);
 	public SpellAction shot;
 	
-	public Skeleton(int absoluteX, int absoluteY, Chunk chunk, String sprite, int hp, int arm, double fire, double earth, double water, double plasma){
-		super(absoluteX, absoluteY, chunk, sprite, hp, arm, "Skeleton",fire, earth, water, plasma, VisionSquare.r15);
+	public Skeleton(int absoluteX, int absoluteY, Chunk chunk, int hp, int arm, double fire, double earth, double water, double plasma){
+		super(absoluteX, absoluteY, chunk, filename, hp, arm, "Skeleton",fire, earth, water, plasma, VisionSquare.r15);
 	}
-	public Skeleton(int absoluteX, int absoluteY, Chunk chunk, String sprite){
-		super(absoluteX, absoluteY, chunk, sprite, 10, 1, "Skeleton", 0.10, -0.10, -0.10, 0.10, VisionSquare.r15);
+	public Skeleton(int absoluteX, int absoluteY, Chunk chunk){
+		super(absoluteX, absoluteY, chunk, filename, 10, 1, "Skeleton", 0.10, -0.10, -0.10, 0.10, VisionSquare.r15);
 		
 	}
 	/*

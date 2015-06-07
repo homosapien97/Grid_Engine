@@ -136,15 +136,16 @@ public class WaterSpell extends Spell{
 		for(int i = 1; i < areaL.points.length; i++) {
 			if(LoadedChunks.heightAt(areaL.points[i].x, areaL.points[i].y) > 0) {
 				areaL = new Line(areaL, i + 1);
-				areaC = new Circle(areaL.b.x, areaL.b.y, radius[level]);
+//				areaC = new Circle(areaL.b.x, areaL.b.y, radius[level]);
 				break;
 			}
 			if(LoadedChunks.entitiesAt(areaL.points[i].x, areaL.points[i].y).size() > 0) {
 				areaL = new Line(areaL, i + 1);
-				areaC = new Circle(areaL.b.x, areaL.b.y, radius[level]);
+//				areaC = new Circle(areaL.b.x, areaL.b.y, radius[level]);
 				break;
 			}
 		}
+		areaC = new Circle(areaL.b.x, areaL.b.y, radius[level]);
 		PointCollection ret = new PointCollection(areaL);
 		ret.addAll(new PointCollection(areaC));
 		return ret;

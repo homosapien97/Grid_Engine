@@ -118,6 +118,7 @@ public class Camera {
 		synchronized(Player.player.visionSquare) {
 			Player.player.visionSquare.trace(pAbsX, pAbsY);
 			entities = LoadedChunks.entitiesIn(pAbsX - Display.WIDTH/2, pAbsY - Display.HEIGHT/2, pAbsX + Display.WIDTH/2, pAbsY + Display.HEIGHT/2);
+			System.out.println(entities.size() + " entities");
 			for(int i = 0; i < entityImageSnapshot.length; i++) {
 				for(int j = 0; j < entityImageSnapshot[0].length; j++) {
 					entityImageSnapshot[i][j] = null;
@@ -153,7 +154,11 @@ public class Camera {
 			tempPC = a.pointsToHighlight();
 			if(tempPC != null) {
 				for(Point p : a.pointsToHighlight()) {
-					highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
+					if(Display.WIDTH / 2 + p.x - pAbsX > 0 && Display.WIDTH / 2 + p.x - pAbsX < highlightSnapshot.length
+							&& Display.HEIGHT / 2 + p.y - pAbsY > 0 && Display.HEIGHT / 2 + p.y < highlightSnapshot[0].length)
+					{
+						highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
+					}
 				}
 			}
 		}

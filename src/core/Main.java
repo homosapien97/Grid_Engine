@@ -4,10 +4,12 @@ import java.awt.EventQueue;
 
 import action.Action;
 import entity.Player;
+import entity.creature.Skeleton;
 import generation.GenWall;
 import terrain.Quicksand;
 import terrain.Stone;
 import tools.Tools;
+import ui.Camera;
 import ui.display.GameDisplay;
 import ui.key_actions.SubmitCommand;
 import ui.terminal.Command;
@@ -25,7 +27,7 @@ public class Main {
 		
 		//main loop
 		while(Core.gameState != GameState.EXITING){
-			LoadedChunks.reload();
+			
 			switch(Core.gameState){
 				case PLAYING:
 					step();
@@ -73,12 +75,16 @@ public class Main {
 		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
 		testWall2.generate();
 		
+		Skeleton skelly = new Skeleton(3, 3, LoadedChunks.center);
+		
 		Core.start();
 	}
 
 	//Stepping Functions
 	public static void step() {
 		stepState();
+		Camera.terrainImageSnapshot();
+		Camera.entityImageSnapshot();
 		stepGraphics();
 	}
 	
@@ -96,6 +102,7 @@ public class Main {
 	
 
 	private static void stepState() {
+		LoadedChunks.reload();
 		LoadedChunks.updateAI();
 		if(SubmitCommand.last != null) {
 			Command.submitCurrent(SubmitCommand.last);
