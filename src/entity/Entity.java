@@ -1,13 +1,6 @@
 package entity;
 
 import java.awt.Image;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-//import java.util.Vector;
-
-
-
 import action.Action;
 import tools.Tools;
 import world.Chunk;
