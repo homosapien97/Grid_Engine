@@ -47,16 +47,16 @@ public class AboutPage extends Display {
 			JTextArea aboutText = new JTextArea();
 			aboutText.setForeground(Color.white);
 			aboutText.setBackground(new Color(25, 25, 25, 200));
-			aboutText.setPreferredSize(new Dimension(1400, 600));
+			aboutText.setPreferredSize(new Dimension(1400, 620));
 			aboutText.setFont(new Font("Consolas", Font.PLAIN, 16));
 			aboutText.setEditable(false);
-			aboutText.setFocusable(false);
+			//aboutText.setFocusable(false);
 			addSources(aboutText);
 			
 			main.add(aboutText);
 			
 			//space
-			main.add(Box.createRigidArea(new Dimension(0, 50)));
+			main.add(Box.createRigidArea(new Dimension(0, 17)));
 			
 			//back button
 			JButton mainMenu = newMainButton("BACK");
@@ -95,7 +95,10 @@ public class AboutPage extends Display {
 			t.append("Oracle Community Pages\n\n");
 			t.append("Oracle Documentation/Help Pages\n\n");
 			t.append("Google Fonts (Cinzel, Cinzel Decorative, Forum)\n\n");
-			t.append("Windows Fonts (Consolas)\n\n");
+			t.append("Windows Fonts (Consolas)\n\n\n");
+			t.append("This program is on GitHub! Link: https://github.com/homosapien97/Grid_Engine");
+			
+			
 //			t.append("\n\n\n");
 //			t.append("Christian's Sources:\n\n");
 //			t.append("http://www.stackoverflow.com\n");

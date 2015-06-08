@@ -11,12 +11,15 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
 import tools.Tools;
 import ui.display.Display;
 import ui.display.GameDisplay;
 import core.Core;
+import core.Main;
 
 @SuppressWarnings("serial")
 public class LoadingScreen extends Display {
@@ -27,11 +30,16 @@ public class LoadingScreen extends Display {
 	//load its resources cause it is running before the load scripts
 	public static Image loadingImage = Tools.img.loadImage("GridSplashX.png", "icons");
 	
-	//the loading bar
+	//loading stuff
 	public JProgressBar progressBar = new JProgressBar(0, 100);
+	public static JTextArea loadLog = new JTextArea("Loading Grid Game " + Main.version + "...\n");
 	
 	public LoadingScreen(){
 		super();
+		
+		//this
+		BoxLayout rootLayout = new BoxLayout(this, BoxLayout.X_AXIS);
+		this.setLayout(rootLayout);
 		
 		//main body
 		Container main = new Container();
@@ -53,7 +61,23 @@ public class LoadingScreen extends Display {
 		loading.setLayout(loadingLayout);
 		loading.setSize(P_WIDTH, P_HEIGHT);
 		
-		loading.add(Box.createRigidArea(new Dimension(0,50)));
+		loading.add(Box.createRigidArea(new Dimension(0, 50)));
+		
+		//loading output
+		loadLog.setForeground(Color.white);
+		loadLog.setBackground(Color.black);
+		//loadLog.setPreferredSize(new Dimension(1536, P_HEIGHT)); //don't question that width...just don't
+		
+		//load log pane
+		JScrollPane logScrollPane = new JScrollPane(loadLog);
+		logScrollPane.setPreferredSize(new Dimension(1536, P_HEIGHT));
+		logScrollPane.setBackground(new Color(0, 0, 0, 0));
+		logScrollPane.setForeground(new Color(0, 0, 0, 0));
+		logScrollPane.setWheelScrollingEnabled(true);
+		logScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		logScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		logScrollPane.setBorder(null);
+		logScrollPane.setVisible(true);
 		
 		//loading text
 		JLabel loadingText = new JLabel("Loading...    ");
@@ -66,8 +90,17 @@ public class LoadingScreen extends Display {
 		
 		//show
 		main.add(loading);
+		
+		this.add(logScrollPane);
 		this.add(main);
+		this.add(Box.createRigidArea(new Dimension(312, 0)));
+		
 		main.setVisible(true);
+	}
+	
+	public static void startupLog(String s){
+		loadLog.append("\n" + s);
+		loadLog.setCaretPosition(loadLog.getDocument().getLength());
 	}
 	
 	public void loadGameResources(){
@@ -79,24 +112,49 @@ public class LoadingScreen extends Display {
 
 		@Override
 		protected Object doInBackground() {
+			startupLog("Loading graphics...");
 			//load graphics
+			startupLog("Loading entities...");
 			Core.loadEntities();
+			startupLog("Done loading entities!");
+			startupLog("Loading terrain...");
 			Core.loadTerrain();
+			startupLog("Done loading terrain!");
+			startupLog("Loading ui graphics...");
 			Core.loadUIGraphics();
+			startupLog("Done loading ui graphics!");
+			startupLog("Loading cards...");
 			Core.loadCards();
+			startupLog("Done loading cards!");
+			startupLog("Loading additional graphics...");
 			Core.loadAdditionalGraphics();
+			startupLog("Done loading additional graphics!");
+			startupLog("Done loading graphics!");
+			
+			startupLog("Loading commands...");
 			Core.loadCommands();
+			startupLog("Done loading commands!");
 
 			//load fonts
+			startupLog("Loading fonts...");
 			Core.loadFonts();
+			startupLog("Done loading fonts!");
 			
 			//load pages
+			startupLog("Creating display pages...");
+			startupLog("Creating game display...");
 			Core.gameDisplay = new GameDisplay();
+			startupLog("Creating main menu...");
 			Core.mainMenu = new MainMenu();
+			startupLog("Creating settings page...");
 			Core.settingsPage = new SettingsPage();
+			startupLog("Creating about page...");
 			Core.aboutPage = new AboutPage();
-			
+			startupLog("Done creating display pages!");
+
+			startupLog("Adding key binds...");
 			Core.addKeyBinds(Core.gameDisplay);
+			startupLog("Done adding keybinds!");
 			
 			//init settings and about pages
 			Core.frame.setVisible(false);

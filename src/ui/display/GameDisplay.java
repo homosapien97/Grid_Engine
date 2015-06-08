@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 
 import tools.Tools;
 import ui.Inventory;
+import ui.LoadingScreen;
 import ui.key_actions.ClickModifier;
 import ui.terminal.Command;
 import core.Clock;
@@ -376,15 +377,22 @@ public class GameDisplay extends Display {
 	//loading
 	
 	public static void load(){
+		LoadingScreen.startupLog("Loading heart...");
 		heart = Tools.img.loadHUDSprite("heart.png");
+		LoadingScreen.startupLog("Loading broken heart...");
 		broken_heart = Tools.img.loadHUDSprite("broken-heart.png");
 
+		LoadingScreen.startupLog("Loading armor shield...");
 		shield = Tools.img.loadHUDSprite("shield.png");
+		LoadingScreen.startupLog("Loading broken armor shield...");
 		broken_shield = Tools.img.loadHUDSprite("broken-shield.png");
-		
+
+		LoadingScreen.startupLog("Loading tick clock...");
 		tick_clock = Tools.img.loadHUDSprite("tick-clock.png");
-		
+
+		LoadingScreen.startupLog("Loading left click highlight...");
 		leftClickHighlight = Tools.img.loadImage("leftClickHighlight.png", "general");
+		LoadingScreen.startupLog("Loading right click highlight...");
 		rightClickHighlight = Tools.img.loadImage("rightClickHighlight.png", "general");
 	}
 	

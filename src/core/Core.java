@@ -146,7 +146,7 @@ public class Core {
 		InputMap gameIM = game.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_CMDLINE = GameDisplay.cmdInput.getInputMap(JComponent.WHEN_FOCUSED);
 		InputMap gameIM_INVENTORY = game.inventory.getInputMap(JComponent.WHEN_FOCUSED);
-		InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		//InputMap gameIM_MASTER = game.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		
 		ActionMap gameAM = game.getActionMap();
 		ActionMap gameAM_CMDLINE = GameDisplay.cmdInput.getActionMap();
@@ -196,75 +196,102 @@ public class Core {
 	}
 	
 	public static void loadCreatures(){
+		LoadingScreen.startupLog("Loading skeleton...");
 		Skeleton.load();
 		incrementLoadingProgress(2);
 	}
 	
 	public static void loadEntities(){
 		loadCreatures();
+		LoadingScreen.startupLog("Loading player...");
 		Player.load();
 		incrementLoadingProgress(2);
 	}
 	
 	public static void loadTerrain(){
+		LoadingScreen.startupLog("Loading stone...");
 		Stone.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading quicksand...");
 		Quicksand.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading empty...");
 		Empty.load();
 		incrementLoadingProgress(4);
 	}
 	
 	public static void loadUIGraphics(){
+		LoadingScreen.startupLog("Loading game ui graphics...");
 		GameDisplay.load();
 		incrementLoadingProgress(4);
 	}
 	
 	public static void loadCards(){
+		LoadingScreen.startupLog("Loading earth spell...");
 		EarthSpell.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading fire spell...");
 		FireSpell.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading plasma spell...");
 		PlasmaSpell.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading water spell...");
 		WaterSpell.load();
 		incrementLoadingProgress(4);
 		
+		LoadingScreen.startupLog("Loading bow spell...");
 		BowSpell.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading shield spell...");
 		ShieldSpell.load();
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading sword spell...");
 		SwordSpell.load();
 		incrementLoadingProgress(4);
 	}
 	
 	public static void loadCommands() {
+		LoadingScreen.startupLog("Creating move command...");
 		@SuppressWarnings("unused")
 		Object a = MoveCommand.moveCommand;
+		LoadingScreen.startupLog("Creating cast command...");
 		a = CastCommand.castCommand;
+		LoadingScreen.startupLog("Creating move relative command...");
 		a = MoveRelativeCommand.moveRelativeCommand;
+		LoadingScreen.startupLog("Creating cast relative command...");
 		a = CastRelativeCommand.castRelativeCommand;
 	}
 	
 	public static void loadAdditionalGraphics(){
+		LoadingScreen.startupLog("Loading main menu background...");
 		bg = Tools.img.loadImage("mainmenu.png", "backgrounds");
 		incrementLoadingProgress(4);
 		background = new ImageTileBackground(bg);
 		
+		LoadingScreen.startupLog("Loading highlights...");
+		LoadingScreen.startupLog("Loading blue highlight...");
 		blueHighlight = Tools.img.loadImage("blueHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading cyan highlight...");
 		cyanHighlight = Tools.img.loadImage("cyanHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading green highlight...");
 		greenHighlight = Tools.img.loadImage("greenHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading grey highlight...");
 		greyHighlight = Tools.img.loadImage("greyHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading purple highlight...");
 		purpleHighlight = Tools.img.loadImage("purpleHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading red highlight...");
 		redHighlight = Tools.img.loadImage("redHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading white highlight...");
 		whiteHighlight = Tools.img.loadImage("whiteHighlight.png", "general");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading yellow highlight...");
 		yellowHighlight = Tools.img.loadImage("yellowHighlight.png", "general");
 		incrementLoadingProgress(4);
 	}
@@ -337,12 +364,16 @@ public class Core {
 	//fonts
 	
 	public static void loadFonts(){
+		LoadingScreen.startupLog("Loading Cinzel...");
 		cinzel = loadFont("Cinzel.ttf");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading Cinzel Decorative...");
 		cinzelDecorative = loadFont("CinzelDecorative.ttf");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading Forum...");
 		forum = loadFont("Forum.ttf");
 		incrementLoadingProgress(4);
+		LoadingScreen.startupLog("Loading Courier...");
 		courier = loadFont("Courier.ttf");
 		incrementLoadingProgress(4);
 	}
