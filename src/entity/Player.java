@@ -212,7 +212,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	}
 	
 	@Override
-	public boolean pathTo(int x, int y) {
+	public MoveAction<Player> pathTo(int x, int y) {
 //		synchronized(actions) {
 //			actions.removeIf(s -> ((s instanceof MoveAction) && s.done()));
 //			for(Action a : actions) {
@@ -220,10 +220,9 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 //			}
 			if(path.constructPathTo(x, y)) {
 //				return addAction(new MoveAction<Player>(this, x, y, true));
-				new MoveAction<Player>(this, x, y, true);
-				return true;
+				return new MoveAction<Player>(this, x, y, true);
 			}
-			return false;
+			return null;
 //		}
 	}
 	

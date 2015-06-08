@@ -10,7 +10,7 @@ public interface Pathing<T extends Entity & Mobile & Sighted & Pathing<T>> {
 //	public Vector<Terrain> terrainList();
 //	public boolean terrainWhitelist();
 	public Path<T> getPath();
-	public boolean pathTo(int x, int y);
+	public MoveAction<T> pathTo(int x, int y);
 	public MoveAction<T> pathToPreview(int x, int y);
 }
 

@@ -35,12 +35,13 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 		maxHealth = hp;
 		health = hp;
 		natArmor = arm;
-		this.name = name;
+		this.ticksPerTile = ticksPerTile;
 		alive = true;
 		fireRes = fire;
 		earthRes = earth;
 		waterRes = water;
 		plasmaRes = plasma;
+		this.name = name;
 		
 		visionSquare = vsquare;
 		synchronized(visionSquare) {
@@ -144,12 +145,11 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 	}
 
 	@Override
-	public boolean pathTo(int x, int y) {
+	public MoveAction<Creature> pathTo(int x, int y) {
 		if(path.constructPathTo(x, y)) {
-			new MoveAction<Creature>(this, x, y, true);
-			return true;
+			return new MoveAction<Creature>(this, x, y, true);
 		}
-		return false;
+		return null;
 	}
 	
 	@Override

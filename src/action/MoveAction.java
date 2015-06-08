@@ -11,9 +11,10 @@ public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T> > exte
 	public int ticksPerDistance;
 	public int xTarget;
 	public int yTarget;
+	private int count = 0;
 //	public T actor;
 	public MoveAction (T actor, int xTarget, int yTarget, boolean execute) {
-		super(actor, Clock.ticks + actor.ticksPerTileWalked(), 0, execute, true);
+		super(actor, Clock.ticks, 0, execute, true);
 		this.ticksPerDistance = actor.ticksPerTileWalked();
 		this.xTarget = xTarget;
 		this.yTarget = yTarget;
@@ -23,8 +24,10 @@ public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T> > exte
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
-//		actor.stepTowards(xTarget, yTarget);
-		((T)(actor)).getPath().goTo(xTarget, yTarget);
+		if(count % ticksPerDistance == 0) {
+			((T)(actor)).getPath().goTo(xTarget, yTarget);
+		}
+		count++;
 	}
 	
 	@Override

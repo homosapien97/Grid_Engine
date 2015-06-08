@@ -77,7 +77,7 @@ public abstract class Action implements Runnable{
 //			queue.removeIf(s -> (s.done()));
 			for(Map.Entry<Entity, Action> entry : queue.entrySet()) {
 				if((entry.getValue() != null) && (Clock.ticks >= entry.getValue().startTime && (Clock.ticks <= entry.getValue().startTime + entry.getValue().totalTicks || entry.getValue().totalTicks < 0))) {
-					System.out.println("executing [" + entry.getValue().getClass() + "] from " + entry.getValue().startTime + " to " + (entry.getValue().startTime + entry.getValue().totalTicks));
+					System.out.println("executing [" + entry.getKey().getClass()+ "][" + entry.getValue().getClass() + "] from " + entry.getValue().startTime + " to " + (entry.getValue().startTime + entry.getValue().totalTicks));
 					entry.getValue().run();
 				}
 				if((entry.getValue() != null) && entry.getValue().done()) entry.setValue(null);
