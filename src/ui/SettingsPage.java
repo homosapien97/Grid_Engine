@@ -24,7 +24,7 @@ import core.Settings;
  * Displays the settings page and provides settings configuration.
  * @author Michael
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "unused" })
 public class SettingsPage extends Display {
 	//button stuff
 	private final Dimension BUTTON_SIZE = new Dimension(100, 30);
@@ -178,9 +178,9 @@ public class SettingsPage extends Display {
 					
 					Core.addKeyBinds(Core.gameDisplay, true);
 					
-					JOptionPane.showMessageDialog(getRootPane(), "Settings saved!");
+					JOptionPane.showMessageDialog(getRootPane(), "Settings saved!", "Grid Game Settings", JOptionPane.DEFAULT_OPTION);
 					
-					Core.frame.repaint();
+					Core.frame.repaint(); //incase the JOptionPane leaves a black square where it was
 					
 					inv.setText(Settings.inventoryKeyBind);
 					hud.setText(Settings.hudKeyBind);
