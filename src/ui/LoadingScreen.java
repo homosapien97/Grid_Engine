@@ -153,7 +153,7 @@ public class LoadingScreen extends Display {
 			startupLog("Done creating display pages!");
 
 			startupLog("Adding key binds...");
-			Core.addKeyBinds(Core.gameDisplay);
+			Core.addKeyBinds(Core.gameDisplay, false);
 			startupLog("Done adding keybinds!");
 			
 			//init settings and about pages

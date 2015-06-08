@@ -1,0 +1,12 @@
+Michael Fischler
+	In doing this project, I learned a great deal about Java Swing. I also learned why everyone hates Java Swing so much. I learned all about layout managers, many different JComponents, how to load fonts,
+how to add key binds to different components with different attributes, how to load images into files then load them into Image objects, and how to draw images using JLabels in addition to using the Graphics
+draw image method. Since I was primarily doing graphics, I also spent time learning how to change how JButtons looked and about JScrollPanes and many other cool features. I learned how to turn mouse click
+coordinates into a location on a grid of 16x16 pixel squares. I also used enums for the first time, which were very nice to use.
+	I reinforced my expierences that I had gained from doing the optional graphics programs for the QPPs with all the object oriented graphics code I wrote, along with the key bindings, mouse events, and action
+events that I used to create a user interface. I also learned how to use JProgressBars for loading, along with how to run parrallel tasks. I was able to incorporate SwingWorkers in the code, in addition to 
+Runnable objects in the event queue. I gained skills with designing and formatting UIs while also having to learn what has to be done as to not make swing unhappy (like how setVisible had to be ran in a parallel
+thread).
+	In my expierences helping to code this game, I saw how quickly proper practices such as encapsulation can be left in the dust due to the extra code needed to incorporate them into a project. This did not
+have any negative effects on our program, but could be considered bad practice. I did improve my skills on file organization, so that is an organizational plus for this project. Overall, I learned a lot about
+graphics in this project, in addition to a few other things such as parallelization.

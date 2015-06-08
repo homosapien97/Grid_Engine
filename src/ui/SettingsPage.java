@@ -13,9 +13,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import ui.display.Display;
 import core.Core;
+import core.Settings;
 
 /**
  * Displays the settings page and provides settings configuration.
@@ -26,6 +29,9 @@ public class SettingsPage extends Display {
 	//button stuff
 	private final Dimension BUTTON_SIZE = new Dimension(100, 30);
 	
+	private JTextField inv;
+	private JTextField hud;
+	
 	public SettingsPage(){
 		super();
 		
@@ -35,7 +41,7 @@ public class SettingsPage extends Display {
 		main.setSize(P_WIDTH, P_HEIGHT);
 		
 		Container buttons = new Container();
-		BoxLayout buttonLayout = new BoxLayout(buttons, BoxLayout.Y_AXIS);
+		BoxLayout buttonLayout = new BoxLayout(buttons, BoxLayout.X_AXIS);
 		buttons.setLayout(buttonLayout);
 		
 		//space
@@ -51,19 +57,20 @@ public class SettingsPage extends Display {
 		
 		//the settings
 		
+		/*
 		JLabel graphics = new JLabel("Graphics");
 		graphics.setAlignmentX(CENTER_ALIGNMENT);
 		graphics.setFont(new Font("Cinzel", Font.PLAIN, 30));
 		graphics.setForeground(Color.orange);
 		
-		//main.add(graphics);
+		main.add(graphics);
 		
 		JLabel set1 = new JLabel("Aspect Ratio");
 		set1.setAlignmentX(CENTER_ALIGNMENT);
 		set1.setFont(MainMenu.bodyFont);
 		set1.setForeground(Color.orange);
 		
-		//main.add(set1);
+		main.add(set1);
 		
 		JComboBox<String> res = new JComboBox<String>();
 		res.addItem("16:9");
@@ -71,12 +78,59 @@ public class SettingsPage extends Display {
 		res.setAlignmentX(CENTER_ALIGNMENT);
 		res.setFont(new Font("Forum", Font.PLAIN, 10));
 		
-		//buttons.add(res);
+		buttons.add(res);
+		*/
 		
-		//space (temp)
-		buttons.add(Box.createRigidArea(new Dimension(0,687)));
+		JLabel ctrls = new JLabel("Controls");
+		ctrls.setAlignmentX(CENTER_ALIGNMENT);
+		ctrls.setFont(new Font("Cinzel", Font.PLAIN, 30));
+		ctrls.setForeground(Color.orange);
 		
+		main.add(ctrls);
 		
+		Container inventory = new Container();
+		BoxLayout iL = new BoxLayout(inventory, BoxLayout.X_AXIS);
+		inventory.setLayout(iL);
+		
+		JLabel label1 = new JLabel("Inventory Toggle: ");
+		label1.setAlignmentX(CENTER_ALIGNMENT);
+		label1.setFont(MainMenu.bodyFont);
+		label1.setForeground(Color.orange);
+		
+		inv = new JTextField(Settings.inventoryKeyBind);
+		inv.setForeground(Color.black);
+		inv.setBackground(Color.gray);
+		inv.setBorder(null);
+		
+		inventory.add(label1);
+		inventory.add(inv);
+		
+		main.add(inventory);
+		
+		//space
+		main.add(Box.createRigidArea(new Dimension(0, 10)));
+		
+		Container hudC = new Container();
+		BoxLayout hL = new BoxLayout(hudC, BoxLayout.X_AXIS);
+		hudC.setLayout(hL);
+		
+		JLabel label2 = new JLabel("HUD Toggle: ");
+		label2.setAlignmentX(CENTER_ALIGNMENT);
+		label2.setFont(MainMenu.bodyFont);
+		label2.setForeground(Color.orange);
+		
+		hud = new JTextField(Settings.hudKeyBind);
+		hud.setForeground(Color.black);
+		hud.setBackground(Color.gray);
+		hud.setBorder(null);
+		
+		hudC.add(label2);
+		hudC.add(hud);
+		
+		main.add(hudC);
+		
+		//space
+		main.add(Box.createRigidArea(new Dimension(0, 588))); //687 without any settings
 		
 		//back button
 		JButton mainMenu = newMainButton("BACK");
@@ -85,6 +139,15 @@ public class SettingsPage extends Display {
 		mainMenu.setFont(MainMenu.buttonFont);
 		mainMenu.addActionListener(new ButtonListener(0));
 		
+		//submit button
+		JButton save = newMainButton("SAVE");
+		save.setAlignmentX(CENTER_ALIGNMENT);
+		save.setSize(BUTTON_SIZE);
+		save.setFont(MainMenu.buttonFont);
+		save.addActionListener(new ButtonListener(1));
+
+		buttons.add(save);
+		buttons.add(Box.createRigidArea(new Dimension(20, 0)));
 		buttons.add(mainMenu);
 		
 		main.add(buttons);
@@ -107,6 +170,20 @@ public class SettingsPage extends Display {
 				case 0:
 					//go back
 					Core.mainMenu();
+					break;
+				case 1:
+					//save settings changes
+					Settings.setInventoryKeyBind(inv.getText());
+					Settings.setHUDKeyBind(hud.getText());
+					
+					Core.addKeyBinds(Core.gameDisplay, true);
+					
+					JOptionPane.showMessageDialog(getRootPane(), "Settings saved!");
+					
+					Core.frame.repaint();
+					
+					inv.setText(Settings.inventoryKeyBind);
+					hud.setText(Settings.hudKeyBind);
 					break;
 			}
 		}
