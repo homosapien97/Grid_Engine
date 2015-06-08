@@ -75,8 +75,6 @@ public class AboutPage extends Display {
 		private void addSources(JTextArea t){
 			t.append("Sources\n\n");
 			
-			t.append("General\n\n");
-			
 			t.append("Cross Platform Font List: http://templates.mailchimp.com/design/typography/\n");
 			t.append("Font Size to Pixel:       http://reeddesign.co.uk/test/points-pixels.html\n");
 			t.append("SetVisible hangup:        https://community.oracle.com/thread/1357662\n");
@@ -95,7 +93,8 @@ public class AboutPage extends Display {
 			t.append("Oracle Community Pages\n\n");
 			t.append("Oracle Documentation/Help Pages\n\n");
 			t.append("Google Fonts (Cinzel, Cinzel Decorative, Forum)\n\n");
-			t.append("Windows Fonts (Consolas)\n\n\n");
+			t.append("Windows Fonts (Consolas)\n\n");
+			t.append("QuickSand terrain image from: http://i.imgur.com/vxcSP.png\n\n\n");
 			t.append("This program is on GitHub! Link: https://github.com/homosapien97/Grid_Engine");
 			
 			
