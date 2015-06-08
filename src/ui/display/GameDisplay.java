@@ -37,7 +37,7 @@ public class GameDisplay extends Display {
 	//states of toggleable things
 	private static Boolean hudVisible = true;
 	public static Boolean cmdLogVisible = false;
-	private static Boolean inventoryVisible = false;
+	public static Boolean inventoryVisible = false;
 	
 	//HUD icons
 	private static Image broken_heart = null;

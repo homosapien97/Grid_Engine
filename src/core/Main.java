@@ -45,7 +45,7 @@ public class Main {
 					Tools.time.wait(1);
 					
 					//unpause if the player has queued actions and the cmd line is closed
-					if(Action.queue.get(Player.player) != null && !GameDisplay.cmdLogVisible){
+					if(Action.queue.get(Player.player) != null && !GameDisplay.cmdLogVisible && !GameDisplay.inventoryVisible){
 						Core.gameState = GameState.PLAYING;
 					}
 					
