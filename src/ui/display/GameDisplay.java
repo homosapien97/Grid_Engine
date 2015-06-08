@@ -8,8 +8,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,7 +22,6 @@ import javax.swing.border.LineBorder;
 import tools.Tools;
 import ui.Inventory;
 import ui.LoadingScreen;
-import ui.key_actions.ClickModifier;
 import ui.terminal.Command;
 import core.Clock;
 import core.Core;

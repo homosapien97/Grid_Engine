@@ -108,7 +108,7 @@ public class MainMenu extends Display{
 	public void paintComponent(Graphics page){
 		//debug info
 		page.setColor(Color.white);
-		page.drawString("VERSION " + Main.version, 0, 10);
+		page.drawString("GRID GAME " + Main.version, 0, 10);
 	}
 	
 	private class ButtonListener implements ActionListener {

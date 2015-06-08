@@ -1,13 +1,11 @@
 package world.generation;
 
-import entity.creature.Skeleton;
 import geometry.Point;
 import terrain.Quicksand;
 import terrain.Stone;
 import terrain.StoneBrick;
 import tools.Tools;
 import world.Chunk;
-import world.LoadedChunks;
 
 public class Generator {
 	public static final char FLOOR_STONE = 'o';

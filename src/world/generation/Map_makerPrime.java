@@ -1,6 +1,7 @@
 package world.generation;
 
 public class Map_makerPrime {
+	@SuppressWarnings("unused")
 	public static void main (String[]args)
 	{
 		final int WPARAM = 256;

@@ -18,7 +18,7 @@ import world.generation.GenWall;
 
 public class Main {
 	//for debug for now
-	public static final String version = "alpha_0_3";
+	public static final String version = "v1.0";
 	
 	//Main Program
 	public static void main(String[] args) {
@@ -75,6 +75,7 @@ public class Main {
 		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
 		testWall2.generate();
 		
+		@SuppressWarnings("unused")
 		Skeleton skelly = new Skeleton(3, 3, LoadedChunks.center);
 		
 		Core.start();

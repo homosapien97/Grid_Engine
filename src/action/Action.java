@@ -1,7 +1,6 @@
 package action;
 
 import entity.Entity;
-import entity.Player;
 import geometry.PointCollection;
 
 import java.util.ArrayList;

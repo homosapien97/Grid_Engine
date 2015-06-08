@@ -1,7 +1,6 @@
 package entity.interfaces;
 
 import entity.Entity;
-import entity.Player;
 import action.MoveAction;
 import ai.Path;
 

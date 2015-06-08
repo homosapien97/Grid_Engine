@@ -56,14 +56,14 @@ public class SettingsPage extends Display {
 		graphics.setFont(new Font("Cinzel", Font.PLAIN, 30));
 		graphics.setForeground(Color.orange);
 		
-		main.add(graphics);
+		//main.add(graphics);
 		
 		JLabel set1 = new JLabel("Aspect Ratio");
 		set1.setAlignmentX(CENTER_ALIGNMENT);
 		set1.setFont(MainMenu.bodyFont);
 		set1.setForeground(Color.orange);
 		
-		main.add(set1);
+		//main.add(set1);
 		
 		JComboBox<String> res = new JComboBox<String>();
 		res.addItem("16:9");
@@ -71,10 +71,10 @@ public class SettingsPage extends Display {
 		res.setAlignmentX(CENTER_ALIGNMENT);
 		res.setFont(new Font("Forum", Font.PLAIN, 10));
 		
-		buttons.add(res);
+		//buttons.add(res);
 		
 		//space (temp)
-		buttons.add(Box.createRigidArea(new Dimension(0,600)));
+		buttons.add(Box.createRigidArea(new Dimension(0,687)));
 		
 		
 		

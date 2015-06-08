@@ -35,7 +35,6 @@ import ui.SettingsPage;
 import ui.display.Display;
 import ui.display.GameDisplay;
 import ui.display.ImageTileBackground;
-import ui.key_actions.ClickModifier;
 import ui.key_actions.CloseCMDLog;
 import ui.key_actions.ExitToMainMenu;
 import ui.key_actions.OpenCMDLog;
