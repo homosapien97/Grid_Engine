@@ -25,11 +25,12 @@ import terrain.Empty;
 import ui.key_actions.PreviewCommand;
 
 public class Camera {
-	public static final char PATH = 'r';	//redHighlight
-	public static final char RADIUS = 'c';	//cyanHighlight
-	public static final char SPELL = 'p';	//purpleHighlight
-	public static final char GENERIC = 'g';	//greenHighlight
-	public static final char NONE = 'n';	//no highlight
+	public static final char PLAYER_PATH = 'r';	//redHighlight
+	public static final char MOB_PATH = 'c';	//cyanHighlight
+	public static final char PLAYER_SPELL = 'p';//purpleHighlight
+	public static final char MOB_SPELL = 'b';	//blueHighlight
+	public static final char PREVIEW = 'g';		//greenHighlight
+	public static final char NONE = 'n';		//no highlight
 	
 //	public static Player player;
 	
@@ -144,11 +145,21 @@ public class Camera {
 		}
 		for(Action a : actions) {
 			if(a instanceof MoveAction) {
-				tempChar = PATH;
+				if(a.actor instanceof Player) {
+					tempChar = PLAYER_PATH;
+				} else {
+					tempChar = MOB_PATH;
+				}
 			} else if(a instanceof SpellAction) {
-				tempChar = SPELL;
+				if(a.actor instanceof Player) {
+					tempChar = PLAYER_SPELL;
+				} else {
+					tempChar = MOB_SPELL;
+				}
 			} else {
-				tempChar = GENERIC;
+				if(a.actor instanceof Player) {
+					tempChar = PREVIEW;
+				}
 			}
 			tempPC = a.pointsToHighlight();
 			if(tempPC != null) {
@@ -163,7 +174,7 @@ public class Camera {
 		}
 		if(PreviewCommand.current != null) {
 			for(Point p : PreviewCommand.current) {
-				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = GENERIC;
+				highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = PREVIEW;
 			}
 		}
 		return highlightSnapshot;

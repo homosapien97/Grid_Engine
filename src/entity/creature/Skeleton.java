@@ -56,8 +56,10 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 			}
 		} else {
 			if(shot == null) {
+				System.out.println("Skelly: Should I shoot?");
 				for(Point p : bow.preview(this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
 					if(p.equals(new Point(Player.player.getAbsoluteX(), Player.player.getAbsoluteY()))) {
+						System.out.println("Skelly: Yes!");
 						shot = new SpellAction(bow, this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY(), true);
 						followingPlayer = false;
 					}

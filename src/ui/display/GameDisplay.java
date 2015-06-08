@@ -198,18 +198,20 @@ public class GameDisplay extends Display {
 		switch(c) {
 		case Camera.NONE:
 			break;
-		case Camera.SPELL:
+		case Camera.PLAYER_SPELL:
 			page.drawImage(Core.purpleHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 			break;
-		case Camera.RADIUS:
-			page.drawImage(Core.cyanHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
+		case Camera.MOB_SPELL:
+			page.drawImage(Core.blueHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 			break;
-		case Camera.GENERIC:
+		case Camera.PREVIEW:
 			page.drawImage(Core.greenHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 			break;
-		case Camera.PATH:
+		case Camera.PLAYER_PATH:
 			page.drawImage(Core.redHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 			break;
+		case Camera.MOB_PATH:
+			page.drawImage(Core.cyanHighlight, x * Display.SPRITE_DIM, y * Display.SPRITE_DIM, Display.SPRITE_DIM, Display.SPRITE_DIM, null);
 		default:
 		}
 	}
