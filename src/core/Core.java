@@ -36,6 +36,7 @@ import ui.display.Display;
 import ui.display.GameDisplay;
 import ui.display.ImageTileBackground;
 import ui.key_actions.CloseCMDLog;
+import ui.key_actions.CommandNav;
 import ui.key_actions.ExitToMainMenu;
 import ui.key_actions.OpenCMDLog;
 import ui.key_actions.PreviewCommand;
@@ -171,6 +172,9 @@ public class Core {
 			gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "closeCMDLog");
 			gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "submitCommand");
 			gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "previewCommand");
+
+			gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "previousCommandUp");
+			gameIM_CMDLINE.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "previousCommandDown");
 			
 			//gameIM_MASTER.put(KeyStroke.getKeyStroke(KeyEvent.VK_CONTROL, 0, false), "ctrlModifier");
 			//gameIM_MASTER.put(KeyStroke.getKeyStroke(KeyEvent.VK_ALT, 0, false), "altModifier");
@@ -192,6 +196,9 @@ public class Core {
 			gameAM_CMDLINE.put("closeCMDLog", new CloseCMDLog());
 			gameAM_CMDLINE.put("submitCommand", new SubmitCommand());
 			gameAM_CMDLINE.put("previewCommand", new PreviewCommand());
+
+			gameAM_CMDLINE.put("previousCommandUp", new CommandNav(CommandNav.direction.UP));
+			gameAM_CMDLINE.put("previousCommandDown", new CommandNav(CommandNav.direction.DOWN));
 			
 			//gameAM.put("ctrlModifier", new ClickModifier());
 			//gameAM.put("altModifier", new ClickModifier());

@@ -18,10 +18,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.BadLocationException;
 
 import tools.Tools;
 import ui.Inventory;
 import ui.LoadingScreen;
+import ui.key_actions.CommandNav;
 import ui.terminal.Command;
 import core.Clock;
 import core.Core;
@@ -56,6 +58,10 @@ public class GameDisplay extends Display {
 	
 	public static JTextArea cmdLog = new JTextArea();
 	JScrollPane logScrollPane = null;
+	
+	public static int cmdLogIndex = 0;
+	private static boolean navFirstCall = true;
+	private static String command;
 	
 	//inventory
 	private Container main = new Container();
@@ -230,29 +236,124 @@ public class GameDisplay extends Display {
 	}
 	
 	//command logging
-	private static String command;
 	
 	public static String submitCommand(){
-//		if(!cmdInput.getText().equals("")){
-		command = cmdInput.getText();
+		command = "";
 		
-		if(cmdLog.getText().equals("")){
-			cmdLog.setText(command);
-		}else{
-			cmdLog.append("\n" + command);
+		if(!cmdInput.getText().equals("")){
+			command = cmdInput.getText();
+			
+			if(cmdLog.getText().equals("")){
+				cmdLog.setText(">" + command);
+			}else{
+				cmdLog.append("\n>" + command);
+			}
+			
+			cmdInput.setText("");
+			
+			cmdLogVisible = !cmdLogVisible;
+			
+	//		if(cmdLogVisible){
+	//			Core.frame.getContentPane().repaint();
+	//		}
+			
+			Core.frame.getContentPane().repaint();
+			
+			cmdLogIndex = 0;
+			navFirstCall = true;
 		}
 		
-		cmdInput.setText("");
-		
-		cmdLogVisible = !cmdLogVisible;
-		
-//		if(cmdLogVisible){
-//			Core.frame.getContentPane().repaint();
-//		}
-		
-		Core.frame.getContentPane().repaint();
 		return command;
-//		}
+	}
+	
+	//command navigation (up/down to use the command last used)	
+	
+	public static void navLog(CommandNav.direction direction){
+		if(!cmdLog.getText().equals("")){
+			if(navFirstCall){
+				cmdLogIndex = numLines(cmdLog.getText());
+				navFirstCall = false;
+			}else{
+				switch(direction){
+					case UP:
+						cmdLogIndex++;
+						break;
+					case DOWN:
+						cmdLogIndex--;
+						break;
+				}
+			}
+			
+			//get the last line
+			int[] limits = nthLineLimits(rangeIndex(cmdLogIndex), cmdLog.getText());
+			
+			System.out.println("1st: " + limits[0]);
+			System.out.println("2nd: " + limits[1]);
+			
+			try {
+				cmdInput.setText(cmdLog.getText(limits[0], limits[1] - limits[0] + 1));
+			} catch (BadLocationException e) {
+				System.out.println(e);
+			}
+		}
+	}
+	
+	private static int[] nthLineLimits(int n, String s){
+		int limits[] = new int[2];
+		boolean foundStart = false;
+		boolean foundEnd = false;
+		int x = 1;
+		
+		for(int i = 0; i < s.length(); i++){
+			if(s.substring(i, i + 1).equals(">")){
+				if(x == n){
+					if(foundStart){
+						limits[1] = i;
+						foundEnd = true;
+						break;
+					}else{
+						limits[0] = i + 1;
+						foundStart = true;
+					}
+				}else{
+					x++;
+				}
+			}
+		}
+		
+		if(!foundEnd){
+			limits[1] = s.length() - 1;
+		}
+		
+		return limits;
+	}
+	
+	private static int numLines(String s){
+		int n = 0;
+		
+		for(int i = 0; i < s.length(); i++){
+			if(s.substring(i, i + 1).equals(">")){
+				n++;
+			}
+		}
+		
+		return n;
+	}
+	
+	private static int rangeIndex(int i){
+		System.out.println(i);
+		if(i > 0 && i <= numLines(cmdLog.getText())){
+			cmdLogIndex = i;
+			return i;
+		}else{
+			if(i <= 0){
+				cmdLogIndex = 1;
+			}else if(i > numLines(cmdLog.getText())){
+				cmdLogIndex = numLines(cmdLog.getText());
+			}
+			
+			return 1;
+		}
 	}
 	
 	//game components
@@ -403,6 +504,10 @@ public class GameDisplay extends Display {
 		private geometry.Point absGridPoint = new geometry.Point(0, 0);
 		private int button = 0;
 		
+		private String cmdText;
+		private String cmdStatic; //text to keep when adding coordinates
+		private String cmdKey;
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			//rounding makes it bad
@@ -420,12 +525,70 @@ public class GameDisplay extends Display {
 			
 			//enter into terminal if left click
 			if(button == 1 && cmdLogVisible){
-				//if(ClickModifier.keyModifier == KeyEvent.ALT_DOWN_MASK){
-					cmdInput.setText(cmdInput.getText() + absGridPoint.x + " " + absGridPoint.y);
-				//	ClickModifier.keyModifier = -1;
-				//}else{
-				//	cmdInput.setText(cmdInput.getText() + (clickedGridPoint.x - 48) + " " + (clickedGridPoint.y - 27));
-				//}
+				int x = 0;
+				int y = 0;
+				
+				cmdText = cmdInput.getText();
+				
+				cmdKey = cmdText.substring(0, 2);
+				
+				switch(cmdKey){
+					case "ca":
+						//cast
+						
+						if(cmdText.substring(6, 7).equals(" ")){
+							//a one digit spell id
+							cmdStatic = cmdText.substring(0, 6);
+						}else{
+							//a two digit spell id
+							cmdStatic = cmdText.substring(0, 7);
+						}
+						
+						x = absGridPoint.x;
+						y = absGridPoint.y;
+						
+						break;
+					case "cr":
+						//cast relative
+						
+						if(cmdText.substring(4, 5).equals(" ")){
+							//a one digit spell id
+							cmdStatic = cmdText.substring(0, 4);
+						}else{
+							//a two digit spell id
+							cmdStatic = cmdText.substring(0, 5);
+						}
+						
+						x = (clickedGridPoint.x - 48);
+						y = (clickedGridPoint.y - 27);
+						
+						break;
+					case "mo":
+						//move
+						cmdStatic = cmdText.substring(0, 4);
+						
+						x = absGridPoint.x;
+						y = absGridPoint.y;
+						
+						break;
+					case "mr":
+						//move relative
+						cmdStatic = cmdText.substring(0, 2);
+						
+						x = (clickedGridPoint.x - 48);
+						y = (clickedGridPoint.y - 27);
+						
+						break;
+					default:
+						cmdStatic = cmdText;
+						
+						x = absGridPoint.x;
+						y = absGridPoint.y;
+						
+						break;
+				}
+				
+				cmdInput.setText(cmdStatic + " " + x + " " + y);
 			}
 		}
 
