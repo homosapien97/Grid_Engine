@@ -2,8 +2,6 @@ package entity;
 
 import java.awt.Image;
 
-import core.Core;
-import core.GameState;
 import action.Action;
 import tools.Tools;
 import world.Chunk;
