@@ -18,7 +18,7 @@ import world.generation.GenWall;
 
 public class Main {
 	//for debug for now
-	public static final String version = "v1.0";
+	public static final String version = "v1.1";
 	
 	//Main Program
 	public static void main(String[] args) {

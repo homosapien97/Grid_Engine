@@ -44,6 +44,10 @@ Available Commands:
 Spell IDs can be found by opening the inventory (see next section) and hovering the mouse over a
 spell.
 
+Use the enter key to submit commands. Hitting the spacebar after filling out a command instead of
+hitting enter will preview the command on the map. Hitting enter after that will still submit the 
+command.
+
 # The Inventory (opened by default with the "I" key, configurable in settings)
 
 The inventory contains a list of all spells, along with how many of each the player has. Hovering
@@ -54,7 +58,9 @@ then hit enter to cast the spell.
 # Enemies
 
 At the moment, there is only one enemy: the skeleton. It follows the player when it sees you, and
-will attack when in range.
+will attack when in range. It can be killed through attacks and can also hurt the player.
+
+Cyan highlights indicate enemy pathing, and blue highlights indicate enemy attacks.
 
 # Settings Page
 
@@ -67,8 +73,8 @@ Provides sources that were used in the making of this game.
 
 # Notes on current progress of game
 
-Player cannot currently die, and player also has unlimited of all spells. New games can be made
-by quiting the program and re-opening it.
+Player kind of can currently die, and player also has unlimited of all spells. New games can be 
+made by quiting the program and re-opening it.
 
 Glossary
 ---------------------------------------------------------------------------------------------------
