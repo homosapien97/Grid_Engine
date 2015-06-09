@@ -62,16 +62,16 @@ public abstract class Command {
 		} return new PointCollection();
 	}
 	public static boolean submitCurrent(String[] args) {
-		System.out.println("submitting:");
+//		System.out.println("submitting:");
 		if(args.length > 0) {
-			for(int i = 0; i < args.length; i++){
-				System.out.println("\t" + args[i]);
-			}
+//			for(int i = 0; i < args.length; i++){
+//				System.out.println("\t" + args[i]);
+//			}
 			if(commands.get(args[0]) == null) {
-				System.out.println(">command not found");
+//				System.out.println(">command not found");
 				return false;
 			} else {
-				System.out.println(">For real");
+//				System.out.println(">For real");
 				return commands.get(args[0]).run(args);
 			}
 		}

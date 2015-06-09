@@ -316,6 +316,7 @@ public class Core {
 		frame.pack();
 		
 		gameState = GameState.PLAYING;
+//		gameState = GameState.PAUSED;
 		gameDisplay.requestFocusInWindow();
 		Main.stepGraphics();
 	}

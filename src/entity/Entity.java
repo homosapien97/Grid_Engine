@@ -1,6 +1,9 @@
 package entity;
 
 import java.awt.Image;
+
+import core.Core;
+import core.GameState;
 import action.Action;
 import tools.Tools;
 import world.Chunk;
@@ -53,6 +56,7 @@ public abstract class Entity {
 		synchronized (Action.queue) {
 			Action.queue.remove(this);
 		}
+		chunk = null;
 	}
 	public boolean deleteSafe() {
 		delete();

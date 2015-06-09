@@ -7,6 +7,8 @@ import ai.VisionSquare;
 
 import java.awt.Image;
 
+import core.Core;
+import core.GameState;
 import entity.interfaces.Armored;
 import entity.interfaces.Health;
 import entity.interfaces.Mobile;
@@ -19,7 +21,7 @@ import world.Chunk;
 import world.LoadedChunks;
 
 public class Player extends Entity implements Health, Armored, Mobile, Sighted, Pathing<Player> {
-	public static final Player player = new Player(0, 0, new Chunk(0, 0, true, Stone.get()), "P", 256, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1);
+	public static final Player player = new Player(0, 0, new Chunk(0, 0, true, Stone.get()), "P", 16, 64, "Player", 0.0, 0.0, 0.0, 0.0, 1);
 	public int maxHealth;
 	public int health;
 	public int natArmor;
@@ -109,8 +111,11 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	@Override
 	public int hurt(int damage) {
 		health -= damage;
-		if(health - maxHealth < -10)
+		if(health < 0) {
 			alive = false;
+//			this.delete();
+			Core.gameState = GameState.JUST_QUIT_GAME;
+		}
 		return health;
 	}
 	

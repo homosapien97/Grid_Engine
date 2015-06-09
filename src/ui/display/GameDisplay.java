@@ -168,7 +168,7 @@ public class GameDisplay extends Display {
 		}
 		
 		//handle action highlighting
-		Camera.highlightSnapshot();
+//		Camera.highlightSnapshot();
 		
 		for(int x = 0; x < Display.WIDTH; x++) {
 			for(int y = 0; y < Display.HEIGHT; y++) {

@@ -145,32 +145,34 @@ public class Camera {
 				highlightSnapshot[i][j] = NONE;
 			}
 		}
-		for(Action a : actions) {
-			if(a.startTime >= Clock.ticks) {
-				if(a instanceof MoveAction) {
-					if(a.actor instanceof Player) {
-						tempChar = PLAYER_PATH;
+		synchronized(actions) {
+			for(Action a : actions) {
+				if(Clock.ticks >= a.startTime) {
+					if(a instanceof MoveAction) {
+						if(a.actor instanceof Player) {
+							tempChar = PLAYER_PATH;
+						} else {
+							tempChar = MOB_PATH;
+						}
+					} else if(a instanceof SpellAction) {
+						if(a.actor instanceof Player) {
+							tempChar = PLAYER_SPELL;
+						} else {
+							tempChar = MOB_SPELL;
+						}
 					} else {
-						tempChar = MOB_PATH;
+						if(a.actor instanceof Player) {
+							tempChar = PREVIEW;
+						}
 					}
-				} else if(a instanceof SpellAction) {
-					if(a.actor instanceof Player) {
-						tempChar = PLAYER_SPELL;
-					} else {
-						tempChar = MOB_SPELL;
-					}
-				} else {
-					if(a.actor instanceof Player) {
-						tempChar = PREVIEW;
-					}
-				}
-				tempPC = a.pointsToHighlight();
-				if(tempPC != null) {
-					for(Point p : a.pointsToHighlight()) {
-						if(Display.WIDTH / 2 + p.x - pAbsX >= 0 && Display.WIDTH / 2 + p.x - pAbsX < highlightSnapshot.length
-								&& Display.HEIGHT / 2 + p.y - pAbsY >= 0 && Display.HEIGHT / 2 + p.y - pAbsY < highlightSnapshot[0].length)
-						{
-							highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
+					tempPC = a.pointsToHighlight();
+					if(tempPC != null) {
+						for(Point p : a.pointsToHighlight()) {
+							if(Display.WIDTH / 2 + p.x - pAbsX >= 0 && Display.WIDTH / 2 + p.x - pAbsX < highlightSnapshot.length
+									&& Display.HEIGHT / 2 + p.y - pAbsY >= 0 && Display.HEIGHT / 2 + p.y - pAbsY < highlightSnapshot[0].length)
+							{
+								highlightSnapshot[Display.WIDTH/2 + p.x - pAbsX][Display.HEIGHT/2 + p.y - pAbsY] = tempChar;
+							}
 						}
 					}
 				}

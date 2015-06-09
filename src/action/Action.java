@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 //import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
+import ui.display.Camera;
 import core.Clock;
 //import java.util.Vector;
 /**
@@ -21,7 +25,7 @@ import core.Clock;
  */
 public abstract class Action implements Runnable{
 //	public static List<Action> queue = Collections.synchronizedList(new ArrayList<Action>());
-	public static Map<Entity, Action> queue = Collections.synchronizedMap(new HashMap<Entity, Action>());
+	public static Map<Entity, Action> queue = /*Collections.synchronizedMap(new HashMap<Entity, Action>());*/ new ConcurrentHashMap<Entity, Action>();
 	public static List<Action> highlightable = Collections.synchronizedList(new ArrayList<Action>());
 	public final boolean highlight;
 	public final int startTime;
@@ -47,42 +51,37 @@ public abstract class Action implements Runnable{
 		if(/*(actor instanceof Player) &&*/ highlight) {
 			synchronized(highlightable) {
 				highlightable.add(this);
+//				Camera.highlightSnapshot();
 			}
 		}
 	}
 	
-	public static void runAll() {
+	public synchronized static void runAll() {
 		synchronized(queue) {
 			Collection<Action> values = queue.values();
-//			for(Action a : queue) {
-//				
-//				if(Clock.ticks >= a.startTime && (Clock.ticks <= a.startTime + a.totalTicks || a.totalTicks < 0)) {
-//					System.out.println("executing " + a.getClass() + " from " + a.startTime + " to " + (a.startTime + a.totalTicks));
-//					a.run();
-//				}
-//			}
-			
-//			for(Action a : values) {
-//				if(Clock.ticks >= a.startTime && (Clock.ticks <= a.startTime + a.totalTicks || a.totalTicks < 0)) {
-//					System.out.println("executing " + a.getClass() + " from " + a.startTime + " to " + (a.startTime + a.totalTicks));
-//					a.run();
-//				}
-//			}
-//			synchronized(highlightable) {
-//				highlightable.removeIf(s -> (!queue.contains(s)));
-//			}
 			synchronized(highlightable) {
-				highlightable.removeIf(s -> (!values.contains(s)));
+				highlightable.removeIf(v -> (!values.contains(v)));
 			}
-//			queue.removeIf(s -> (s.done()));
-			for(Map.Entry<Entity, Action> entry : queue.entrySet()) {
+//			Set<Map.Entry<Entity, Action> > es = queue.entrySet();
+//			Iterator<Map.Entry<Entity, Action> > it = es.iterator();
+//			while(it.hasNext()) {
+//				Map.Entry<Entity, Action> entry = it.next();
+//				if((entry.getValue() != null) && (Clock.ticks >= entry.getValue().startTime && (Clock.ticks <= entry.getValue().startTime + entry.getValue().totalTicks || entry.getValue().totalTicks < 0))) {
+//					System.out.println("executing [" + entry.getKey().getClass()+ "][" + entry.getValue().getClass() + "] from " + entry.getValue().startTime + " to " + (entry.getValue().startTime + entry.getValue().totalTicks));
+//					entry.getValue().run();
+//				}
+//			}
+			for(Iterator<Map.Entry<Entity, Action> > it = queue.entrySet().iterator(); it.hasNext();) {
+				Map.Entry<Entity, Action> entry = it.next();
 				if((entry.getValue() != null) && (Clock.ticks >= entry.getValue().startTime && (Clock.ticks <= entry.getValue().startTime + entry.getValue().totalTicks || entry.getValue().totalTicks < 0))) {
 					System.out.println("executing [" + entry.getKey().getClass()+ "][" + entry.getValue().getClass() + "] from " + entry.getValue().startTime + " to " + (entry.getValue().startTime + entry.getValue().totalTicks));
 					entry.getValue().run();
 				}
-				if((entry.getValue() != null) && entry.getValue().done()) entry.setValue(null);
 			}
+			queue.entrySet().removeIf(e -> e.getValue().done());
+
 		}
+		Camera.highlightSnapshot();
 	}
 	
 	public boolean done() {
@@ -90,12 +89,8 @@ public abstract class Action implements Runnable{
 	}
 	public boolean addToQueue() {
 		synchronized(queue) {
-//			if(queue.contains(this)) {
-//				return false;
-//			}
 			queue.put(actor, this);
 			return true;
-//			return queue.add(this);
 		}
 	}
 	

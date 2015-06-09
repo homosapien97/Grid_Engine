@@ -1,7 +1,10 @@
 package ui.key_actions;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
+import ui.display.Camera;
 
 @SuppressWarnings("serial")
 public class ClickModifier extends AbstractAction {

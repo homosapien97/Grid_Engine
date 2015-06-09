@@ -261,7 +261,7 @@ public class Chunk {
 	public Chunk(Point pos, boolean checkOverlap, Chunk chunk) {
 		this.pos = pos;
 		
-		entities = new Vector<Entity>();
+		entities = Collections.synchronizedList(new ArrayList<Entity>());
 		
 		if(checkOverlap && chunks.get(pos) == null) {
 			chunks.put(pos, this);

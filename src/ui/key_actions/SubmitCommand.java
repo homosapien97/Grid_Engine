@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import ui.display.Camera;
 import ui.display.GameDisplay;
 import ui.terminal.Command;
 import core.Core;
@@ -14,7 +15,7 @@ public class SubmitCommand extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 //		GameDisplay.submitCommand();
-		System.out.println("cmd submitted");
+//		System.out.println("cmd submitted");
 		Core.gameState = TogglePause.oldState;
 		last = GameDisplay.submitCommand().split(" ");
 		PreviewCommand.current = null;
@@ -22,5 +23,6 @@ public class SubmitCommand extends AbstractAction {
 			Command.submitCurrent(SubmitCommand.last);
 			SubmitCommand.last = null;
 		}
+		Camera.highlightSnapshot();
 	}
 }

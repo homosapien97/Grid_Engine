@@ -13,8 +13,8 @@ import world.LoadedChunks;
 
 public class BowSpell extends Spell {
 	public static final int NUM_LEVELS = 7;
-	public static final int[] casting = {1,1,1,1,1,1,1};
-	public static final int[] channel = {0,0,0,0,0,0,0};
+	public static final int[] casting = {0,0,0,0,0,0,0};
+	public static final int[] channel = {1,1,1,1,1,1,1};
 	public static final int[] trueDamage = {1,1,1,1,1,1,1};
 	public static final int[] damage = {1,2,2,3,3,3,4};
 	public static final String[] name = {"Bow level 0", "Bow level 1", "Bow level 2", "Bow level 3", "Bow level 4", "Bow level 5", "Bow level 6",};
@@ -108,7 +108,7 @@ public class BowSpell extends Spell {
 			}
 			temp = LoadedChunks.entitiesAt(area.points[i].x, area.points[i].y);
 			if(temp.size() > 0) {
-				System.out.println("It's a hit!");
+				System.out.println(">Bow: It's a hit!");
 				if(temp.size() == 1) {
 					if(temp.get(0) instanceof Health) {
 						((Health) temp.get(0)).hurt(damage[level]);

@@ -39,29 +39,34 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	
 	@Override
 	public void tick() {
-		System.out.println("ticking skelly");
+//		System.out.println(">Skelly {");
 		if(action != null && action.done()){
-			System.out.println(">Skelly: Prev action done");
+//			System.out.println(">Skelly: Prev action done");
 			action = null;
 		}
-		System.out.println(">Skelly: Attempting to shoot player");
+//		System.out.println(">Skelly: Attempting to shoot player");
 		Point playerPos = new Point(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
-		if(!(action instanceof SpellAction)) {
-			for(Point p : bow.preview(this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
-				if(p.equals(playerPos)) {
-					action = new SpellAction(bow, this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY(), true);
-					break;
+		synchronized(Action.queue) {
+			if(!(action instanceof SpellAction)) {
+				for(Point p : bow.preview(this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
+					if(p.equals(playerPos)) {
+//						System.out.println(">Skelly: Shot the player");
+						action = new SpellAction(bow, this, Player.player.getAbsoluteX(), Player.player.getAbsoluteY(), true);
+						break;
+					}
 				}
 			}
+			if(action instanceof MoveAction && super.vsquare().canSee(Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
+				System.out.println("__");
+				action = null;
+			}
+			if(action == null) {
+//				System.out.println(">Skelly: Could not shoot player. Attempting to path to player");
+				super.vsquare().trace(super.getAbsoluteX(), super.getAbsoluteY());
+				action = super.pathTo(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
+			}
 		}
-		if(action instanceof MoveAction && super.vsquare().canSee(Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
-			action = null;
-		}
-		if(action == null) {
-			System.out.println(">Skelly: Could not shoot player. Attempting to path to player");
-			super.vsquare().trace(super.getAbsoluteX(), super.getAbsoluteY());
-			action = super.pathTo(Player.player.getAbsoluteX(), Player.player.getAbsoluteY());
-		}
+//		System.out.println(">Skelly }");
 	}
 	@Override
 	public Image sprite() {

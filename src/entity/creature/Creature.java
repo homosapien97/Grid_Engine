@@ -58,8 +58,6 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 	@Override
 	public int hurt(int hurts) {
 		health -= hurts;
-//		if(maxHealth - health < -10)
-//			alive = false;
 		if(health < 0) {
 			alive = false;
 			this.delete();
