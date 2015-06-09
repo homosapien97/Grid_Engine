@@ -3,6 +3,7 @@ package entity;
 import java.awt.Image;
 
 import action.Action;
+import spells.Spell;
 import tools.Tools;
 import world.Chunk;
 
@@ -16,12 +17,12 @@ public abstract class Entity {
 	
 	public static Image sprite;
 	
-	public Entity(int absoluteX, int absoluteY, Chunk chunk, String sprite) {
+	public Entity(int absoluteX, int absoluteY, Chunk chunk, String filename) {
 		this.absoluteX = absoluteX;
 		this.absoluteY = absoluteY;
 		this.chunk = chunk;
 		chunk.addEntity(this);
-		this.filename = sprite;
+		this.filename = filename;
 //		this.maxActions = maxActions;
 //		actions = Collections.synchronizedList(new ArrayList<Action>(maxActions));
 	}
@@ -73,5 +74,7 @@ public abstract class Entity {
 //		return false;
 //	}
 	public abstract Image sprite();
+	
+	public abstract boolean cast(Spell s);
 //	public abstract void load();
 }

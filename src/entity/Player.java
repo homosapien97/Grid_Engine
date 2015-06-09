@@ -73,7 +73,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		path = new Path<Player>(this);
 		
 		for(int i = 0; i < Inventory.spells.length; i++) {
-			spellInventory.set(i, Integer.MAX_VALUE);
+			spellInventory.set(i, 7 - (i % 7));
 		}
 		
 		new WaitAction(this, 0);
@@ -104,7 +104,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		path = new Path<Player>(this);
 		
 		for(int i = 0; i < Inventory.spells.length; i++) {
-			spellInventory.set(i, Integer.MAX_VALUE);
+			spellInventory.set(i, 7 - (i % 7));
 		}
 	}
 		@Override
@@ -241,5 +241,13 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 			return new MoveAction<Player>(this, x, y, false);
 		}
 		return null;
+	}
+	@Override
+	public boolean cast(Spell s) {
+		if(spellInventory.canUse(Inventory.indexOf(s))) {
+			spellInventory.use(Inventory.indexOf(s));
+			return true;
+		}
+		return false;
 	}
 }

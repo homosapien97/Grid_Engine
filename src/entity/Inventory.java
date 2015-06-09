@@ -74,6 +74,12 @@ public class Inventory {
 			this.nums[i] = nums[i];
 		}
 	}
+	public static int indexOf(Spell s) {
+		for(int i = 0; i < spells.length; i++) {
+			if(s.equals(spells[i])) return i;
+		}
+		return -1;
+	}
 	public int add(int index, int num) {
 		if(index > -1 && index < nums.length) {
 			return (nums[index] += num);
@@ -85,6 +91,11 @@ public class Inventory {
 			return (++nums[index]);
 		}
 		return nums[index];
+	}
+	public void add(Inventory inv) {
+		for(int i = 0; i < nums.length; i++) {
+			nums[i] += inv.nums[i];
+		}
 	}
 	public boolean canUse(int index) {
 		return (((index > -1) && (index < nums.length)) ? (nums[index] > 0) : false);

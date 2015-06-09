@@ -144,5 +144,4 @@ public class BowSpell extends Spell {
 		}
 		return new PointCollection(area);
 	}
-
 }

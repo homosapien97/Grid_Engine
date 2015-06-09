@@ -47,6 +47,7 @@ import ui.terminal.CastCommand;
 import ui.terminal.CastRelativeCommand;
 import ui.terminal.MoveCommand;
 import ui.terminal.MoveRelativeCommand;
+import entity.Chest;
 import entity.Player;
 import entity.creature.Skeleton;
 //import key_actions.TogglePause;
@@ -216,6 +217,9 @@ public class Core {
 		loadCreatures();
 		LoadingScreen.startupLog("Loading player...");
 		Player.load();
+		incrementLoadingProgress(2);
+		LoadingScreen.startupLog("Loading chest...");
+		Chest.load();
 		incrementLoadingProgress(2);
 	}
 	
