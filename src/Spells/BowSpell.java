@@ -13,7 +13,7 @@ import world.LoadedChunks;
 
 public class BowSpell extends Spell {
 	public static final int NUM_LEVELS = 7;
-	public static final int[] casting = {0,0,0,0,0,0,0};
+	public static final int[] casting = {1,1,1,1,1,1,1};
 	public static final int[] channel = {1,1,1,1,1,1,1};
 	public static final int[] trueDamage = {1,1,1,1,1,1,1};
 	public static final int[] damage = {1,2,2,3,3,3,4};

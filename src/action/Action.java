@@ -71,14 +71,15 @@ public abstract class Action implements Runnable{
 //					entry.getValue().run();
 //				}
 //			}
+			queue.entrySet().removeIf(e -> e.getValue().done());
 			for(Iterator<Map.Entry<Entity, Action> > it = queue.entrySet().iterator(); it.hasNext();) {
 				Map.Entry<Entity, Action> entry = it.next();
-				if((entry.getValue() != null) && (Clock.ticks >= entry.getValue().startTime && (Clock.ticks <= entry.getValue().startTime + entry.getValue().totalTicks || entry.getValue().totalTicks < 0))) {
+				if((entry.getValue() != null) && (Clock.ticks >= entry.getValue().startTime)) {
 					System.out.println("executing [" + entry.getKey().getClass()+ "][" + entry.getValue().getClass() + "] from " + entry.getValue().startTime + " to " + (entry.getValue().startTime + entry.getValue().totalTicks));
 					entry.getValue().run();
 				}
 			}
-			queue.entrySet().removeIf(e -> e.getValue().done());
+//			queue.entrySet().removeIf(e -> e.getValue().done());
 
 		}
 		Camera.highlightSnapshot();

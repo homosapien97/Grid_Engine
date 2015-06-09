@@ -19,14 +19,14 @@ public class MoveAction <T extends Entity & Mobile & Sighted & Pathing<T> > exte
 		this.xTarget = xTarget;
 		this.yTarget = yTarget;
 		actor.getPath().constructPathTo(xTarget, yTarget);
-		super.totalTicks = (actor.getPath().length() - 2) * ticksPerDistance;
+		super.totalTicks = (actor.getPath().length() - 1) * ticksPerDistance;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
-		if(count % ticksPerDistance == 0) {
+//		if(count % ticksPerDistance == 0) {
 			((T)(actor)).getPath().goTo(xTarget, yTarget);
-		}
+//		}
 		count++;
 	}
 	

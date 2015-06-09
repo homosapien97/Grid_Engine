@@ -57,7 +57,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 				}
 			}
 			if(action instanceof MoveAction && super.vsquare().canSee(Player.player.getAbsoluteX(), Player.player.getAbsoluteY())) {
-				System.out.println("__");
+//				System.out.println("__");
 				action = null;
 			}
 			if(action == null) {

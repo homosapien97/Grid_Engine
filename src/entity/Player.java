@@ -1,7 +1,9 @@
 package entity;
 
 
+import action.Action;
 import action.MoveAction;
+import action.WaitAction;
 import ai.Path;
 import ai.VisionSquare;
 
@@ -73,6 +75,8 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		for(int i = 0; i < Inventory.spells.length; i++) {
 			spellInventory.set(i, Integer.MAX_VALUE);
 		}
+		
+		new WaitAction(this, 0);
 	}
 	public Player(int x, int y, Chunk c, String sprite) {
 		super(x, y, c, sprite);

@@ -30,13 +30,13 @@ public class Main {
 			
 			switch(Core.gameState){
 				case PLAYING:
+					if((Action.queue.get(Player.player) == null || Action.queue.get(Player.player).done() || GameDisplay.cmdLogVisible) && Clock.ticks != 0){
+						Core.gameState = GameState.PAUSED;
+						break;
+					}
 					step();
 					
 					Tools.time.wait(400);
-					
-					if(Action.queue.get(Player.player) == null || GameDisplay.cmdLogVisible){
-						Core.gameState = GameState.PAUSED;
-					}
 					
 					break;
 				case PAUSED:
@@ -69,11 +69,11 @@ public class Main {
 		@SuppressWarnings("unused")
 		Player initPlayer = Player.player;
 		
-		GenWall testWall = new GenWall(5, 5, 10, 10, Quicksand.get());
-		testWall.generate();
-		
-		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
-		testWall2.generate();
+//		GenWall testWall = new GenWall(5, 5, 10, 10, Quicksand.get());
+//		testWall.generate();
+//		
+//		GenWall testWall2 = new GenWall(0,-2, 15, -7, Stone.get());
+//		testWall2.generate();
 		
 		@SuppressWarnings("unused")
 		Skeleton skelly = new Skeleton(3, 3, LoadedChunks.center);
