@@ -31,6 +31,7 @@ public class SettingsPage extends Display {
 	
 	private JTextField inv;
 	private JTextField hud;
+	private JLabel saved;
 	
 	public SettingsPage(){
 		super();
@@ -128,9 +129,20 @@ public class SettingsPage extends Display {
 		hudC.add(hud);
 		
 		main.add(hudC);
+
+		//space
+		main.add(Box.createRigidArea(new Dimension(0, 20)));
+		
+		saved = new JLabel(" ");
+		saved.setAlignmentX(CENTER_ALIGNMENT);
+		saved.setFont(MainMenu.bodyFont);
+		saved.setForeground(Color.orange);
+		saved.setVisible(true);
+		
+		main.add(saved);
 		
 		//space
-		main.add(Box.createRigidArea(new Dimension(0, 588))); //687 without any settings
+		main.add(Box.createRigidArea(new Dimension(0, 546))); //687 without any settings
 		
 		//back button
 		JButton mainMenu = newMainButton("BACK");
@@ -178,7 +190,9 @@ public class SettingsPage extends Display {
 					
 					Core.addKeyBinds(Core.gameDisplay, true);
 					
-					JOptionPane.showMessageDialog(getRootPane(), "Settings saved!", "Grid Game Settings", JOptionPane.DEFAULT_OPTION);
+					//JOptionPane.showMessageDialog(getRootPane(), "Settings saved!", "Grid Game Settings", JOptionPane.DEFAULT_OPTION);
+					
+					saved.setText("Settings saved!");
 					
 					Core.frame.repaint(); //incase the JOptionPane leaves a black square where it was
 					

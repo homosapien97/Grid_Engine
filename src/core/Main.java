@@ -34,7 +34,7 @@ public class Main {
 					
 					Tools.time.wait(400);
 					
-					if(Action.queue.get(Player.player) == null){
+					if(Action.queue.get(Player.player) == null || GameDisplay.cmdLogVisible){
 						Core.gameState = GameState.PAUSED;
 					}
 					
@@ -51,7 +51,7 @@ public class Main {
 					
 					break;
 				case JUST_QUIT_GAME:
-					//creates a new game display object, essentially makes it so you can play a new game
+					//creates a new game display object, essentially makes it so you can play a new game, this isn't actually implemented yet
 					Core.newGame();
 					Tools.time.wait(1);
 					Core.gameState = GameState.IN_MAIN_MENU;
