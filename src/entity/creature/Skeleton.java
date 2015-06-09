@@ -18,7 +18,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	public static final String filename = "skeleton.png";
 	public static Image sprite;
 	public MoveAction<Creature> current = null;
-	public static BowSpell bow = BowSpell.get(3);
+	public static BowSpell bow = BowSpell.get(2);
 	public Action action;
 	
 	public Skeleton(int absoluteX, int absoluteY, Chunk chunk, int hp, int arm, double fire, double earth, double water, double plasma){

@@ -13,9 +13,9 @@ import world.LoadedChunks;
 public class PlasmaSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
 	public static final int[] casting = {0,0,0,0,0,0,0};
-	public static final int[] channel = {0,0,0,0,0,0,0};
+	public static final int[] channel = {1,1,1,2,2,2,2};
 	public static final int[] trueDamage = {0,0,0,0,0,0,0};
-	public static final int[] damage = {0,0,0,0,0,0,0};
+	public static final int[] damage = {1,1,1,1,1,2,2};
 	public static final String[] name = {"Plasma level 0", "Plasma level 1", "Plasma level 2", "Plasma level 3", "Plasma level 4", "Plasma level 5", "Plasma level 6",};
 	public static final String[] filename = {"Plasma1.png","Plasma2.png","Plasma3.png","Plasma4.png","Plasma5.png","Plasma6.png","Plasma7.png"};
 	public static final Image[] sprite = new Image[7];
