@@ -1,7 +1,5 @@
 package entity;
 
-
-import action.Action;
 import action.MoveAction;
 import action.WaitAction;
 import ai.Path;
@@ -74,6 +72,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		
 		for(int i = 0; i < Inventory.spells.length; i++) {
 			spellInventory.set(i, 7 - (i % 7));
+			System.out.println(spellInventory.nums[i]);
 		}
 		
 		new WaitAction(this, 0);
@@ -244,8 +243,10 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	}
 	@Override
 	public boolean cast(Spell s) {
+//		System.out.println(">Player: Attempting to cast " + s.name() + " " + Inventory.indexOf(s));
 		if(spellInventory.canUse(Inventory.indexOf(s))) {
 			spellInventory.use(Inventory.indexOf(s));
+			System.out.println(">success");
 			return true;
 		}
 		return false;

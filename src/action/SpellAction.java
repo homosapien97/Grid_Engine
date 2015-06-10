@@ -17,7 +17,9 @@ public class SpellAction extends Action{
 		this.spell = spell;
 		this.x = x;
 		this.y = y;
-		go = actor.cast(spell);
+		if(execute) {
+			go = actor.cast(spell);
+		}
 	}
 	
 	@Override
@@ -33,5 +35,14 @@ public class SpellAction extends Action{
 	@Override
 	public boolean done() {
 		return (Clock.ticks >= startTime + totalTicks) || (!go);
+	}
+	
+	@Override
+	public boolean addToQueue() {
+		go = actor.cast(spell);
+		synchronized(queue) {
+			queue.put(actor, this);
+			return true;
+		}
 	}
 }
