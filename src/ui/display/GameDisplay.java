@@ -544,6 +544,11 @@ public class GameDisplay extends Display {
 			
 			//move player if right click
 			if(button == 3){
+				if(cmdLog.getText().equals("")){
+					cmdLog.setText(">move " + absGridPoint.x + " " + absGridPoint.y);
+				}else{
+					cmdLog.append("\n>" + "move " + absGridPoint.x + " " + absGridPoint.y);
+				}
 				Command.submitCurrent(new String[] {"move", "" + absGridPoint.x, "" + absGridPoint.y});
 			}
 			
