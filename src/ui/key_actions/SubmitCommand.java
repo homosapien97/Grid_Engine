@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import ui.InventoryPage;
 import ui.display.Camera;
 import ui.display.GameDisplay;
 import ui.terminal.Command;
@@ -24,5 +25,6 @@ public class SubmitCommand extends AbstractAction {
 			SubmitCommand.last = null;
 		}
 		Camera.highlightSnapshot();
+		InventoryPage.updateCards();
 	}
 }

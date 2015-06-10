@@ -21,7 +21,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.BadLocationException;
 
 import tools.Tools;
-import ui.Inventory;
+import ui.InventoryPage;
 import ui.LoadingScreen;
 import ui.key_actions.CommandNav;
 import ui.terminal.Command;
@@ -66,7 +66,7 @@ public class GameDisplay extends Display {
 	//inventory
 	private Container main = new Container();
 	private Container center = new Container();
-	public Inventory inventory = new Inventory();
+	public InventoryPage inventory = new InventoryPage();
 	
 	//mouse listener
 	GridMouseListener listener = new GridMouseListener();
