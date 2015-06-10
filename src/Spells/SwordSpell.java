@@ -23,7 +23,7 @@ public class SwordSpell extends Spell{
 	
 	public static Point area;
 	
-	protected SwordSpell(int level){
+	public SwordSpell(int level){
 //		super(0,0,0,"Sword lv" + level, filenames[level]);
 		super(level);
 		

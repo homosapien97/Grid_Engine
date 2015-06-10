@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -26,6 +27,7 @@ import spells.EarthSpell;
 import spells.FireSpell;
 import spells.PlasmaSpell;
 import spells.ShieldSpell;
+import spells.Spell;
 import spells.SwordSpell;
 import spells.WaterSpell;
 import ui.display.Display;
@@ -115,34 +117,55 @@ public class Inventory extends Display {
 	}
 	
 	private static Container getCardAsComponent(Image img, int i, spell s){
+		@SuppressWarnings("unused")
+		Spell z = null;
+		z = new BowSpell(0);
+		z = new EarthSpell(0);
+		z = new FireSpell(0);
+		z = new PlasmaSpell(0);
+		z = new ShieldSpell(0);
+		z = new SwordSpell(0);
+		z = new WaterSpell(0);
+		
 		Container c = new Container();
 		BoxLayout l = new BoxLayout(c, BoxLayout.X_AXIS);
 		c.setLayout(l);
 		
 		int x = 0;
 		
+		Spell spell; //just a default
+		
 		switch(s){
 			case BOW_SPELL:
 				x = Player.player.spellInventory.nums[i];
+				spell = BowSpell.get(i);
 				break;
 			case EARTH_SPELL:
 				x = Player.player.spellInventory.nums[i + 7];
+				spell = EarthSpell.get(i);
 				break;
 			case FIRE_SPELL:
 				x = Player.player.spellInventory.nums[i + 14];
+				spell = FireSpell.get(i);
 				break;
 			case PLASMA_SPELL:
 				x = Player.player.spellInventory.nums[i + 21];
+				spell = PlasmaSpell.get(i);
 				break;
 			case SHIELD_SPELL:
 				x = Player.player.spellInventory.nums[i + 28];
+				spell = ShieldSpell.get(i);
 				break;
 			case SWORD_SPELL:
 				x = Player.player.spellInventory.nums[i + 35];
+				spell = SwordSpell.get(i);
 				break;
 			case WATER_SPELL:
 				x = Player.player.spellInventory.nums[i + 42];
+				spell = WaterSpell.get(i);
 				break;
+			default:
+				spell = BowSpell.get(i);
 		}
 		
 		String count;
@@ -189,7 +212,7 @@ public class Inventory extends Display {
 		
 		int index = i + 7 * s.ordinal();
 		
-		image.setToolTipText("" + index);
+		image.setToolTipText("" + index + ": " /*+ spell.tooltipInfo()*/);
 		
 		image.setPreferredSize(new Dimension(32, 32));
 		

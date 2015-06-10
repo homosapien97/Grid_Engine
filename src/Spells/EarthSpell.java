@@ -24,7 +24,7 @@ public class EarthSpell extends Spell{
 	public static Line area;
 	public static final int[] range = {4,5,6,7,8,9,10};
 	
-	protected EarthSpell(int level){
+	public EarthSpell(int level){
 //		super(0,0,0,"Earth lv" + level, filenames[level]);
 		super(level);
 		

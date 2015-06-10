@@ -27,7 +27,7 @@ public class WaterSpell extends Spell{
 	public static int[] radius = {1,1,2,2,3,3,4};
 	public static int[] range = {3,4,5,6,7,8,9};
 	
-	protected WaterSpell(int level){
+	public WaterSpell(int level){
 //		super(0,0,0,"Water lv" + level, filenames[level]);
 		super(level);
 		

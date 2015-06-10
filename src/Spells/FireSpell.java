@@ -26,7 +26,7 @@ public class FireSpell extends Spell{
 	public static final int[] radius = {1,1,2,3,5,8,13};
 	public static final int[] range = {2,5,7,9,11,13,15,};
 	
-	protected FireSpell(int level){
+	public FireSpell(int level){
 //		super(0,0,0,"Fire lv" + level, filenames[level]);
 		super(level);
 		

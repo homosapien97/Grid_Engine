@@ -24,7 +24,7 @@ public class PlasmaSpell extends Spell{
 	public static Ray area;
 	public static final int[] range = {5,6,8,11,15,20,26};
 	
-	protected PlasmaSpell(int level){
+	public PlasmaSpell(int level){
 //		super(0,0,0,"Plasma lv" + level, filenames[level]);
 		super(level);
 		

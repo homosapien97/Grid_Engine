@@ -28,7 +28,7 @@ public class BowSpell extends Spell {
 	
 
 	
-	protected BowSpell(int level){
+	public BowSpell(int level){
 //		super(0,0,0,"Bow lv" + level, filenames[level]);
 		super(level);
 		

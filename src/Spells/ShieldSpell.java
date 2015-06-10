@@ -23,7 +23,7 @@ public class ShieldSpell extends Spell{
 	public static Point[][] area = new Point[3][3];
 	public static int[][] oldHeights = new int[3][3];
 	
-	protected ShieldSpell(int level){
+	public ShieldSpell(int level){
 //		super(0,0,0,"Shield lv" + level, filenames[level]);
 		super(level);
 		

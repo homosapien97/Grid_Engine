@@ -15,6 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
+import spells.BowSpell;
+import spells.EarthSpell;
+import spells.FireSpell;
+import spells.PlasmaSpell;
+import spells.ShieldSpell;
+import spells.Spell;
+import spells.SwordSpell;
+import spells.WaterSpell;
 import tools.Tools;
 import ui.display.Display;
 import ui.display.GameDisplay;
@@ -139,6 +147,11 @@ public class LoadingScreen extends Display {
 			startupLog("Loading fonts...");
 			Core.loadFonts();
 			startupLog("Done loading fonts!");
+			
+			//load spells (fixes java bug where crash due to these classes not being loaded before ui.Inventory
+			startupLog("Loading spell classes...");
+			startupLog("Done loading spell classes!");
+			
 			
 			//load pages
 			startupLog("Creating display pages...");
