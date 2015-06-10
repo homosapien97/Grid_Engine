@@ -17,7 +17,7 @@ public class CastCommand extends Command{
 		try {
 			if(action == null) {
 //				if(Player.player.spellInventory.canUse(index))
-				if(Player.player.spellInventory.use(Integer.parseInt(args[1])) > -1) {
+				if(Player.player.spellInventory.canUse(Integer.parseInt(args[1]))) {
 					action = new SpellAction(Inventory.spells[Integer.parseInt(args[1])], Player.player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), true);
 					action = null; //set action to null once executed.
 					return true;
@@ -37,7 +37,7 @@ public class CastCommand extends Command{
 	public PointCollection preview(String[] args) { //takes args including first token, which should be same as header.
 		if(args.length != 4 || !(Integer.parseInt(args[1]) < Inventory.spells.length)) return new PointCollection();
 		try {
-			if(Player.player.spellInventory.use(Integer.parseInt(args[1])) > -1) {
+			if(Player.player.spellInventory.canUse(Integer.parseInt(args[1]))) {
 				action = new SpellAction(Inventory.spells[Integer.parseInt(args[1])], Player.player, Integer.parseInt(args[2]), Integer.parseInt(args[3]), false);
 				return action.pointsToHighlight();
 			}

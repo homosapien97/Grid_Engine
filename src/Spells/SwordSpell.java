@@ -13,7 +13,7 @@ import world.LoadedChunks;
 public class SwordSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
 	public static final int[] casting = {0,0,0,0,0,0,0};
-	public static final int[] channel = {0,0,0,0,0,0,0};
+	public static final int[] channel = {1,1,1,1,1,1,1};
 	public static final int[] trueDamage = {0,0,0,0,0,0,0};
 	public static final int[] damage = {4,5,5,6,6,7,8};
 	public static final String[] name = {"Sword level 0", "Sword level 1", "Sword level 2", "Sword level 3", "Sword level 4", "Sword level 5", "Sword level 6",};

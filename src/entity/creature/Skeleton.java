@@ -83,6 +83,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 	@Override
 	public int hurt(int hurts) {
 		health -= hurts;
+		System.out.println(">Skelly health " + health);
 		if(health < 0) {
 			alive = false;
 			Chest chest = new Chest(super.absoluteX, super.absoluteY, chunk, new Inventory());
