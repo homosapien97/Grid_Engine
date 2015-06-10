@@ -66,10 +66,11 @@ public abstract class Spell {
 	 */
 	public abstract PointCollection cast(Entity caster, int x, int y);
 	public abstract PointCollection preview(Entity caster, int x, int y);
+	
 	public String tooltipInfo() {
 		return name[level]
-				+ "\n\tDmg\t" + damage[level]
-				+ "\n\tCst\t" + casting[level]
-				+ "\n\tDur\t" + channel[level];
+				+ ", Damage: " + damage[level]
+				+ " Casting: " + casting[level]
+				+ " Channel: " + channel[level];
 	}
 }

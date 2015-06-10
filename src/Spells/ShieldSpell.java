@@ -124,5 +124,13 @@ public class ShieldSpell extends Spell{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String tooltipInfo() {
+		return name[level]
+				+ ", Damage: " + damage[level]
+				+ " Casting: " + casting[level]
+				+ " Channel: " + channel[level];
+	}
 
 }

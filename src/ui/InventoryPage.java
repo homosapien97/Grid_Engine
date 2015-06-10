@@ -225,7 +225,7 @@ public class InventoryPage extends Display {
 		
 		int index = i + 7 * s.ordinal();
 		
-		image.setToolTipText("" + index + ": " /*+ spell.tooltipInfo()*/);
+		image.setToolTipText("" + index + ": " + spell.tooltipInfo());
 		
 		image.setPreferredSize(new Dimension(32, 32));
 		

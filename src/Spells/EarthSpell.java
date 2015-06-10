@@ -139,5 +139,13 @@ public class EarthSpell extends Spell{
 		}
 		return new PointCollection(area);
 	}
+	
+	@Override
+	public String tooltipInfo() {
+		return name[level]
+				+ ", Damage: " + damage[level]
+				+ " Casting: " + casting[level]
+				+ " Channel: " + channel[level];
+	}
 
 }

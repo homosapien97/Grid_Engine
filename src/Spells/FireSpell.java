@@ -120,5 +120,13 @@ public class FireSpell extends Spell{
 		PointCollection ret = new PointCollection(area);
 		return ret;
 	}
+	
+	@Override
+	public String tooltipInfo() {
+		return name[level]
+				+ ", Damage: " + damage[level]
+				+ " Casting: " + casting[level]
+				+ " Channel: " + channel[level];
+	}
 
 }

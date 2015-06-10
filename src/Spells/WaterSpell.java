@@ -150,5 +150,12 @@ public class WaterSpell extends Spell{
 		ret.addAll(new PointCollection(areaC));
 		return ret;
 	}
-
+	
+	@Override
+	public String tooltipInfo() {
+		return name[level]
+				+ ", Damage: " + damage[level]
+				+ " Casting: " + casting[level]
+				+ " Channel: " + channel[level];
+	}
 }
