@@ -25,6 +25,5 @@ public class SubmitCommand extends AbstractAction {
 			SubmitCommand.last = null;
 		}
 		Camera.highlightSnapshot();
-		InventoryPage.updateCards();
 	}
 }
