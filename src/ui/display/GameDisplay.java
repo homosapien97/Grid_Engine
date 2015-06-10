@@ -270,25 +270,33 @@ public class GameDisplay extends Display {
 	
 	public static void navLog(CommandNav.direction direction){
 		if(!cmdLog.getText().equals("")){
+			
 			if(navFirstCall){
 				cmdLogIndex = numLines(cmdLog.getText());
 				navFirstCall = false;
 			}else{
 				switch(direction){
 					case UP:
-						cmdLogIndex++;
+						cmdLogIndex--;
 						break;
 					case DOWN:
-						cmdLogIndex--;
+						cmdLogIndex++;
 						break;
 				}
 			}
 			
 			//get the last line
+			rangeIndex(cmdLogIndex); //make sure cmdLogIndex is ranged
 			int[] limits = nthLineLimits(rangeIndex(cmdLogIndex), cmdLog.getText());
 			
+			/*
+			System.out.println("-------------------------------------------------------");
+			System.out.println("Ranged: " + rangeIndex(cmdLogIndex));
+			System.out.println("Index: " + cmdLogIndex);
+			System.out.println("Num Lines: " + numLines(cmdLog.getText()));
 			System.out.println("1st: " + limits[0]);
 			System.out.println("2nd: " + limits[1]);
+			*/
 			
 			try {
 				cmdInput.setText(cmdLog.getText(limits[0], limits[1] - limits[0] + 1));
@@ -300,20 +308,32 @@ public class GameDisplay extends Display {
 	
 	private static int[] nthLineLimits(int n, String s){
 		int limits[] = new int[2];
+		
 		boolean foundStart = false;
 		boolean foundEnd = false;
+		
 		int x = 1;
 		
+		/*
+		System.out.println("++++++++++++++++++++++++++++");
+		System.out.println("Length: " + s.length());
+		System.out.println("n: " + n);
+		*/
+		
 		for(int i = 0; i < s.length(); i++){
+			//System.out.print("x: " + x + " ");
 			if(s.substring(i, i + 1).equals(">")){
+				//System.out.println("\nFOUND >");
 				if(x == n){
 					if(foundStart){
-						limits[1] = i;
+						limits[1] = i - 1;
 						foundEnd = true;
+						//System.out.println("FOUND END");
 						break;
 					}else{
 						limits[0] = i + 1;
 						foundStart = true;
+						//System.out.println("FOUND START");
 					}
 				}else{
 					x++;
@@ -321,8 +341,11 @@ public class GameDisplay extends Display {
 			}
 		}
 		
+		
+		
 		if(!foundEnd){
 			limits[1] = s.length() - 1;
+			//System.out.println("\nNOT FOUND END");
 		}
 		
 		return limits;
@@ -341,7 +364,6 @@ public class GameDisplay extends Display {
 	}
 	
 	private static int rangeIndex(int i){
-		System.out.println(i);
 		if(i > 0 && i <= numLines(cmdLog.getText())){
 			cmdLogIndex = i;
 			return i;
@@ -350,6 +372,8 @@ public class GameDisplay extends Display {
 				cmdLogIndex = 1;
 			}else if(i > numLines(cmdLog.getText())){
 				cmdLogIndex = numLines(cmdLog.getText());
+			}else{
+				cmdLogIndex = 1;
 			}
 			
 			return 1;
