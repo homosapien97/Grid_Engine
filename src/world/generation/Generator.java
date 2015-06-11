@@ -1,5 +1,6 @@
 package world.generation;
 
+import entity.creature.Skeleton;
 import geometry.Point;
 import terrain.Quicksand;
 import terrain.Stone;
@@ -51,12 +52,9 @@ public class Generator {
 					}
 				}
 			}
-		} else {
-			
 		}
-//		int numSkellys = ((int) (Math.random() * 5));
-//		for(int i = 0; i < numSkellys; i++) {
-//			new Skeleton(p.x * Chunk.DIM + (int)(Math.random() * Chunk.DIM), p.y * Chunk.DIM + (int)(Math.random() * Chunk.DIM), ret);
+//		else {
+//			
 //		}
 		return ret;
 	}

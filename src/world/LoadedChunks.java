@@ -10,11 +10,13 @@ import java.util.List;
 
 
 
+
 import terrain.Terrain;
 import tools.Tools;
 import world.generation.Generator;
 import entity.Entity;
 import entity.Player;
+import entity.creature.Skeleton;
 import entity.interfaces.Intelligent;
 //import entity.Player;
 import geometry.Circle;
@@ -259,6 +261,25 @@ public class LoadedChunks {
 						if(e instanceof Intelligent) {
 							((Intelligent) e).tick();
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	public static void spawnMobs() {
+		//TODO when there are more enemies this will have to be revamped but it's good for now
+		int numSkellys;
+		int xPos;
+		int yPos;
+		for(int i = Player.player.chunk.pos.x - center.pos.x + RADIUS - UPDATE_RADIUS; i < Player.player.chunk.pos.x - center.pos.x + RADIUS + UPDATE_RADIUS; i++) {
+			for(int j = Player.player.chunk.pos.y - center.pos.y + RADIUS - UPDATE_RADIUS; j < Player.player.chunk.pos.y - center.pos.y + RADIUS + UPDATE_RADIUS; j++) {
+				numSkellys = ((int) (Math.random() * 5));
+				synchronized(chunks[i][j].entities) {
+					for(int k = 0; k < numSkellys; k++) {
+						xPos = (int)(Math.random() * Chunk.DIM);
+						yPos = (int)(Math.random() * Chunk.DIM);
+						if(chunks[i][j].heightmap[xPos][yPos] == 0) new Skeleton(chunks[i][j].pos.x * Chunk.DIM + xPos, chunks[i][j].pos.y * Chunk.DIM + yPos, chunks[i][j]);
 					}
 				}
 			}
