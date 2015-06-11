@@ -53,6 +53,7 @@ public abstract class Entity {
 		return filename;
 	}
 	public void delete() {
+		remove = true;
 		chunk.removeEntity(this);
 		synchronized (Action.queue) {
 			Action.queue.remove(this);
