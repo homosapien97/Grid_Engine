@@ -71,7 +71,7 @@ public abstract class Action implements Runnable{
 //					entry.getValue().run();
 //				}
 //			}
-			queue.entrySet().removeIf(e -> e.getValue().done());
+			queue.entrySet().removeIf(e -> (e.getValue().done() || e.getValue().actor.remove));
 			for(Iterator<Map.Entry<Entity, Action> > it = queue.entrySet().iterator(); it.hasNext();) {
 				Map.Entry<Entity, Action> entry = it.next();
 				if((entry.getValue() != null) && (Clock.ticks >= entry.getValue().startTime)) {
@@ -86,7 +86,7 @@ public abstract class Action implements Runnable{
 	}
 	
 	public boolean done() {
-		return Clock.ticks >= startTime + totalTicks;
+		return (Clock.ticks >= startTime + totalTicks) || (actor.chunk == null) || (actor.remove);
 	}
 	public boolean addToQueue() {
 		synchronized(queue) {

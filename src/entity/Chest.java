@@ -30,9 +30,8 @@ public class Chest extends Entity implements Intelligent{
 	public void tick() {
 		if(super.absoluteX == Player.player.absoluteX && super.absoluteY == Player.player.absoluteY) {
 			Player.player.spellInventory.add(inventory);
-			this.delete();
+			this.flagForRemoval();
 		}
-		
 	}
 
 	@Override

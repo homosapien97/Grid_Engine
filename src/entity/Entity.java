@@ -17,6 +17,8 @@ public abstract class Entity {
 	
 	public static Image sprite;
 	
+	public boolean remove = false;
+	
 	public Entity(int absoluteX, int absoluteY, Chunk chunk, String filename) {
 		this.absoluteX = absoluteX;
 		this.absoluteY = absoluteY;
@@ -57,10 +59,13 @@ public abstract class Entity {
 		}
 		chunk = null;
 	}
-	public boolean deleteSafe() {
-		delete();
-		return true;
+	public void flagForRemoval() {
+		remove = true;
 	}
+//	public boolean deleteSafe() {
+//		delete();
+//		return true;
+//	}
 //	protected boolean addAction(Action a) {
 //		synchronized(actions) {
 //			for(Action b : actions) {

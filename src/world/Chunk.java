@@ -428,6 +428,13 @@ public class Chunk {
 			entities.remove(e);
 		}
 	}
+	public void removeFlaggedEntities() {
+		Entity e;
+		for(Iterator<Entity> it = entities.iterator(); it.hasNext();) {
+			e = it.next();
+			if(e.remove) it.remove();
+		}
+	}
 	public void removeEntity(Iterator<Entity> i) {
 		i.remove();
 	}
@@ -438,7 +445,7 @@ public class Chunk {
 	 * @param y the y of the coordinate to check for an entity
 	 * @return returns the entity at position (x, y). If no entity is there, returns null.
 	 */
-	public Entity REFACTORSTUFFentityAt(int absoluteX, int absoluteY) {
+	public Entity entityAt(int absoluteX, int absoluteY) {
 		synchronized(entities) {
 			for(Entity e : entities) {
 				if(e.getAbsoluteX() == absoluteX && e.getAbsoluteY() == absoluteY){
@@ -455,7 +462,7 @@ public class Chunk {
 	 * @param y the y of the coordinate to check for entities
 	 * @return returns the entities at position (x, y). If no entities are there, returns null.
 	 */
-	public List<Entity> REFACTORSTUFFentitiesAt(int absoluteX, int absoluteY) {
+	public List<Entity> entitiesAt(int absoluteX, int absoluteY) {
 		List<Entity> ret = Collections.synchronizedList(new ArrayList<Entity>());
 		synchronized(entities) {
 			synchronized(ret) {

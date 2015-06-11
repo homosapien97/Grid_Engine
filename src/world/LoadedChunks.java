@@ -247,7 +247,7 @@ public class LoadedChunks {
 	}
 	public static List<Entity> entitiesAt(int x, int y) {
 		return chunks[Tools.nav.absCoordToChunkCoord(x) - chunks[0][0].pos.x][Tools.nav.absCoordToChunkCoord(y) - chunks[0][0].pos.y].
-				REFACTORSTUFFentitiesAt(x, y);
+				entitiesAt(x, y);
 	}
 	
 	public static void updateAI() {
@@ -262,6 +262,8 @@ public class LoadedChunks {
 							((Intelligent) e).tick();
 						}
 					}
+					chunks[i][j].removeFlaggedEntities();
+					
 				}
 			}
 		}
