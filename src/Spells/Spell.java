@@ -12,7 +12,7 @@ public abstract class Spell {
 	 */
 	public static int[] casting;
 	public static int[] channel;
-	public static int[] trueDamage;
+	public static int[] healing;
 	public static int[] damage;
 	public static String[] name;
 	public static String[] filename;
@@ -52,7 +52,7 @@ public abstract class Spell {
 	
 	public abstract int casting();
 	public abstract int channel();
-	public abstract int trueDamage();
+	public abstract int healing();
 	public abstract int damage();
 	public abstract String name();
 	public abstract String filename();

@@ -1,13 +1,5 @@
-package entity;
+package spells;
 
-import spells.BowSpell;
-import spells.EarthSpell;
-import spells.FireSpell;
-import spells.PlasmaSpell;
-import spells.ShieldSpell;
-import spells.Spell;
-import spells.SwordSpell;
-import spells.WaterSpell;
 
 public class Inventory {
 	public static final Spell[] spells =  {
@@ -60,6 +52,13 @@ public class Inventory {
 		WaterSpell.get(4),
 		WaterSpell.get(5),
 		WaterSpell.get(6),
+		HealSelfSpell.get(0),
+		HealSelfSpell.get(1),
+		HealSelfSpell.get(2),
+		HealSelfSpell.get(3),
+		HealSelfSpell.get(4),
+		HealSelfSpell.get(5),
+		HealSelfSpell.get(6),
 	};
 	public final int[] nums = new int[spells.length];
 	

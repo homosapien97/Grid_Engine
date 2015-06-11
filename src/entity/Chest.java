@@ -3,6 +3,7 @@ package entity;
 import java.awt.Image;
 
 import entity.interfaces.Intelligent;
+import spells.Inventory;
 import spells.Spell;
 import tools.Tools;
 import world.Chunk;

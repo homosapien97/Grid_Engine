@@ -15,7 +15,7 @@ public class FireSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
 	public static final int[] casting = {0,0,0,0,0,0,0};
 	public static final int[] channel = {1,2,3,4,5,6,7};
-	public static final int[] trueDamage = {0,0,0,0,0,0,0};
+	public static final int[] healing = {0,0,0,0,0,0,0};
 	public static final int[] damage = {1,1,1,2,2,2,3};
 	public static final String[] name = {"Fire level 0", "Fire level 1", "Fire level 2", "Fire level 3", "Fire level 4", "Fire level 5", "Fire level 6",};
 	public static final String[] filename = {"Fire1.png","Fire2.png","Fire3.png","Fire4.png","Fire5.png","Fire6.png","Fire7.png"};
@@ -59,8 +59,8 @@ public class FireSpell extends Spell{
 
 
 	@Override
-	public int trueDamage() {
-		return trueDamage[level];
+	public int healing() {
+		return healing[level];
 	}
 
 

@@ -1,10 +1,10 @@
 package entity.creature;
 import spells.BowSpell;
+import spells.Inventory;
 import spells.Spell;
 import tools.Tools;
 import world.Chunk;
 import entity.Chest;
-import entity.Inventory;
 import entity.Player;
 import entity.interfaces.Mobile;
 import entity.interfaces.Sighted;

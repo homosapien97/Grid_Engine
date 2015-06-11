@@ -1,6 +1,6 @@
 package ui.terminal;
 
-import entity.Inventory;
+import spells.Inventory;
 import entity.Player;
 import geometry.PointCollection;
 import action.SpellAction;

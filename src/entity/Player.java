@@ -14,6 +14,7 @@ import entity.interfaces.Health;
 import entity.interfaces.Mobile;
 import entity.interfaces.Pathing;
 import entity.interfaces.Sighted;
+import spells.Inventory;
 import spells.Spell;
 import terrain.Stone;
 import tools.Tools;
@@ -124,7 +125,7 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 	
 	@Override
 	public int heal(int heals) {
-		if(health != maxHealth)
+//		if(health != maxHealth)
 			health += heals;
 		if(maxHealth - health < 0)
 			health = maxHealth;

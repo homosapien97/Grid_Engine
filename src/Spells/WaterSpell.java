@@ -15,7 +15,7 @@ public class WaterSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
 	public static final int[] casting = {0,0,0,0,0,0,0};
 	public static final int[] channel = {1,2,3,3,4,4,5};
-	public static final int[] trueDamage = {0,0,0,0,0,0,0};
+	public static final int[] healing = {0,0,0,0,0,0,0};
 	public static final int[] damage = {1,1,1,1,1,1,1};
 	public static final String[] name = {"Water level 0", "Water level 1", "Water level 2", "Water level 3", "Water level 4", "Water level 5", "Water level 6",};
 	public static final String[] filename = {"Water1.png","Water2.png","Water3.png","Water4.png","Water5.png","Water6.png","Water7.png"};
@@ -60,8 +60,8 @@ public class WaterSpell extends Spell{
 
 
 	@Override
-	public int trueDamage() {
-		return trueDamage[level];
+	public int healing() {
+		return healing[level];
 	}
 
 

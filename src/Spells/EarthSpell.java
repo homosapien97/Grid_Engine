@@ -14,7 +14,7 @@ public class EarthSpell extends Spell{
 	public static final int NUM_LEVELS = 7;
 	public static final int[] casting = {1,1,1,1,1,1,1};
 	public static final int[] channel = {0,0,0,0,0,0,0};
-	public static final int[] trueDamage = {0,0,0,0,0,0,0};
+	public static final int[] healing = {0,0,0,0,0,0,0};
 	public static final int[] damage = {2,3,3,4,4,4,5};
 	public static final String[] name = {"Earth level 0", "Earth level 1", "Earth level 2", "Earth level 3", "Earth level 4", "Earth level 5", "Earth level 6",};
 	public static final String[] filename = {"Earth1.png","Earth2.png","Earth3.png","Earth4.png","Earth5.png","Earth6.png","Earth7.png"};
@@ -57,8 +57,8 @@ public class EarthSpell extends Spell{
 
 
 	@Override
-	public int trueDamage() {
-		return trueDamage[level];
+	public int healing() {
+		return healing[level];
 	}
 
 

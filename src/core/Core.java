@@ -20,6 +20,7 @@ import javax.swing.KeyStroke;
 import spells.BowSpell;
 import spells.EarthSpell;
 import spells.FireSpell;
+import spells.HealSelfSpell;
 import spells.PlasmaSpell;
 import spells.ShieldSpell;
 import spells.SwordSpell;
@@ -261,7 +262,6 @@ public class Core {
 		LoadingScreen.startupLog("Loading water spell...");
 		WaterSpell.load();
 		incrementLoadingProgress(4);
-		
 		LoadingScreen.startupLog("Loading bow spell...");
 		BowSpell.load();
 		incrementLoadingProgress(4);
@@ -270,6 +270,8 @@ public class Core {
 		incrementLoadingProgress(4);
 		LoadingScreen.startupLog("Loading sword spell...");
 		SwordSpell.load();
+		LoadingScreen.startupLog("Loading selfheal spell...");
+		HealSelfSpell.load();
 		incrementLoadingProgress(4);
 	}
 	
