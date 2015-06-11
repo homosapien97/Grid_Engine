@@ -92,19 +92,19 @@ public class Main {
 	}
 	
 	public static void stepGraphics() {
-		System.out.println("Starting step graphics");
-		System.out.println("Calling repaint");
+//		System.out.println("Starting step graphics");
+//		System.out.println("Calling repaint");
 		Core.frame.repaint();
 		
-		System.out.println("Calling EventQueue.invokeLater");
+//		System.out.println("Calling EventQueue.invokeLater");
 		EventQueue.invokeLater(new Runnable() {
 	        public void run() {
 	        	Core.frame.setVisible(true);    
 	        }
 	    });
-		System.out.println("Calling getContentPane().repaint()");
+//		System.out.println("Calling getContentPane().repaint()");
 		Core.frame.getContentPane().repaint();
-		System.out.println("Finishing step graphics");
+//		System.out.println("Finishing step graphics");
 	}
 	
 

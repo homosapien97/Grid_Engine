@@ -58,7 +58,7 @@ public abstract class Entity {
 		synchronized (Action.queue) {
 			Action.queue.remove(this);
 		}
-		chunk = null;
+//		chunk = null; //this causes a nasty nullpointerexception that I can't seem to find and fix in move actions over chunk boarders
 	}
 	public void flagForRemoval() {
 		remove = true;

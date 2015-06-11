@@ -118,7 +118,8 @@ public abstract class Creature extends Entity implements Health, Armored, Mobile
 	@Override
 	public boolean goToAbsolute(int absoluteX, int absoluteY) {
 		if(LoadedChunks.isLoaded(absoluteX, absoluteY)) {
-			synchronized(chunk.entities) {
+			synchronized(chunk
+					.entities) {
 				chunk.removeEntity(this);
 			}
 			chunk = LoadedChunks.chunks[Tools.nav.absCoordToChunkCoord(absoluteX) - LoadedChunks.getTopLeftX()][Tools.nav.absCoordToChunkCoord(absoluteY) - LoadedChunks.getTopLeftY()];

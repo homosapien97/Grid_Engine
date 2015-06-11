@@ -73,7 +73,6 @@ public class Player extends Entity implements Health, Armored, Mobile, Sighted, 
 		
 		for(int i = 0; i < Inventory.spells.length; i++) {
 			spellInventory.set(i, 7 - (i % 7));
-			System.out.println(spellInventory.nums[i]);
 		}
 		
 		new WaitAction(this, 0);
