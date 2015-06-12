@@ -1,6 +1,5 @@
 package world.generation;
 
-import entity.creature.Skeleton;
 import geometry.Point;
 import terrain.Quicksand;
 import terrain.Stone;

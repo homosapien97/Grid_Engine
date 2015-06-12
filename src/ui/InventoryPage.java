@@ -141,7 +141,6 @@ public class InventoryPage extends Display {
 		
 		int x = 0;
 		
-		@SuppressWarnings("unused")
 		Spell spell; //just a default
 		
 		switch(s){

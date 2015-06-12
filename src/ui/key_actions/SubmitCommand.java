@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import ui.InventoryPage;
 import ui.display.Camera;
 import ui.display.GameDisplay;
 import ui.terminal.Command;

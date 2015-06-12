@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 import action.Action;
 import entity.Player;
 import entity.creature.Skeleton;
-import terrain.Quicksand;
-import terrain.Stone;
 import tools.Tools;
 import ui.display.Camera;
 import ui.display.GameDisplay;
@@ -14,11 +12,10 @@ import ui.key_actions.SubmitCommand;
 import ui.terminal.Command;
 //import world.Chunk;
 import world.LoadedChunks;
-import world.generation.GenWall;
 
 public class Main {
 	//for debug for now
-	public static final String version = "v1.1";
+	public static final String version = "v2.0-final";
 	
 	//Main Program
 	public static void main(String[] args) {
