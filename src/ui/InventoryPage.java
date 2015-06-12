@@ -68,17 +68,17 @@ public class InventoryPage extends Display {
 		
 		main.add(title);
 		
-		main.add(Box.createRigidArea(new Dimension(0,32)));
+		main.add(Box.createRigidArea(new Dimension(0, 32)));
 		
 		inventory = new Container();
-		GridLayout inventoryLayout = new GridLayout(7, 7, 50, 32);
+		GridLayout inventoryLayout = new GridLayout(8, 7, 50, 32);
 		inventory.setLayout(inventoryLayout);
 		
 		addCards(inventory);
 		
 		main.add(inventory);
 
-		main.add(Box.createRigidArea(new Dimension(0,100)));
+		main.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		JButton close = newMainButton("CLOSE");
 		close.setAlignmentX(CENTER_ALIGNMENT);
@@ -105,11 +105,11 @@ public class InventoryPage extends Display {
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i, spell.PLASMA_SPELL));
+			c.add(getCardAsComponent(FireSpell.sprite[i], i, spell.FIRE_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(HealSelfSpell.sprite[i], i, spell.HEAL_SELF_SPELL));
+			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i, spell.PLASMA_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
@@ -122,6 +122,10 @@ public class InventoryPage extends Display {
 		
 		for(int i = 0; i < 7; i++){
 			c.add(getCardAsComponent(WaterSpell.sprite[i], i, spell.WATER_SPELL));
+		}
+		
+		for(int i = 0; i < 7; i++){
+			c.add(getCardAsComponent(HealSelfSpell.sprite[i], i, spell.HEAL_SELF_SPELL));
 		}
 	}
 	
@@ -158,10 +162,6 @@ public class InventoryPage extends Display {
 				x = Player.player.spellInventory.nums[i + 14];
 				spell = FireSpell.get(i);
 				break;
-			case HEAL_SELF_SPELL:
-				x = Player.player.spellInventory.nums[i + 49];
-				spell = HealSelfSpell.get(i);
-				break;
 			case PLASMA_SPELL:
 				x = Player.player.spellInventory.nums[i + 21];
 				spell = PlasmaSpell.get(i);
@@ -177,6 +177,10 @@ public class InventoryPage extends Display {
 			case WATER_SPELL:
 				x = Player.player.spellInventory.nums[i + 42];
 				spell = WaterSpell.get(i);
+				break;
+			case HEAL_SELF_SPELL:
+				x = Player.player.spellInventory.nums[i + 49];
+				spell = HealSelfSpell.get(i);
 				break;
 			default:
 				spell = BowSpell.get(i);
