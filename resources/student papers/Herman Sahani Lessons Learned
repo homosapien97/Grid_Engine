@@ -1,0 +1,11 @@
+Herman Sahani
+	I learned a great deal, when doing this project alongside Christian and Michael, in terms of both project management and programming. I learned about different ways that responsibilities can constrict the
+time-frame in which I normally get my work done, and that dividing work when strapped for time is the best way to finish a difficult task. I also figured out how to make decent pixel art, and got a crude but effective understanding
+of how to draw pixel-by-pixel in a way that allows for continuous patterns and designs. Lastly, and probably most significnatly, I got my first realistic application of encapsulation and inheritance, and learned how to understand and manage
+complex code written by people other than myself. Plus I learned the basics of, and the issues with, getting the hang of File IO
+	Among my most important responsibilities in the early stages of this game's construction was the content that would eventually go into making the game that can be seen now. Every spell texture, entity texture, and terrain texture was created
+pixel-by-pixel in a way that would make them all unique, and relevant ones repeatable. This taught me patience, in that the scale that I was creating art on did not allow for smoothe lines that I am normally used too, while also allowing me to understand
+how readily pixels blend together when zoomed out on. I also learned how to create content as the people around me required it, in that both Christian and Michael, as they made ideas of their own, requested specific content-based requests that I would often
+have to give great priority to so that they could do their jobs in a timely mannor.
+	Which brings up another problem, the time in which I like to work. Working with people who sleep regularly meant that I had to do the majority of my programming before midnight. This certainly changed my way of approaching this project and my work, but
+I learned that it's actually not that bad to program at an earlier time, especially when you can use that time to colaborate with people working on the same project as you.

@@ -88,6 +88,7 @@ public class Skeleton extends Creature implements Mobile, Sighted {
 			alive = false;
 			Chest chest = new Chest(super.absoluteX, super.absoluteY, chunk, new Inventory());
 			chest.inventory.add(2, shots);
+			chest.inventory.add(((int)(Math.random() * 7 + 49)), ((int)(Math.random() * 5)));
 			this.delete();
 		}
 		return health;

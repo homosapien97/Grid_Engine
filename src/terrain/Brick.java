@@ -24,7 +24,7 @@ public class Brick extends Terrain {
 	}
 	
 	public static void load() {
-		sprite = Tools.img.loadEntitySprite(filename);
+		sprite = Tools.img.loadTerrainSprite(filename);
 	}
 
 	@Override

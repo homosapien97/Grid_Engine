@@ -44,6 +44,8 @@ Available Commands:
 Spell IDs can be found by opening the inventory (see next section) and hovering the mouse over a
 spell.
 
+The heal self spell can be used on any coordinates and will still heal the player.
+
 Use the enter key to submit commands. Hitting the spacebar after filling out a command instead of
 hitting enter will preview the command on the map. Hitting enter after that will still submit the 
 command.
@@ -74,6 +76,7 @@ Provides sources that were used in the making of this game.
 # Notes on current progress of game
 
 Player can't currently die. New games can be made by quiting the program and re-opening it.
+Shield spell is also broken at the moment.
 
 Glossary
 ---------------------------------------------------------------------------------------------------
