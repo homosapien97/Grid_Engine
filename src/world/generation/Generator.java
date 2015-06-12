@@ -1,6 +1,7 @@
 package world.generation;
 
 import geometry.Point;
+import terrain.Brick;
 import terrain.Quicksand;
 import terrain.Stone;
 import terrain.StoneBrick;
@@ -10,7 +11,7 @@ import world.Chunk;
 public class Generator {
 	public static final char FLOOR_STONE = 'o';
 	public static final char FLOOR_QUICKSAND = 'q';
-	public static final char FLOOR_STONEBRICK = 'b';
+	public static final char FLOOR_BRICK = 'b';
 	public static final char WALL = 'x';
 	
 	
@@ -41,7 +42,7 @@ public class Generator {
 					case FLOOR_QUICKSAND:
 						ret.terrain[i][j] = Quicksand.get();
 						break;
-					case FLOOR_STONEBRICK:
+					case FLOOR_BRICK:
 						ret.terrain[i][j] = StoneBrick.get();
 					case WALL:
 						ret.heightmap[i][j] = 1;

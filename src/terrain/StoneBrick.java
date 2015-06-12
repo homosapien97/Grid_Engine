@@ -20,7 +20,7 @@ public class StoneBrick extends Terrain {
 	
 	public String toString() {
 		//Decide a letter
-		return null;
+		return "B";
 	}
 
 	public static void load() {
