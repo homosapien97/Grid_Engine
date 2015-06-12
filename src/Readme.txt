@@ -73,8 +73,7 @@ Provides sources that were used in the making of this game.
 
 # Notes on current progress of game
 
-Player kind of can currently die, and player also has unlimited of all spells. New games can be 
-made by quiting the program and re-opening it.
+Player can't currently die. New games can be made by quiting the program and re-opening it.
 
 Glossary
 ---------------------------------------------------------------------------------------------------

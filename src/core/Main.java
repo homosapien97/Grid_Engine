@@ -15,7 +15,7 @@ import world.LoadedChunks;
 
 public class Main {
 	//for debug for now
-	public static final String version = "v2.0-final";
+	public static final String version = "v1.2-final";
 	
 	//Main Program
 	public static void main(String[] args) {

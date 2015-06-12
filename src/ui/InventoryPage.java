@@ -25,6 +25,7 @@ import entity.Player;
 import spells.BowSpell;
 import spells.EarthSpell;
 import spells.FireSpell;
+import spells.HealSelfSpell;
 import spells.PlasmaSpell;
 import spells.ShieldSpell;
 import spells.Spell;
@@ -104,11 +105,11 @@ public class InventoryPage extends Display {
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(FireSpell.sprite[i], i, spell.FIRE_SPELL));
+			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i, spell.PLASMA_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
-			c.add(getCardAsComponent(PlasmaSpell.sprite[i], i, spell.PLASMA_SPELL));
+			c.add(getCardAsComponent(HealSelfSpell.sprite[i], i, spell.HEAL_SELF_SPELL));
 		}
 		
 		for(int i = 0; i < 7; i++){
@@ -130,6 +131,7 @@ public class InventoryPage extends Display {
 		z = new BowSpell(0);
 		z = new EarthSpell(0);
 		z = new FireSpell(0);
+		z = new HealSelfSpell(0);
 		z = new PlasmaSpell(0);
 		z = new ShieldSpell(0);
 		z = new SwordSpell(0);
@@ -155,6 +157,10 @@ public class InventoryPage extends Display {
 			case FIRE_SPELL:
 				x = Player.player.spellInventory.nums[i + 14];
 				spell = FireSpell.get(i);
+				break;
+			case HEAL_SELF_SPELL:
+				x = Player.player.spellInventory.nums[i + 49];
+				spell = HealSelfSpell.get(i);
 				break;
 			case PLASMA_SPELL:
 				x = Player.player.spellInventory.nums[i + 21];
@@ -283,5 +289,5 @@ public class InventoryPage extends Display {
 		}
 	}
 	
-	private enum spell { BOW_SPELL, EARTH_SPELL, FIRE_SPELL, PLASMA_SPELL, SHIELD_SPELL, SWORD_SPELL, WATER_SPELL }
+	private enum spell { BOW_SPELL, EARTH_SPELL, FIRE_SPELL, PLASMA_SPELL, SHIELD_SPELL, SWORD_SPELL, WATER_SPELL, HEAL_SELF_SPELL }
 }
