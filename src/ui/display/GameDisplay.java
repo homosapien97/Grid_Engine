@@ -99,6 +99,7 @@ public class GameDisplay extends Display {
 		cmdLog.setBorder(logBorder);
 		cmdLog.setVisible(cmdLogVisible);
 		cmdLog.setFocusable(false);
+		cmdLog.setEditable(false);
 		//cmdLog.setPreferredSize(new Dimension(P_WIDTH, 22 * 10)); 
 		
 		//logScrollPane.add(cmdLog);
@@ -109,6 +110,7 @@ public class GameDisplay extends Display {
 		logScrollPane.setBackground(new Color(0, 0, 0, 0));
 		logScrollPane.setForeground(new Color(0, 0, 0, 0));
 		logScrollPane.setVisible(cmdLogVisible);
+		logScrollPane.setFocusable(false);
 		logScrollPane.setWheelScrollingEnabled(true);
 		logScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
@@ -559,65 +561,67 @@ public class GameDisplay extends Display {
 				
 				cmdText = cmdInput.getText();
 				
-				cmdKey = cmdText.substring(0, 2);
-				
-				switch(cmdKey){
-					case "ca":
-						//cast
-						
-						if(cmdText.substring(6, 7).equals(" ")){
-							//a one digit spell id
-							cmdStatic = cmdText.substring(0, 6);
-						}else{
-							//a two digit spell id
-							cmdStatic = cmdText.substring(0, 7);
-						}
-						
-						x = absGridPoint.x;
-						y = absGridPoint.y;
-						
-						break;
-					case "cr":
-						//cast relative
-						
-						if(cmdText.substring(4, 5).equals(" ")){
-							//a one digit spell id
+				if(cmdText.length() >= 2){
+					cmdKey = cmdText.substring(0, 2);
+					
+					switch(cmdKey){
+						case "ca":
+							//cast
+							
+							if(cmdText.substring(6, 7).equals(" ")){
+								//a one digit spell id
+								cmdStatic = cmdText.substring(0, 6);
+							}else{
+								//a two digit spell id
+								cmdStatic = cmdText.substring(0, 7);
+							}
+							
+							x = absGridPoint.x;
+							y = absGridPoint.y;
+							
+							break;
+						case "cr":
+							//cast relative
+							
+							if(cmdText.substring(4, 5).equals(" ")){
+								//a one digit spell id
+								cmdStatic = cmdText.substring(0, 4);
+							}else{
+								//a two digit spell id
+								cmdStatic = cmdText.substring(0, 5);
+							}
+							
+							x = (clickedGridPoint.x - 48);
+							y = (clickedGridPoint.y - 27);
+							
+							break;
+						case "mo":
+							//move
 							cmdStatic = cmdText.substring(0, 4);
-						}else{
-							//a two digit spell id
-							cmdStatic = cmdText.substring(0, 5);
-						}
-						
-						x = (clickedGridPoint.x - 48);
-						y = (clickedGridPoint.y - 27);
-						
-						break;
-					case "mo":
-						//move
-						cmdStatic = cmdText.substring(0, 4);
-						
-						x = absGridPoint.x;
-						y = absGridPoint.y;
-						
-						break;
-					case "mr":
-						//move relative
-						cmdStatic = cmdText.substring(0, 2);
-						
-						x = (clickedGridPoint.x - 48);
-						y = (clickedGridPoint.y - 27);
-						
-						break;
-					default:
-						cmdStatic = cmdText;
-						
-						x = absGridPoint.x;
-						y = absGridPoint.y;
-						
-						break;
+							
+							x = absGridPoint.x;
+							y = absGridPoint.y;
+							
+							break;
+						case "mr":
+							//move relative
+							cmdStatic = cmdText.substring(0, 2);
+							
+							x = (clickedGridPoint.x - 48);
+							y = (clickedGridPoint.y - 27);
+							
+							break;
+						default:
+							cmdStatic = cmdText;
+							
+							x = absGridPoint.x;
+							y = absGridPoint.y;
+							
+							break;
+					}
+					
+					cmdInput.setText(cmdStatic + " " + x + " " + y);
 				}
-				
-				cmdInput.setText(cmdStatic + " " + x + " " + y);
 			}
 		}
 
